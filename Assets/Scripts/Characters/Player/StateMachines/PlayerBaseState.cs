@@ -11,9 +11,9 @@ public class PlayerBaseState : IState
     protected PlayerStateMachine stateMachine;
     protected readonly PlayerGroundData groundData;
 
-    public PlayerBaseState(PlayerStateMachine playerStateMachine)
+    public PlayerBaseState(PlayerStateMachine _playerStateMachine)
     {
-        stateMachine = playerStateMachine;
+        stateMachine = _playerStateMachine;
         groundData = stateMachine.Player.Data.GroundedData;
     }
 
@@ -52,7 +52,7 @@ public class PlayerBaseState : IState
 
     }
 
-    protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
+    protected virtual void OnMovementCanceled(InputAction.CallbackContext _context)
     {
 
     }
@@ -77,27 +77,28 @@ public class PlayerBaseState : IState
 
         return right * stateMachine.MovementInput.x;
     }
-    private void Move(Vector3 movementDirection)
+    private void Move(Vector3 _movementDirection)
     {
+        
         float movementSpeed = GetMovementSpeed();
         stateMachine.Player.Controller.Move(
-            (movementDirection * movementSpeed) * Time.deltaTime);
+            (_movementDirection * movementSpeed) * Time.deltaTime);
     }
 
     private float GetMovementSpeed()
     {
         float movementSpeed = stateMachine.MovementSpeed * stateMachine.MovementSpeedModifier;
-
+        
         return movementSpeed;
     }
 
-    protected void StartAnimation(int animationHash)
+    protected void StartAnimation(int _animationHash)
     {
-        stateMachine.Player.Animator.SetBool(animationHash, true);
+        stateMachine.Player.Animator.SetBool(_animationHash, true);
     }
 
-    protected void StopAnimation(int animationHash)
+    protected void StopAnimation(int _animationHash)
     {
-        stateMachine.Player.Animator.SetBool(animationHash, false);
+        stateMachine.Player.Animator.SetBool(_animationHash, false);
     }
 }

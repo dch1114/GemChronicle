@@ -17,14 +17,15 @@ public class PlayerStateMachine : StateMachine
 
     public Transform MainCameraTransform { get; set; }
 
-    public PlayerStateMachine(Player player)
+    public PlayerStateMachine(Player _player)
     {
-        this.Player = player;
+        this.Player = _player;
 
         IdleState = new PlayerIdleState(this);
+        WalkState = new PlayerWalkState(this);
 
         MainCameraTransform = Camera.main.transform;
 
-        MovementSpeed = player.Data.GroundedData.BaseSpeed;
+        MovementSpeed = _player.Data.GroundedData.BaseSpeed;
     }
 }
