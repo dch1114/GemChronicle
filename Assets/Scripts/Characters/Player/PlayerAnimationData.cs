@@ -37,9 +37,11 @@ public class PlayerAnimationData
         GroundParameterHash = Animator.StringToHash(groundParameterName);
         IdleParameterHash = Animator.StringToHash(idleParameterName);
         WalkParameterHash = Animator.StringToHash(walkParameterName);
+
         AirParameterHash = Animator.StringToHash(airParameterName);
         JumpParameterHash = Animator.StringToHash(jumpParameterName);
         FallParameterHash = Animator.StringToHash(fallParameterName);
+
         AttackParameterHash = Animator.StringToHash(attackParameterName);
         Skill1ParameterHash = Animator.StringToHash(skill1ParameterName);
         Skill2ParameterHash = Animator.StringToHash(skill2ParameterName);
