@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
         transform.Translate(_speed);
     }
 
-    public void Flip(bool isLeft)
+    public void Look(bool isLeft)
     {
         transform.localScale = isLeft ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
     }

@@ -89,19 +89,20 @@ public class PlayerBaseState : IState
 
     private void Look(Vector3 _movementDirection)
     {
+        //이동 방향
         if(_movementDirection.x < 0f)
         {
-            stateMachine.Player.Controller.Flip(true);
+            stateMachine.Player.Controller.Look(true);
         } else if(_movementDirection.x > 0f)
         {
-            stateMachine.Player.Controller.Flip(false);
+            stateMachine.Player.Controller.Look(false);
         }
     }
 
     private float GetMovementSpeed()
     {
         float movementSpeed = stateMachine.MovementSpeed * stateMachine.MovementSpeedModifier;
-        
+
         return movementSpeed;
     }
 
