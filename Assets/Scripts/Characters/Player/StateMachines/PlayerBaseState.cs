@@ -44,12 +44,14 @@ public class PlayerBaseState : IState
 
     protected virtual void AddInputActionsCallbacks()
     {
-
+        PlayerInput input = stateMachine.Player.Input;
+        input.PlayerActions.Movement.canceled += OnMovementCanceled;
     }
 
     protected virtual void RemoveInputActionsCallbacks()
     {
-
+        PlayerInput input = stateMachine.Player.Input;
+        input.PlayerActions.Movement.canceled -= OnMovementCanceled;
     }
 
     protected virtual void OnMovementCanceled(InputAction.CallbackContext _context)
@@ -66,6 +68,7 @@ public class PlayerBaseState : IState
     {
         Vector3 movementDirection = GetMovementDirection();
         Move(movementDirection);
+        Look(movementDirection);
     }
 
     private Vector3 GetMovementDirection()
@@ -79,10 +82,20 @@ public class PlayerBaseState : IState
     }
     private void Move(Vector3 _movementDirection)
     {
-        
         float movementSpeed = GetMovementSpeed();
         stateMachine.Player.Controller.Move(
             (_movementDirection * movementSpeed) * Time.deltaTime);
+    }
+
+    private void Look(Vector3 _movementDirection)
+    {
+        if(_movementDirection.x < 0f)
+        {
+            stateMachine.Player.Controller.Flip(true);
+        } else if(_movementDirection.x > 0f)
+        {
+            stateMachine.Player.Controller.Flip(false);
+        }
     }
 
     private float GetMovementSpeed()

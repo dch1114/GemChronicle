@@ -9,4 +9,9 @@ public class PlayerController : MonoBehaviour
         //need Camera Limit
         transform.Translate(_speed);
     }
+
+    public void Flip(bool isLeft)
+    {
+        transform.localScale = isLeft ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+    }
 }
