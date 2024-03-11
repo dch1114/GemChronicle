@@ -11,13 +11,17 @@ public class PlayerStateMachine : StateMachine
 
     public PlayerJumpState JumpState { get; }
     public PlayerFallState FallState { get; }
-
+    public PlayerAttackNumState AttackNumState { get; }
 
     public Vector2 MovementInput { get; set; }
     public float MovementSpeed { get; private set; }
     public float MovementSpeedModifier { get; set; } = 1f;
 
     public float JumpForce { get; set; }
+
+    public bool IsAttacking { get; set; }
+    public int AttackIndex { get; set; }
+    public List<int> SkillIndex { get; set; }
 
     public Transform MainCameraTransform { get; set; }
 
@@ -30,6 +34,8 @@ public class PlayerStateMachine : StateMachine
 
         JumpState = new PlayerJumpState(this);
         FallState = new PlayerFallState(this);
+
+        AttackNumState = new PlayerAttackNumState(this);
 
         MainCameraTransform = Camera.main.transform;
 

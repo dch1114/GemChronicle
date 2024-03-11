@@ -45,4 +45,9 @@ public class Player : MonoBehaviour
     {
         stateMachine.PhysicsUpdate();
     }
+
+    public PlayerStateMachine GetStateMachine()
+    {
+        return stateMachine;
+    }
 }

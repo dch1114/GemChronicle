@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,8 +25,15 @@ public class PlayerGroundedState : PlayerBaseState
     public override void Update()
     {
         base.Update();
+
+        if(stateMachine.IsAttacking)
+        {
+            OnAttack();
+            return;
+        }
     }
 
+   
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
@@ -58,6 +66,11 @@ public class PlayerGroundedState : PlayerBaseState
     protected override void OnJumpStarted(InputAction.CallbackContext context)
     {
         stateMachine.ChangeState(stateMachine.JumpState);
+    }
+
+    private void OnAttack()
+    {
+        stateMachine.ChangeState(stateMachine.AttackNumState);
     }
 
 }

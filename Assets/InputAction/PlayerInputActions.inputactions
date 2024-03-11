@@ -33,31 +33,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill1",
-                    "type": "Button",
-                    "id": "747c60ca-bac9-492d-9769-1449a2a4485b",
+                    "name": "Attack",
+                    "type": "Value",
+                    "id": "70b4fed8-1207-43b2-9806-f18c7954c00c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Skill2",
-                    "type": "Button",
-                    "id": "de5cd958-0c68-4ccb-808d-c200f6c0ec71",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Skill3",
-                    "type": "Button",
-                    "id": "bee233a3-eb48-4347-b5e2-c07e94caac73",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -118,34 +100,34 @@
                 },
                 {
                     "name": "",
-                    "id": "e3321118-22e3-4899-b755-166dac3b0436",
+                    "id": "edd3817f-3dc0-4547-be89-6bf6627d07fa",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Skill1",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b8cb80d8-29a8-4acf-9df6-9ecd7a6d0c62",
+                    "id": "b49fd953-7783-4cd4-9634-bebf46fdc907",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Skill2",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "44b2fa82-02ee-45b6-bbc7-4ac277e8cf70",
+                    "id": "745483c8-b92f-4574-82d2-f546a8c994fe",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Skill3",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -194,9 +194,10 @@ MonoBehaviour:
     jumpParameterName: Jump
     fallParameterName: Fall
     attackParameterName: '@Attack'
-    skill1ParameterName: Skill1
-    skill2ParameterName: Skill2
-    skill3ParameterName: Skill3
+    attackIndexParameterName: AttackIndex
+    skill1IndexParameterName: Skill1Index
+    skill2IndexParameterName: Skill2Index
+    skill3IndexParameterName: Skill3Index
 --- !u!114 &220625668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459915c175ef275449f50eacdba97f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0}
 --- !u!61 &220625671
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -435,7 +437,10 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5324911572894026624, guid: 04d5fefd32cb5d74691984a6b9d1747e, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9169588843449900436, guid: 04d5fefd32cb5d74691984a6b9d1747e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2132423206}
   m_SourcePrefab: {fileID: 100100000, guid: 04d5fefd32cb5d74691984a6b9d1747e, type: 3}
 --- !u!1 &1859042394
 GameObject:
@@ -850,3 +855,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &2132423202 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9169588843449900436, guid: 04d5fefd32cb5d74691984a6b9d1747e, type: 3}
+  m_PrefabInstance: {fileID: 521311506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2132423206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132423202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776fcf047626db246a1b6c90e8509219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 220625667}
