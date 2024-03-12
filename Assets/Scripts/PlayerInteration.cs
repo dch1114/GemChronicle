@@ -28,6 +28,11 @@ public class PlayerInteration : MonoBehaviour
                 ItemObject itemObject = hit.collider.GetComponent<ItemObject>();
                 if (itemObject != null)
                 {
+                    if(!Inventory.Instance.CanAddItem()) //&& itemObject.itemData.itemType == ItemType.Equipment)
+                    {
+                        return;
+                    }
+
                     Inventory.Instance.AddItem(itemObject.itemData);
                     Debug.Log("æ∆¿Ã≈€ »πµÊ");
                     Destroy(itemObject.gameObject);
