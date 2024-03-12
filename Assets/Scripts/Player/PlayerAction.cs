@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class PlayerAction : MonoBehaviour
@@ -17,6 +18,7 @@ public class PlayerAction : MonoBehaviour
     bool isHorizonMove;
     GameObject scanObject;
     public GameObject talkBtn;
+    public GameObject NPCInteractive;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -79,6 +81,7 @@ public class PlayerAction : MonoBehaviour
         {
             if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
             {
+                NPCInteractive.GetComponent<NPCInteractive>().AddNPCList();
                 scanObject = _other.gameObject;
                 talkBtn.SetActive(true);
 
@@ -100,6 +103,7 @@ public class PlayerAction : MonoBehaviour
         {
             if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
             {
+                NPCInteractive.GetComponent<NPCInteractive>().RemoveNPCList();
                 scanObject = null;
                 talkBtn.SetActive(false);
             }

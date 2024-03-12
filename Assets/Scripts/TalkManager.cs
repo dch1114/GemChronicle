@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class TalkManager : MonoBehaviour
 {
-    Dictionary<int, string[]> talkData;
+    
     Dictionary<int, Sprite> portraitData;
     public NPCDatabase npcDatabase;
     public Sprite[] portraitArr;
     private void Awake()
     {
-        
-        talkData = new Dictionary<int, string[]>();
+
+        npcDatabase = DataManager.instance.npcDatabase;
         portraitData = new Dictionary<int, Sprite>();
-        
+      
     }
 
     void GenerateData()
     {
 
-        talkData.Add(1001, npcDatabase.GetNPCByKey(1001).conversation);
-        talkData.Add(1101, npcDatabase.GetNPCByKey(1101).conversation);
-        talkData.Add(1201, npcDatabase.GetNPCByKey(1201).conversation);
-        talkData.Add(1301, npcDatabase.GetNPCByKey(1301).conversation);
+       
 
         portraitData.Add(1001, portraitArr[0]);
         portraitData.Add(1101, portraitArr[1]);
@@ -33,11 +30,11 @@ public class TalkManager : MonoBehaviour
     }
     public string GetTalk(int _id, int _talkIndex)
     {
-        GenerateData();
-        if (_talkIndex == talkData[_id].Length)
+
+        if (_talkIndex == npcDatabase.NPCInfos[_id].conversation.Length)
             return null;
         else
-            return talkData[_id][_talkIndex];
+            return npcDatabase.NPCInfos[_id].conversation[_talkIndex];
     }
     public Sprite GetPortrait(int _id, int portraitIndex)
     {

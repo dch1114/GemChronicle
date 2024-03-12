@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour
     public GameObject scanObject;
     public GameObject talkPanel;
     public bool isAction;
-
     public TalkManager talkManager;
+
+
     public int talkIndex;
     public Image portraitImg;
     public void Action(GameObject _scanobj)
@@ -18,14 +19,12 @@ public class GameManager : MonoBehaviour
        
 
             scanObject = _scanobj;
+        NPCController NpcData = scanObject.GetComponent<NPCController>();
+       
+        Talk(NpcData.NPCID, true);
         
-        //NPC NPCDatabase = scanObject.GetComponent<NPC>();
-        //if (NPCDatabase != null)
-        //{
-        //    Talk(NPCDatabase.ID, NPCDatabase.isNPC);
-        //}
 
-        //talkPanel.SetActive(isAction);
+       talkPanel.SetActive(isAction);
 
     }
 
@@ -43,9 +42,9 @@ public class GameManager : MonoBehaviour
         }
         if (isNpc)
         {
-            talkText.text = talkData.Split(':')[0];
+            talkText.text = talkData;
 
-            portraitImg.sprite = talkManager.GetPortrait(id, int.Parse( talkData.Split(':')[1]));
+            portraitImg.sprite = talkManager.GetPortrait(id, int.Parse( talkData));
             portraitImg.color = new Color(1, 1, 1, 1);
         }
         else
