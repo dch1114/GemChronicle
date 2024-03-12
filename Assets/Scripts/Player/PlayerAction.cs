@@ -56,7 +56,12 @@ public class PlayerAction : MonoBehaviour
 
         //scanObject
         if (Input.GetButtonDown("Jump") && scanObject != null)
+        {
+            Debug.Log("talk complete");
+            
             NPCInteractive.instance.Action(scanObject);
+
+        }
 
 
 

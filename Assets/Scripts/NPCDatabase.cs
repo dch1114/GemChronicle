@@ -11,7 +11,6 @@ public class NPC
     public string discription;
     public string []conversation;
     public bool isNPC;
-
 }
 
 public class NPCInstance

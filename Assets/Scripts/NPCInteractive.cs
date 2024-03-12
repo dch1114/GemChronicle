@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,11 +16,15 @@ public interface INPCInteractive
 }
 
 
+
+
+
 public class NPCInteractive : MonoBehaviour, INPCInteractive
 {
     public GameObject scanObject;
     public TalkManager talkManager;
     public GameObject talkPanel;
+    public GameObject potraitPanel;
     public bool isAction;
     public int talkIndex;
     public Text talkText;
@@ -28,7 +33,7 @@ public class NPCInteractive : MonoBehaviour, INPCInteractive
 
     public Image portraitImg;
     public static NPCInteractive instance = null;
-
+    NPCDatabase npcDatabase;
 
     public int NPCID { get; set; }
     List<int> NPCList = new List<int>();
@@ -52,13 +57,17 @@ public class NPCInteractive : MonoBehaviour, INPCInteractive
         Debug.Log(NPCList);
     }
 
+
+    void Start()
+    {
+        npcDatabase = DataManager.instance.npcDatabase;
+    }
+
     public void RemoveNPCList()
     {
         NPCList.Remove(NPCID);
         Debug.Log(NPCList);
     }
-
-    
 
     public void Action(GameObject _scanobj)
     {
@@ -69,7 +78,7 @@ public class NPCInteractive : MonoBehaviour, INPCInteractive
 
         if (npcController != null)
         {
-            Talk(npcController.NPCID);
+            Talk(npcController.GetNpcData().ID);
         }
 
         talkPanel.SetActive(isAction);
@@ -79,6 +88,18 @@ public class NPCInteractive : MonoBehaviour, INPCInteractive
 
     public void Talk(int id)
     {
+
+        if (talkIndex >= npcDatabase.GetNPCByKey(id).conversation.Length)
+        {
+            Debug.Log("대화 종료");
+            isAction = false;
+            talkIndex = 0;
+            potraitPanel.SetActive(false);
+
+            return;
+        }
+        
+        //대화 불러오기
         string talkData = talkManager.GetTalk(id, talkIndex);
 
         if (talkData == null)
@@ -90,13 +111,18 @@ public class NPCInteractive : MonoBehaviour, INPCInteractive
         }
         if (talkData != null)
         {
+            potraitPanel.SetActive(true);
             talkText.text = talkData;
 
-            portraitImg.sprite = talkManager.GetPortrait(id, int.Parse(talkData));
+            portraitImg.sprite = talkManager.GetPortrait(id);
+            Debug.Log("Portrait complete");
+
             portraitImg.color = new Color(1, 1, 1, 1);
         }
         else
         {
+            potraitPanel.SetActive(false);
+
             talkText.text = talkData;
 
             portraitImg.color = new Color(1, 1, 1, 0);

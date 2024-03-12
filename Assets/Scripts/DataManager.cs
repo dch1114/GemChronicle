@@ -36,6 +36,7 @@ public class DataManager : MonoBehaviour
             npcDatabase.Initialize();
 
 
+
           
         }
     }
