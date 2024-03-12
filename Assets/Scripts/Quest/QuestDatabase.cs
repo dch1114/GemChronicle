@@ -17,40 +17,28 @@ public class Quest
 
 public class QuestInstance
 {
-    int no;
     public Quest quest;
 }
 
 [System.Serializable]
-public class questDatabase
+public class QuestDatabase
 {
-    public string questDataPath;
     public List<Quest> QuestInfos;
-    public Dictionary<int, Quest> questDic = new();
+    public Dictionary<int, Quest> npcDic = new();
 
-
-    void Start()
+    public void Initialize()
     {
-        LoadQuestData();
+        foreach (Quest npc in QuestInfos)
+        {
+            npcDic.Add(npc.ID, npc);
+        }
     }
 
-    void LoadQuestData()
+    public Quest GetNPCByKey(int id)
     {
-        // JSON ÆÄÀÏ ÀÐ±â
-        string json;
-        using (StreamReader reader = new StreamReader(questDataPath))
-        {
-            json = reader.ReadToEnd();
-        }
+        if (npcDic.ContainsKey(id))
+            return npcDic[id];
 
-        // JSON ÆÄ½ÌÇÏ¿© µñ¼Å³Ê¸®¿¡ ÀúÀå
-        List<Quest> questList = JsonConvert.DeserializeObject<List<Quest>>(json);
-        questDic = new Dictionary<int, Quest>();
-
-        // °¢ Äù½ºÆ®¸¦ µñ¼Å³Ê¸®¿¡ Ãß°¡
-        foreach (Quest quest in questList)
-        {
-            questDic.Add(quest.ID, quest);
-        }
+        return null;
     }
 }

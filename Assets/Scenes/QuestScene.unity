@@ -241,8 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6aae272eae41c47ade8e5c15ac42d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1001
-  isNpc: 1
+  id: 0
+  isNpc: 0
 --- !u!114 &11003519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,9 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f681d98cc5d8d844ab927cc10c5bb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questId: 2001
-  questActionIndex: 0
-  questObject: []
+  questDatabase:
+    QuestInfos: []
 --- !u!1 &28899108
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,8 +838,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6aae272eae41c47ade8e5c15ac42d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1101
-  isNpc: 1
+  id: 0
+  isNpc: 0
 --- !u!114 &589413030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,9 +852,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f681d98cc5d8d844ab927cc10c5bb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questId: 2002
-  questActionIndex: 0
-  questObject: []
+  questDatabase:
+    QuestInfos: []
 --- !u!1 &642362862
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,8 +972,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6aae272eae41c47ade8e5c15ac42d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1301
-  isNpc: 1
+  id: 0
+  isNpc: 0
 --- !u!114 &642362868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,9 +986,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f681d98cc5d8d844ab927cc10c5bb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questId: 0
-  questActionIndex: 0
-  questObject: []
+  questDatabase:
+    QuestInfos: []
 --- !u!1 &700483056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,8 +1288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae6aae272eae41c47ade8e5c15ac42d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1201
-  isNpc: 1
+  id: 0
+  isNpc: 0
 --- !u!1 &988244040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,9 +1954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f681d98cc5d8d844ab927cc10c5bb99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questId: 0
-  questActionIndex: 0
-  questObject: []
+  questDatabase:
+    QuestInfos: []
 --- !u!4 &1437858469
 Transform:
   m_ObjectHideFlags: 0
@@ -2121,13 +2117,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc7b8449a8d6344cadc22df5a37c00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkText: {fileID: 804901354}
+  talkText: {fileID: 0}
   scanObject: {fileID: 0}
-  talkPanel: {fileID: 700483056}
+  talkPanel: {fileID: 0}
   isAction: 0
-  talkManager: {fileID: 1522781903}
+  talkManager: {fileID: 0}
   talkIndex: 0
-  portraitImg: {fileID: 1032137680}
+  portraitImg: {fileID: 0}
 --- !u!4 &1580581877
 Transform:
   m_ObjectHideFlags: 0
