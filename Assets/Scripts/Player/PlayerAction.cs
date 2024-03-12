@@ -18,7 +18,7 @@ public class PlayerAction : MonoBehaviour
     bool isHorizonMove;
     GameObject scanObject;
     public GameObject talkBtn;
-    public GameObject NPCInteractive;
+    
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -29,13 +29,13 @@ public class PlayerAction : MonoBehaviour
     {
 
         //간단한 이동식
-        h = gameManager.isAction ? 0 : Input.GetAxisRaw("Horizontal");  //액션상태에 따라 움직이지 못하게
-        v = gameManager.isAction ? 0 : Input.GetAxisRaw("Vertical");
+        h = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Horizontal");  //액션상태에 따라 움직이지 못하게
+        v = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Vertical");
 
-        bool hDown = gameManager.isAction ? false : Input.GetButtonDown("Horizontal");
-        bool vDown = gameManager.isAction ? false : Input.GetButtonDown("Vertical");
-        bool hUp = gameManager.isAction ? false : Input.GetButtonUp("Horizontal");
-        bool vUp = gameManager.isAction ? false : Input.GetButtonUp("Vertical");
+        bool hDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Horizontal");
+        bool vDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Vertical");
+        bool hUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Horizontal");
+        bool vUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Vertical");
 
         if (hDown || vUp)
             isHorizonMove = true;
@@ -56,7 +56,7 @@ public class PlayerAction : MonoBehaviour
 
         //scanObject
         if (Input.GetButtonDown("Jump") && scanObject != null)
-            gameManager.Action(scanObject);
+            NPCInteractive.instance.Action(scanObject);
 
 
 
@@ -81,7 +81,7 @@ public class PlayerAction : MonoBehaviour
         {
             if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
             {
-                NPCInteractive.GetComponent<NPCInteractive>().AddNPCList();
+                NPCInteractive.instance.AddNPCList();
                 scanObject = _other.gameObject;
                 talkBtn.SetActive(true);
 
@@ -103,7 +103,7 @@ public class PlayerAction : MonoBehaviour
         {
             if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
             {
-                NPCInteractive.GetComponent<NPCInteractive>().RemoveNPCList();
+                NPCInteractive.instance.RemoveNPCList();
                 scanObject = null;
                 talkBtn.SetActive(false);
             }

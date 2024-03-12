@@ -36,19 +36,7 @@ public class DataManager : MonoBehaviour
             npcDatabase.Initialize();
 
 
-            //int npcKeyToFind = 1001;
-            //NPC foundNPC = npcDatabase.GetNPCByKey(npcKeyToFind);
-            //if (foundNPC != null)
-            //{
-            //    Debug.Log("NPC ID: " + foundNPC.ID);
-            //    Debug.Log("NPC role: " + foundNPC.role);
-            //    Debug.Log("NPC name: " + foundNPC.name);
-            //    Debug.Log("NPC place: " + foundNPC.place);
-            //}
-            //else
-            //{
-            //    Debug.Log("NPC with key " + npcKeyToFind + " not found.");
-            //}
+          
         }
     }
 }

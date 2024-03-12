@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class NPCController : MonoBehaviour
 {
     
-    public int NPCID;
-    
-    private void Start()
-    {
-        NPCManager.instance.GetNpcData(NPCID);
-        
 
+    public int NPCID;
+
+
+    public void Init()
+    {
+       
+        int NPCKeyToFind = NPCID;
+        DataManager.instance.npcDatabase.GetNPCByKey(NPCKeyToFind);
     }
     
 }

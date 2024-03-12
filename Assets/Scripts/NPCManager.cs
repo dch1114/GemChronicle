@@ -6,7 +6,7 @@ using UnityEngine;
 public class NPCManager : MonoBehaviour
 {
     public static NPCManager instance = null;
-    public NPCDatabase npcDatabase;
+   
 
     void Awake()
     {
@@ -23,40 +23,23 @@ public class NPCManager : MonoBehaviour
                 Destroy(this.gameObject);
         }
 
-        if (DataManager.instance != null)
-        {
-            npcDatabase = DataManager.instance.npcDatabase;
-        }
-        else
-        {
-            Debug.LogError("DataManager.npcDatabase null");
-        }
+        
 
 
     }
     void Start()
     {
-        
-        
-    }
 
-
-    public void GetNpcData(int _npcIdTofind)
-    {
-
-        NPC foundNPC = npcDatabase.GetNPCByKey(_npcIdTofind);
-        if (foundNPC != null)
+        NPCController[] foundNPC = FindObjectsOfType<NPCController>();
+        foreach(NPCController npcController in foundNPC)
         {
-            Debug.Log("NPC ID: " + foundNPC.ID);
-            Debug.Log("NPC role: " + foundNPC.role);
-            Debug.Log("NPC name: " + foundNPC.name);
-            Debug.Log("NPC place: " + foundNPC.place);
-            
-        }
-        else
-        {
-            Debug.Log("NPC with ID " + _npcIdTofind + " not found.");
+            npcController.Init();
         }
     }
+
+    //동적생성을 함으로써 데이터를 여기서 갖고와서 바로 만들어버린다.
+    //instantiate 를 여기서 해버린다
+
+   
 
 }

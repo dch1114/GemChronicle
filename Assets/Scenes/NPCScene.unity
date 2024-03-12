@@ -276,7 +276,6 @@ MonoBehaviour:
   speed: 4
   gameManager: {fileID: 1580581876}
   talkBtn: {fileID: 988244040}
-  NPCInteractive: {fileID: 1487618700}
 --- !u!50 &28899110
 Rigidbody2D:
   serializedVersion: 4
@@ -2013,6 +2012,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648fd338f9b1fc1499ea5eb3aba4cbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scanObject: {fileID: 0}
+  talkManager: {fileID: 1522781903}
+  talkPanel: {fileID: 988244040}
+  isAction: 0
+  talkIndex: 0
+  talkText: {fileID: 804901354}
+  isNPC: 0
+  portraitImg: {fileID: 1032137680}
 --- !u!1 &1503326059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,13 +2168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc7b8449a8d6344cadc22df5a37c00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkText: {fileID: 804901354}
-  scanObject: {fileID: 0}
-  talkPanel: {fileID: 700483056}
-  isAction: 0
-  talkManager: {fileID: 1522781903}
-  talkIndex: 0
-  portraitImg: {fileID: 1032137680}
 --- !u!4 &1580581877
 Transform:
   m_ObjectHideFlags: 0

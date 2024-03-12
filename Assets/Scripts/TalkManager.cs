@@ -11,7 +11,7 @@ public class TalkManager : MonoBehaviour
     private void Awake()
     {
 
-        npcDatabase = DataManager.instance.npcDatabase;
+        
         portraitData = new Dictionary<int, Sprite>();
       
     }
@@ -45,4 +45,4 @@ public class TalkManager : MonoBehaviour
 }
 
 
-// 엑셀을 이용해서 하거나
+

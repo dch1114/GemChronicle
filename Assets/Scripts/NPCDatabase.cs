@@ -16,7 +16,7 @@ public class NPC
 
 public class NPCInstance
 {
-    int no;
+   
     public NPC npc;
 }
 
