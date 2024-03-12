@@ -5,10 +5,13 @@ using System.Collections.Generic;
 public class NPC
 {
     public int ID; // 이름이 동일해야 한다
-    public string Name;
-    public int Attack;
-    public int Gold;
-    public string Description;
+    public string role;
+    public string name;
+    public string place;
+    public string discription;
+    public string []conversation;
+    public bool isNPC;
+
 }
 
 public class NPCInstance

@@ -39,7 +39,7 @@ public class DataManager : MonoBehaviour
         //else
         //{
         //    Debug.LogError("Failed to load itemDatabase.json");
-        //}
+        }
     }
 }
 
