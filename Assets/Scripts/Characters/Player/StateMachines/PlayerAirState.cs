@@ -18,4 +18,22 @@ public class PlayerAirState : PlayerBaseState
         base.Exit();
         StopAnimation(stateMachine.Player.AnimationData.AirParameterHash);
     }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (stateMachine.IsAttacking)
+        {
+            OnAttack();
+            return;
+        }
+    }
+
+    private void OnAttack()
+    {
+        //TODO: CHECK JOB
+        Debug.Log("air");
+        stateMachine.ChangeState(stateMachine.AttackNumState);
+    }
 }

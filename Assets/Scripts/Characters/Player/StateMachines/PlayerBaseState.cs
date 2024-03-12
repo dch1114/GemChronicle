@@ -49,6 +49,8 @@ public class PlayerBaseState : IState
 
         input.PlayerActions.Jump.started += OnJumpStarted;
 
+        input.PlayerActions.ComboAttack.started += OnComboAttackStarted;
+
         input.PlayerActions.Attack.performed += OnAttackPerformed;
         input.PlayerActions.Attack.canceled += OnAttackCanceled;
     }
@@ -62,33 +64,50 @@ public class PlayerBaseState : IState
 
         input.PlayerActions.Attack.performed -= OnAttackPerformed;
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
+
+        input.PlayerActions.ComboAttack.canceled += OnComboAttackCanceled;
     }
 
     protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
     {
-        stateMachine.IsAttacking = true;
+        if(!stateMachine.IsComboAttacking)
+        {
+            stateMachine.IsAttacking = true;
 
-        InputAction action = context.action;
-        if (action.activeControl.Equals(action.controls[0]))
-        {
-            stateMachine.AttackIndex = 1;
-            stateMachine.SkillIndex = new List<int> { 0, 1, 2 };
-        }
-        else if (action.activeControl.Equals(action.controls[1]))
-        {
-            stateMachine.AttackIndex = 2;
-            stateMachine.SkillIndex = new List<int> { 1, 1, 1 };
-        }
-        else if (action.activeControl.Equals(action.controls[2]))
-        {
-            stateMachine.AttackIndex = 3;
-            stateMachine.SkillIndex = new List<int> { 2, 1, 0 };
+            //TODO: Skill Index 연동 필요
+            InputAction action = context.action;
+
+            if (action.activeControl.Equals(action.controls[0]))
+            {
+                stateMachine.AttackIndex = 1;
+                stateMachine.SkillIndex = new List<int> { 0, 1, 2 };
+            }
+            else if (action.activeControl.Equals(action.controls[1]))
+            {
+                stateMachine.AttackIndex = 2;
+                stateMachine.SkillIndex = new List<int> { 1, 1, 1 };
+            }
+            else if (action.activeControl.Equals(action.controls[2]))
+            {
+                stateMachine.AttackIndex = 3;
+                stateMachine.SkillIndex = new List<int> { 2, 1, 0 };
+            }
         }
     }
 
     protected virtual void OnAttackCanceled(InputAction.CallbackContext obj)
     {
         stateMachine.IsAttacking = false;
+    }
+
+    protected virtual void OnComboAttackStarted(InputAction.CallbackContext context)
+    {
+        stateMachine.IsComboAttacking = true;
+        Debug.Log("Combo");
+    }
+    protected virtual void OnComboAttackCanceled(InputAction.CallbackContext context)
+    {
+        stateMachine.IsComboAttacking = false;
     }
 
     protected virtual void OnMovementCanceled(InputAction.CallbackContext _context)

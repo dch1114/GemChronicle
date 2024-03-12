@@ -20,6 +20,7 @@ public class PlayerStateMachine : StateMachine
     public float JumpForce { get; set; }
 
     public bool IsAttacking { get; set; }
+    public bool IsComboAttacking { get; set; }
     public int AttackIndex { get; set; }
     public List<int> SkillIndex { get; set; }
 
