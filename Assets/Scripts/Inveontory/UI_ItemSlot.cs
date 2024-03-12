@@ -3,13 +3,16 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    private UI ui;
+    protected UI ui;
     public InventoryItem item;
+
+    public float clickDelay = 0.3f;
+    public float lastClickTime = 0;
 
     private void Start()
     {
@@ -47,37 +50,54 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if(item == null)
+        if (item == null)
         {
             return;
         }
 
-        if(Input.GetKey(KeyCode.LeftControl))
+        float currentTime = Time.time;
+        float timeSinceLastClick = currentTime - lastClickTime;
+
+        if (timeSinceLastClick <= clickDelay)
         {
-            Inventory.Instance.RemoveItem(item.data);
-            return;
+            if (item.data.itemType == ItemType.Equipment)
+            {
+                Inventory.Instance.EquipItem(item.data);
+                ui.itemToopTip.HideToolTip();
+            }
+        }
+        else
+        {
+            AdjustToolTipPosition();
+            ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
         }
 
-        if (item.data.itemType == ItemType.Equipment)
-        {
-            Inventory.Instance.EquipItem(item.data);
-        }
+        lastClickTime = currentTime;
+        //if (Input.GetKey(KeyCode.LeftControl))
+        //{
+        //    Inventory.Instance.RemoveItem(item.data);
+        //    return;
+        //}
+
+        //AdjustToolTipPosition();
+        //ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
+
+
+        //if (item.data.itemType == ItemType.Equipment)
+        //{
+        //    Inventory.Instance.EquipItem(item.data);
+        //}
 
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    protected void AdjustToolTipPosition()
     {
-        if(item == null)
-        {
-            return;
-        }
-
         Vector2 mousePosition = Input.mousePosition;
 
         float xOffset = 0;
         float yOffset = 0;
 
-        if(mousePosition.x > 600)
+        if (mousePosition.x > 600)
         {
             xOffset = -75;
         }
@@ -86,7 +106,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
             xOffset = 75;
         }
 
-        if(mousePosition.y > 320)
+        if (mousePosition.y > 320)
         {
             yOffset = -75;
         }
@@ -95,17 +115,50 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHand
             yOffset = 75;
         }
 
-        ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
         ui.itemToopTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (item == null)
-        {
-            return;
-        }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    if(item == null)
+    //    {
+    //        return;
+    //    }
 
-        ui.itemToopTip.HideToolTip();
-    }
+    //    Vector2 mousePosition = Input.mousePosition;
+
+    //    float xOffset = 0;
+    //    float yOffset = 0;
+
+    //    if(mousePosition.x > 600)
+    //    {
+    //        xOffset = -75;
+    //    }
+    //    else
+    //    {
+    //        xOffset = 75;
+    //    }
+
+    //    if(mousePosition.y > 320)
+    //    {
+    //        yOffset = -75;
+    //    }
+    //    else
+    //    {
+    //        yOffset = 75;
+    //    }
+
+    //    ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
+    //    ui.itemToopTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
+    //}
+
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    if (item == null)
+    //    {
+    //        return;
+    //    }
+
+    //    ui.itemToopTip.HideToolTip();
+    //}
 }
