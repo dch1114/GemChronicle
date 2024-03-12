@@ -81,6 +81,7 @@ public class PlayerAction : MonoBehaviour
             {
                 scanObject = _other.gameObject;
                 talkBtn.SetActive(true);
+
             }
         }
         else
@@ -110,6 +111,7 @@ public class PlayerAction : MonoBehaviour
         }
             
     }
+
 
 
 }

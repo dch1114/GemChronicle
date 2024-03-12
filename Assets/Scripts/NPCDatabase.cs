@@ -44,11 +44,5 @@ public class NPCDatabase
         return null;
     }
 
-    public NPC GetRandomItem()
-    {
-        if (NPCInfos.Count <= 0)
-            return null;
-
-        return NPCInfos[Random.Range(0, NPCInfos.Count)];
-    }
+  
 }

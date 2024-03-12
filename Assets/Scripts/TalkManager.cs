@@ -10,18 +10,19 @@ public class TalkManager : MonoBehaviour
     public Sprite[] portraitArr;
     private void Awake()
     {
-       
+        
         talkData = new Dictionary<int, string[]>();
         portraitData = new Dictionary<int, Sprite>();
-        GenerateData();
+        
     }
 
     void GenerateData()
     {
-        talkData.Add(1001, new string[] {});
-        talkData.Add(1101, new string[] { "안녕:0", "잘부탁해:0" });
-        talkData.Add(1201, new string[] { "난 NPC3란다:0" });
-        talkData.Add(1301, new string[] { "하이:0", "난 npc4야:0" });
+
+        talkData.Add(1001, npcDatabase.GetNPCByKey(1001).conversation);
+        talkData.Add(1101, npcDatabase.GetNPCByKey(1101).conversation);
+        talkData.Add(1201, npcDatabase.GetNPCByKey(1201).conversation);
+        talkData.Add(1301, npcDatabase.GetNPCByKey(1301).conversation);
 
         portraitData.Add(1001, portraitArr[0]);
         portraitData.Add(1101, portraitArr[1]);
@@ -32,6 +33,7 @@ public class TalkManager : MonoBehaviour
     }
     public string GetTalk(int _id, int _talkIndex)
     {
+        GenerateData();
         if (_talkIndex == talkData[_id].Length)
             return null;
         else
@@ -42,6 +44,7 @@ public class TalkManager : MonoBehaviour
         //return portraitData[id + portraitIndex];
         return portraitData[_id];
     }
+    
 }
 
 

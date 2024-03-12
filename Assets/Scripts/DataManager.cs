@@ -1,44 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
 
 public class DataManager : MonoBehaviour
 {
+    //싱글톤화
     public NPCDatabase npcDatabase;
+    public static DataManager instance = null;
 
+   
     void Awake()
     {
+        if (instance == null) 
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); 
+        }
+        else
+        {
+            if (instance != this) 
+                Destroy(this.gameObject); 
+        }
+
+
+   
         TextAsset jsonFile = Resources.Load<TextAsset>("JSON/NPCData");
         if (jsonFile != null)
         {
             string json = jsonFile.text;
 
-            // JSON 파일을 파싱하여 ItemDatabase에 저장합니다.
+            // JSON 파일을 파싱하여 NPCDatabase(변수)에 저장합니다.
             npcDatabase = JsonUtility.FromJson<NPCDatabase>(json);
             npcDatabase.Initialize();
 
 
-
-
-            // 예제로 특정 아이템에 접근하는 방법
-        //    int npcKeyToFind = 3;
-        //    NPC foundNPC = npcDatabase.GetNPCByKey(npcKeyToFind);
-        //    if (foundNPC != null)
-        //    {
-        //        //Debug.Log("Item Name: " + foundItem.Name);
-        //        //Debug.Log("Item Attack: " + foundItem.Attack);
-        //        //Debug.Log("Item Gold: " + foundItem.Gold);
-        //        //Debug.Log("Item Description: " + foundItem.Description);
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Item with key " + npcKeyToFind + " not found.");
-        //    }
-        //}
-        //else
-        //{
-        //    Debug.LogError("Failed to load itemDatabase.json");
+            //int npcKeyToFind = 1001;
+            //NPC foundNPC = npcDatabase.GetNPCByKey(npcKeyToFind);
+            //if (foundNPC != null)
+            //{
+            //    Debug.Log("NPC ID: " + foundNPC.ID);
+            //    Debug.Log("NPC role: " + foundNPC.role);
+            //    Debug.Log("NPC name: " + foundNPC.name);
+            //    Debug.Log("NPC place: " + foundNPC.place);
+            //}
+            //else
+            //{
+            //    Debug.Log("NPC with key " + npcKeyToFind + " not found.");
+            //}
         }
     }
 }

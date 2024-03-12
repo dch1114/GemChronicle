@@ -237,11 +237,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 11003513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6aae272eae41c47ade8e5c15ac42d2, type: 3}
+  m_Script: {fileID: 11500000, guid: d0a67f138e8c2aa4ba8109968ba31c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1001
-  isNpc: 1
+  npcdatabase:
+    NPCInfos: []
+  NPCID: 1001
 --- !u!1 &28899108
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,11 +820,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 589413024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6aae272eae41c47ade8e5c15ac42d2, type: 3}
+  m_Script: {fileID: 11500000, guid: d0a67f138e8c2aa4ba8109968ba31c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1101
-  isNpc: 1
+  npcdatabase:
+    NPCInfos: []
+  NPCID: 1101
 --- !u!1 &642362862
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,11 +940,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 642362862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6aae272eae41c47ade8e5c15ac42d2, type: 3}
+  m_Script: {fileID: 11500000, guid: d0a67f138e8c2aa4ba8109968ba31c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1301
-  isNpc: 1
+  npcdatabase:
+    NPCInfos: []
+  NPCID: 1301
 --- !u!1 &700483056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,11 +1243,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 910547864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6aae272eae41c47ade8e5c15ac42d2, type: 3}
+  m_Script: {fileID: 11500000, guid: d0a67f138e8c2aa4ba8109968ba31c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1201
-  isNpc: 1
+  npcdatabase:
+    NPCInfos: []
+  NPCID: 1201
 --- !u!1 &988244040
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,7 +1267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &988244041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1541,7 +1545,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -200}
+  m_AnchoredPosition: {x: 2, y: -122}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1057434114
@@ -2023,6 +2027,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bb2cd66f6cdd34ab4c8df0d26f0117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcDatabase:
+    NPCInfos: []
   portraitArr:
   - {fileID: 21300000, guid: 645d3f70a58891f43b294a84cf87721c, type: 3}
   - {fileID: 21300000, guid: f543315a5f7098a43b94ab872bbd1378, type: 3}
