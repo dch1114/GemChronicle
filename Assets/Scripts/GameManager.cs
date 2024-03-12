@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
        
 
             scanObject = _scanobj;
-            Objdata objData = scanObject.GetComponent<Objdata>();
-            Talk(objData.id, objData.isNpc);
+        NPC NPCDatabase = scanObject.GetComponent<NPC>();
+            Talk(NPCDatabase.ID, NPCDatabase.isNPC);
        
         talkPanel.SetActive(isAction);//판넬의 값은 isAction과 동일하기 때문
         

@@ -88,7 +88,7 @@ public class PlayerAction : MonoBehaviour
             scanObject = null;
             talkBtn = null;
         }
-            
+        
     }
 
 

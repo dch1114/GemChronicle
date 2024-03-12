@@ -9,7 +9,7 @@ public class DataManager : MonoBehaviour
 
     void Awake()
     {
-        TextAsset jsonFile = Resources.Load<TextAsset>("JSON/ITEM_INFO");
+        TextAsset jsonFile = Resources.Load<TextAsset>("JSON/NPCData");
         if (jsonFile != null)
         {
             string json = jsonFile.text;

@@ -37,15 +37,7 @@ public class NPCDatabase
 
     public NPC GetNPCByKey(int id)
     {
-        //foreach (Item item in ItemInfos)
-        //{
-        //    if (item.ID == id)
-        //    {
-        //        return item;
-        //    }
-        //}
-        //return null;
-
+      
         if (npcDic.ContainsKey(id))
             return npcDic[id];
 

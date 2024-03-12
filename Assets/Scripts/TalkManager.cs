@@ -6,10 +6,11 @@ public class TalkManager : MonoBehaviour
 {
     Dictionary<int, string[]> talkData;
     Dictionary<int, Sprite> portraitData;
-
+    public NPCDatabase npcDatabase;
     public Sprite[] portraitArr;
     private void Awake()
     {
+       
         talkData = new Dictionary<int, string[]>();
         portraitData = new Dictionary<int, Sprite>();
         GenerateData();
@@ -17,7 +18,7 @@ public class TalkManager : MonoBehaviour
 
     void GenerateData()
     {
-        talkData.Add(1001, new string[] { "안녕 ? :0", "난 NPC1이야 :0" });
+        talkData.Add(1001, new string[] {});
         talkData.Add(1101, new string[] { "안녕:0", "잘부탁해:0" });
         talkData.Add(1201, new string[] { "난 NPC3란다:0" });
         talkData.Add(1301, new string[] { "하이:0", "난 npc4야:0" });
