@@ -11,6 +11,7 @@ public class PlayerFallState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("FallENter");
 
         StartAnimation(stateMachine.Player.AnimationData.FallParameterHash);
     }
@@ -19,6 +20,7 @@ public class PlayerFallState : PlayerAirState
     { 
         base.Exit();
 
+        Debug.Log("FallExit");
         StopAnimation(stateMachine.Player.AnimationData.FallParameterHash);
     }
 
