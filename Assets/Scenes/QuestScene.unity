@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 11003516}
   - component: {fileID: 11003517}
   - component: {fileID: 11003518}
+  - component: {fileID: 11003519}
   m_Layer: 6
   m_Name: NPC1
   m_TagString: Untagged
@@ -242,6 +243,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1001
   isNpc: 1
+--- !u!114 &11003519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11003513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f681d98cc5d8d844ab927cc10c5bb99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questId: 2001
+  questActionIndex: 0
+  questObject: []
 --- !u!1 &28899108
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +733,7 @@ GameObject:
   - component: {fileID: 589413025}
   - component: {fileID: 589413028}
   - component: {fileID: 589413029}
+  - component: {fileID: 589413030}
   m_Layer: 6
   m_Name: NPC2
   m_TagString: Untagged
@@ -824,6 +841,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1101
   isNpc: 1
+--- !u!114 &589413030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589413024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f681d98cc5d8d844ab927cc10c5bb99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questId: 2002
+  questActionIndex: 0
+  questObject: []
 --- !u!1 &642362862
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +868,7 @@ GameObject:
   - component: {fileID: 642362863}
   - component: {fileID: 642362866}
   - component: {fileID: 642362867}
+  - component: {fileID: 642362868}
   m_Layer: 6
   m_Name: NPC4
   m_TagString: Untagged
@@ -943,6 +976,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1301
   isNpc: 1
+--- !u!114 &642362868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642362862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f681d98cc5d8d844ab927cc10c5bb99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questId: 0
+  questActionIndex: 0
+  questObject: []
 --- !u!1 &700483056
 GameObject:
   m_ObjectHideFlags: 0

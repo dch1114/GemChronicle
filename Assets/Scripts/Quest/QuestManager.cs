@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -18,8 +19,7 @@ public class QuestManager : MonoBehaviour
 
     void GenerateData()
     {
-        questList.Add(10, new QuestData("마을 사람들과 대화하기", new int[] { 1001, 1002 }));
-        questList.Add(20, new QuestData("NPC2의 가발 찾아주기", new int[] { 3001, 1002 }));
+        questList.Add(10, new QuestData("마을 사람들과 대화하기", new int[] { 1001, 1101, 1201, 1301 }));
     }
 
     public int GetQuestTalkIndex(int id)
@@ -27,17 +27,20 @@ public class QuestManager : MonoBehaviour
         return questId + questActionIndex;
     }
 
-    public string CheckQuest(int id)
+    public void CheckQuest(int npcId)
     {
-        if (id == questList[questId].npcId[questActionIndex])
-            questActionIndex++;
+        if (questList.ContainsKey(questId) && questList[questId].npcId.Contains(npcId))
+        {
+            if (npcId == questList[questId].npcId[questActionIndex])
+            {
+                questActionIndex++;
 
-        ControlObject();
+                ControlObject();
 
-        if (questActionIndex == questList[questId].npcId.Length)
-            NextQuest();
-
-        return questList[questId].questName;
+                if (questActionIndex == questList[questId].npcId.Length)
+                    NextQuest();
+            }
+        }
     }
 
     void NextQuest()
