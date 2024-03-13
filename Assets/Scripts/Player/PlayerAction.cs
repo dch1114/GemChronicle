@@ -66,7 +66,7 @@ public class PlayerAction : MonoBehaviour
             }
             if (scanObject.layer == LayerMask.NameToLayer("Shop"))
             {
-                if( NPCInteractive.instance.isShop == false)
+                
                 NPCInteractive.instance.touch(scanObject);
                 
 

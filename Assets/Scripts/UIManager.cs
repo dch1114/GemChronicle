@@ -44,9 +44,17 @@ public class UIManager : MonoBehaviour
 
     public void shopChoiceOnOff(bool _OnOff)
     {
-        shopChoice.SetActive(_OnOff);
-        if( _OnOff == false)
-        NPCInteractive.instance.isShop = false;
+      
+        if(_OnOff)
+            shopChoice.SetActive(_OnOff);
+            else
+        {
+            shopChoice.SetActive(_OnOff);
+            NPCInteractive.instance.isAction = false;
+            talkPanelOnOff(false);
+        }
+            
+
     }
 
 }
