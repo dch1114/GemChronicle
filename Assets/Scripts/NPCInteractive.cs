@@ -67,7 +67,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
         {
             Talk(npcController.GetNpcData().ID);
         }
-        Debug.Log("test" + isAction);
+      
         UIManager.instance.talkPanelOnOff(isAction);
 
     }

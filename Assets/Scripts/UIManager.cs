@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
 
     public void shopChoiceOnOff(bool _OnOff)
     {
-        Debug.Log(_OnOff);
+      
         if (_OnOff)
         {
             btn.SetActive(_OnOff);
