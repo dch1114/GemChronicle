@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [field: Header("References")]
-    [field: SerializeField] public PlayerStats Data { get; private set; }
+    [field: SerializeField] public PlayerDatas Data { get; private set; }
 
     [field: Header("Animations")]
     [field: SerializeField] public PlayerAnimationData AnimationData { get; private set; }

@@ -8,6 +8,7 @@ public class AttackInfoData
 {
     [field: SerializeField] public string AttackName {  get; private set; }
     [field: SerializeField] public int AttackStateIndex { get; private set; }
+    [field: SerializeField] public int Damage { get; private set; }
 }
 
 [Serializable]
