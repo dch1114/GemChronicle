@@ -6,13 +6,21 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory Instance;
 
+    //Test
+    GameManager gameManager;
+    DataManager dataManager;
+    ItemDatabase itemDatabase;
+
     public List<ItemData> startingItems;
+    //public List<Item> startingItems;
 
     public List<InventoryItem> equipment;
     public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
 
     public List<InventoryItem> inventory;
     public Dictionary<ItemData, InventoryItem> inventoryDictionary;
+    //test
+    public Dictionary<Item, InventoryItem> itemDictionaryTest;
 
    // public List<InventoryItem> stash;
     //public Dictionary <ItemData, InventoryItem> stashDictionary;
@@ -20,13 +28,13 @@ public class Inventory : MonoBehaviour
     [Header("Inventory UI")]
 
     [SerializeField] private Transform inventorySlotParent;
-    //[SerializeField] private Transform stashSlotParent;
     [SerializeField] private Transform equipmentSlotParent;
+    //[SerializeField] private Transform stashSlotParent;
     
 
     private UI_ItemSlot[] inventoryItemSlot;
-    //private UI_ItemSlot[] stashItemSlot;
     private UI_EquipmentSlot[] equipmentSlot;
+    //private UI_ItemSlot[] stashItemSlot;
 
     private void Awake()
     {
@@ -38,10 +46,17 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     private void Start()
     {
+        //test
+        gameManager = GameManager.instance;
+        dataManager = gameManager.dataManager;
+
+        itemDatabase = dataManager.itemDatabase;
+
         inventory = new List<InventoryItem>();
         inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
 
@@ -58,6 +73,46 @@ public class Inventory : MonoBehaviour
         AddStartingItems();
     }
 
+    public void Gacha() // test
+    {
+        Item item = itemDatabase.GetRandomItem();  // 데이터베이스에서 랜덤한 데이터를 반환
+
+        InventoryItem itemInstanceas = new InventoryItem(item); // 인벤토리에 들어갈 아이템 인스턴스 생성
+
+        inventory.Add(itemInstanceas);  // 인벤토리에 아이템 추가
+
+        Debug.Log(itemInstanceas.datas.Name);
+    }
+
+    public void AddItemTest(Item _item)
+    {
+        //if ((_item.itemType == ItemType.Equipment || _item.itemType == ItemType.Material) && CanAddItem())
+        //{
+        //    AddToInventory(_item);
+        //}
+        //else if(_item.itemType == ItemType.Material)
+        //{
+        //    AddToStash(_item);
+        //}
+
+        AddToInventoryTest(_item);
+        UpdateSlotUI();
+    }
+
+    private void AddToInventoryTest(Item _item)
+    {
+        if (itemDictionaryTest.TryGetValue(_item, out InventoryItem value))
+        {
+            value.AddStack();
+        }
+        else
+        {
+            InventoryItem newItem = new InventoryItem(_item);
+            inventory.Add(newItem);
+            itemDictionaryTest.Add(_item, newItem);
+        }
+    }
+
     private void AddStartingItems()
     {
         for (int i = 0; i < startingItems.Count; i++)
@@ -67,33 +122,33 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void EquipItem(ItemData _item)
-    {
-        ItemData_Equipment newEquipment = _item as ItemData_Equipment;
-        InventoryItem newItem = new InventoryItem(newEquipment);
+    //public void EquipItem(ItemData _item)
+    //{
+    //    ItemData_Equipment newEquipment = _item as ItemData_Equipment;
+    //    InventoryItem newItem = new InventoryItem(newEquipment);
 
-        ItemData_Equipment oldEquipment = null;
+    //    ItemData_Equipment oldEquipment = null;
 
-        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
-        {
-            if (item.Key.equipmentType == newEquipment.equipmentType)
-            {
-                oldEquipment = item.Key;
-            }
-        }
+    //    foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
+    //    {
+    //        if (item.Key.equipmentType == newEquipment.equipmentType)
+    //        {
+    //            oldEquipment = item.Key;
+    //        }
+    //    }
 
-        if(oldEquipment != null)
-        {
-            UnEquipItem(oldEquipment);
-            AddItem(oldEquipment);
-        }
+    //    if(oldEquipment != null)
+    //    {
+    //        UnEquipItem(oldEquipment);
+    //        AddItem(oldEquipment);
+    //    }
 
-        equipment.Add(newItem);
-        equipmentDictionary.Add(newEquipment, newItem);
-        RemoveItem(_item);
+    //    equipment.Add(newItem);
+    //    equipmentDictionary.Add(newEquipment, newItem);
+    //    RemoveItem(_item);
 
-        UpdateSlotUI();
-    }
+    //    UpdateSlotUI();
+    //}
 
     public void UnEquipItem(ItemData_Equipment itemToRemove)
     {
@@ -143,7 +198,7 @@ public class Inventory : MonoBehaviour
     {
         if ((_item.itemType == ItemType.Equipment || _item.itemType == ItemType.Material) && CanAddItem())
         {
-            AddToInventory(_item);
+            //AddToInventory(_item);
         }
         //else if(_item.itemType == ItemType.Material)
         //{
@@ -168,19 +223,19 @@ public class Inventory : MonoBehaviour
     //    }
     //}
 
-    private void AddToInventory(ItemData _item)
-    {
-        if (inventoryDictionary.TryGetValue(_item, out InventoryItem value))
-        {
-            value.AddStack();
-        }
-        else
-        {
-            InventoryItem newItem = new InventoryItem(_item);
-            inventory.Add(newItem);
-            inventoryDictionary.Add(_item, newItem);
-        }
-    }
+    //private void AddToInventory(ItemData _item)
+    //{
+    //    if (inventoryDictionary.TryGetValue(_item, out InventoryItem value))
+    //    {
+    //        value.AddStack();
+    //    }
+    //    else
+    //    {
+    //        InventoryItem newItem = new InventoryItem(_item);
+    //        inventory.Add(newItem);
+    //        inventoryDictionary.Add(_item, newItem);
+    //    }
+    //}
 
     public void RemoveItem(ItemData _item)
     {

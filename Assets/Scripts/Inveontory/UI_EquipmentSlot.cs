@@ -14,32 +14,36 @@ public class UI_EquipmentSlot : UI_ItemSlot
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        if(item == null || item.data == null)
-        {
-            return;
-        }
+        //if(item == null || item.data == null)
+        //{
+        //    return;
+        //}
 
-        float currentTime = Time.time;
-        float timeSinceLastClick = currentTime - lastClickTime;
+        //float currentTime = Time.time;
+        //float timeSinceLastClick = currentTime - lastClickTime;
 
-        if (timeSinceLastClick <= clickDelay)
-        {
-            if (item.data.itemType == ItemType.Equipment)
-            {
-                Inventory.Instance.UnEquipItem(item.data as ItemData_Equipment);
-                Inventory.Instance.AddItem(item.data as ItemData_Equipment);
-                CleanUpSlot();
-                ui.itemToopTip.HideToolTip();
-            }
-        }
-        else
-        {
-            AdjustToolTipPosition();
-            ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
-        }
+        //if (timeSinceLastClick <= clickDelay)
+        //{
+        //    if (item.data.itemType == ItemType.Equipment)
+        //    {
+        //        Inventory.Instance.UnEquipItem(item.data as ItemData_Equipment);
+        //        Inventory.Instance.AddItem(item.data as ItemData_Equipment);
+        //        CleanUpSlot();
+        //        ui.itemToopTip.HideToolTip();
+        //    }
+        //}
+        //else
+        //{
+        //    AdjustToolTipPosition();
+        //    ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
+        //}
 
-        lastClickTime = currentTime;
+        //lastClickTime = currentTime;
 
+        
+        
+        
+        
         //AdjustToolTipPosition();
 
         //Inventory.Instance.UnEquipItem(item.data as ItemData_Equipment);

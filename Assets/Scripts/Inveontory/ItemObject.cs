@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemObject : MonoBehaviour
 {
     [SerializeField] public ItemData itemData;  // public ¹Ù²Ü¹æ¹ý
+    [SerializeField] public Item itemDataTest;
 
     private void OnValidate()
     {

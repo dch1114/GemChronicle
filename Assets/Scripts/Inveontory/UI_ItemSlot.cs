@@ -26,7 +26,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
         if(item != null)
         {
-            itemImage.sprite = item.data.icon;
+            itemImage.sprite = item.datas.sprite; // test
 
             if (item.stackSize > 1)
             {
@@ -60,16 +60,17 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
         if (timeSinceLastClick <= clickDelay)
         {
-            if (item.data.itemType == ItemType.Equipment)
-            {
-                Inventory.Instance.EquipItem(item.data);
-                ui.itemToopTip.HideToolTip();
-            }
+            //if (item.data.itemType == ItemType.Equipment) // test
+            //{
+            //    //Inventory.Instance.EquipItem(item.data);
+            //    ui.itemToopTip.HideToolTip();
+            //}
+            ui.itemToopTip.HideToolTip();
         }
         else
         {
             AdjustToolTipPosition();
-            ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
+            //ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);   //test
         }
 
         lastClickTime = currentTime;
