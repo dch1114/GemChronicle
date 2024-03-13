@@ -34,13 +34,8 @@ public class TalkManager : MonoBehaviour
     }
     public string GetTalk(int _id, int _talkIndex)
     {
-        Debug.Log("_id : " + _id);
-
-        Debug.Log("_talkIndex : " + _talkIndex);
-        //if (_talkIndex == npcDatabase.NPCInfos[_id].conversation.Length)
-        //    return null;
-        //else
-        //    return npcDatabase.NPCInfos[_id].conversation[_talkIndex];
+       
+       
         if (_talkIndex == npcDatabase.GetNPCByKey(_id).conversation.Length)
             return null;
         else 

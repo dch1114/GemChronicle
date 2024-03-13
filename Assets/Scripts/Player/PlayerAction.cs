@@ -29,13 +29,13 @@ public class PlayerAction : MonoBehaviour
     {
 
         //간단한 이동식
-        h = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Horizontal");  //액션상태에 따라 움직이지 못하게
-        v = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Vertical");
+        h = Interactive.instance.isAction ? 0 : Input.GetAxisRaw("Horizontal");  //액션상태에 따라 움직이지 못하게
+        v = Interactive.instance.isAction ? 0 : Input.GetAxisRaw("Vertical");
 
-        bool hDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Horizontal");
-        bool vDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Vertical");
-        bool hUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Horizontal");
-        bool vUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Vertical");
+        bool hDown = Interactive.instance.isAction ? false : Input.GetButtonDown("Horizontal");
+        bool vDown = Interactive.instance.isAction ? false : Input.GetButtonDown("Vertical");
+        bool hUp = Interactive.instance.isAction ? false : Input.GetButtonUp("Horizontal");
+        bool vUp = Interactive.instance.isAction ? false : Input.GetButtonUp("Vertical");
 
         if (hDown || vUp)
             isHorizonMove = true;
@@ -57,9 +57,9 @@ public class PlayerAction : MonoBehaviour
         //scanObject
         if (Input.GetButtonDown("Jump") && scanObject != null)
         {
-            Debug.Log("talk complete");
-            
-            NPCInteractive.instance.Action(scanObject);
+         
+
+            Interactive.instance.Action(scanObject);
 
         }
 
@@ -86,7 +86,7 @@ public class PlayerAction : MonoBehaviour
         {
             if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
             {
-                NPCInteractive.instance.AddNPCList();
+         
                 scanObject = _other.gameObject;
                 talkBtn.SetActive(true);
 
@@ -108,7 +108,7 @@ public class PlayerAction : MonoBehaviour
         {
             if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
             {
-                NPCInteractive.instance.RemoveNPCList();
+                
                 scanObject = null;
                 talkBtn.SetActive(false);
             }
@@ -126,15 +126,3 @@ public class PlayerAction : MonoBehaviour
 }
 
 
-////보는 방향+ 거리확인
-//Debug.DrawRay(rigid.position, dirVec * 1.7f, new Color(0, 1, 0));
-
-////대화걸기
-//RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, dirVec, 1.7f, LayerMask.GetMask("Object"));
-
-//if (rayHit.collider != null)
-//{
-//    scanObject = rayHit.collider.gameObject;
-//}
-//else
-//    scanObject = null;

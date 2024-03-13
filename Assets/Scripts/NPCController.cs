@@ -18,12 +18,6 @@ public class NPCController : MonoBehaviour
     {
         return npcData;
     }
-    //public void Init()
-    //{
-       
-    //    int NPCKeyToFind = NPCID;
-
-    //    DataManager.instance.npcDatabase.GetNPCByKey(NPCKeyToFind);
-    //}
+    
     
 }
