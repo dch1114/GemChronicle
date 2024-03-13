@@ -31,9 +31,9 @@ public class DataManager : MonoBehaviour
         if (jsonFile != null)
         {
             string json = jsonFile.text;
-
-            // JSON ������ �Ľ��Ͽ� NPCDatabase(����)�� �����մϴ�.
-            npcDatabase = JsonUtility.FromJson<NPCDatabase>(json);
+            string NPCjson = NPCjsonFile.text;
+            
+            npcDatabase = JsonUtility.FromJson<NPCDatabase>(NPCjson);
             npcDatabase.Initialize();
 
 
