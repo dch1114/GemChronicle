@@ -17,7 +17,7 @@ public interface IInteractive
 
 
 
-public class Interactive : MonoBehaviour, IInteractive
+public class NPCInteractive : MonoBehaviour, IInteractive
 {
     public GameObject scanObject;
     public TalkManager talkManager;
@@ -29,7 +29,7 @@ public class Interactive : MonoBehaviour, IInteractive
     public bool isNPC;
 
     public Image portraitImg;
-    public static Interactive instance = null;
+    public static NPCInteractive instance = null;
     NPCDatabase npcDatabase;
 
    

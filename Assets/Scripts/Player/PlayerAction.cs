@@ -29,13 +29,13 @@ public class PlayerAction : MonoBehaviour
     {
 
         //간단한 이동식
-        h = Interactive.instance.isAction ? 0 : Input.GetAxisRaw("Horizontal");  //액션상태에 따라 움직이지 못하게
-        v = Interactive.instance.isAction ? 0 : Input.GetAxisRaw("Vertical");
+        h = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Horizontal");  //액션상태에 따라 움직이지 못하게
+        v = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Vertical");
 
-        bool hDown = Interactive.instance.isAction ? false : Input.GetButtonDown("Horizontal");
-        bool vDown = Interactive.instance.isAction ? false : Input.GetButtonDown("Vertical");
-        bool hUp = Interactive.instance.isAction ? false : Input.GetButtonUp("Horizontal");
-        bool vUp = Interactive.instance.isAction ? false : Input.GetButtonUp("Vertical");
+        bool hDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Horizontal");
+        bool vDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Vertical");
+        bool hUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Horizontal");
+        bool vUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Vertical");
 
         if (hDown || vUp)
             isHorizonMove = true;
@@ -57,9 +57,9 @@ public class PlayerAction : MonoBehaviour
         //scanObject
         if (Input.GetButtonDown("Jump") && scanObject != null)
         {
-         
 
-            Interactive.instance.Action(scanObject);
+
+            NPCInteractive.instance.Action(scanObject);
 
         }
 
