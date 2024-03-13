@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class PlayerAction : MonoBehaviour
@@ -17,6 +18,8 @@ public class PlayerAction : MonoBehaviour
     bool isHorizonMove;
     GameObject scanObject;
     public GameObject talkBtn;
+    
+    
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -27,13 +30,14 @@ public class PlayerAction : MonoBehaviour
     {
 
         //간단한 이동식
-        h = gameManager.isAction ? 0 : Input.GetAxisRaw("Horizontal");  //액션상태에 따라 움직이지 못하게
-        v = gameManager.isAction ? 0 : Input.GetAxisRaw("Vertical");
+        h = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Horizontal");  //액션상태에 따라 움직이지 못하게
+        v = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Vertical");
 
-        bool hDown = gameManager.isAction ? false : Input.GetButtonDown("Horizontal");
-        bool vDown = gameManager.isAction ? false : Input.GetButtonDown("Vertical");
-        bool hUp = gameManager.isAction ? false : Input.GetButtonUp("Horizontal");
-        bool vUp = gameManager.isAction ? false : Input.GetButtonUp("Vertical");
+        bool hDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Horizontal");
+        bool vDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Vertical");
+        bool hUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Horizontal");
+        bool vUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Vertical");
+        
 
         if (hDown || vUp)
             isHorizonMove = true;
@@ -54,7 +58,21 @@ public class PlayerAction : MonoBehaviour
 
         //scanObject
         if (Input.GetButtonDown("Jump") && scanObject != null)
-            gameManager.Action(scanObject);
+        {
+
+
+            if (scanObject.layer == LayerMask.NameToLayer("NPC"))
+            {
+                NPCInteractive.instance.touch(scanObject);
+            }
+            if (scanObject.layer == LayerMask.NameToLayer("Shop"))
+            {
+               
+                NPCInteractive.instance.touch(scanObject);
+                
+
+            }
+        }
 
 
 
@@ -77,18 +95,26 @@ public class PlayerAction : MonoBehaviour
 
         if (_other != null)
         {
-            if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
+            if (_other.gameObject.layer == LayerMask.NameToLayer("NPC"))
+            {
+
+                scanObject = _other.gameObject;
+                UIManager.instance.talkBtnOnOff(true);
+
+            }
+            if (_other.gameObject.layer == LayerMask.NameToLayer("Shop"))
             {
                 scanObject = _other.gameObject;
-                talkBtn.SetActive(true);
+                UIManager.instance.shopPanelOnOff(true);
             }
         }
         else
         {
             scanObject = null;
             talkBtn = null;
-        }
             
+        }
+        
     }
 
 
@@ -97,10 +123,16 @@ public class PlayerAction : MonoBehaviour
     {
         if (_other != null)
         {
-            if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
+            if (_other.gameObject.layer == LayerMask.NameToLayer("NPC"))
+            {
+
+                scanObject = null;
+                UIManager.instance.talkBtnOnOff(false);
+            }
+            if (_other.gameObject.layer == LayerMask.NameToLayer("Shop"))
             {
                 scanObject = null;
-                talkBtn.SetActive(false);
+                UIManager.instance.shopPanelOnOff(false);
             }
         }
         else
@@ -115,15 +147,3 @@ public class PlayerAction : MonoBehaviour
 }
 
 
-////보는 방향+ 거리확인
-//Debug.DrawRay(rigid.position, dirVec * 1.7f, new Color(0, 1, 0));
-
-////대화걸기
-//RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, dirVec, 1.7f, LayerMask.GetMask("Object"));
-
-//if (rayHit.collider != null)
-//{
-//    scanObject = rayHit.collider.gameObject;
-//}
-//else
-//    scanObject = null;
