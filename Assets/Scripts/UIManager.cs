@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject talkBtn;
     public GameObject talkPanel;
     public GameObject shopPanel;
+    public GameObject shopChoice;
     public static UIManager instance = null;
     void Awake()
     {
@@ -40,4 +41,10 @@ public class UIManager : MonoBehaviour
     {
         shopPanel.SetActive(_OnOff);
     }
+
+    public void shopChoiceOnOff(bool _OnOff)
+    {
+        shopChoice.SetActive(_OnOff);
+    }
+
 }
