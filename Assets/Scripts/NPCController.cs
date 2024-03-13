@@ -9,7 +9,7 @@ public class NPCController : MonoBehaviour
     private NPC npcData;
     //public int NPCID;
 
-    public void SetNpcData(NPC npc)
+    public void SetNpcData(NPC npc)  //초기화로 해주고 매니저가 npc를 초기화하면서 자기를 역참조하면서 보내기
     { 
         npcData = npc;
     }

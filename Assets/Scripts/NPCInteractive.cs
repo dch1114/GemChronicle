@@ -4,11 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public interface IInteractive
+public interface IInteractive  
 {
 
-    void Talk(int NPCID);
-    void Action(GameObject gameObject);
+
+    void touch(GameObject _player); //이름 바꾸기 , 매게변수 플레이어로 바꾸기
     
 
 }
@@ -58,7 +58,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
 
     
 
-    public void Action(GameObject _scanobj)
+    public void touch(GameObject _scanobj)
     {
 
 

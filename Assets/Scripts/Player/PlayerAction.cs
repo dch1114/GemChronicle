@@ -59,7 +59,7 @@ public class PlayerAction : MonoBehaviour
         {
 
 
-            NPCInteractive.instance.Action(scanObject);
+            NPCInteractive.instance.touch(scanObject);
 
         }
 
