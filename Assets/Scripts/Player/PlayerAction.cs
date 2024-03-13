@@ -37,6 +37,7 @@ public class PlayerAction : MonoBehaviour
         bool vDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Vertical");
         bool hUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Horizontal");
         bool vUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Vertical");
+        
 
         if (hDown || vUp)
             isHorizonMove = true;
@@ -130,7 +131,7 @@ public class PlayerAction : MonoBehaviour
             }
             if (_other.gameObject.layer == LayerMask.NameToLayer("Shop"))
             {
-                scanObject = _other.gameObject;
+                scanObject = null;
                 UIManager.instance.shopPanelOnOff(false);
             }
         }
