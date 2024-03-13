@@ -6,7 +6,7 @@ using static UnityEditor.Progress;
 
 public class DataManager : MonoBehaviour
 {
-    //½Ì±ÛÅæÈ­
+    //ï¿½Ì±ï¿½ï¿½ï¿½È­
     public NPCDatabase npcDatabase;
     public static DataManager instance = null;
 
@@ -27,11 +27,20 @@ public class DataManager : MonoBehaviour
 
    
         TextAsset jsonFile = Resources.Load<TextAsset>("JSON/NPCData");
+using UnityEngine;
+
+public class DataManager : MonoBehaviour
+{
+    public ItemDatabase itemDatabase;
+
+    void Awake()
+    {
+        TextAsset jsonFile = Resources.Load<TextAsset>("JSON/Item_Data");
         if (jsonFile != null)
         {
             string json = jsonFile.text;
 
-            // JSON ÆÄÀÏÀ» ÆÄ½ÌÇÏ¿© NPCDatabase(º¯¼ö)¿¡ ÀúÀåÇÕ´Ï´Ù.
+            // JSON ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ï¿½Ï¿ï¿½ NPCDatabase(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
             npcDatabase = JsonUtility.FromJson<NPCDatabase>(json);
             npcDatabase.Initialize();
 
@@ -42,3 +51,31 @@ public class DataManager : MonoBehaviour
     }
 }
 
+            // JSON ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ï¿½Ï¿ï¿½ ItemDatabaseï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
+            itemDatabase = JsonUtility.FromJson<ItemDatabase>(json);
+            itemDatabase.Initialize();
+
+
+
+
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½
+            int itemKeyToFind = 3;
+            Item foundItem = itemDatabase.GetItemByKey(itemKeyToFind);
+            if (foundItem != null)
+            {
+                Debug.Log("Item Name: " + foundItem.Name);
+                Debug.Log("Item Damage: " + foundItem.Damage);
+                Debug.Log("Item Armor: " + foundItem.Armor);
+                Debug.Log("Item Description: " + foundItem.Description);
+            }
+            else
+            {
+                Debug.Log("Item with key " + itemKeyToFind + " not found.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to load itemDatabase.json");
+        }
+    }
+}
