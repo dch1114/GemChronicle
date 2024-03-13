@@ -19,6 +19,7 @@ public class PlayerAction : MonoBehaviour
     GameObject scanObject;
     public GameObject talkBtn;
     
+    
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -65,10 +66,10 @@ public class PlayerAction : MonoBehaviour
             }
             if (scanObject.layer == LayerMask.NameToLayer("Shop"))
             {
-                
+                if( NPCInteractive.instance.isShop == false)
                 NPCInteractive.instance.touch(scanObject);
                 
-               
+
             }
         }
 

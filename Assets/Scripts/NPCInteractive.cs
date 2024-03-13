@@ -29,7 +29,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
     public Image portraitImg;
     public static NPCInteractive instance = null;
     NPCDatabase npcDatabase;
-
+    public bool isShop = false;
    
   
 
@@ -81,7 +81,11 @@ public class NPCInteractive : MonoBehaviour, IInteractive
             
             isAction = false;
             talkIndex = 0;
-           
+           if (__id == 1301)
+            {
+                UIManager.instance.shopChoiceOnOff(true);
+                isShop = true;
+            }
 
             return;
         }
@@ -119,3 +123,4 @@ public class NPCInteractive : MonoBehaviour, IInteractive
         talkIndex++;
     }
 }
+
