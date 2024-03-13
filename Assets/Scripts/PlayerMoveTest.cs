@@ -1,7 +1,7 @@
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class Player : Entity
+public class PlayerMoveTest : Entity
 {
     [Header("Move info")]
     [SerializeField] private float moveSpeed;
