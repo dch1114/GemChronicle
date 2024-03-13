@@ -5,7 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class DataManager
+public class DataManagers
 {
     public static readonly DataManager instance = new DataManager();
 
@@ -13,7 +13,7 @@ public class DataManager
     //private Dictionary<int, ItemData> dicItemData;
     private Dictionary<int, QuestData> dicQuestData;
 
-    private DataManager() { }
+    private DataManagers() { }
 
     //public ShopData GetShopData(int id)
     //{
