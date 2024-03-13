@@ -101,7 +101,7 @@ public class Inventory : MonoBehaviour
         {
             equipment.Remove(value);
             equipmentDictionary.Remove(itemToRemove);
-            itemToRemove.RemoveModifiers();
+            //itemToRemove.RemoveModifiers();
         }
     }
 
