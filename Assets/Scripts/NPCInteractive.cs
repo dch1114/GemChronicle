@@ -21,7 +21,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
 {
     public GameObject scanObject;
     public TalkManager talkManager;
-    public GameObject talkPanel;
+    
     public bool isAction;
     public int talkIndex;
     public Text talkText;
@@ -70,7 +70,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
             Talk(npcController.GetNpcData().ID);
         }
 
-        talkPanel.SetActive(isAction);
+        UIManager.instance.talkPanelOnOff(isAction);
 
     }
 

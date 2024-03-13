@@ -88,7 +88,7 @@ public class PlayerAction : MonoBehaviour
             {
          
                 scanObject = _other.gameObject;
-                talkBtn.SetActive(true);
+                UIManager.instance.talkBtnOnOff(true);
 
             }
         }
@@ -110,7 +110,7 @@ public class PlayerAction : MonoBehaviour
             {
                 
                 scanObject = null;
-                talkBtn.SetActive(false);
+                UIManager.instance.talkBtnOnOff(false);
             }
         }
         else
