@@ -22,7 +22,6 @@ public class Interactive : MonoBehaviour, IInteractive
     public GameObject scanObject;
     public TalkManager talkManager;
     public GameObject talkPanel;
-    public GameObject potraitPanel;
     public bool isAction;
     public int talkIndex;
     public Text talkText;
@@ -84,7 +83,7 @@ public class Interactive : MonoBehaviour, IInteractive
             
             isAction = false;
             talkIndex = 0;
-            potraitPanel.SetActive(false);
+           
 
             return;
         }
@@ -101,21 +100,21 @@ public class Interactive : MonoBehaviour, IInteractive
         }
         if (talkData != null)
         {
-            potraitPanel.SetActive(true);
+          
             talkText.text = talkData;
 
             portraitImg.sprite = talkManager.GetPortrait(id);
             
 
-            portraitImg.color = new Color(1, 1, 1, 1);
+            
         }
         else
         {
-            potraitPanel.SetActive(false);
+         
 
             talkText.text = talkData;
 
-            portraitImg.color = new Color(1, 1, 1, 0);
+           
         }
 
         isAction = true;

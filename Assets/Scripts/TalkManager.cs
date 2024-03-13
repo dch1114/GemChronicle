@@ -30,7 +30,7 @@ public class TalkManager : MonoBehaviour
         portraitData.Add(1201, portraitArr[2]);
         portraitData.Add(1301, portraitArr[3]);
 
-        // 실전에선 여러가지 표정을 넣을수 있도록 하기위해 NPC 번호를 NCP 1명당 100~1000씩 할당하면 좋을듯함
+       
     }
     public string GetTalk(int _id, int _talkIndex)
     {
