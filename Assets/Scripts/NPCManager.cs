@@ -38,8 +38,6 @@ public class NPCManager : MonoBehaviour
         //프리펩을 게임오브젝트로 생성하고 위치도 지정해준다
         MakeNpcGameObject();
 
-      
-
     }
 
    
@@ -60,7 +58,8 @@ public class NPCManager : MonoBehaviour
             //데이터 매니저에서 NpcId에 해당하는 데이터 가져오기
             NPC dbase = DataManager.instance.npcDatabase.GetNPCByKey(npcId[i]);
             //가져온 데이터를 각각의 엔피씨컨트롤러에 세팅하기
-            npcInstance.GetComponent<NPCController>().SetNpcData(dbase);
+            NPCController npcController = npcInstance.GetComponent<NPCController>();
+            npcController.Init(dbase, this); // NPCManager 자신을 역참조로 보냄
 
         }
     }

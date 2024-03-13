@@ -7,11 +7,12 @@ public class NPCController : MonoBehaviour
 {
     [SerializeField]
     private NPC npcData;
-    //public int NPCID;
+    NPCManager npcManager; // NPCManager의 역참조를 받을 필드 추가
 
-    public void SetNpcData(NPC npc)  //초기화로 해주고 매니저가 npc를 초기화하면서 자기를 역참조하면서 보내기
-    { 
+    public void Init(NPC npc, NPCManager manager)
+    {
         npcData = npc;
+        npcManager = manager; // NPCManager의 역참조를 받음
     }
 
     public NPC GetNpcData()
