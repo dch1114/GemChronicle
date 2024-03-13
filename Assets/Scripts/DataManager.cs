@@ -16,7 +16,7 @@ public class DataManager : MonoBehaviour
         if (instance == null) 
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); 
+            //DontDestroyOnLoad(gameObject); 
         }
         else
         {
@@ -24,30 +24,20 @@ public class DataManager : MonoBehaviour
                 Destroy(this.gameObject); 
         }
 
-
-   
-        TextAsset NPCjsonFile = Resources.Load<TextAsset>("JSON/NPCData");
-        TextAsset jsonFile = Resources.Load<TextAsset>("JSON/Item_Data");
-        if (jsonFile != null)
+        //TextAsset NPCjsonFile = Resources.Load<TextAsset>("JSON/NPCData");
+        TextAsset ItemjsonFile = Resources.Load<TextAsset>("Json/Item_Data");
+        if (ItemjsonFile != null)
         {
-            string json = jsonFile.text;
+            string json = ItemjsonFile.text;
 
-            // JSON ������ �Ľ��Ͽ� NPCDatabase(����)�� �����մϴ�.
-            npcDatabase = JsonUtility.FromJson<NPCDatabase>(json);
-            npcDatabase.Initialize();
+            //npcDatabase = JsonUtility.FromJson<NPCDatabase>(json);
+            //npcDatabase.Initialize();
 
 
             itemDatabase = JsonUtility.FromJson<ItemDatabase>(json);
             itemDatabase.Initialize();
 
         }
-        
-
-    
-
-      
-       
-         
            
     }
 }

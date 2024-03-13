@@ -33,7 +33,7 @@ public class PlayerInteration : MonoBehaviour
                         return;
                     }
 
-                    Inventory.Instance.AddItem(itemObject.itemData);
+                    //Inventory.Instance.AddItem(itemObject.itemData);
                     Debug.Log("æ∆¿Ã≈€ »πµÊ");
                     Destroy(itemObject.gameObject);
                 }
