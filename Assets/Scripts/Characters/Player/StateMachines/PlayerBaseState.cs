@@ -145,7 +145,7 @@ public class PlayerBaseState : IState
     {
         float movementSpeed = GetMovementSpeed();
         stateMachine.Player.Controller.Move(
-            (_movementDirection * movementSpeed) * Time.deltaTime);
+            ((_movementDirection * movementSpeed) + stateMachine.Player.Controller.Movement) * Time.deltaTime);
     }
 
     private void Look(Vector3 _movementDirection)

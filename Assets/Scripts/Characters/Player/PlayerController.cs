@@ -4,27 +4,37 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private Vector3 currentVelocity = new Vector3(0, 0, 0);
+    private Vector3 impact;
+
     public Vector2 velocity;
     public bool isGrounded { get; set; } = false;
 
-    private void Start()
+    public Vector3 Movement => impact + Vector3.up * velocity.y;
+    private void FixedUpdate()
     {
-        rb = GetComponent<Rigidbody2D>();
-        velocity = rb.velocity;
-    }
-
-    private void Update()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, 0.1f, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, 0.2f, LayerMask.GetMask("Ground"));
         Debug.DrawRay(transform.position, Vector3.down, Color.green);
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
             isGrounded = true;
-        } else
+        }
+        else
         {
             isGrounded = false;
         }
+
+        if (velocity.y <= 0f && isGrounded)
+        {
+            velocity = Vector2.zero;
+        }
+        else
+        {
+            velocity += (Physics2D.gravity * 0.2f) * Time.fixedDeltaTime;
+            transform.position += new Vector3(velocity.x, velocity.y);
+        }
+
+        impact = Vector3.SmoothDamp(impact, Vector3.zero, ref currentVelocity, 0.3f);
     }
 
     public void Move(Vector3 _speed)
@@ -40,6 +50,6 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(float _jumpForce)
     {
-        rb.velocity += new Vector2(0f, _jumpForce);
+        velocity.y += _jumpForce;
     }
 }

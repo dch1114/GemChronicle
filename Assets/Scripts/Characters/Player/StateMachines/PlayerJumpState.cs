@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAirState
 {
+    private bool isJumping = false;
     public PlayerJumpState(PlayerStateMachine _playerStateMachine) : base(_playerStateMachine)
     {
     }
@@ -28,7 +29,7 @@ public class PlayerJumpState : PlayerAirState
     {
         base.PhysicsUpdate();
 
-        if (stateMachine.Player.Controller.velocity.y <= 0)
+        if(stateMachine.Player.Controller.velocity.y < 0)
         {
             stateMachine.ChangeState(stateMachine.FallState);
             return;
