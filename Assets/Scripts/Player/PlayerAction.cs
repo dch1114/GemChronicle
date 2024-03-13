@@ -59,8 +59,14 @@ public class PlayerAction : MonoBehaviour
         {
 
 
-            NPCInteractive.instance.touch(scanObject);
-
+            if (scanObject.layer == LayerMask.NameToLayer("NPC"))
+            {
+                NPCInteractive.instance.touch(scanObject);
+            }
+            if (scanObject.layer == LayerMask.NameToLayer("Shop"))
+            {
+                NPCInteractive.instance.touch(scanObject);
+            }
         }
 
 
@@ -84,18 +90,24 @@ public class PlayerAction : MonoBehaviour
 
         if (_other != null)
         {
-            if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
+            if (_other.gameObject.layer == LayerMask.NameToLayer("NPC"))
             {
-         
+
                 scanObject = _other.gameObject;
                 UIManager.instance.talkBtnOnOff(true);
 
+            }
+            if (_other.gameObject.layer == LayerMask.NameToLayer("Shop"))
+            {
+                scanObject = _other.gameObject;
+                UIManager.instance.shopPanelOnOff(true);
             }
         }
         else
         {
             scanObject = null;
             talkBtn = null;
+            
         }
         
     }
@@ -106,11 +118,16 @@ public class PlayerAction : MonoBehaviour
     {
         if (_other != null)
         {
-            if (_other.gameObject.layer == LayerMask.NameToLayer("Object"))
+            if (_other.gameObject.layer == LayerMask.NameToLayer("NPC"))
             {
-                
+
                 scanObject = null;
                 UIManager.instance.talkBtnOnOff(false);
+            }
+            if (_other.gameObject.layer == LayerMask.NameToLayer("Shop"))
+            {
+                scanObject = _other.gameObject;
+                UIManager.instance.shopPanelOnOff(false);
             }
         }
         else
@@ -121,7 +138,10 @@ public class PlayerAction : MonoBehaviour
             
     }
 
+    public void discrimination()
+    {
 
+    }
 
 }
 

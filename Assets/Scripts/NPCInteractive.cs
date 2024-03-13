@@ -9,11 +9,9 @@ public interface IInteractive
 
 
     void touch(GameObject _player); //이름 바꾸기 , 매게변수 플레이어로 바꾸기
-    
 
+    void Talk(int __id);// 없애길 고려
 }
-
-
 
 
 
@@ -75,10 +73,10 @@ public class NPCInteractive : MonoBehaviour, IInteractive
     }
 
 
-    public void Talk(int id)
+    public void Talk(int __id)
     {
 
-        if (talkIndex >= npcDatabase.GetNPCByKey(id).conversation.Length)
+        if (talkIndex >= npcDatabase.GetNPCByKey(__id).conversation.Length)
         {
             
             isAction = false;
@@ -89,7 +87,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
         }
         
         //대화 불러오기
-        string talkData = talkManager.GetTalk(id, talkIndex);
+        string talkData = talkManager.GetTalk(__id, talkIndex);
 
         if (talkData == null)
         {
@@ -103,7 +101,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
           
             talkText.text = talkData;
 
-            portraitImg.sprite = talkManager.GetPortrait(id);
+            portraitImg.sprite = talkManager.GetPortrait(__id);
             
 
             

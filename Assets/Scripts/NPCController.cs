@@ -20,5 +20,6 @@ public class NPCController : MonoBehaviour
         return npcData;
     }
     
+
     
 }
