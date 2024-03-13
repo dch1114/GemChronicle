@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestMain : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public UIQuestDirector director;
+
     void Start()
     {
-        
-    }
+        //DataViewManager.instance.LoadQuestData();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.director.Init();
     }
 }
