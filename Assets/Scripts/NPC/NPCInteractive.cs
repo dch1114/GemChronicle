@@ -30,8 +30,11 @@ public class NPCInteractive : MonoBehaviour, IInteractive
     public static NPCInteractive instance = null;
     NPCDatabase npcDatabase;
     public bool isShop = false;
-   
-  
+
+    public PlayerController playerController;
+
+    public bool isEndTalk = false;
+
 
     void Awake()
     {
@@ -58,17 +61,36 @@ public class NPCInteractive : MonoBehaviour, IInteractive
 
     public void touch(GameObject _scanobj)
     {
-
-
         scanObject = _scanobj;
         NPCController npcController = scanObject.GetComponent<NPCController>();
+
+        //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
+        if (UIManager.instance.IsOpenShowPopup())
+        {
+            UIManager.instance.RunSelectedMenuButton();
+            return;
+        }
+
+        isEndTalk = false;
+        playerController.isTalking = true;
+
+        if (isEndTalk == true)
+        {
+            playerController.isTalking = false;
+            return;
+        } 
+
+
+
+        //Debug.Log("Check NULL npcController : " + npcController);
 
         if (npcController != null)
         {
             Talk(npcController.GetNpcData().ID);
         }
-      
-        UIManager.instance.talkPanelOnOff(isAction);
+        //Debug.Log("Check NULL scanObject 1: " + scanObject);
+
+        UIManager.instance.PotraitPanelOnOff(isAction);
 
     }
 
@@ -76,16 +98,24 @@ public class NPCInteractive : MonoBehaviour, IInteractive
     public void Talk(int __id)
     {
 
+        //더이상 대화 내용이 존재 하지 않아 대화를 종료해야 한다면
         if (talkIndex >= npcDatabase.GetNPCByKey(__id).conversation.Length)
         {
-            
+            isEndTalk = true;
+            playerController.isTalking = false;
+
+            //Time.timeScale = 1;
             isAction = false;
             talkIndex = 0;
             
            if (__id == 1301)
-            {
+           {
+                //상점 팝업창
                 UIManager.instance.shopChoiceOnOff(true);
+                //Time.timeScale = 0;
                 isAction = true;
+                playerController.isTalking = true;
+                //Debug.Log("Check NULL scanObject 2: " + scanObject);
             }
 
             return;
@@ -96,32 +126,50 @@ public class NPCInteractive : MonoBehaviour, IInteractive
 
         if (talkData == null)
         {
+            //Time.timeScale = 1;
             isAction = false;
             talkIndex = 0;
+            isEndTalk = true;
+            playerController.isTalking = false;
 
-            return;
-        }
-        if (talkData != null)
-        {
-          
             talkText.text = talkData;
-
-            portraitImg.sprite = talkManager.GetPortrait(__id);
-            
-
-            
+            return;
         }
         else
         {
-         
-
             talkText.text = talkData;
+            portraitImg.sprite = talkManager.GetPortrait(__id);
+            isAction = true;
+            talkIndex++;
 
-           
         }
+        //Debug.Log("Check NULL scanObject 3: " + scanObject);
 
-        isAction = true;
-        talkIndex++;
+
+
+        //if (talkData != null)
+        //{
+
+        //    talkText.text = talkData;
+
+        //    portraitImg.sprite = talkManager.GetPortrait(__id);
+
+
+
+        //}
+        //else
+        //{
+
+        //    //Time.timeScale = 1;
+
+        //    talkText.text = talkData;
+
+
+        //}
+
+
     }
+
+
 }
 
