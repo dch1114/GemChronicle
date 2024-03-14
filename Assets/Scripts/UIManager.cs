@@ -48,8 +48,11 @@ public class UIManager : MonoBehaviour
       
         if (_OnOff)
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
+            
         }
            
             else
@@ -59,6 +62,7 @@ public class UIManager : MonoBehaviour
             talkPanelOnOff(false);
             btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
+          
         }
             
 

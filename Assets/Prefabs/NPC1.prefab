@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 278911168712881298}
   - component: {fileID: 6002712321127145348}
   - component: {fileID: 6904863588589275527}
+  - component: {fileID: 340526478118677429}
   m_Layer: 7
   m_Name: NPC1
   m_TagString: Untagged
@@ -125,6 +126,33 @@ MonoBehaviour:
     discription: 
     conversation: []
     isNPC: 0
+--- !u!50 &340526478118677429
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4188532623863034095}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &3572728224904292541
 PrefabInstance:
   m_ObjectHideFlags: 0
