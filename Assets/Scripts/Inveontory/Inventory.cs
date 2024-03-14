@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public static Inventory Instance;
+    public static Inventory instance;
 
     //Test
     GameManager gameManager;
@@ -33,9 +33,9 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
         else
         {
@@ -87,10 +87,16 @@ public class Inventory : MonoBehaviour
 
     //}
 
+    //public void UnequipTest()
+    //{
+    //    Debug.Log(equipment[0].datas.Name);
+    //    UnEquipItemTest(equipment[0].datas);
+    //}
+
 
     public void AddItemTest(Item _item)
     {
-        //if ((_item.itemType == ItemType.Equipment || _item.itemType == ItemType.Material) && CanAddItem())
+        //if (CanAddItem())
         //{
         //    AddToInventory(_item);
         //}
@@ -104,13 +110,13 @@ public class Inventory : MonoBehaviour
 
     private void AddToInventoryTest(Item _item)
     {
-        if (inventoryDictionaryTest.TryGetValue(_item, out InventoryItem value))
+        if (inventoryDictionaryTest.TryGetValue(_item, out InventoryItem _value))  //_item이 인벤토리에 이미 있으면 true 반환 _value에 값 저장,  
         {
-            value.AddStack();
+            _value.AddStack();
         }
         else
         {
-            InventoryItem newItem = new InventoryItem(_item);
+            InventoryItem newItem = new InventoryItem(_item);  // 이전에 인벤토리에 없으면 새로  생성해서 inventory와 딕셔너리에 추가
             inventory.Add(newItem);
             inventoryDictionaryTest.Add(_item, newItem);
         }
@@ -170,28 +176,28 @@ public class Inventory : MonoBehaviour
         UpdateSlotUITest();
     }
 
-    public void UnEquipItemTest(Item itemToRemove)
+    public void UnEquipItemTest(Item _itemToRemove)
     {
-        if (equipmentDictionaryTest.TryGetValue(itemToRemove, out InventoryItem value))
+        if (equipmentDictionaryTest.TryGetValue(_itemToRemove, out InventoryItem _value))
         {
-            equipment.Remove(value);
-            equipmentDictionaryTest.Remove(itemToRemove);
+            equipment.Remove(_value);
+            equipmentDictionaryTest.Remove(_itemToRemove);
             //itemToRemove.RemoveModifiers();
         }
     }
 
     public void RemoveItemTest(Item _item)
     {
-        if (inventoryDictionaryTest.TryGetValue(_item, out InventoryItem value))
+        if (inventoryDictionaryTest.TryGetValue(_item, out InventoryItem _value))
         {
-            if (value.stackSize <= 1)
+            if (_value.stackSize <= 1)
             {
-                inventory.Remove(value);
+                inventory.Remove(_value);
                 inventoryDictionaryTest.Remove(_item);
             }
             else
             {
-                value.RemoveStack();
+                _value.RemoveStack();
             }
         }
 

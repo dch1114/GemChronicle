@@ -1,11 +1,11 @@
 using System.Text;
 using UnityEngine;
 
-public enum ItemType
-{
-    Material,
-    Equipment
-}
+//public enum ItemType
+//{
+//    Material,
+//    Equipment
+//}
 
 [CreateAssetMenu(fileName = "New Item Data,", menuName = "Data/Item")]
 public class ItemData : ScriptableObject

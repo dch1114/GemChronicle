@@ -5,7 +5,7 @@ using static UnityEditor.Progress;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] private GameObject characterUI;
+    [SerializeField] public GameObject characterUI;
     [SerializeField] private GameObject skillTreeUI;
     [SerializeField] private GameObject optionUI;
 

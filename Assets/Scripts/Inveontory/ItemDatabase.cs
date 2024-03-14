@@ -12,6 +12,12 @@ public enum EquipmentType //test
     Flask
 }
 
+public enum ItemType
+{
+    Material,
+    Equipment
+}
+
 [System.Serializable]
 public class Item
 {
@@ -20,6 +26,7 @@ public class Item
     public int Damage;
     public int Armor;
     public string Description;
+    public ItemType ItemType;
     public EquipmentType EquipmentType;
 
     private int descriptionLength;

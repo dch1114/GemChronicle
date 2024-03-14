@@ -11,12 +11,16 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     protected UI ui;
     public InventoryItem item;
 
+    private UI_EquipmentSlot equipmentSlot;
+
     float clickDelay = 0.3f;
     float lastClickTime = 0;
+
 
     private void Start()
     {
         ui = GetComponentInParent<UI>();
+        equipmentSlot = GetComponentInParent<UI_EquipmentSlot>();
     }
     public void UpdateSlot(InventoryItem _newitem)
     {
@@ -60,12 +64,12 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
         if (timeSinceLastClick <= clickDelay)
         {
-            //if (item.data.itemType == ItemType.Equipment) // test
-            //{
-            //    //Inventory.Instance.EquipItem(item.data);
-            //    ui.itemToopTip.HideToolTip();
-            //}
-            ui.itemToopTip.HideToolTip();
+            if (item.datas.ItemType == ItemType.Equipment) // test
+            {
+                Inventory.instance.EquipItemTest(item.datas);
+                //ui.itemtooptip.hidetooltip();
+            }
+            //ui.itemToopTip.HideToolTip();
         }
         else
         {
