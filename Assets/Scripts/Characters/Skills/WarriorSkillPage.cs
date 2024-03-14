@@ -5,9 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillInfo : MonoBehaviour
+public class WarriorSkillPage : MonoBehaviour
 {
-    [SerializeField] private GameObject go;
+    [SerializeField] private GameObject goSkillInfo;
     [SerializeField] private Image skillIcon;
     [SerializeField] private TextMeshProUGUI damageTxt;
     [SerializeField] private Image typeIcon;
@@ -19,7 +19,7 @@ public class SkillInfo : MonoBehaviour
     {
         try
         {
-            if (!go.activeSelf) go.SetActive(true);
+            if (!goSkillInfo.activeSelf) goSkillInfo.SetActive(true);
 
             skillIcon.sprite = _skill.icon.sprite;
             damageTxt.text = _skill.damage.ToString();
@@ -44,5 +44,10 @@ public class SkillInfo : MonoBehaviour
         {
             Debug.Log(e);
         }
+    }
+
+    public void ShowSkillPage()
+    {
+
     }
 }
