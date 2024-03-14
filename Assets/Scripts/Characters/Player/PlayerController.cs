@@ -50,12 +50,13 @@ public class PlayerController : MonoBehaviour
 
     public void Look(bool isLeft)
     {
+        if (isTalking) return;
         transform.localScale = isLeft ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
     }
 
     public void Jump(float _jumpForce)
     {
-        if(isTalking) return;
+
         velocity.y += _jumpForce;
     }
 }
