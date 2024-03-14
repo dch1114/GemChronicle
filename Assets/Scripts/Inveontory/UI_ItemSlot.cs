@@ -87,17 +87,18 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     protected void AdjustToolTipPosition()
     {
         Vector2 mousePosition = Input.mousePosition;
+        Debug.Log(mousePosition);
 
-        float xOffset = 0;
-        float yOffset = 0;
+        float xOffset;
+        float yOffset;
 
         if (mousePosition.x > 600)
         {
-            xOffset = -75;
+            xOffset = -150;
         }
         else
         {
-            xOffset = 75;
+            xOffset = 150;
         }
 
         if (mousePosition.y > 320)
