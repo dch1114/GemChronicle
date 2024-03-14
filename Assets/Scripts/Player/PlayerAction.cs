@@ -1,65 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 
 public class PlayerAction : MonoBehaviour
 {
-    public float speed;
-
-
-    Rigidbody2D rigid;
-    float h;
-    float v;
 
     public GameManager gameManager;
-    Vector3 dirVec;
-    bool isHorizonMove;
+   
     GameObject scanObject;
     public GameObject talkBtn;
-    
-    
-    void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-    }
+
+    private PlayerInputActions inputActions;
+
+
 
     // Update is called once per frame
     void Update()
     {
 
-        //간단한 이동식
-        h = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Horizontal");  //액션상태에 따라 움직이지 못하게
-        v = NPCInteractive.instance.isAction ? 0 : Input.GetAxisRaw("Vertical");
 
-        bool hDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Horizontal");
-        bool vDown = NPCInteractive.instance.isAction ? false : Input.GetButtonDown("Vertical");
-        bool hUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Horizontal");
-        bool vUp = NPCInteractive.instance.isAction ? false : Input.GetButtonUp("Vertical");
-        
-
-        if (hDown || vUp)
-            isHorizonMove = true;
-        else if (vDown || hUp)
-            isHorizonMove = false;
-     
-
-
-        //보는 방향 설정
-        if (vDown && v == 1)
-            dirVec = Vector3.up;
-        //else if (vDown && v == -1)
-        //    dirVec = Vector3.down;
-        else if (hDown && h == -1)
-            dirVec = Vector3.left;
-         else if (hDown && h == 1)
-            dirVec = Vector3.right;
-
-        //scanObject
-        if (Input.GetButtonDown("Jump") && scanObject != null)
+        if (Keyboard.current.aKey.wasPressedThisFrame&& scanObject != null)
         {
-
+            
 
             if (scanObject.layer == LayerMask.NameToLayer("NPC"))
             {
@@ -80,14 +45,6 @@ public class PlayerAction : MonoBehaviour
 
     }
 
-    void FixedUpdate()
-    {
-        //수평이동
-        Vector2 moveVec = isHorizonMove ? new Vector2(h, 0) : new Vector2(0, v);
-        rigid.velocity = moveVec * speed;
-
-       
-    }
 
     /// Istrigger가 켜져있는 콜라이더가 겹치는 곳의 npc 정보를 가져옴
     private void OnTriggerEnter2D(Collider2D _other)
