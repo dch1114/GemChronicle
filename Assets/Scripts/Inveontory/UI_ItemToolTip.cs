@@ -11,15 +11,15 @@ public class UI_ItemToolTip : MonoBehaviour
 
     [SerializeField] private int defaultFontSize = 32;
 
-    public void ShowToolTip(ItemData_Equipment item)
+    public void ShowToolTip(Item item)
     {
         if(item == null)
         {
             return;
         }
 
-        itemNameText.text = item.itemName;
-        itemTypeText.text = item.equipmentType.ToString();
+        itemNameText.text = item.Name;
+        itemTypeText.text = item.EquipmentType.ToString();
         itemDescription.text = item.GetDescription();
 
         if(itemNameText.text.Length > 12)

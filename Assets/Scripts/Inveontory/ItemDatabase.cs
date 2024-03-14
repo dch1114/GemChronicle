@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+
+public enum EquipmentType //test
+{
+    Weapon,
+    Armor,
+    Amulet,
+    Flask
+}
+
 [System.Serializable]
 public class Item
 {
@@ -11,7 +20,7 @@ public class Item
     public int Damage;
     public int Armor;
     public string Description;
-
+    public EquipmentType EquipmentType;
 
     private int descriptionLength;
     private StringBuilder sb = new StringBuilder();

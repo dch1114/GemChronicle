@@ -11,8 +11,8 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     protected UI ui;
     public InventoryItem item;
 
-    public float clickDelay = 0.3f;
-    public float lastClickTime = 0;
+    float clickDelay = 0.3f;
+    float lastClickTime = 0;
 
     private void Start()
     {

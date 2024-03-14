@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +10,11 @@ public class Inventory : MonoBehaviour
     DataManager dataManager;
     ItemDatabase itemDatabase;
 
-    public List<ItemData> startingItems;
+    //public List<ItemData> startingItems;
     //public List<Item> startingItems;
 
     public List<InventoryItem> equipment;
-   // public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
+    // public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
     //test
     public Dictionary<Item, InventoryItem> equipmentDictionaryTest;
 
@@ -27,7 +26,7 @@ public class Inventory : MonoBehaviour
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform equipmentSlotParent;
-    
+
 
     private UI_ItemSlot[] inventoryItemSlot;
     private UI_EquipmentSlot[] equipmentSlot;
@@ -81,6 +80,14 @@ public class Inventory : MonoBehaviour
         Debug.Log(itemInstanceas.datas.Name);
     }
 
+    //public void EquipTest() // test
+    //{
+    //    Debug.Log(inventory[0].datas.Name);
+    //    EquipItemTest(inventory[0].datas); // 인벤토리에 아이템 추가
+
+    //}
+
+
     public void AddItemTest(Item _item)
     {
         //if ((_item.itemType == ItemType.Equipment || _item.itemType == ItemType.Material) && CanAddItem())
@@ -115,12 +122,12 @@ public class Inventory : MonoBehaviour
         {
             foreach (KeyValuePair<Item, InventoryItem> item in equipmentDictionaryTest)
             {
-                //if (item.Key.equipmentType == equipmentSlot[i].slotType)
-                //{
-                //    equipmentSlot[i].UpdateSlot(item.Value);
-                //}
+                if (item.Key.EquipmentType == equipmentSlot[i].slotType)
+                {
+                    equipmentSlot[i].UpdateSlot(item.Value);
+                }
 
-                equipmentSlot[i].UpdateSlot(item.Value);
+                //equipmentSlot[i].UpdateSlot(item.Value);
             }
         }
 
@@ -133,6 +140,62 @@ public class Inventory : MonoBehaviour
         {
             inventoryItemSlot[i].UpdateSlot(inventory[i]);
         }
+    }
+
+    public void EquipItemTest(Item _item)
+    {
+        Item newEquipment = _item;
+        InventoryItem newItem = new InventoryItem(newEquipment);
+
+        Item oldEquipment = null;
+
+        foreach (KeyValuePair<Item, InventoryItem> item in equipmentDictionaryTest)
+        {
+            if (item.Key.EquipmentType == newEquipment.EquipmentType)
+            {
+                oldEquipment = item.Key;
+            }
+        }
+
+        if (oldEquipment != null)
+        {
+            UnEquipItemTest(oldEquipment);
+            AddItemTest(oldEquipment);
+        }
+
+        equipment.Add(newItem);
+        equipmentDictionaryTest.Add(newEquipment, newItem);
+        RemoveItemTest(_item);
+
+        UpdateSlotUITest();
+    }
+
+    public void UnEquipItemTest(Item itemToRemove)
+    {
+        if (equipmentDictionaryTest.TryGetValue(itemToRemove, out InventoryItem value))
+        {
+            equipment.Remove(value);
+            equipmentDictionaryTest.Remove(itemToRemove);
+            //itemToRemove.RemoveModifiers();
+        }
+    }
+
+    public void RemoveItemTest(Item _item)
+    {
+        if (inventoryDictionaryTest.TryGetValue(_item, out InventoryItem value))
+        {
+            if (value.stackSize <= 1)
+            {
+                inventory.Remove(value);
+                inventoryDictionaryTest.Remove(_item);
+            }
+            else
+            {
+                value.RemoveStack();
+            }
+        }
+
+        UpdateSlotUITest();
     }
 
     //public void EquipItem(ItemData _item)
@@ -242,7 +305,7 @@ public class Inventory : MonoBehaviour
 
     public bool CanAddItem()
     {
-        if(inventory.Count >= inventoryItemSlot.Length)
+        if (inventory.Count >= inventoryItemSlot.Length)
         {
             return false;
         }
