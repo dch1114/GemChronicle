@@ -8,7 +8,7 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
-    public enum ShowMenuType
+    public enum ShowMenuType  //보기쉽게 하기위해 enum선언
     { 
         Buy,
         Sell,
@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
         showMenuButton[(int)ShowMenuType.Buy].onClick.AddListener(BuyShop);
         showMenuButton[(int)ShowMenuType.Sell].onClick.AddListener(SellShop);
         showMenuButton[(int)ShowMenuType.Exit].onClick.AddListener(ExitShop);
-
+        //위에 3줄을 없애고 함수 3개를 public 으로 바꿔서 온버튼에서 해도됨
         showMenuButton[(int)ShowMenuType.Buy].image.sprite = unSelectButton;
         showMenuButton[(int)ShowMenuType.Sell].image.sprite = unSelectButton;
         showMenuButton[(int)ShowMenuType.Exit].image.sprite = unSelectButton;
@@ -192,7 +192,7 @@ public class UIManager : MonoBehaviour
 
     void ExitShop() 
     {
-
+        shopChoiceOnOff(false);
         Debug.Log("Select Exi");
 
     }

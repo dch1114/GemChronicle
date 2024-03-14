@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(float _jumpForce)
     {
+        if(isTalking) return;
         velocity.y += _jumpForce;
     }
 }

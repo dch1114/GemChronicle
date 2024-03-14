@@ -82,13 +82,13 @@ public class NPCInteractive : MonoBehaviour, IInteractive
 
 
 
-        //Debug.Log("Check NULL npcController : " + npcController);
+       
 
         if (npcController != null)
         {
             Talk(npcController.GetNpcData().ID);
         }
-        //Debug.Log("Check NULL scanObject 1: " + scanObject);
+       
 
         UIManager.instance.PotraitPanelOnOff(isAction);
 
@@ -104,7 +104,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
             isEndTalk = true;
             playerController.isTalking = false;
 
-            //Time.timeScale = 1;
+           
             isAction = false;
             talkIndex = 0;
             
@@ -112,10 +112,9 @@ public class NPCInteractive : MonoBehaviour, IInteractive
            {
                 //»óÁ¡ ÆË¾÷Ã¢
                 UIManager.instance.shopChoiceOnOff(true);
-                //Time.timeScale = 0;
                 isAction = true;
                 playerController.isTalking = true;
-                //Debug.Log("Check NULL scanObject 2: " + scanObject);
+                
             }
 
             return;
@@ -143,29 +142,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
             talkIndex++;
 
         }
-        //Debug.Log("Check NULL scanObject 3: " + scanObject);
-
-
-
-        //if (talkData != null)
-        //{
-
-        //    talkText.text = talkData;
-
-        //    portraitImg.sprite = talkManager.GetPortrait(__id);
-
-
-
-        //}
-        //else
-        //{
-
-        //    //Time.timeScale = 1;
-
-        //    talkText.text = talkData;
-
-
-        //}
+       
 
 
     }
