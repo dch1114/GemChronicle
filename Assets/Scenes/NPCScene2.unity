@@ -305,7 +305,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 300}
+  m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &163960191
 MonoBehaviour:
@@ -715,6 +715,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911816973}
   m_CullTransparentMesh: 1
+--- !u!1 &1063597731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 269157362840342957, guid: 060617489d382b8409ebb6b66a752eed, type: 3}
+  m_PrefabInstance: {fileID: 1704420802177189450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1063597739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063597731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed5223702c3c448ad668d614ae2e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  talkBtn: {fileID: 0}
 --- !u!1 &1147019377
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,11 +858,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5472f4ec3de71e244bb47d332faab331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkBtn: {fileID: 0}
-  talkPanel: {fileID: 0}
-  shopPanel: {fileID: 0}
-  shopChoice: {fileID: 0}
-  btn: {fileID: 0}
+  talkBtn: {fileID: 1826137330}
+  talkPanel: {fileID: 1670872899}
+  shopPanel: {fileID: 360558545}
+  shopChoice: {fileID: 163960189}
+  btn: {fileID: 1762707367}
+--- !u!1 &1169213036 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 856440166226088500, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
+  m_PrefabInstance: {fileID: 8243748700098772497}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1169213044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169213036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed5223702c3c448ad668d614ae2e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  talkBtn: {fileID: 1826137330}
 --- !u!1 &1213614685
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.54}
-  m_AnchoredPosition: {x: -20.3, y: 30.6}
+  m_AnchoredPosition: {x: 0, y: 30.6}
   m_SizeDelta: {x: 150, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1213614687
@@ -928,7 +966,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1148306353}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: shopChoiceOnOff
         m_Mode: 6
@@ -1201,7 +1239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.54}
-  m_AnchoredPosition: {x: -20.3, y: 2.9}
+  m_AnchoredPosition: {x: 0, y: 2.9}
   m_SizeDelta: {x: 150, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1327629985
@@ -1248,7 +1286,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1148306353}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: shopChoiceOnOff
         m_Mode: 6
@@ -1543,6 +1581,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670872899}
   m_CullTransparentMesh: 1
+--- !u!1 &1714258545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4963442984316616658, guid: 7969ddab4af65e84bab85cb02ebc1111, type: 3}
+  m_PrefabInstance: {fileID: 5666293173139209238}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1714258553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714258545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed5223702c3c448ad668d614ae2e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  talkBtn: {fileID: 0}
 --- !u!1 &1715427997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,9 +1648,9 @@ MonoBehaviour:
   talkManager: {fileID: 1601485555}
   isAction: 0
   talkIndex: 0
-  talkText: {fileID: 0}
+  talkText: {fileID: 215329923}
   isNPC: 0
-  portraitImg: {fileID: 0}
+  portraitImg: {fileID: 1933271740}
   isShop: 0
 --- !u!1 &1762707367
 GameObject:
@@ -1632,7 +1689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.54}
-  m_AnchoredPosition: {x: -20.3, y: -26.9}
+  m_AnchoredPosition: {x: 0, y: -26.9}
   m_SizeDelta: {x: 150, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1762707369
@@ -1679,7 +1736,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1148306353}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: shopChoiceOnOff
         m_Mode: 6
@@ -1820,7 +1877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -230}
+  m_AnchoredPosition: {x: 2, y: -109}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1826137332
@@ -2419,6 +2476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 269157362840342957, guid: 060617489d382b8409ebb6b66a752eed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7320495564661818076, guid: 060617489d382b8409ebb6b66a752eed, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2466,7 +2527,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 269157362840342957, guid: 060617489d382b8409ebb6b66a752eed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1063597739}
   m_SourcePrefab: {fileID: 100100000, guid: 060617489d382b8409ebb6b66a752eed, type: 3}
 --- !u!1001 &5666293173139209238
 PrefabInstance:
@@ -2479,6 +2543,10 @@ PrefabInstance:
     - target: {fileID: 4963442984316616658, guid: 7969ddab4af65e84bab85cb02ebc1111, type: 3}
       propertyPath: m_Name
       value: Magician
+      objectReference: {fileID: 0}
+    - target: {fileID: 4963442984316616658, guid: 7969ddab4af65e84bab85cb02ebc1111, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7282966733332489012, guid: 7969ddab4af65e84bab85cb02ebc1111, type: 3}
       propertyPath: m_RootOrder
@@ -2527,7 +2595,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4963442984316616658, guid: 7969ddab4af65e84bab85cb02ebc1111, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1714258553}
   m_SourcePrefab: {fileID: 100100000, guid: 7969ddab4af65e84bab85cb02ebc1111, type: 3}
 --- !u!1001 &8243748700098772497
 PrefabInstance:
@@ -2588,5 +2659,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 856440166226088500, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1169213044}
   m_SourcePrefab: {fileID: 100100000, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}

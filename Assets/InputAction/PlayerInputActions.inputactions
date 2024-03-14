@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "InteractiveAction",
+                    "type": "Button",
+                    "id": "b24c93dd-2ba8-48da-a324-d18457290317",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -238,6 +247,17 @@
                     "action": "ComboAttack",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "71b49d35-f523-435d-8ef5-eeb6e0b7daa8",
+                    "path": "<Keyboard>/#(A)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractiveAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

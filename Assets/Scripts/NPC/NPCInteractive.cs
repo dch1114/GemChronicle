@@ -81,6 +81,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
             
             isAction = false;
             talkIndex = 0;
+            
            if (__id == 1301)
             {
                 UIManager.instance.shopChoiceOnOff(true);
