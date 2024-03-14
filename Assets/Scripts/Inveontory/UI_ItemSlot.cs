@@ -11,16 +11,14 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     protected UI ui;
     public InventoryItem item;
 
-    private UI_EquipmentSlot equipmentSlot;
 
-    float clickDelay = 0.3f;
-    float lastClickTime = 0;
+    protected float clickDelay = 0.3f;
+    protected float lastClickTime = 0;
 
 
     private void Start()
     {
         ui = GetComponentInParent<UI>();
-        equipmentSlot = GetComponentInParent<UI_EquipmentSlot>();
     }
     public void UpdateSlot(InventoryItem _newitem)
     {
@@ -54,7 +52,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if (item == null)
+        if (item == null || item.stackSize == 0)
         {
             return;
         }
@@ -67,32 +65,23 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
             if (item.datas.ItemType == ItemType.Equipment) // test
             {
                 Inventory.instance.EquipItemTest(item.datas);
-                //ui.itemtooptip.hidetooltip();
+                ui.itemToopTip.HideToolTip();
             }
             //ui.itemToopTip.HideToolTip();
         }
         else
         {
             AdjustToolTipPosition();
-            //ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);   //test
+            ui.itemToopTip.ShowToolTip(item.datas);   //test
         }
 
         lastClickTime = currentTime;
+        
         //if (Input.GetKey(KeyCode.LeftControl))
         //{
         //    Inventory.Instance.RemoveItem(item.data);
         //    return;
         //}
-
-        //AdjustToolTipPosition();
-        //ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
-
-
-        //if (item.data.itemType == ItemType.Equipment)
-        //{
-        //    Inventory.Instance.EquipItem(item.data);
-        //}
-
     }
 
     protected void AdjustToolTipPosition()

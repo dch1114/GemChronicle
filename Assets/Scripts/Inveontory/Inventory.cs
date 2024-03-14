@@ -62,6 +62,7 @@ public class Inventory : MonoBehaviour
         //test
         equipmentDictionaryTest = new Dictionary<Item, InventoryItem>();
 
+
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
 

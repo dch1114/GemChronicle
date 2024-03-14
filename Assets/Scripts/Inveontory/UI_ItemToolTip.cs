@@ -24,7 +24,7 @@ public class UI_ItemToolTip : MonoBehaviour
 
         if(itemNameText.text.Length > 12)
         {
-            itemNameText.fontSize = itemNameText.fontSize * 0.7f;
+            itemNameText.fontSize = itemNameText.fontSize; //* 0.7f;
         }
         else
         {
@@ -36,6 +36,11 @@ public class UI_ItemToolTip : MonoBehaviour
     public void HideToolTip()
     {
         itemNameText.fontSize = defaultFontSize;
+        gameObject.SetActive(false);
+    }
+
+    public void OnClickCloseToopTip()
+    {
         gameObject.SetActive(false);
     }
 

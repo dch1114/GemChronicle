@@ -40,6 +40,8 @@ public class Item
 
         AddItemDescription(Damage, "Damage");
         AddItemDescription(Armor, "Armor");
+        AddItemDescription(Description, "Description");
+
 
         if (descriptionLength < 5)
         {
@@ -67,12 +69,21 @@ public class Item
             descriptionLength++;
         }
     }
-}
 
-public class ItemInstance
-{
-    int no;
-    public Item item;
+    private void AddItemDescription(string _value, string _name)
+    {
+        if (_value != "")
+        {
+            if (sb.Length > 0)
+            {
+                sb.AppendLine();
+            }
+            
+            sb.Append(_name + ": " + _value);
+            
+            descriptionLength++;
+        }
+    }
 }
 
 [System.Serializable]
