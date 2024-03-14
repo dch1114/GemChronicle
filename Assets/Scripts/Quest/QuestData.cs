@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class QuestData
+public class QuestData : RawData
 {
-    public int id;
+    //public int id;
     public string name;
     public string sprite_name;
     public int goal_val;
