@@ -21,7 +21,7 @@ public class NPCManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            
         }
         else
         {

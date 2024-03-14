@@ -38,7 +38,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+           
         }
         else
         {
