@@ -22,7 +22,7 @@ public class PlayerAction : MonoBehaviour
     {
 
 
-        if (Keyboard.current.aKey.wasPressedThisFrame&& scanObject != null)
+        if (Keyboard.current.tabKey.wasPressedThisFrame&& scanObject != null)
         {
             
 

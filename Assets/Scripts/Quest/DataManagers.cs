@@ -1,15 +1,16 @@
-using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
+using Newtonsoft.Json;
+using System.Linq;
+using Newtonsoft.Json;
+using static SoonsoonData;
+using UnityEditor.U2D.Aseprite;
 
-public class QuestDataManager
+public class DataManagers
 {
-    public static readonly QuestDataManager instance = new QuestDataManager();
+    public static readonly DataManagers instance = new DataManagers();
 
-    //private Dictionary<int, ShopData> dicShopData;
     private Dictionary<int, ItemData> dicItemData;
     private Dictionary<int, QuestData> dicQuestData;
     private Dictionary<int, RewardItemData> dicRewardItemData;
@@ -19,49 +20,32 @@ public class QuestDataManager
 
     private Dictionary<string, string> pathDic = new Dictionary<string, string>();
 
-    private QuestDataManager()
+    //생성자 
+    private DataManagers()
     {
         pathDic.Add(typeof(QuestData).ToString(), "quest_data");
         pathDic.Add(typeof(RewardItemData).ToString(), "reward_item_data");
     }
 
-    //public ShopData GetShopData(int id)
-    //{
-    //    return this.dicShopData[id];
-    //}
-
-    //public void Loadshopdata()
-    //{
-    //    TextAsset asset = Resources.Load<TextAsset>("Data/shop_data");
-    //    var json = asset.text;
-    //    Debug.Log(json);
-
-    //    ShopData[] arrShopDatas = JsonConvert.DeserializeObject<short[]>(json);
-
-    //    this.dicShopData = arrShopDatas.ToDictionary(x => x.id);
-
-    //    Debug.LogFormat("shop data loaded : {0}", this.dicShopData.Count);
-    //}
-
-    //public List<ShopData> GetShopDatas()
-    //{
-    //    return this.dicShopData.Values.ToList();
-    //}
-
     public void LoadItemData()
     {
+        //Resources
+        //Data/item_data
         TextAsset asset = Resources.Load<TextAsset>("Data/item_data");
         string json = asset.text;
         Debug.Log(json);
-
+        //역직렬화 
         ItemData[] arr = JsonConvert.DeserializeObject<ItemData[]>(json);
+        //foreach, for 돌리면서 dic에 추가 (dic 인스턴스화 필요)
 
-        //this.dicItemData = arr.ToDictionary(x => x.id);
+        //Linq 사용 (dic 인스턴화 필요 x)
+        this.dicItemData = arr.ToDictionary(x => x.id);    //id를 키로 
         Debug.Log("item data loaded.");
         Debug.LogFormat("item data count: <color=yellow>{0}</color>", this.dicItemData.Count);
+
     }
 
-    public ItemData GetItemDAta(int id)
+    public ItemData GetItemData(int id)
     {
         if (this.dicItemData.ContainsKey(id))
         {
@@ -72,20 +56,21 @@ public class QuestDataManager
         return null;
     }
 
-    //public rewarditemdata getrandomitemdata()
-    //{
-    //    var randid = random.range(0, this.dicitemdata.count) + 100;
-    //    return this.getitemdata(randid);
-    //}
+    public ItemData GetRandomItemData()
+    {
+        //랜덤 아이템 획득 
+        //0 ~ (count -1)  + 100 
+        var randId = Random.Range(0, this.dicItemData.Count) + 100;   //0 ~ 22 
+        return this.GetItemData(randId);
+    }
 
     public void LoadQuestData()
     {
-        TextAsset asset = Resources.Load<TextAsset>("Data/Quest_data");
+        TextAsset asset = Resources.Load<TextAsset>("Data/quest_data");
         string json = asset.text;
         QuestData[] arr = JsonConvert.DeserializeObject<QuestData[]>(json);
-
         this.dicQuestData = arr.ToDictionary(x => x.id);
-        Debug.LogFormat("quest data loaded : <color=yellow>{0}</color?", this.dicQuestData.Count);
+        Debug.LogFormat("quest data loaded : <color=yellow>{0}</color>", this.dicQuestData.Count);
     }
 
     public QuestData GetQuestData(int id)
@@ -109,32 +94,43 @@ public class QuestDataManager
 
     public void LoadData<T>() where T : RawData
     {
-        Debug.LogFormat("LoadData: {0}",typeof(T).ToString());
-        var Key = typeof(T).ToString();
+        Debug.LogFormat("LoadData: {0}", typeof(T).ToString());
+        var key = typeof(T).ToString();
 
-        var path = this.pathDic[Key];
+        var path = this.pathDic[key];
 
         TextAsset asset = Resources.Load<TextAsset>(string.Format("Data/{0}", path));
 
         string json = asset.text;
         T[] arr = JsonConvert.DeserializeObject<T[]>(json);
 
-        var a = arr.ToDictionary(x => x.id, x => (RawData) x);
+        var a = arr.ToDictionary(x => x.id, x => (RawData)x);
 
-        if (!dic.ContainsKey(Key))
+        if (!dic.ContainsKey(key))
         {
-            this.dic.Add(Key, a);
+            this.dic.Add(key, a);
         }
-        Debug.LogFormat("key: {0}", Key);
-        Debug.LogFormat("{0} loaded : <color=yellow>{1}</color>", path, this.dic[Key].Count);
+
+        Debug.LogFormat("key: {0}", key);
+        Debug.LogFormat("{0} loaded : <color=yellow>{1}</color>", path, this.dic[key].Count);
+
     }
 
     public Dictionary<int, T> GetDataDic<T>() where T : RawData
     {
-        var Key = typeof(T).ToString();
+        var key = typeof(T).ToString();
 
-        var a = this.dic[Key];
+        var a = this.dic[key];
 
         return a.ToDictionary(x => x.Key, x => (T)x.Value);
+    }
+
+    public T GetData<T>(int id) where T : RawData
+    {
+        var key = typeof(T).ToString();
+
+        var a = this.dic[key];
+
+        return a.ToDictionary(x => x.Key, x => (T)x.Value)[id];
     }
 }
