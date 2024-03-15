@@ -14,35 +14,39 @@ public class PlayerAction : MonoBehaviour
     public GameObject talkBtn;
 
     private PlayerInputActions inputActions;
+    bool isQuestPanelOpen = false;
 
 
 
     // Update is called once per frame
     void Update()
     {
-
-
+        // Q 키를 눌렀을 때 퀘스트 창을 열거나 닫기
+        if (Keyboard.current.qKey.wasPressedThisFrame)
+        {
+            if (isQuestPanelOpen)
+            {
+                UIManager.instance.OpenClosePanelInspectorQuests();
+                isQuestPanelOpen = false;
+            }
+            else
+            {
+                UIManager.instance.OpenClosePanelInspectorQuests();
+                isQuestPanelOpen = true;
+            }
+        }
         if (Keyboard.current.tabKey.wasPressedThisFrame&& scanObject != null)
         {
             
-
             if (scanObject.layer == LayerMask.NameToLayer("NPC"))
             {
                 NPCInteractive.instance.touch(scanObject);
             }
             if (scanObject.layer == LayerMask.NameToLayer("Shop"))
             {
-               
                 NPCInteractive.instance.touch(scanObject);
-                
-
             }
         }
-
-
-
-
-
     }
 
 

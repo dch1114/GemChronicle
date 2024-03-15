@@ -5,27 +5,27 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Paneles")]
+    [SerializeField] private GameObject panelInspectorQuests;
+
     public GameObject talkBtn;
     public GameObject talkPanel;
     public GameObject shopPanel;
     public GameObject shopChoice;
-    public static UIManager instance = null;
     public GameObject btn;
+    public static UIManager instance = null;
+
     void Awake()
     {
-
-
         if (instance == null)
         {
-            instance = this;
-           
+            instance = this; 
         }
         else
         {
             if (instance != this)
                 Destroy(this.gameObject);
         }
-
     }
 
     public void talkBtnOnOff(bool _OnOff)
@@ -45,27 +45,25 @@ public class UIManager : MonoBehaviour
 
     public void shopChoiceOnOff(bool _OnOff)
     {
-      
         if (_OnOff)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
-            
+
         }
-           
-            else
+        else
         {
-            
             //NPCInteractive.instance.isAction = false;
             talkPanelOnOff(false);
             btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
-          
         }
-            
-
     }
 
+    public void OpenClosePanelInspectorQuests()
+    {
+        panelInspectorQuests.SetActive(!panelInspectorQuests.activeSelf);
+    }
 }
