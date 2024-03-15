@@ -8,7 +8,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    protected UI ui;
+    protected InventoryUIController ui;
     public InventoryItem item;
 
 
@@ -18,7 +18,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
     private void Start()
     {
-        ui = GetComponentInParent<UI>();
+        ui = GetComponentInParent<InventoryUIController>();
     }
     public void UpdateSlot(InventoryItem _newitem)
     {
