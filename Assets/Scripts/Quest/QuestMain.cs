@@ -12,16 +12,16 @@ public class QuestMain : MonoBehaviour
     {
         //DataViewManager.instance.LoadQuestData();
 
-        QuestDataManager.instance.LoadData<QuestData>();
-        QuestDataManager.instance.LoadData<RewardItemData>();
+        DataManagers.instance.LoadData<QuestData>();
+        DataManagers.instance.LoadData<RewardItemData>();
 
-        var dicQuestData = QuestDataManager.instance.GetDataDic<QuestData>();
+        var dicQuestData = DataManagers.instance.GetDataDic<QuestData>();
         foreach ( var data in dicQuestData.Values)
         {
             Debug.LogFormat("{0}\t{1}\t{2}",data.id, data.name, string.Format(data.goal_desc, data.goal_val));
         }
 
-        var dicRewardItemData = QuestDataManager.instance.GetDataDic<RewardItemData>();
+        var dicRewardItemData = DataManagers.instance.GetDataDic<RewardItemData>();
         foreach (var data in dicRewardItemData.Values)
         {
             Debug.LogFormat("{0}\t{1}", data.id, data.name);
