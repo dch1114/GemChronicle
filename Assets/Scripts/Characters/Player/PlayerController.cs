@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 velocity;
     public bool isGrounded { get; set; } = false;
-    public bool isTalking { get; set; } = false;
+
 
     public Vector3 Movement => impact + Vector3.up * velocity.y;
 
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector3 _speed)
     {
-        if (isTalking) return;
+
 
         //need Camera Limit
         transform.Translate(_speed);
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     public void Look(bool isLeft)
     {
-        if (isTalking) return;
+
         transform.localScale = isLeft ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
     }
 

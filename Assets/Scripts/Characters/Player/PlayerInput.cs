@@ -14,12 +14,12 @@ public class PlayerInput : MonoBehaviour
         PlayerActions = InputActions.Player;
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         InputActions.Enable();
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         InputActions.Disable();
     }

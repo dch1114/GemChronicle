@@ -16,7 +16,7 @@ public class PlayerAction : MonoBehaviour
     public GameObject talkBtn;
 
     private PlayerInputActions inputActions;
-
+    public PlayerInput playerinput;
     //대화가 종료되었는지 체크
 
 
@@ -28,9 +28,10 @@ public class PlayerAction : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Space) && scanObject != null)
         {
             //Time.timeScale = 0;
-
+            playerinput.OnDisable();
             if (scanObject.layer == LayerMask.NameToLayer("NPC"))
             {
+
                 NPCInteractive.instance.touch(scanObject);
                 
             }

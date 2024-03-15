@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     ShowMenuType currentShowMenuType;
 
     bool isOpenShowPopUp = false;
-
+    public PlayerInput playerinput;
     Action selectMenuAction = null;
 
     void Awake()
@@ -111,7 +111,7 @@ public class UIManager : MonoBehaviour
             PotraitPanelOnOff(false);
             //btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
-            playerController.isTalking = false;
+            playerinput.OnEnable();
             isOpenShowPopUp = false;
 
         }
@@ -125,14 +125,14 @@ public class UIManager : MonoBehaviour
         if (currentShowMenuType > ShowMenuType.Exit)
         {
             currentShowMenuType = ShowMenuType.Exit;
-            Debug.Log("더이상 아래로 메뉴가 존재하지 않습니다");
+     
             return;
         }
 
         if (currentShowMenuType < ShowMenuType.Buy)
         {
             currentShowMenuType = ShowMenuType.Buy;
-            Debug.Log("더이상 위로 메뉴가 존재하지 않습니다");
+
             return;
         }
 

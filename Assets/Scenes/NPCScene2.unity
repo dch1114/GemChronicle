@@ -743,6 +743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   talkBtn: {fileID: 0}
+  playerinput: {fileID: 0}
 --- !u!1 &1147019377
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +880,7 @@ MonoBehaviour:
   selectButton: {fileID: 21300000, guid: c943332d5b7bce243a9ce462e3802b8a, type: 3}
   unSelectButton: {fileID: 21300000, guid: 3ac0b4e40bbf0f9449f1d7a6d2a9baba, type: 3}
   currentShowMenuType: 0
+  playerinput: {fileID: 1169213052}
 --- !u!1 &1169213036 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 856440166226088500, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
@@ -898,6 +900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   talkBtn: {fileID: 1826137330}
+  playerinput: {fileID: 1169213052}
 --- !u!114 &1169213047 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6376897481716819918, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
@@ -907,6 +910,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 459915c175ef275449f50eacdba97f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1169213052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2620629338676233774, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
+  m_PrefabInstance: {fileID: 8243748700098772497}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169213036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d03fcf61ce36ac54fa74daf8a807d0c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1213614685
@@ -1681,6 +1695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   talkBtn: {fileID: 0}
+  playerinput: {fileID: 0}
 --- !u!1 &1715427997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,6 +1750,7 @@ MonoBehaviour:
   isShop: 0
   playerController: {fileID: 1169213047}
   isEndTalk: 0
+  playerinput: {fileID: 1169213052}
 --- !u!1 &1762707367
 GameObject:
   m_ObjectHideFlags: 0

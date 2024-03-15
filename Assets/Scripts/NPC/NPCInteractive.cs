@@ -34,7 +34,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
     public PlayerController playerController;
 
     public bool isEndTalk = false;
-
+    public PlayerInput playerinput;
 
     void Awake()
     {
@@ -72,11 +72,11 @@ public class NPCInteractive : MonoBehaviour, IInteractive
         }
 
         isEndTalk = false;
-        playerController.isTalking = true;
+     
 
         if (isEndTalk == true)
         {
-            playerController.isTalking = false;
+
             return;
         } 
 
@@ -102,18 +102,19 @@ public class NPCInteractive : MonoBehaviour, IInteractive
         if (talkIndex >= npcDatabase.GetNPCByKey(__id).conversation.Length)
         {
             isEndTalk = true;
-            playerController.isTalking = false;
 
-           
+            playerinput.OnEnable();
+
             isAction = false;
             talkIndex = 0;
             
            if (__id == 1301)
            {
+                playerinput.OnDisable();
                 //»óÁ¡ ÆË¾÷Ã¢
                 UIManager.instance.shopChoiceOnOff(true);
                 isAction = true;
-                playerController.isTalking = true;
+
                 
             }
 
@@ -129,7 +130,7 @@ public class NPCInteractive : MonoBehaviour, IInteractive
             isAction = false;
             talkIndex = 0;
             isEndTalk = true;
-            playerController.isTalking = false;
+
 
             talkText.text = talkData;
             return;
