@@ -104,11 +104,6 @@ public class DataManagers
 
         var a = arr.ToDictionary(x => x.id, x => (RawData) x);
 
-        if (dic == null)
-        {
-            dic = new Dictionary<string, Dictionary<int, RawData>>();
-        }
-
         if (!dic.ContainsKey(key))
         {
             this.dic.Add(key, a);
