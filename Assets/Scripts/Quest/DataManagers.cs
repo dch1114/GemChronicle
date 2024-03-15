@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.Linq;
-using Newtonsoft.Json;
 using static SoonsoonData;
-using UnityEditor.U2D.Aseprite;
 
 public class DataManagers
 {
@@ -104,7 +102,12 @@ public class DataManagers
         string json = asset.text;
         T[] arr = JsonConvert.DeserializeObject<T[]>(json);
 
-        var a = arr.ToDictionary(x => x.id, x => (RawData)x);
+        var a = arr.ToDictionary(x => x.id, x => (RawData) x);
+
+        if (dic == null)
+        {
+            dic = new Dictionary<string, Dictionary<int, RawData>>();
+        }
 
         if (!dic.ContainsKey(key))
         {
