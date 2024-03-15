@@ -34,33 +34,33 @@ public class SkillManager : MonoBehaviour
         return skillList;
     }
 
-    public int[,] GetWarriorSkills()
-    {
-        int[,] skillList = new int[3, 3] { { 0, 1, 2 }, { 1, 1, 1 }, { 2, 1, 0 } };
-
-        return skillList;
-    }
-
-    //public List<List<int>> GetWarriorSkills()
+    //public int[,] GetWarriorSkills()
     //{
+    //    int[,] skillList = new int[3, 3] { { 0, 1, 2 }, { 1, 1, 1 }, { 2, 1, 0 } };
 
-    //}
-    public int[] GetArcherSkills()
-    {
-        int[] skillList = new int[3] { 0, 1, 2 };
-
-        return skillList;
-    }
-
-    //public List<int> GetWarriorSkills()
-    //{
-
+    //    return skillList;
     //}
 
-    public int[] GetMagicianSkills()
-    {
-        int[] skillList = new int[3] { 0, 1, 2 };
+    ////public List<List<int>> GetWarriorSkills()
+    ////{
 
-        return skillList;
-    }
+    ////}
+    //public int[] GetArcherSkills()
+    //{
+    //    int[] skillList = new int[3] { 0, 1, 2 };
+
+    //    return skillList;
+    //}
+
+    ////public List<int> GetWarriorSkills()
+    ////{
+
+    ////}
+
+    //public int[] GetMagicianSkills()
+    //{
+    //    int[] skillList = new int[3] { 0, 1, 2 };
+
+    //    return skillList;
+    //}
 }

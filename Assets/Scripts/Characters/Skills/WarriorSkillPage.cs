@@ -17,50 +17,39 @@ public class WarriorSkillPage : MonoBehaviour
     [SerializeField] private List<Sprite> typeSprites;
     [SerializeField] private List<Toggle> asdPage;
 
-    public void ShowSkillInfo(Skill _skill)
-    {
-        try
-        {
-            if (!goSkillInfo.activeSelf) goSkillInfo.SetActive(true);
+    //public void ShowSkillInfo(Skill _skill)
+    //{
+    //    try
+    //    {
+    //        if (!goSkillInfo.activeSelf) goSkillInfo.SetActive(true);
 
-            skillIcon.sprite = _skill.icon.sprite;
-            damageTxt.text = _skill.damage.ToString();
+    //        skillIcon.sprite = _skill.icon.sprite;
+    //        damageTxt.text = _skill.damage.ToString();
 
-            switch (_skill.type)
-            {
-                case SkillType.Fire:
-                    typeIcon.sprite = typeSprites[0];
-                    break;
-                case SkillType.Ice:
-                    typeIcon.sprite = typeSprites[1];
-                    break;
-                case SkillType.Light:
-                    typeIcon.sprite = typeSprites[2];
-                    break;
-                default:
-                    typeIcon.sprite = typeSprites[0];
-                    break;
-            }
-            priceTxt.text = _skill.price.ToString();
-        } catch(Exception e)
-        {
-            Debug.Log(e);
-        }
-    }
+    //        switch (_skill.type)
+    //        {
+    //            case SkillType.Fire:
+    //                typeIcon.sprite = typeSprites[0];
+    //                break;
+    //            case SkillType.Ice:
+    //                typeIcon.sprite = typeSprites[1];
+    //                break;
+    //            case SkillType.Light:
+    //                typeIcon.sprite = typeSprites[2];
+    //                break;
+    //            default:
+    //                typeIcon.sprite = typeSprites[0];
+    //                break;
+    //        }
+    //        priceTxt.text = _skill.price.ToString();
+    //    } catch(Exception e)
+    //    {
+    //        Debug.Log(e);
+    //    }
+    //}
 
     public void ShowSkillPage()
     {
-        int[,] skillList = SkillManager.instance.GetWarriorSkills();
-
-        int[] activeSkills = new int[skillList.Length];
-
-        for(int i = 0; i < asdPage.Count; i++)
-        {
-            if (asdPage[i].isOn)
-            {
-
-            }
-        }
-
+        
     }
 }
