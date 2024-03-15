@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class WarriorSkillPage : MonoBehaviour
     [SerializeField] private TextMeshProUGUI priceTxt;
 
     [SerializeField] private List<Sprite> typeSprites;
+    [SerializeField] private List<Toggle> asdPage;
 
     public void ShowSkillInfo(Skill _skill)
     {
@@ -48,6 +50,17 @@ public class WarriorSkillPage : MonoBehaviour
 
     public void ShowSkillPage()
     {
+        int[,] skillList = SkillManager.instance.GetWarriorSkills();
+
+        int[] activeSkills = new int[skillList.Length];
+
+        for(int i = 0; i < asdPage.Count; i++)
+        {
+            if (asdPage[i].isOn)
+            {
+
+            }
+        }
 
     }
 }
