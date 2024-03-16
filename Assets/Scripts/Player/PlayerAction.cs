@@ -15,27 +15,37 @@ public class PlayerAction : MonoBehaviour
     private PlayerInputActions inputActions;
     public PlayerInput playerinput;
     //대화가 종료되었는지 체크
-
+   
     //0315 interactive 리스트 선언
     List<IInteractive> interactiveList = new List<IInteractive>();
 
     IInteractive target = null;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (Keyboard.current.tabKey.wasPressedThisFrame&& interactiveList.Count > 0)
     
+    private void OnInteractive()
+    {
+       if( interactiveList.Count > 0)
         {
-      
             playerinput.OnDisable();
-            
             target.TryTalk();
-
         }
-
     }
+
+    
+    //void Update()
+    //{
+
+    //    if (Keyboard.current.tabKey.wasPressedThisFrame&& interactiveList.Count > 0)
+    
+    //    {
+      
+    //        playerinput.OnDisable();
+            
+    //        target.TryTalk();
+
+    //    }
+
+    //}
     // 플레이어와 가장 가까운 몬스터를 찾는 메소드입니다.
     IInteractive FindClosestTarget()
     {
