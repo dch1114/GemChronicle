@@ -112,18 +112,17 @@ public class NPCController : MonoBehaviour, IInteractive
 
     }
 
-    //void Talk(int __id)
+   
     void Talk()
     {
         //대화 불러오기
         int msgId = GetNpcData().ID;
         string talkData = talkManager.GetTalk(msgId, talkIndex);
-        //string talkData = talkManager.GetTalk(__id, talkIndex);
+
 
         if (talkData == null)
         {
-            //Time.timeScale = 1;
-            //isAction = false;
+  
             talkIndex = 0;
             isEndTalk = true;
             uiManager.SetTalkMessage(talkData);
@@ -141,29 +140,7 @@ public class NPCController : MonoBehaviour, IInteractive
 
         }
 
-        //더이상 대화 내용이 존재 하지 않아 대화를 종료해야 한다면
-        //if (talkIndex >= npcData.conversation.Length)
-        //{
-        //    isEndTalk = true;
-
-        //    playerinput.OnEnable();
-
-        //    isAction = false;
-        //    talkIndex = 0;
-
-        //    //if (__id == 1301)
-        //    if(npcType == NPCType.Shop)
-        //    {
-        //        playerinput.OnDisable();
-        //        //상점 팝업창
-        //        UIManager.instance.shopChoiceOnOff(true);
-        //        isAction = true;
-
-
-        //    }
-
-        //    return;
-        //}
+     
 
 
     }
