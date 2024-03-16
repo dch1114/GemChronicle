@@ -11,8 +11,14 @@ public class NPC
     public string discription;
     public string []conversation;
     public bool isNPC;
+    
 }
-
+//0315 Npc타입을 구별하기 위해 enum 선언
+public enum NPCType
+{ 
+    Npc,
+    Shop
+}
 public class NPCInstance
 {
    

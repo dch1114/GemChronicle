@@ -36,6 +36,12 @@ public class UIManager : MonoBehaviour
     public PlayerInput playerinput;
     Action selectMenuAction = null;
 
+    //0315 [SerializeField]를 선언하면 외부 스크립트에서 접근할수 없으나 인스펙터에서 세팅 및 확인을 할 수 있음  
+    [SerializeField]
+    Text talkText;
+    [SerializeField]
+    Image portraitImg;
+
     void Awake()
     {
 
@@ -72,9 +78,16 @@ public class UIManager : MonoBehaviour
         showMenuButton[(int)ShowMenuType.Exit].image.sprite = unSelectButton;
     }
 
-
-    
-
+    //0315 대회메세지 세팅
+    public void SetTalkMessage(string msg)
+    {
+        talkText.text = msg;
+    }
+    //0315 초상화 이미지 세팅
+    public void SetPortraitImage(Sprite sp)
+    {
+        portraitImg.sprite = sp;
+    }
     public void talkBtnOnOff(bool _OnOff)
     {
         talkBtn.SetActive(_OnOff);

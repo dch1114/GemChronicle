@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 8725986004346491450}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &4993208987679539032
 CircleCollider2D:
@@ -126,6 +126,12 @@ MonoBehaviour:
     discription: 
     conversation: []
     isNPC: 0
+  npcType: 0
+  talkIndex: 0
+  isAction: 0
+  isNPC: 0
+  isShop: 0
+  isEndTalk: 0
 --- !u!50 &2723871308718145109
 Rigidbody2D:
   serializedVersion: 4

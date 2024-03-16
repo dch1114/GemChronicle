@@ -826,7 +826,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  talkBtn: {fileID: 0}
   playerinput: {fileID: 0}
 --- !u!1 &1147019377
 GameObject:
@@ -965,6 +964,8 @@ MonoBehaviour:
   unSelectButton: {fileID: 21300000, guid: 3ac0b4e40bbf0f9449f1d7a6d2a9baba, type: 3}
   currentShowMenuType: 0
   playerinput: {fileID: 1169213052}
+  talkText: {fileID: 215329923}
+  portraitImg: {fileID: 1933271740}
 --- !u!1 &1169213036 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 856440166226088500, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
@@ -983,7 +984,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  talkBtn: {fileID: 1826137330}
   playerinput: {fileID: 1169213052}
 --- !u!114 &1169213047 stripped
 MonoBehaviour:
@@ -1468,7 +1468,6 @@ Transform:
   - {fileID: 1601485556}
   - {fileID: 540200734}
   - {fileID: 1788085596}
-  - {fileID: 1715427998}
   - {fileID: 1148306352}
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -1783,63 +1782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
-  talkBtn: {fileID: 0}
   playerinput: {fileID: 0}
---- !u!1 &1715427997
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1715427998}
-  - component: {fileID: 1715427999}
-  m_Layer: 0
-  m_Name: IObj
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1715427998
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715427997}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1406976311}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1715427999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715427997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 648fd338f9b1fc1499ea5eb3aba4cbf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scanObject: {fileID: 0}
-  talkManager: {fileID: 1601485555}
-  isAction: 0
-  talkIndex: 0
-  talkText: {fileID: 1147019379}
-  isNPC: 0
-  portraitImg: {fileID: 1933271740}
-  isShop: 0
-  playerController: {fileID: 1169213047}
-  isEndTalk: 0
-  playerinput: {fileID: 1169213052}
 --- !u!1 &1762707367
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,6 +1949,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c1332e0874d0384e8b6ed1d62cbacaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  talkManager: {fileID: 1601485555}
+  playerinput: {fileID: 1169213052}
   npcList:
   - {fileID: 4188532623863034095, guid: d8699f3ea1d879e45b1ae8e23d03b741, type: 3}
   - {fileID: 6968360432040738624, guid: d0ac32dcddc63d94a8b1bfe2ce0423e2, type: 3}
