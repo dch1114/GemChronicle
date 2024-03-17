@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("Paneles")]
     [SerializeField] private GameObject panelInspectorQuests;
+    [SerializeField] private GameObject panelPersonajeQuests;
 
     public GameObject talkBtn;
     public GameObject talkPanel;
@@ -55,7 +56,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            //NPCInteractive.instance.isAction = false;
+            NPCInteractive.instance.isAction = false;
             talkPanelOnOff(false);
             btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
@@ -65,5 +66,10 @@ public class UIManager : MonoBehaviour
     public void OpenClosePanelInspectorQuests()
     {
         panelInspectorQuests.SetActive(!panelInspectorQuests.activeSelf);
+    }
+
+    public void AbrirCerrarPanelPersonajeQuests()
+    {
+        panelPersonajeQuests.SetActive(!panelPersonajeQuests.activeSelf);
     }
 }

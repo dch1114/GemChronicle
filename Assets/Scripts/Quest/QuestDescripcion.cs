@@ -8,9 +8,11 @@ public class QuestDescripcion : MonoBehaviour
     [SerializeField] private TextMeshProUGUI questNombre;
     [SerializeField] private TextMeshProUGUI questDescripcion;
 
-    public virtual void ConfigurarQuestUI(Quest_ questPorCargar)
+    public Quest_ QuestCargado {  get; set; }
+
+    public virtual void ConfigurarQuestUI(Quest_ quest)
     {
-        questNombre.text = questPorCargar.Nombre;
-        questDescripcion.text = questPorCargar.Descripcion;
+        questNombre.text = quest.Nombre;
+        questDescripcion.text = quest.Descripcion;
     }
 }

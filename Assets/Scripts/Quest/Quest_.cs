@@ -9,7 +9,7 @@ public class Quest_ : ScriptableObject
     [Header("Info")]
     public string Nombre;
     public string ID;
-    public int CantidadObjectivo;
+    public int CantidadObjetivo;
 
     [Header("Descripcion")]
     [TextArea] public string Descripcion;

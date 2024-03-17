@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class QuestManager_ : MonoBehaviour
+public class QuestManager_ : Singleton<QuestManager_>
 {
     [Header("Quests")]
     [SerializeField] private Quest_[] questDisponibles;
@@ -11,7 +12,11 @@ public class QuestManager_ : MonoBehaviour
     [SerializeField] private InspectorQuestDescripcion inspectorQuestPrefab;
     [SerializeField] private Transform inspectorQuestContenedor;
 
-    void Start()
+    [Header("Personaje Quests")]
+    [SerializeField] private PersonajeQuestDescripcion personajeQuestPrefab;
+    [SerializeField] private Transform personajeQuestContenedor;
+
+    private void Start()
     {
         CargarQuestEnInspector();
     }
@@ -23,5 +28,16 @@ public class QuestManager_ : MonoBehaviour
             InspectorQuestDescripcion nuevoQuest = Instantiate(inspectorQuestPrefab, inspectorQuestContenedor);
             nuevoQuest.ConfigurarQuestUI(questDisponibles[i]);
         }
+    }
+
+    private void AnadirQuestPorCompletar(Quest_ questPorCompletar)
+    {
+        PersonajeQuestDescripcion nuevoQuest = Instantiate(personajeQuestPrefab, personajeQuestContenedor);
+        nuevoQuest.ConfigurarQuestUI(questPorCompletar);
+    }
+
+    public void AnadirQuest(Quest_ questPorCompletar)
+    {
+        AnadirQuestPorCompletar(questPorCompletar);
     }
 }
