@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     private PlayerStateMachine stateMachine;
 
+    public GameObject SkillPage;
+
     private void Awake()
     {
         AnimationData.Initialize();

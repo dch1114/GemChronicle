@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            velocity += (Physics2D.gravity * 0.2f) * Time.fixedDeltaTime;
+            velocity += (Physics2D.gravity) * Time.fixedDeltaTime;
             transform.position += new Vector3(velocity.x, velocity.y);
         }
 

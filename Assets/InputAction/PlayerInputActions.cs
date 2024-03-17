@@ -71,6 +71,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillPage"",
+                    ""type"": ""Button"",
+                    ""id"": ""66dc3983-0aa9-466f-9e87-8e4fb8a7a252"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -260,6 +269,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ComboAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""141fda65-eb9d-4fae-b8cd-0fa1cece72ee"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -273,6 +293,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_ComboAttack = m_Player.FindAction("ComboAttack", throwIfNotFound: true);
+        m_Player_SkillPage = m_Player.FindAction("SkillPage", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -339,6 +360,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_ComboAttack;
+    private readonly InputAction m_Player_SkillPage;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -348,6 +370,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @ComboAttack => m_Wrapper.m_Player_ComboAttack;
+        public InputAction @SkillPage => m_Wrapper.m_Player_SkillPage;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -372,6 +395,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ComboAttack.started += instance.OnComboAttack;
             @ComboAttack.performed += instance.OnComboAttack;
             @ComboAttack.canceled += instance.OnComboAttack;
+            @SkillPage.started += instance.OnSkillPage;
+            @SkillPage.performed += instance.OnSkillPage;
+            @SkillPage.canceled += instance.OnSkillPage;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -391,6 +417,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ComboAttack.started -= instance.OnComboAttack;
             @ComboAttack.performed -= instance.OnComboAttack;
             @ComboAttack.canceled -= instance.OnComboAttack;
+            @SkillPage.started -= instance.OnSkillPage;
+            @SkillPage.performed -= instance.OnSkillPage;
+            @SkillPage.canceled -= instance.OnSkillPage;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -415,5 +444,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnComboAttack(InputAction.CallbackContext context);
+        void OnSkillPage(InputAction.CallbackContext context);
     }
 }
