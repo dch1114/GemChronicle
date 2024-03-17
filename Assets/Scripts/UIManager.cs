@@ -8,6 +8,9 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Paneles")]
+    [SerializeField] private GameObject panelInspectorQuests;
+    [SerializeField] private GameObject panelPersonajeQuests;
     public enum ShowMenuType  //보기쉽게 하기위해 enum선언
     { 
         Buy,
@@ -21,6 +24,9 @@ public class UIManager : MonoBehaviour
     public GameObject potraitPanel;
     public GameObject shopPanel;
     public GameObject shopChoice;
+    public GameObject btn;
+    public static UIManager instance = null;
+
     public static UIManager instance = null;
 
     public PlayerController playerController;
@@ -44,12 +50,9 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
-
-
         if (instance == null)
         {
-            instance = this;
-           
+            instance = this; 
         }
         else
         {
@@ -105,7 +108,6 @@ public class UIManager : MonoBehaviour
 
     public void shopChoiceOnOff(bool _OnOff)
     {
-      
         if (_OnOff)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -119,116 +121,20 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-
-            //NPCInteractive.instance.isAction = false;
-            PotraitPanelOnOff(false);
-            //btn.SetActive(_OnOff);
+            NPCInteractive.instance.isAction = false;
+            talkPanelOnOff(false);
+            btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
-            playerinput.OnEnable();
-            isOpenShowPopUp = false;
-
-        }
-
-
-    }
-
-
-    public void PopupShopMenuSelect(ShowMenuType type)
-    {
-        if (currentShowMenuType > ShowMenuType.Exit)
-        {
-            currentShowMenuType = ShowMenuType.Exit;
-     
-            return;
-        }
-
-        if (currentShowMenuType < ShowMenuType.Buy)
-        {
-            currentShowMenuType = ShowMenuType.Buy;
-
-            return;
-        }
-
-
-        currentShowMenuType = type;
-        //기존에 세팅되어 있는 버튼의 연결을 모두 해제
-        selectMenuAction = null;
-        //선택될 버튼에 상점타입의 버튼을 연결한다 
-        selectMenuAction = GetSelectedShopMenu(type);
-
-    }
-
-    public void RunSelectedMenuButton()
-    {
-        selectMenuAction?.Invoke();
-    }
-
-    Action GetSelectedShopMenu(ShowMenuType type)
-    {
-        showMenuButton[(int)ShowMenuType.Buy].image.sprite = unSelectButton;
-        showMenuButton[(int)ShowMenuType.Sell].image.sprite = unSelectButton;
-        showMenuButton[(int)ShowMenuType.Exit].image.sprite = unSelectButton;
-
-        switch (type)
-        {
-            case ShowMenuType.Buy:
-                showMenuButton[(int)ShowMenuType.Buy].image.sprite = selectButton;
-
-                return BuyShop;
-
-            case ShowMenuType.Sell:
-                showMenuButton[(int)ShowMenuType.Sell].image.sprite = selectButton;
-
-                return SellShop;
-            case ShowMenuType.Exit:
-                showMenuButton[(int)ShowMenuType.Exit].image.sprite = selectButton;
-
-                return ExitShop;
-            default:
-                return null;
         }
     }
 
-
-    void BuyShop() 
+    public void OpenClosePanelInspectorQuests()
     {
-
-        Debug.Log("Select Buy");
+        panelInspectorQuests.SetActive(!panelInspectorQuests.activeSelf);
     }
 
-    void SellShop()
+    public void AbrirCerrarPanelPersonajeQuests()
     {
-
-        Debug.Log("Select Sell");
-
+        panelPersonajeQuests.SetActive(!panelPersonajeQuests.activeSelf);
     }
-
-    void ExitShop() 
-    {
-        shopChoiceOnOff(false);
-        Debug.Log("Select Exi");
-
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            PopupShopMenuSelect(--currentShowMenuType);
-        }
-
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            //Debug.Log("Key Down");
-            PopupShopMenuSelect(++currentShowMenuType);
-            //Debug.Log("현재 선택된 메뉴는 : " + currentShowMenuType);
-        }
-
-    }
-
-
-
-
-
 }
