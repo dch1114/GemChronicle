@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6968360432040738624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.6, y: -2.24, z: 0}
+  m_LocalPosition: {x: -6.6, y: -2.24, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8725986004346491450}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &4993208987679539032
 CircleCollider2D:
@@ -126,6 +126,12 @@ MonoBehaviour:
     discription: 
     conversation: []
     isNPC: 0
+  npcType: 0
+  talkIndex: 0
+  isAction: 0
+  isNPC: 0
+  isShop: 0
+  isEndTalk: 0
 --- !u!50 &2723871308718145109
 Rigidbody2D:
   serializedVersion: 4
@@ -152,7 +158,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!1001 &4340582816290923529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,6 +530,14 @@ PrefabInstance:
     - target: {fileID: 8678604165427261050, guid: 36b24f84c8ef1e048b9cacb3b5e4b75e, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738238128656449657, guid: 36b24f84c8ef1e048b9cacb3b5e4b75e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8738238128656449657, guid: 36b24f84c8ef1e048b9cacb3b5e4b75e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 463203791
       objectReference: {fileID: 0}
     - target: {fileID: 8875922198942340803, guid: 36b24f84c8ef1e048b9cacb3b5e4b75e, type: 3}
       propertyPath: m_Layer

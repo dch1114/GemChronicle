@@ -41,5 +41,7 @@ public class PlayerStateMachine : StateMachine
         MainCameraTransform = Camera.main.transform;
 
         MovementSpeed = _player.Data.GroundedData.BaseSpeed;
+        JumpForce = _player.Data.AirData.JumpForce;
+
     }
 }

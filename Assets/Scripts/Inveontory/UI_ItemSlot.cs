@@ -8,7 +8,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    protected UI ui;
+    protected InventoryUIController ui;
     public InventoryItem item;
 
 
@@ -18,7 +18,8 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
     private void Start()
     {
-        ui = GetComponentInParent<UI>();
+        ui = GetComponentInParent<InventoryUIController>();
+        UpdateSlot(item);
     }
     public void UpdateSlot(InventoryItem _newitem)
     {
@@ -26,8 +27,13 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
         itemImage.color = Color.white;
 
-        if(item != null)
+        if (item == null || item.stackSize == 0)
         {
+            itemImage.color = new Color(255,255,255,0);
+        }
+
+        if (item != null)
+        {    
             itemImage.sprite = item.datas.sprite; // test
 
             if (item.stackSize > 1)
@@ -39,6 +45,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
                 itemText.text = "";
             }
         }
+
     }
 
     public void CleanUpSlot()
@@ -87,17 +94,18 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     protected void AdjustToolTipPosition()
     {
         Vector2 mousePosition = Input.mousePosition;
+        Debug.Log(mousePosition);
 
-        float xOffset = 0;
-        float yOffset = 0;
+        float xOffset;
+        float yOffset;
 
         if (mousePosition.x > 600)
         {
-            xOffset = -75;
+            xOffset = -150;
         }
         else
         {
-            xOffset = 75;
+            xOffset = 150;
         }
 
         if (mousePosition.y > 320)

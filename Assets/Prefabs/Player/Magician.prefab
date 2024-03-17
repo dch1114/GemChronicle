@@ -2076,6 +2076,7 @@ GameObject:
   - component: {fileID: 6297280273684821664}
   - component: {fileID: 5822715117651603149}
   - component: {fileID: 4609938153641177507}
+  - component: {fileID: -9059894567221357031}
   m_Layer: 0
   m_Name: Magician
   m_TagString: Untagged
@@ -2136,6 +2137,7 @@ MonoBehaviour:
     skill1IndexParameterName: Skill1Index
     skill2IndexParameterName: Skill2Index
     skill3IndexParameterName: Skill3Index
+  SkillPage: {fileID: 0}
 --- !u!114 &4936310947417410832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2153,6 +2155,8 @@ MonoBehaviour:
     <WalkSpeedModifier>k__BackingField: 0.5
   <AirData>k__BackingField:
     <JumpForce>k__BackingField: 0.5
+  <AttackData>k__BackingField:
+    <SkillInfoDatas>k__BackingField: []
 --- !u!114 &6297280273684821664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2238,6 +2242,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5702901, y: 0.76942396}
   m_EdgeRadius: 0
+--- !u!114 &-9059894567221357031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963442984316616658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed5223702c3c448ad668d614ae2e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  talkBtn: {fileID: 0}
+  playerinput: {fileID: 0}
 --- !u!1 &5079423989659550179
 GameObject:
   m_ObjectHideFlags: 0

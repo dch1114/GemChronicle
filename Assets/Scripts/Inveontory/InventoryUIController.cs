@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class UI : MonoBehaviour
+public class InventoryUIController : MonoBehaviour
 {
     [SerializeField] public GameObject characterUI;
     [SerializeField] private GameObject skillTreeUI;
