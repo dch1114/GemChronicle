@@ -19,6 +19,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     private void Start()
     {
         ui = GetComponentInParent<InventoryUIController>();
+        UpdateSlot(item);
     }
     public void UpdateSlot(InventoryItem _newitem)
     {
@@ -26,8 +27,13 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
         itemImage.color = Color.white;
 
-        if(item != null)
+        if (item == null || item.stackSize == 0)
         {
+            itemImage.color = new Color(255,255,255,0);
+        }
+
+        if (item != null)
+        {    
             itemImage.sprite = item.datas.sprite; // test
 
             if (item.stackSize > 1)
@@ -39,6 +45,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
                 itemText.text = "";
             }
         }
+
     }
 
     public void CleanUpSlot()
