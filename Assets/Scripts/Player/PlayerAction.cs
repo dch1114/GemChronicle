@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class PlayerAction : MonoBehaviour
 {
 
-    public GameManager gameManager;
+
    
     GameObject scanObject;
     public GameObject talkBtn;
