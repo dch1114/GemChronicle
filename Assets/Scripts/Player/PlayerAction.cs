@@ -24,7 +24,7 @@ public class PlayerAction : MonoBehaviour
 
     // Update is called once per frame
 
-    private void OnInteractive()
+    public void OnInteractive()
     {
         if (interactiveList.Count > 0)
         {
