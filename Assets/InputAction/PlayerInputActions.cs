@@ -89,6 +89,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillPage"",
+                    ""type"": ""Button"",
+                    ""id"": ""b0c23919-9e93-4e9f-8832-cbaa93806008"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -300,6 +309,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Interactive"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""690deef3-e68e-415d-882a-2f4aaa4ea8e7"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -315,6 +335,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_ComboAttack = m_Player.FindAction("ComboAttack", throwIfNotFound: true);
         m_Player_Quest = m_Player.FindAction("Quest", throwIfNotFound: true);
         m_Player_Interactive = m_Player.FindAction("Interactive", throwIfNotFound: true);
+        m_Player_SkillPage = m_Player.FindAction("SkillPage", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -383,6 +404,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ComboAttack;
     private readonly InputAction m_Player_Quest;
     private readonly InputAction m_Player_Interactive;
+    private readonly InputAction m_Player_SkillPage;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -394,6 +416,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @ComboAttack => m_Wrapper.m_Player_ComboAttack;
         public InputAction @Quest => m_Wrapper.m_Player_Quest;
         public InputAction @Interactive => m_Wrapper.m_Player_Interactive;
+        public InputAction @SkillPage => m_Wrapper.m_Player_SkillPage;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -424,6 +447,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interactive.started += instance.OnInteractive;
             @Interactive.performed += instance.OnInteractive;
             @Interactive.canceled += instance.OnInteractive;
+            @SkillPage.started += instance.OnSkillPage;
+            @SkillPage.performed += instance.OnSkillPage;
+            @SkillPage.canceled += instance.OnSkillPage;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -449,6 +475,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interactive.started -= instance.OnInteractive;
             @Interactive.performed -= instance.OnInteractive;
             @Interactive.canceled -= instance.OnInteractive;
+            @SkillPage.started -= instance.OnSkillPage;
+            @SkillPage.performed -= instance.OnSkillPage;
+            @SkillPage.canceled -= instance.OnSkillPage;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -475,5 +504,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnComboAttack(InputAction.CallbackContext context);
         void OnQuest(InputAction.CallbackContext context);
         void OnInteractive(InputAction.CallbackContext context);
+        void OnSkillPage(InputAction.CallbackContext context);
     }
 }
