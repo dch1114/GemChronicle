@@ -6,7 +6,8 @@ using UnityEngine;
 public class NPCManager : MonoBehaviour
 {
     public static NPCManager instance = null;
-
+    public TalkManager talkManager;
+    public PlayerInput playerinput;
     //엔피씨 게임오브젝트가 될 프리펩 리스트
     public List<GameObject> npcList;
     //엔피씨가 생성될 위치 리스트
