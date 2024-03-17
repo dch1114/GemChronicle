@@ -30,8 +30,11 @@ public class NPCInteractive : MonoBehaviour, IInteractive
     public static NPCInteractive instance = null;
     NPCDatabase npcDatabase;
     public bool isShop = false;
-   
-  
+
+    public PlayerController playerController;
+
+    public bool isEndTalk = false;
+    public PlayerInput playerinput;
 
     void Awake()
     {
@@ -58,17 +61,36 @@ public class NPCInteractive : MonoBehaviour, IInteractive
 
     public void touch(GameObject _scanobj)
     {
-
-
         scanObject = _scanobj;
         NPCController npcController = scanObject.GetComponent<NPCController>();
+
+        //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
+        if (UIManager.instance.IsOpenShowPopup())
+        {
+            UIManager.instance.RunSelectedMenuButton();
+            return;
+        }
+
+        isEndTalk = false;
+     
+
+        if (isEndTalk == true)
+        {
+
+            return;
+        } 
+
+
+
+       
 
         if (npcController != null)
         {
             Talk(npcController.GetNpcData().ID);
         }
-      
-        UIManager.instance.talkPanelOnOff(isAction);
+       
+
+        UIManager.instance.PotraitPanelOnOff(isAction);
 
     }
 
@@ -76,16 +98,24 @@ public class NPCInteractive : MonoBehaviour, IInteractive
     public void Talk(int __id)
     {
 
+        //더이상 대화 내용이 존재 하지 않아 대화를 종료해야 한다면
         if (talkIndex >= npcDatabase.GetNPCByKey(__id).conversation.Length)
         {
-            
+            isEndTalk = true;
+
+            playerinput.OnEnable();
+
             isAction = false;
             talkIndex = 0;
             
            if (__id == 1301)
-            {
+           {
+                playerinput.OnDisable();
+                //상점 팝업창
                 UIManager.instance.shopChoiceOnOff(true);
                 isAction = true;
+
+                
             }
 
             return;
@@ -96,32 +126,28 @@ public class NPCInteractive : MonoBehaviour, IInteractive
 
         if (talkData == null)
         {
+            //Time.timeScale = 1;
             isAction = false;
             talkIndex = 0;
+            isEndTalk = true;
 
-            return;
-        }
-        if (talkData != null)
-        {
-          
+
             talkText.text = talkData;
-
-            portraitImg.sprite = talkManager.GetPortrait(__id);
-            
-
-            
+            return;
         }
         else
         {
-         
-
             talkText.text = talkData;
+            portraitImg.sprite = talkManager.GetPortrait(__id);
+            isAction = true;
+            talkIndex++;
 
-           
         }
+       
 
-        isAction = true;
-        talkIndex++;
+
     }
+
+
 }
 

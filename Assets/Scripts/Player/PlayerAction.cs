@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
@@ -16,6 +18,8 @@ public class PlayerAction : MonoBehaviour
     private PlayerInputActions inputActions;
     bool isQuestPanelOpen = false;
 
+    public PlayerInput playerinput;
+    //대화가 종료되었는지 체크
 
 
     // Update is called once per frame
@@ -35,18 +39,26 @@ public class PlayerAction : MonoBehaviour
                 isQuestPanelOpen = true;
             }
         }
+
         if (Keyboard.current.tabKey.wasPressedThisFrame&& scanObject != null)
+        //if (Input.GetKeyDown(KeyCode.Space) && scanObject != null)
         {
             
+            //Time.timeScale = 0;
+            playerinput.OnDisable();
             if (scanObject.layer == LayerMask.NameToLayer("NPC"))
             {
+
                 NPCInteractive.instance.touch(scanObject);
+                
             }
             if (scanObject.layer == LayerMask.NameToLayer("Shop"))
             {
+                //Debug.Log("scanObject: " + scanObject);
                 NPCInteractive.instance.touch(scanObject);
             }
         }
+
     }
 
 
