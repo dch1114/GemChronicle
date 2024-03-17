@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,40 +16,118 @@ public class WarriorSkillPage : MonoBehaviour
     [SerializeField] private TextMeshProUGUI priceTxt;
 
     [SerializeField] private List<Sprite> typeSprites;
+    [SerializeField] private List<Toggle> asdPage;
+    [SerializeField] private List<Toggle> comboNumToggle;
 
-    public void ShowSkillInfo(Skill _skill)
+    [SerializeField] private List<Sprite> icons;
+    [SerializeField] private List<SkillButton> skillBtns;
+
+    [SerializeField] Player player;
+
+    private int skillInfoIndex = 0;
+    private void Start()
+    {
+        ShowSkillPage();
+    }
+
+    public void ShowSkillPage()
+    {
+        for(int i = 0; i < skillBtns.Count; i++)
+        {
+            skillBtns[i].skillInfoData = player.Data.AttackData.GetSkillInfo(i);
+            skillBtns[i].icon.sprite = icons[i];
+        }
+
+        ShowSkillSettings();
+    }
+
+    public void ShowSkillInfo(SkillButton _skill)
     {
         try
         {
             if (!goSkillInfo.activeSelf) goSkillInfo.SetActive(true);
 
-            skillIcon.sprite = _skill.icon.sprite;
-            damageTxt.text = _skill.damage.ToString();
+            SkillInfoData data = _skill.skillInfoData;
 
-            switch (_skill.type)
-            {
-                case SkillType.Fire:
-                    typeIcon.sprite = typeSprites[0];
-                    break;
-                case SkillType.Ice:
-                    typeIcon.sprite = typeSprites[1];
-                    break;
-                case SkillType.Light:
-                    typeIcon.sprite = typeSprites[2];
-                    break;
-                default:
-                    typeIcon.sprite = typeSprites[0];
-                    break;
-            }
-            priceTxt.text = _skill.price.ToString();
-        } catch(Exception e)
+            skillIcon.sprite = _skill.icon.sprite;
+            damageTxt.text = data.Damage.ToString();
+            ShowSkillType(data);
+            priceTxt.text = data.Price.ToString();
+            skillInfoIndex = data.SkillStateIndex;
+        }
+        catch (Exception e)
         {
             Debug.Log(e);
         }
     }
 
-    public void ShowSkillPage()
+    public void SaveSkillNum()
     {
+        int asdIndex = GetASDIndex();
+        int comboNumIndex = GetComboNumIndex();
 
+        player.Data.AttackData.AttackSkillStates[asdIndex][comboNumIndex] = skillInfoIndex;
+        ShowSkillSettings();
+    }
+
+    private void ShowSkillSettings()
+    {
+        int asdIndex = GetASDIndex();
+        Debug.Log(player.Data.AttackData.AttackSkillStates.Count);
+        List<int> indexs = player.Data.AttackData.AttackSkillStates[asdIndex];
+        
+        foreach (SkillButton btn in skillBtns)
+        {
+            btn.cover.SetActive(false);
+        }
+
+        skillBtns[indexs[0]].cover.SetActive(true);
+        skillBtns[indexs[1]].cover.SetActive(true);
+        skillBtns[indexs[2]].cover.SetActive(true);
+        skillBtns[indexs[0]].tmp.text = string.Empty;
+        skillBtns[indexs[1]].tmp.text = string.Empty;
+        skillBtns[indexs[2]].tmp.text = string.Empty;
+        skillBtns[indexs[0]].tmp.text += "1";
+        skillBtns[indexs[1]].tmp.text += "2";
+        skillBtns[indexs[2]].tmp.text += "3";
+    }
+
+    private int GetASDIndex()
+    {
+        for(int i = 0; i < asdPage.Count; i++)
+        {
+            if (asdPage[i].isOn) return i;
+        }
+
+        return 0;
+    }
+
+    private int GetComboNumIndex()
+    {
+        for(int i = 0; i < comboNumToggle.Count; i++)
+        {
+            if (comboNumToggle[i].isOn) return i;
+        }
+
+        return 0;
+    }
+
+    private void ShowSkillType(SkillInfoData _skill)
+    {
+        switch (_skill.SkillType)
+        {
+            case SkillType.Fire:
+                typeIcon.sprite = typeSprites[0];
+                break;
+            case SkillType.Ice:
+                typeIcon.sprite = typeSprites[1];
+                break;
+            case SkillType.Light:
+                typeIcon.sprite = typeSprites[2];
+                break;
+            default:
+                typeIcon.sprite = typeSprites[0];
+                break;
+        }
     }
 }

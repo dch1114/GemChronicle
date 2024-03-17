@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3046869253995054968}
   - component: {fileID: 6927718691248429296}
   - component: {fileID: 7140720859329250403}
+  - component: {fileID: -5954042473564933580}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -75,6 +76,7 @@ MonoBehaviour:
     skill1IndexParameterName: Skill1Index
     skill2IndexParameterName: Skill2Index
     skill3IndexParameterName: Skill3Index
+  SkillPage: {fileID: 0}
 --- !u!114 &8183084284366364018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,6 +94,8 @@ MonoBehaviour:
     <WalkSpeedModifier>k__BackingField: 0.5
   <AirData>k__BackingField:
     <JumpForce>k__BackingField: 0.5
+  <AttackData>k__BackingField:
+    <SkillInfoDatas>k__BackingField: []
 --- !u!114 &3046869253995054968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +181,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5702901, y: 0.76942396}
   m_EdgeRadius: 0
+--- !u!114 &-5954042473564933580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269157362840342957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed5223702c3c448ad668d614ae2e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  talkBtn: {fileID: 0}
+  playerinput: {fileID: 0}
 --- !u!1 &269946539491135751
 GameObject:
   m_ObjectHideFlags: 0

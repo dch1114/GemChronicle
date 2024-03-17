@@ -488,10 +488,11 @@ GameObject:
   - component: {fileID: 3903399004546380253}
   - component: {fileID: 2620629338676233774}
   - component: {fileID: 7216131085512388129}
-  - component: {fileID: 5137826165586194487}
   - component: {fileID: 6376897481716819918}
   - component: {fileID: 4689342327268521984}
   - component: {fileID: 7781107090796812468}
+  - component: {fileID: 3799405967087320498}
+  - component: {fileID: -17210104332238769}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Untagged
@@ -513,7 +514,7 @@ Transform:
   m_Children:
   - {fileID: 8722219699655976883}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2620629338676233774
 MonoBehaviour:
@@ -539,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee5f3a119cf78047b2eb8784a90575f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Data>k__BackingField: {fileID: 5137826165586194487}
+  <Data>k__BackingField: {fileID: 0}
   <AnimationData>k__BackingField:
     groundParameterName: '@Ground'
     idleParameterName: Idle
@@ -552,23 +553,7 @@ MonoBehaviour:
     skill1IndexParameterName: Skill1Index
     skill2IndexParameterName: Skill2Index
     skill3IndexParameterName: Skill3Index
---- !u!114 &5137826165586194487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 856440166226088500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4b6a9b5c02616488e805ae9f05074d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <GroundedData>k__BackingField:
-    <BaseSpeed>k__BackingField: 5
-    <WalkSpeedModifier>k__BackingField: 0.5
-  <AirData>k__BackingField:
-    <JumpForce>k__BackingField: 0.5
+  SkillPage: {fileID: 0}
 --- !u!114 &6376897481716819918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,6 +639,114 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5702901, y: 0.76942396}
   m_EdgeRadius: 0
+--- !u!114 &3799405967087320498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856440166226088500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4b6a9b5c02616488e805ae9f05074d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <GroundedData>k__BackingField:
+    <BaseSpeed>k__BackingField: 5
+    <WalkSpeedModifier>k__BackingField: 1
+  <AirData>k__BackingField:
+    <JumpForce>k__BackingField: 1
+  <AttackData>k__BackingField:
+    <SkillInfoDatas>k__BackingField:
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: 
+      <Damage>k__BackingField: 0
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+--- !u!114 &-17210104332238769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856440166226088500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0ed5223702c3c448ad668d614ae2e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  talkBtn: {fileID: 0}
+  playerinput: {fileID: 0}
 --- !u!1 &986954549359711830
 GameObject:
   m_ObjectHideFlags: 0
