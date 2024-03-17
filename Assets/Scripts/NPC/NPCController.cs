@@ -67,7 +67,7 @@ public class NPCController : MonoBehaviour, IInteractive
         }
         else if (npcType == NPCType.Shop)
         {
-            UIManager.instance.talkBtnOnOff(true);
+        
             UIManager.instance.shopPanelOnOff(true);
 
         }
