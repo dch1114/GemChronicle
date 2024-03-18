@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -20,12 +21,12 @@ public class Inventory : MonoBehaviour
     public List<InventoryItem> equipment;
     // public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
     //test
-    public Dictionary<Item, InventoryItem> equipmentDictionaryTest;
+    public Dictionary<Item, InventoryItem> equipmentDictionary;
 
     public List<InventoryItem> inventory;
     //public Dictionary<ItemData, InventoryItem> inventoryDictionary;
     //test
-    public Dictionary<Item, InventoryItem> inventoryDictionaryTest;
+    public Dictionary<Item, InventoryItem> inventoryDictionary;
 
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
@@ -58,13 +59,13 @@ public class Inventory : MonoBehaviour
         inventory = new List<InventoryItem>();
         //inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
         //test
-        inventoryDictionaryTest = new Dictionary<Item, InventoryItem>();
+        inventoryDictionary = new Dictionary<Item, InventoryItem>();
 
 
         equipment = new List<InventoryItem>();
         //equipmentDictionary = new Dictionary<ItemData_Equipment, InventoryItem>();
         //test
-        equipmentDictionaryTest = new Dictionary<Item, InventoryItem>();
+        equipmentDictionary = new Dictionary<Item, InventoryItem>();
 
 
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
@@ -105,8 +106,8 @@ public class Inventory : MonoBehaviour
         //{
         //    AddToInventory(_item);
         //}
-
         AddToInventory(_item);
+        //GetComponent<Image>().SetNativeSize();
         //UpdateSlotUI();
         //test
         UpdateSlotUI();
@@ -115,7 +116,7 @@ public class Inventory : MonoBehaviour
 
     private void AddToInventory(Item _item)
     {
-        if (inventoryDictionaryTest.TryGetValue(_item, out InventoryItem _value))  //_item이 인벤토리에 이미 있으면 true 반환 _value에 값 저장,  
+        if (inventoryDictionary.TryGetValue(_item, out InventoryItem _value))  //_item이 인벤토리에 이미 있으면 true 반환 _value에 값 저장,  
         {
             _value.AddStack();
         }
@@ -123,7 +124,7 @@ public class Inventory : MonoBehaviour
         {
             InventoryItem newItem = new InventoryItem(_item);  // 이전에 인벤토리에 없으면 새로  생성해서 inventory와 딕셔너리에 추가
             inventory.Add(newItem);
-            inventoryDictionaryTest.Add(_item, newItem);
+            inventoryDictionary.Add(_item, newItem);
         }
     }
 
@@ -131,7 +132,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < equipmentSlot.Length; i++)
         {
-            foreach (KeyValuePair<Item, InventoryItem> item in equipmentDictionaryTest)
+            foreach (KeyValuePair<Item, InventoryItem> item in equipmentDictionary)
             {
                 if (item.Key.EquipmentType == equipmentSlot[i].slotType)
                 {
@@ -160,7 +161,7 @@ public class Inventory : MonoBehaviour
 
         Item oldEquipment = null;
 
-        foreach (KeyValuePair<Item, InventoryItem> item in equipmentDictionaryTest)
+        foreach (KeyValuePair<Item, InventoryItem> item in equipmentDictionary)
         {
             if (item.Key.EquipmentType == newEquipment.EquipmentType)
             {
@@ -175,12 +176,16 @@ public class Inventory : MonoBehaviour
         }
 
         equipment.Add(newItem);
-        equipmentDictionaryTest.Add(newEquipment, newItem);
+        equipmentDictionary.Add(newEquipment, newItem);
         RemoveItem(_item);
 
         if(newItem.datas.EquipmentType == EquipmentType.Weapon)
         {
             spriteOBj._weaponList[0].sprite = newItem.datas.sprite;
+        }
+        else if(newItem.datas.EquipmentType == EquipmentType.Armor)
+        {
+            spriteOBj._armorList[0].sprite = newItem.datas.sprite;
         }
 
         UpdateSlotUI();
@@ -188,22 +193,22 @@ public class Inventory : MonoBehaviour
 
     public void UnEquipItem(Item _itemToRemove)
     {
-        if (equipmentDictionaryTest.TryGetValue(_itemToRemove, out InventoryItem _value))
+        if (equipmentDictionary.TryGetValue(_itemToRemove, out InventoryItem _value))
         {
             equipment.Remove(_value);
-            equipmentDictionaryTest.Remove(_itemToRemove);
+            equipmentDictionary.Remove(_itemToRemove);
             //itemToRemove.RemoveModifiers();
         }
     }
 
     public void RemoveItem(Item _item)
     {
-        if (inventoryDictionaryTest.TryGetValue(_item, out InventoryItem _value))
+        if (inventoryDictionary.TryGetValue(_item, out InventoryItem _value))
         {
             if (_value.stackSize <= 1)
             {
                 inventory.Remove(_value);
-                inventoryDictionaryTest.Remove(_item);
+                inventoryDictionary.Remove(_item);
             }
             else
             {

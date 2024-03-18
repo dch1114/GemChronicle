@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Unity.Android.Types;
 
 public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHandler, IPointerExitHandler
 {
@@ -11,6 +12,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     protected InventoryUIController ui;
     public InventoryItem item;
 
+    Color emptySlotColor = new Color(255, 255, 255, 0);
 
     protected float clickDelay = 0.3f;
     protected float lastClickTime = 0;
@@ -29,12 +31,13 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
         if (item == null || item.stackSize == 0)
         {
-            itemImage.color = new Color(255,255,255,0);
+            itemImage.color = emptySlotColor;
         }
 
         if (item != null)
         {    
             itemImage.sprite = item.datas.sprite; // test
+            itemImage.GetComponent<Image>().SetNativeSize();
 
             if (item.stackSize > 1)
             {
@@ -94,7 +97,6 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     protected void AdjustToolTipPosition()
     {
         Vector2 mousePosition = Input.mousePosition;
-        Debug.Log(mousePosition);
 
         float xOffset;
         float yOffset;
