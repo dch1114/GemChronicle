@@ -9,9 +9,14 @@ public interface IInteractive
 
     void OpenUI();
     void CloseUI();
-    void TryTalk(); 
+    void TryTalk();
 
+    void Closer();
+
+    void Interact();
     Vector3 GetPosition();
+
+    //시점만 잡는다
 }
 
 
