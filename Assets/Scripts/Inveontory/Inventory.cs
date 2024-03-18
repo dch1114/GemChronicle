@@ -5,6 +5,10 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
 
+    // Sprite Test
+    public GameObject warrior_EquipmentPrefab;
+    public SPUM_SpriteList spriteOBj;
+
     //Test
     GameManager gameManager;
     DataManager dataManager;
@@ -76,7 +80,7 @@ public class Inventory : MonoBehaviour
         InventoryItem itemInstanceas = new InventoryItem(item); // 인벤토리에 들어갈 아이템 인스턴스 생성
 
         //inventory.Add(itemInstanceas);  
-        AddItemTest(itemInstanceas.datas); // 인벤토리에 아이템 추가
+        AddItem(itemInstanceas.datas); // 인벤토리에 아이템 추가
 
         Debug.Log(itemInstanceas.datas.Name);
     }
@@ -95,21 +99,21 @@ public class Inventory : MonoBehaviour
     //}
 
 
-    public void AddItemTest(Item _item)
+    public void AddItem(Item _item)
     {
         //if (CanAddItem())
         //{
         //    AddToInventory(_item);
         //}
 
-        AddToInventoryTest(_item);
+        AddToInventory(_item);
         //UpdateSlotUI();
         //test
-        UpdateSlotUITest();
+        UpdateSlotUI();
 
     }
 
-    private void AddToInventoryTest(Item _item)
+    private void AddToInventory(Item _item)
     {
         if (inventoryDictionaryTest.TryGetValue(_item, out InventoryItem _value))  //_item이 인벤토리에 이미 있으면 true 반환 _value에 값 저장,  
         {
@@ -123,7 +127,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void UpdateSlotUITest()
+    private void UpdateSlotUI()
     {
         for (int i = 0; i < equipmentSlot.Length; i++)
         {
@@ -149,7 +153,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void EquipItemTest(Item _item)
+    public void EquipItem(Item _item)
     {
         Item newEquipment = _item;
         InventoryItem newItem = new InventoryItem(newEquipment);
@@ -166,18 +170,23 @@ public class Inventory : MonoBehaviour
 
         if (oldEquipment != null)
         {
-            UnEquipItemTest(oldEquipment);
-            AddItemTest(oldEquipment);
+            UnEquipItem(oldEquipment);
+            AddItem(oldEquipment);
         }
 
         equipment.Add(newItem);
         equipmentDictionaryTest.Add(newEquipment, newItem);
-        RemoveItemTest(_item);
+        RemoveItem(_item);
 
-        UpdateSlotUITest();
+        if(newItem.datas.EquipmentType == EquipmentType.Weapon)
+        {
+            spriteOBj._weaponList[0].sprite = newItem.datas.sprite;
+        }
+
+        UpdateSlotUI();
     }
 
-    public void UnEquipItemTest(Item _itemToRemove)
+    public void UnEquipItem(Item _itemToRemove)
     {
         if (equipmentDictionaryTest.TryGetValue(_itemToRemove, out InventoryItem _value))
         {
@@ -187,7 +196,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RemoveItemTest(Item _item)
+    public void RemoveItem(Item _item)
     {
         if (inventoryDictionaryTest.TryGetValue(_item, out InventoryItem _value))
         {
@@ -202,7 +211,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        UpdateSlotUITest();
+        UpdateSlotUI();
     }
 
     //public void EquipItem(ItemData _item)
