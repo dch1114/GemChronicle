@@ -22,9 +22,13 @@ public class PlayerAction : MonoBehaviour
     public PlayerInput playerinput;
     //대화가 종료되었는지 체크
     IInteractive target = null;
-
+    public UIManager uiManagerInstance;
     // Update is called once per frame
 
+    private void Start()
+    {
+        uiManagerInstance = UIManager.instance;
+    }
     void OnInteractive()
     {
         Debug.Log("발동!");
@@ -41,12 +45,12 @@ public class PlayerAction : MonoBehaviour
         {
             if (isQuestPanelOpen)
             {
-                UIManager.instance.OpenClosePanelInspectorQuests(); //변수에 저장해놓고 쓰기
+                uiManagerInstance.OpenClosePanelInspectorQuests(); //캐싱 하기 변수에 저장해놓고 쓰기
                 isQuestPanelOpen = false;
             }
             else
             {
-                UIManager.instance.OpenClosePanelInspectorQuests();
+                uiManagerInstance.OpenClosePanelInspectorQuests();
                 isQuestPanelOpen = true;
             }
         }
