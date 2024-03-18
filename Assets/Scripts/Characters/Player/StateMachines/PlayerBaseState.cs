@@ -85,22 +85,22 @@ public class PlayerBaseState : IState
             if (action.activeControl.Equals(action.controls[0]))
             {
                 stateMachine.AttackIndex = 1;
-                stateMachine.SkillIndex = GetSkillNumIndex(0);
+                stateMachine.SkillIndex = GetSkillNumIndexs(0);
             }
             else if (action.activeControl.Equals(action.controls[1]))
             {
                 stateMachine.AttackIndex = 2;
-                stateMachine.SkillIndex = GetSkillNumIndex(1);
+                stateMachine.SkillIndex = GetSkillNumIndexs(1);
             }
             else if (action.activeControl.Equals(action.controls[2]))
             {
                 stateMachine.AttackIndex = 3;
-                stateMachine.SkillIndex = GetSkillNumIndex(2);
+                stateMachine.SkillIndex = GetSkillNumIndexs(2);
             }
         }
     }
 
-    private List<int> GetSkillNumIndex(int index)
+    private List<int> GetSkillNumIndexs(int index)
     {
         switch(stateMachine.Player.Data.StatusData.JobType)
         {

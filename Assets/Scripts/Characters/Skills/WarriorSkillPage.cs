@@ -91,7 +91,6 @@ public class WarriorSkillPage : MonoBehaviour
     private void ShowSkillSettings()
     {
         int asdIndex = GetASDIndex();
-        Debug.Log(player.Data.AttackData.AttackSkillStates.Count);
         List<int> indexs = player.Data.AttackData.AttackSkillStates[asdIndex];
         
         foreach (SkillButton btn in skillBtns)
