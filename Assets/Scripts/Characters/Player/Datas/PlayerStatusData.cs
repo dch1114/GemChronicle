@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public enum JobType
     Magician
 }
 
+[Serializable]
 public class PlayerStatusData : Status
 {
     [SerializeField] protected int exp;
@@ -40,5 +42,21 @@ public class PlayerStatusData : Status
         Gold = 2000;
         Name = "«Ô∑Œ";
         JobType = JobType.Warrior;
+    }
+
+    private bool IsGoldEnough(int _price)
+    {
+        if (Gold - _price >= 0)
+            return true;
+        else
+            return false;
+    }
+
+    public void UseGold(int _price)
+    {
+        if (IsGoldEnough(_price))
+            gold -= _price;
+        else
+            Debug.Log("∞ÒµÂ∞° ∫Œ¡∑«’¥œ¥Ÿ");
     }
 }

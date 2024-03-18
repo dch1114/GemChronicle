@@ -22,6 +22,8 @@ public class WarriorSkillPage : MonoBehaviour
     [SerializeField] private List<Sprite> icons;
     [SerializeField] private List<SkillButton> skillBtns;
 
+    [SerializeField] private GameObject buyBtn;
+
     [SerializeField] Player player;
 
     private int skillInfoIndex = 0;
@@ -54,10 +56,26 @@ public class WarriorSkillPage : MonoBehaviour
             ShowSkillType(data);
             priceTxt.text = data.Price.ToString();
             skillInfoIndex = data.SkillStateIndex;
+
+            buyBtn.SetActive(!skillBtns[skillInfoIndex].isUnlocked);
         }
         catch (Exception e)
         {
             Debug.Log(e);
+        }
+    }
+
+    public void UnlockSkillBtn()
+    {
+        if(player.Data.StatusData.Gold - skillBtns[skillInfoIndex].skillInfoData.Price >= 0)
+        {
+            player.Data.StatusData.Gold -= skillBtns[skillInfoIndex].skillInfoData.Price;
+            skillBtns[skillInfoIndex].SetUnlocked();
+            buyBtn.SetActive(!skillBtns[skillInfoIndex].isUnlocked);
+
+        } else
+        {
+            Debug.Log("돈이 부족합니다.");
         }
     }
 
@@ -78,7 +96,7 @@ public class WarriorSkillPage : MonoBehaviour
         
         foreach (SkillButton btn in skillBtns)
         {
-            btn.cover.SetActive(false);
+            if(btn.isUnlocked) btn.cover.SetActive(false);
         }
 
         skillBtns[indexs[0]].cover.SetActive(true);
