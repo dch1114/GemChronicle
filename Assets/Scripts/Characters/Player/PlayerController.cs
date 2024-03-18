@@ -50,7 +50,6 @@ public class PlayerController : MonoBehaviour
 
     public void Look(bool isLeft)
     {
-
         transform.localScale = isLeft ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
     }
 
