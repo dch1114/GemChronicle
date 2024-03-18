@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
+[Serializable]
 public class EnemyStatusData : Status, IDamageable
 {
     [SerializeField] protected SkillType type; //冻绢飘副 联 加己阑 困秦
