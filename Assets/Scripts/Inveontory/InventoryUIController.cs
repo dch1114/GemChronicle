@@ -5,9 +5,9 @@ using static UnityEditor.Progress;
 
 public class InventoryUIController : MonoBehaviour
 {
-    [SerializeField] public GameObject characterUI;
-    [SerializeField] private GameObject skillTreeUI;
-    [SerializeField] private GameObject optionUI;
+    [SerializeField] public GameObject inventoryUI;
+    //[SerializeField] private GameObject skillTreeUI;
+    //[SerializeField] private GameObject optionUI;
 
     public UI_ItemToolTip itemToopTip;
     // Start is called before the first frame update
@@ -22,20 +22,20 @@ public class InventoryUIController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            SwitchWithKeyTo(characterUI);
+            SwitchWithKeyTo(inventoryUI);
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            SwitchWithKeyTo(skillTreeUI);
-        }
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    SwitchWithKeyTo(skillTreeUI);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            SwitchWithKeyTo(optionUI);
-        }
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    SwitchWithKeyTo(optionUI);
+        //}
 
     }
 

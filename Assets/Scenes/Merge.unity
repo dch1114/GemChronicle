@@ -4060,6 +4060,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -540
       objectReference: {fileID: 0}
+    - target: {fileID: 720354032917261094, guid: 67d1ee25ab5feaf4f960ba73b58131b7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1048444715212774710, guid: 67d1ee25ab5feaf4f960ba73b58131b7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -4688,6 +4692,22 @@ PrefabInstance:
 --- !u!224 &1245828249 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5830872367616065541, guid: 67d1ee25ab5feaf4f960ba73b58131b7, type: 3}
+  m_PrefabInstance: {fileID: 1245828248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1245828250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1753989828865143119, guid: 67d1ee25ab5feaf4f960ba73b58131b7, type: 3}
+  m_PrefabInstance: {fileID: 1245828248}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64832e9b6c741834eb2448a58d060083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1245828251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4857154878749082983, guid: 67d1ee25ab5feaf4f960ba73b58131b7, type: 3}
   m_PrefabInstance: {fileID: 1245828248}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1263278488 stripped
@@ -8513,6 +8533,7 @@ GameObject:
   - component: {fileID: 1834407486}
   - component: {fileID: 1834407485}
   - component: {fileID: 1834407484}
+  - component: {fileID: 1834407488}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -8612,6 +8633,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1834407488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1834407483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb212749dbc87a4eba0261142d4dfd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 1245828251}
+  itemToopTip: {fileID: 1245828250}
 --- !u!1001 &1843862434
 PrefabInstance:
   m_ObjectHideFlags: 0
