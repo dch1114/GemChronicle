@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class QuestManager_ : Singleton<QuestManager_>
 {
+    //[Header("Personaje")]
+    //[SerializeField] private Personaje personaje;
+
     [Header("Quests")]
     [SerializeField] private Quest_[] questDisponibles;
 
@@ -62,6 +65,20 @@ public class QuestManager_ : Singleton<QuestManager_>
     public void AnadirQuest(Quest_ questPorCompletar)
     {
         AnadirQuestPorCompletar(questPorCompletar);
+    }
+
+    public void ReclamarRecompensa()
+    {
+        if (QuestPorReclamar == null)
+        {
+            return;
+        }
+
+        MonedasManager.Instance.AnadirMonedas(QuestPorReclamar.RecompensaOro);
+        //personaje.PersonajeExperiencia.AnadirExperiencia(QuestPorReclamar.RecompensaExp);
+        //Inventario.Instance.AnadirItem(QuestPorReclamar.RecompensaItem.Item, QuestPorReclamar.RecompensaItem.Cantidad);
+        panelQuestCompletado.SetActive(false);
+        QuestPorReclamar = null;
     }
 
     public void AnadirProgreso(string questID, int cantidad)

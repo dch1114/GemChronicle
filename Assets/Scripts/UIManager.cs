@@ -5,12 +5,17 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     [Header("Paneles")]
     [SerializeField] private GameObject panelInspectorQuests;
     [SerializeField] private GameObject panelPersonajeQuests;
+
+    [Header("Texto")]
+    [SerializeField] private TextMeshProUGUI monedasTMP;
+
     public enum ShowMenuType  //보기쉽게 하기위해 enum선언
     {
         Buy,
@@ -217,6 +222,8 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
+        ActualizarUIPersonaje();
+
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             PopupShopMenuSelect(--currentShowMenuType);
@@ -229,5 +236,10 @@ public class UIManager : MonoBehaviour
             //Debug.Log("현재 선택된 메뉴는 : " + currentShowMenuType);
         }
 
+    }
+
+    private void ActualizarUIPersonaje()
+    {
+        monedasTMP.text = MonedasManager.Instance.MonedasTotales.ToString();
     }
 }
