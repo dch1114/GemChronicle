@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerAction : MonoBehaviour
 {
@@ -24,8 +25,9 @@ public class PlayerAction : MonoBehaviour
 
     // Update is called once per frame
 
-    public void OnInteractive()
+    void OnInteractive()
     {
+        Debug.Log("¹ßµ¿!");
         if (interactiveList.Count > 0)
         {
             playerinput.OnDisable();
