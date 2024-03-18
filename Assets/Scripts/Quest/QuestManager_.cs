@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestManager_ : Singleton<QuestManager_>
 {
@@ -16,7 +19,15 @@ public class QuestManager_ : Singleton<QuestManager_>
     [SerializeField] private PersonajeQuestDescripcion personajeQuestPrefab;
     [SerializeField] private Transform personajeQuestContenedor;
 
-    public Quest QuestPorReclamar { get; private set; }
+    [Header("Panel Quest Completado")]
+    [SerializeField] private GameObject panelQuestCompletado;
+    [SerializeField] private TextMeshProUGUI questNombre;
+    [SerializeField] private TextMeshProUGUI questRecompensaOro;
+    [SerializeField] private TextMeshProUGUI questRecompensaExp;
+    [SerializeField] private TextMeshProUGUI questRecompensaItemCantidad;
+    [SerializeField] private Image questRecompensaItemIcono;
+
+    public Quest_ QuestPorReclamar { get; private set; }
 
     private void Start()
     {
@@ -70,5 +81,35 @@ public class QuestManager_ : Singleton<QuestManager_>
         }
 
         return null;
+    }
+
+    private void MostrarQuestCompletado(Quest_ questCompletado)
+    {
+        panelQuestCompletado.SetActive(true);
+        questNombre.text = questCompletado.Nombre;
+        questRecompensaOro.text = questCompletado.RecompensaOro.ToString();
+        questRecompensaExp.text = questCompletado.RecompensaExp.ToString();
+        //questRecompensaItemCantidad.text = questCompletado.RecompensaItem.Cantidad.ToString();
+        //questRecompensaItemIcono.sprite = questCompletado.RecompensaItem.Item.Icono;
+
+    }
+
+    private void QuestCompletadoRespuesta(Quest_ questCompletado)
+    {
+        QuestPorReclamar = QuestExiste(questCompletado.ID);
+        if (QuestPorReclamar != null)
+        {
+            MostrarQuestCompletado(QuestPorReclamar);
+        }
+    }
+
+    private void OnEnable()
+    {
+        Quest_.EventoQuestCompletado += QuestCompletadoRespuesta;
+    }
+
+    private void OnDisable()
+    {
+        Quest_.EventoQuestCompletado -= QuestCompletadoRespuesta;
     }
 }
