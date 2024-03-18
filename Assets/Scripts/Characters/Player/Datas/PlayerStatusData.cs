@@ -11,16 +11,16 @@ public enum JobType
 }
 
 [Serializable]
-public class PlayerStatusData : Status
+public class PlayerStatusData : Status, IDamageable
 {
     [SerializeField] protected string name;
-    [SerializeField] protected int exp;
+    [SerializeField] protected int maxHp;
     [SerializeField] protected int level;
     [SerializeField] protected int gold;
     [SerializeField] protected JobType jobType;
 
     public string Name { get { return name; } set { name = value; } }
-    public int Exp {  get { return exp; } set {  exp = value; } }
+    public int MaxHp { get { return maxHp; } set { maxHp = value; } }
     public int Level {  get { return level; } set { level = value; } }
     public int Gold { get { return gold; } set {  gold = value; } }
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
@@ -58,5 +58,16 @@ public class PlayerStatusData : Status
             gold -= _price;
         else
             Debug.Log("골드가 부족합니다");
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if(hp - damage > 0)
+        {
+            hp -= damage;
+        } else
+        {
+            //TODO: 사망 구현
+        }
     }
 }
