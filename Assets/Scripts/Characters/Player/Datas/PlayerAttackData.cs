@@ -3,18 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class AttackInfoData
+public enum SkillType
 {
-    [field: SerializeField] public string AttackName {  get; private set; }
-    [field: SerializeField] public int AttackStateIndex { get; private set; }
+    Ice,
+    Fire,
+    Light
+}
+
+//TODO: ø¢ºø µ•¿Ã≈Õ∑Œ ¿‘∑¬ « ø‰
+[Serializable]
+public class SkillInfoData
+{
+    [field: SerializeField] public int SkillStateIndex { get; private set; }
+    [field: SerializeField] public string SkillName { get; private set; }
     [field: SerializeField] public int Damage { get; private set; }
+    [field: SerializeField] public SkillType SkillType {get; private set;}
+    [field:SerializeField] public int Price { get; private set; }
 }
 
 [Serializable]
 public class PlayerAttackData
 {
-    [field:SerializeField] public List<AttackInfoData> AttackInfoDatas { get; private set; }
-    public int GetAttackInfoCount() {  return AttackInfoDatas.Count; }
-    public AttackInfoData GetAttackInfo(int index) {  return AttackInfoDatas[index]; }
+    [field:SerializeField] public List<SkillInfoData> SkillInfoDatas { get; private set; }
+    public int GetSkillInfoCount() {  return SkillInfoDatas.Count; }
+    public SkillInfoData GetSkillInfo(int index) {  return SkillInfoDatas[index]; }
+    [field: SerializeField] public List<List<int>> AttackSkillStates = new List<List<int>>() { new List<int>() { 0, 0, 0 }, new List<int>() { 0, 0, 0 }, new List<int>() { 0, 0, 0 } };
 }

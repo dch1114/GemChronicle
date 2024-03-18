@@ -11,20 +11,20 @@ public class UI_ItemToolTip : MonoBehaviour
 
     [SerializeField] private int defaultFontSize = 32;
 
-    public void ShowToolTip(ItemData_Equipment item)
+    public void ShowToolTip(Item item)
     {
         if(item == null)
         {
             return;
         }
 
-        itemNameText.text = item.itemName;
-        itemTypeText.text = item.equipmentType.ToString();
+        itemNameText.text = item.Name;
+        itemTypeText.text = item.EquipmentType.ToString();
         itemDescription.text = item.GetDescription();
 
         if(itemNameText.text.Length > 12)
         {
-            itemNameText.fontSize = itemNameText.fontSize * 0.7f;
+            itemNameText.fontSize = itemNameText.fontSize; //* 0.7f;
         }
         else
         {
@@ -36,6 +36,11 @@ public class UI_ItemToolTip : MonoBehaviour
     public void HideToolTip()
     {
         itemNameText.fontSize = defaultFontSize;
+        gameObject.SetActive(false);
+    }
+
+    public void OnClickCloseToopTip()
+    {
         gameObject.SetActive(false);
     }
 

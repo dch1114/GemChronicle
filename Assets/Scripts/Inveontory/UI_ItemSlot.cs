@@ -8,15 +8,18 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    protected UI ui;
+    protected InventoryUIController ui;
     public InventoryItem item;
 
-    public float clickDelay = 0.3f;
-    public float lastClickTime = 0;
+
+    protected float clickDelay = 0.3f;
+    protected float lastClickTime = 0;
+
 
     private void Start()
     {
-        ui = GetComponentInParent<UI>();
+        ui = GetComponentInParent<InventoryUIController>();
+        UpdateSlot(item);
     }
     public void UpdateSlot(InventoryItem _newitem)
     {
@@ -24,8 +27,13 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
         itemImage.color = Color.white;
 
-        if(item != null)
+        if (item == null || item.stackSize == 0)
         {
+            itemImage.color = new Color(255,255,255,0);
+        }
+
+        if (item != null)
+        {    
             itemImage.sprite = item.datas.sprite; // test
 
             if (item.stackSize > 1)
@@ -37,6 +45,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
                 itemText.text = "";
             }
         }
+
     }
 
     public void CleanUpSlot()
@@ -50,7 +59,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if (item == null)
+        if (item == null || item.stackSize == 0)
         {
             return;
         }
@@ -60,51 +69,43 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
         if (timeSinceLastClick <= clickDelay)
         {
-            //if (item.data.itemType == ItemType.Equipment) // test
-            //{
-            //    //Inventory.Instance.EquipItem(item.data);
-            //    ui.itemToopTip.HideToolTip();
-            //}
-            ui.itemToopTip.HideToolTip();
+            if (item.datas.ItemType == ItemType.Equipment) // test
+            {
+                Inventory.instance.EquipItemTest(item.datas);
+                ui.itemToopTip.HideToolTip();
+            }
+            //ui.itemToopTip.HideToolTip();
         }
         else
         {
             AdjustToolTipPosition();
-            //ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);   //test
+            ui.itemToopTip.ShowToolTip(item.datas);   //test
         }
 
         lastClickTime = currentTime;
+        
         //if (Input.GetKey(KeyCode.LeftControl))
         //{
         //    Inventory.Instance.RemoveItem(item.data);
         //    return;
         //}
-
-        //AdjustToolTipPosition();
-        //ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
-
-
-        //if (item.data.itemType == ItemType.Equipment)
-        //{
-        //    Inventory.Instance.EquipItem(item.data);
-        //}
-
     }
 
     protected void AdjustToolTipPosition()
     {
         Vector2 mousePosition = Input.mousePosition;
+        Debug.Log(mousePosition);
 
-        float xOffset = 0;
-        float yOffset = 0;
+        float xOffset;
+        float yOffset;
 
         if (mousePosition.x > 600)
         {
-            xOffset = -75;
+            xOffset = -150;
         }
         else
         {
-            xOffset = 75;
+            xOffset = 150;
         }
 
         if (mousePosition.y > 320)

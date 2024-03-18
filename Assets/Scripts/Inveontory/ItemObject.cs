@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour
 {
-    [SerializeField] public ItemData itemData;  // public 官曹规过
+    //[SerializeField] public ItemData itemData;  // public 官曹规过
     [SerializeField] public Item itemDataTest;
 
-    private void OnValidate()
-    {
-        GetComponent<SpriteRenderer>().sprite = itemData.icon;
-        gameObject.name = "item object - " + itemData.name;
-    }
+    //private void OnValidate()
+    //{
+    //    GetComponent<SpriteRenderer>().sprite = itemData.icon;
+    //    gameObject.name = "item object - " + itemData.name;
+    //}
 
     //private void OnTriggerEnter2D(Collider2D collision)
     //{

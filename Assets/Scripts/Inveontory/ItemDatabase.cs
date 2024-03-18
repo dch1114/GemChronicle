@@ -3,6 +3,21 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+
+public enum EquipmentType //test
+{
+    Weapon,
+    Armor,
+    Amulet,
+    Flask
+}
+
+public enum ItemType
+{
+    Material,
+    Equipment
+}
+
 [System.Serializable]
 public class Item
 {
@@ -11,7 +26,8 @@ public class Item
     public int Damage;
     public int Armor;
     public string Description;
-
+    public ItemType ItemType;
+    public EquipmentType EquipmentType;
 
     private int descriptionLength;
     private StringBuilder sb = new StringBuilder();
@@ -24,6 +40,8 @@ public class Item
 
         AddItemDescription(Damage, "Damage");
         AddItemDescription(Armor, "Armor");
+        AddItemDescription(Description, "Description");
+
 
         if (descriptionLength < 5)
         {
@@ -51,12 +69,21 @@ public class Item
             descriptionLength++;
         }
     }
-}
 
-public class ItemInstance
-{
-    int no;
-    public Item item;
+    private void AddItemDescription(string _value, string _name)
+    {
+        if (_value != "")
+        {
+            if (sb.Length > 0)
+            {
+                sb.AppendLine();
+            }
+            
+            sb.Append(_name + ": " + _value);
+            
+            descriptionLength++;
+        }
+    }
 }
 
 [System.Serializable]

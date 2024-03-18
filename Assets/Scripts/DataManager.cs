@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,7 +7,6 @@ using static UnityEditor.Progress;
 
 public class DataManager : MonoBehaviour
 {
-    
     public NPCDatabase npcDatabase;
     public static DataManager instance = null;
     public ItemDatabase itemDatabase;
@@ -16,38 +16,26 @@ public class DataManager : MonoBehaviour
         if (instance == null) 
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); 
+           
         }
         else
         {
             if (instance != this) 
                 Destroy(this.gameObject); 
         }
-
-
    
         TextAsset NPCjsonFile = Resources.Load<TextAsset>("JSON/NPCData");
         TextAsset jsonFile = Resources.Load<TextAsset>("JSON/Item_Data");
         if (jsonFile != null)
         {
             string json = jsonFile.text;
+            string NPCjson = NPCjsonFile.text;
 
-            // JSON ������ �Ľ��Ͽ� NPCDatabase(����)�� �����մϴ�.
-            npcDatabase = JsonUtility.FromJson<NPCDatabase>(json);
+            npcDatabase = JsonUtility.FromJson<NPCDatabase>(NPCjson);
             npcDatabase.Initialize();
-
 
             itemDatabase = JsonUtility.FromJson<ItemDatabase>(json);
             itemDatabase.Initialize();
-
-        }
-        
-
-    
-
-      
-       
-         
-           
+        }    
     }
 }

@@ -49,6 +49,8 @@ public class PlayerBaseState : IState
 
         input.PlayerActions.Jump.started += OnJumpStarted;
 
+        input.PlayerActions.SkillPage.started += OnSkillPageStarted;
+
         input.PlayerActions.ComboAttack.started += OnComboAttackStarted;
 
         input.PlayerActions.Attack.performed += OnAttackPerformed;
@@ -62,11 +64,14 @@ public class PlayerBaseState : IState
 
         stateMachine.Player.Input.PlayerActions.Jump.started -= OnJumpStarted;
 
+        input.PlayerActions.SkillPage.started -= OnSkillPageStarted;
+
         input.PlayerActions.Attack.performed -= OnAttackPerformed;
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
 
         input.PlayerActions.ComboAttack.canceled += OnComboAttackCanceled;
     }
+
 
     protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
     {
@@ -103,11 +108,16 @@ public class PlayerBaseState : IState
     protected virtual void OnComboAttackStarted(InputAction.CallbackContext context)
     {
         stateMachine.IsComboAttacking = true;
-        Debug.Log("Combo");
     }
     protected virtual void OnComboAttackCanceled(InputAction.CallbackContext context)
     {
         stateMachine.IsComboAttacking = false;
+    }
+
+    private void OnSkillPageStarted(InputAction.CallbackContext context)
+    {
+        bool isActive = stateMachine.Player.SkillPage.activeSelf;
+        stateMachine.Player.SkillPage.SetActive(!isActive);
     }
 
     protected virtual void OnMovementCanceled(InputAction.CallbackContext _context)
