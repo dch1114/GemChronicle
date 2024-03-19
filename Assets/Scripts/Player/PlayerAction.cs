@@ -22,16 +22,20 @@ public class PlayerAction : MonoBehaviour
     public PlayerInput playerinput;
     //대화가 종료되었는지 체크
     IInteractive target = null;
-
+    public UIManager uiManagerInstance;
     // Update is called once per frame
 
+    private void Start()
+    {
+        uiManagerInstance = UIManager.instance;
+    }
     void OnInteractive()
     {
         Debug.Log("발동!");
         if (interactiveList.Count > 0)
         {
             playerinput.OnDisable();
-            target.TryTalk();
+            target.Interact(); //trytalk 대신 interact . 가까워졌을때 시점, 상호작용하는 시점 2개를 두고 처리하는 애가 무엇인지 생각
         }
     }
     void Update()  // 이부분 업데이트 제외하고 버튼클릭시 작동하도록 변경
@@ -41,12 +45,12 @@ public class PlayerAction : MonoBehaviour
         {
             if (isQuestPanelOpen)
             {
-                UIManager.instance.OpenClosePanelInspectorQuests();
+                uiManagerInstance.OpenClosePanelInspectorQuests(); //캐싱 하기 변수에 저장해놓고 쓰기
                 isQuestPanelOpen = false;
             }
             else
             {
-                UIManager.instance.OpenClosePanelInspectorQuests();
+                uiManagerInstance.OpenClosePanelInspectorQuests();
                 isQuestPanelOpen = true;
             }
         }
@@ -81,12 +85,12 @@ public class PlayerAction : MonoBehaviour
             //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
             IInteractive t = _other.gameObject.GetComponent<NPCController>();
 
-            if (t != null)
+            if (t != null) 
             {
                 interactiveList.Add(t);
                 // 플레이어와 가장 가까운 몬스터를 찾는 메소드입니다.
                 target = FindClosestTarget();
-                target.OpenUI();
+                target.Closer(); //오픈 UI를 하는것이 아니라. Closer를 한다. 니가 여기서 제일 가깝다라는것을 인식.
             }
         }
 
