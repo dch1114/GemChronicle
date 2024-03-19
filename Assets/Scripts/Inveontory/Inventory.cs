@@ -8,8 +8,12 @@ public class Inventory : MonoBehaviour
     public static Inventory instance;
 
     // Sprite Test
-    public GameObject warrior_EquipmentPrefab;
-    public SPUM_SpriteList spriteOBj;
+    [Header("Sprite Change")]
+    public GameObject characterPrefab;
+    public SPUM_SpriteList characterSpriteOBj;
+
+    public GameObject characterEquipmentPrefab;
+    public SPUM_SpriteList equipmentSpriteOBj;
 
     //Test
     GameManager gameManager;
@@ -19,6 +23,7 @@ public class Inventory : MonoBehaviour
     //public List<ItemData> startingItems;
     //public List<Item> startingItems;
 
+    [Header("Inventory")]
     public List<InventoryItem> equipment;
     // public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
     //test
@@ -182,11 +187,13 @@ public class Inventory : MonoBehaviour
 
         if(newItem.datas.EquipmentType == EquipmentType.Weapon)
         {
-            spriteOBj._weaponList[0].sprite = newItem.datas.sprite;
+            characterSpriteOBj._weaponList[0].sprite = newItem.datas.sprite;
+            equipmentSpriteOBj._weaponList[0].sprite = newItem.datas.sprite;
         }
         else if(newItem.datas.EquipmentType == EquipmentType.Armor)
         {
-            spriteOBj._armorList[0].sprite = newItem.datas.sprite;
+            characterSpriteOBj._armorList[0].sprite = newItem.datas.sprite;
+            equipmentSpriteOBj._armorList[0].sprite = newItem.datas.sprite;
         }
 
         UpdateSlotUI();
@@ -204,11 +211,13 @@ public class Inventory : MonoBehaviour
 
         if (_itemToRemove.EquipmentType == EquipmentType.Weapon)
         {
-            spriteOBj._weaponList[0].sprite = null;
+            characterSpriteOBj._weaponList[0].sprite = null;
+            equipmentSpriteOBj._weaponList[0].sprite = null;
         }
         else if (_itemToRemove.EquipmentType == EquipmentType.Armor)
         {
-            spriteOBj._armorList[0].sprite = null;
+            characterSpriteOBj._armorList[0].sprite= null;
+            equipmentSpriteOBj._armorList[0].sprite = null;
         }
 
     }
