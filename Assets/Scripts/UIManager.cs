@@ -211,10 +211,11 @@ public class UIManager : MonoBehaviour
         panelInspectorQuests.SetActive(!panelInspectorQuests.activeSelf);
     }
 
-    public void AbrirCerrarPanelPersonajeQuests()
+    public void OpenClosePersonalityPanelQuests()
     {
         panelPersonajeQuests.SetActive(!panelPersonajeQuests.activeSelf);
     }
+
     private void Update()
     {
         ActualizarUIPersonaje();

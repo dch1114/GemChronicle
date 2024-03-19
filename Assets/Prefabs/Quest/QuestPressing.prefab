@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2977007994042584708}
   - component: {fileID: 3378626268905797245}
   m_Layer: 5
-  m_Name: Oro - TMP
+  m_Name: Gold - TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Description
+  m_text: NAME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 2631546022313826860}
   - component: {fileID: 8488935457205868178}
   m_Layer: 5
-  m_Name: Expcono
+  m_Name: Expcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 5618674093414216560}
   - component: {fileID: 70904916105850051}
   m_Layer: 5
-  m_Name: Tara - TMP
+  m_Name: Task - TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 1435217972358132244}
   - component: {fileID: 5017248749649704235}
   m_Layer: 5
-  m_Name: PresonajeQuest
+  m_Name: QuestPressing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -576,12 +576,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374ef11d65f337845862dbbf696f24d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questNombre: {fileID: 106724893272311104}
-  questDescripcion: {fileID: 2342798836287809258}
-  tareaObjetivo: {fileID: 70904916105850051}
-  recompensaOro: {fileID: 3378626268905797245}
-  recompensaExp: {fileID: 4999278867844905538}
-  recompensaItemCantidad: {fileID: 0}
+  questName: {fileID: 106724893272311104}
+  questDescription: {fileID: 2342798836287809258}
+  Objectivetask: {fileID: 70904916105850051}
+  rewardGold: {fileID: 3378626268905797245}
+  rewardExp: {fileID: 4999278867844905538}
+  rewardItemIcon: {fileID: 127818688904928474}
+  rewardItemQuantity: {fileID: 1061535547856087115}
 --- !u!1 &3163544733867457523
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +595,7 @@ GameObject:
   - component: {fileID: 4692201158134101677}
   - component: {fileID: 3967351445274370235}
   m_Layer: 5
-  m_Name: Icono
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -668,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2312981393027008487}
   m_Layer: 5
-  m_Name: Recompensa_Item
+  m_Name: Reward_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,7 +843,7 @@ GameObject:
   - component: {fileID: 1730179593768259399}
   - component: {fileID: 4844854476459104248}
   m_Layer: 5
-  m_Name: ContenedorRecompensas
+  m_Name: ContainerRewards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -909,7 +910,7 @@ GameObject:
   - component: {fileID: 5369405370179757028}
   - component: {fileID: 127818688904928474}
   m_Layer: 5
-  m_Name: Itemcono - Imagen
+  m_Name: Itemcon - Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1120,7 +1121,7 @@ GameObject:
   - component: {fileID: 4621279245170543351}
   - component: {fileID: 3960038318249310840}
   m_Layer: 5
-  m_Name: TareaTitulo - TMP
+  m_Name: TaskTitle - TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1174,7 +1175,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Tarea:'
+  m_text: 'Task:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1255,7 +1256,7 @@ GameObject:
   - component: {fileID: 5521202835905074655}
   - component: {fileID: 1061535547856087115}
   m_Layer: 5
-  m_Name: Cantidad - TMP
+  m_Name: Quantity - TMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1390,7 +1391,7 @@ GameObject:
   - component: {fileID: 8256471781488877869}
   - component: {fileID: 2410409080673218398}
   m_Layer: 5
-  m_Name: Orolcono
+  m_Name: Goldlcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1464,7 +1465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8680265042332782888}
   m_Layer: 5
-  m_Name: Recompensa_Oro
+  m_Name: Reward_Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1502,7 +1503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9207891574031226807}
   m_Layer: 5
-  m_Name: Recompensa Exp
+  m_Name: Reward_Exp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
