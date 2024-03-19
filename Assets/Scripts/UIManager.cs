@@ -9,12 +9,19 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Bar")]
+    [SerializeField] private Image expPlayer;
+
+    [Header("Texto")]
+    [SerializeField] private TextMeshProUGUI monedasTMP;
+    [SerializeField] private TextMeshProUGUI expTMP;
+
     [Header("Paneles")]
     [SerializeField] private GameObject panelInspectorQuests;
     [SerializeField] private GameObject panelPersonajeQuests;
 
-    [Header("Texto")]
-    [SerializeField] private TextMeshProUGUI monedasTMP;
+    private float expActual;
+    private float NewLevel;
 
     public enum ShowMenuType  //보기쉽게 하기위해 enum선언
     {
@@ -24,15 +31,11 @@ public class UIManager : MonoBehaviour
         Max
     }
 
-
     public GameObject talkBtn;
     public GameObject potraitPanel;
     public GameObject shopPanel;
     public GameObject shopChoice;
     public static UIManager instance = null;
-
-
-
     public PlayerController playerController;
 
     public Button[] showMenuButton;
@@ -63,15 +66,12 @@ public class UIManager : MonoBehaviour
             if (instance != this)
                 Destroy(this.gameObject);
         }
-
-
     }
 
     public bool IsOpenShowPopup()
     {
         return isOpenShowPopUp;
     }
-
 
     private void Start()
     {
@@ -126,17 +126,13 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-
             //NPCInteractive.instance.isAction = false;
             PotraitPanelOnOff(false);
             //btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
             playerinput.OnEnable();
             isOpenShowPopUp = false;
-
         }
-
-
     }
     public void PopupShopMenuSelect(ShowMenuType type)
     {
@@ -154,14 +150,13 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-
         currentShowMenuType = type;
         //기존에 세팅되어 있는 버튼의 연결을 모두 해제
         selectMenuAction = null;
         //선택될 버튼에 상점타입의 버튼을 연결한다 
         selectMenuAction = GetSelectedShopMenu(type);
-
     }
+
     public void RunSelectedMenuButton()
     {
         selectMenuAction?.Invoke();
@@ -235,11 +230,20 @@ public class UIManager : MonoBehaviour
             PopupShopMenuSelect(++currentShowMenuType);
             //Debug.Log("현재 선택된 메뉴는 : " + currentShowMenuType);
         }
-
     }
 
     private void ActualizarUIPersonaje()
     {
+        expPlayer.fillAmount = Mathf.Lerp(expPlayer.fillAmount,
+            expActual / NewLevel, 10f * Time.deltaTime);
+
+        expTMP.text = $"{((expActual/NewLevel) * 100):F2}%";
         monedasTMP.text = MonedasManager.Instance.MonedasTotales.ToString();
+    }
+
+    public void UpdateExpPersonality(float pExpActul, float pExpRequired)
+    {
+        expActual = pExpActul;
+        NewLevel = pExpRequired;
     }
 }
