@@ -1252,7 +1252,6 @@ GameObject:
   m_Component:
   - component: {fileID: 356382299}
   - component: {fileID: 356382298}
-  - component: {fileID: 356382297}
   - component: {fileID: 356382296}
   - component: {fileID: 356382300}
   - component: {fileID: 356382301}
@@ -1290,20 +1289,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!114 &356382297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 356382295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f51f940b59f8aa24c9fc5802904bddb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextMove: 0
-  animator: {fileID: 0}
 --- !u!212 &356382298
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1410,6 +1395,11 @@ MonoBehaviour:
     hp: 0
     exp: 0
     type: 0
+  EnemyAnimationData:
+    idleParameterName: Idle
+    walkParameterName: Walk
+    attackParameterName: Attack
+    dieParameterName: Die
 --- !u!1001 &356648923
 PrefabInstance:
   m_ObjectHideFlags: 0
