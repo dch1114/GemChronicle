@@ -15,9 +15,6 @@ public class Inventory : MonoBehaviour
     public GameObject characterEquipmentPrefab;
     public SPUM_SpriteList equipmentSpriteOBj;
 
-    //Test
-    GameManager gameManager;
-    DataManager dataManager;
     ItemDatabase itemDatabase;
 
     //public List<ItemData> startingItems;
@@ -57,10 +54,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        //test
-        gameManager = GameManager.instance;
-        dataManager = gameManager.dataManager;
-        itemDatabase = dataManager.itemDatabase;
+        itemDatabase = GameManager.instance.dataManager.itemDatabase;
 
         inventory = new List<InventoryItem>();
         //inventoryDictionary = new Dictionary<ItemData, InventoryItem>();

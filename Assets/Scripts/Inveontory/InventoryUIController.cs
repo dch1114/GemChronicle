@@ -6,6 +6,8 @@ using static UnityEditor.Progress;
 public class InventoryUIController : MonoBehaviour
 {
     [SerializeField] public GameObject inventoryUI;
+    [SerializeField] public GameObject shopUi;
+    [SerializeField] public GameObject tradePopup;
     //[SerializeField] private GameObject skillTreeUI;
     //[SerializeField] private GameObject optionUI;
 
