@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -197,8 +198,19 @@ public class Inventory : MonoBehaviour
         {
             equipment.Remove(_value);
             equipmentDictionary.Remove(_itemToRemove);
+
             //itemToRemove.RemoveModifiers();
         }
+
+        if (_itemToRemove.EquipmentType == EquipmentType.Weapon)
+        {
+            spriteOBj._weaponList[0].sprite = null;
+        }
+        else if (_itemToRemove.EquipmentType == EquipmentType.Armor)
+        {
+            spriteOBj._armorList[0].sprite = null;
+        }
+
     }
 
     public void RemoveItem(Item _item)
