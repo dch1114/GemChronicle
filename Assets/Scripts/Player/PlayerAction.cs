@@ -10,9 +10,6 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerAction : MonoBehaviour
 {
-
-
-   
     GameObject scanObject;
     public GameObject talkBtn;
     List<IInteractive> interactiveList = new List<IInteractive>();
@@ -50,8 +47,6 @@ public class PlayerAction : MonoBehaviour
                 isQuestPanelOpen = true;
             }
         }
-
-
     }
 
     IInteractive FindClosestTarget()
@@ -91,9 +86,7 @@ public class PlayerAction : MonoBehaviour
         }
 
         Debug.Log(interactiveList.Count);
-
     }
-
 
     /// 아래 부분이 없으면 NPC와 떨어지더라도 가장 최근 접촉한 NPC와 계속 대화함
     private void OnTriggerExit2D(Collider2D _other)
@@ -112,14 +105,9 @@ public class PlayerAction : MonoBehaviour
                     t.CloseUI();
                     target = null;
                 }
-
             }
         }
+
         Debug.Log(interactiveList.Count);
-
     }
-
-
 }
-
-
