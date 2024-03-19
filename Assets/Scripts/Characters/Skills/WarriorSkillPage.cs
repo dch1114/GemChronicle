@@ -49,6 +49,8 @@ public class WarriorSkillPage : MonoBehaviour
         {
             if (!goSkillInfo.activeSelf) goSkillInfo.SetActive(true);
 
+            ClearComboToggles();
+
             SkillInfoData data = _skill.skillInfoData;
 
             skillIcon.sprite = _skill.icon.sprite;
@@ -145,6 +147,14 @@ public class WarriorSkillPage : MonoBehaviour
             default:
                 typeIcon.sprite = typeSprites[0];
                 break;
+        }
+    }
+
+    private void ClearComboToggles()
+    {
+        foreach(Toggle toggle in comboNumToggle)
+        {
+            toggle.isOn = false;
         }
     }
 }
