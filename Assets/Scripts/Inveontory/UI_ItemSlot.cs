@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Unity.Android.Types;
+
 
 public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHandler, IPointerExitHandler
 {
