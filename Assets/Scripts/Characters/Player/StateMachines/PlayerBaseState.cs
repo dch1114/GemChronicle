@@ -85,18 +85,31 @@ public class PlayerBaseState : IState
             if (action.activeControl.Equals(action.controls[0]))
             {
                 stateMachine.AttackIndex = 1;
-                stateMachine.SkillIndex = new List<int> { 0, 1, 2 };
+                stateMachine.SkillIndex = GetSkillNumIndexs(0);
             }
             else if (action.activeControl.Equals(action.controls[1]))
             {
                 stateMachine.AttackIndex = 2;
-                stateMachine.SkillIndex = new List<int> { 1, 1, 1 };
+                stateMachine.SkillIndex = GetSkillNumIndexs(1);
             }
             else if (action.activeControl.Equals(action.controls[2]))
             {
                 stateMachine.AttackIndex = 3;
-                stateMachine.SkillIndex = new List<int> { 2, 1, 0 };
+                stateMachine.SkillIndex = GetSkillNumIndexs(2);
             }
+        }
+    }
+
+    private List<int> GetSkillNumIndexs(int index)
+    {
+        switch(stateMachine.Player.Data.StatusData.JobType)
+        {
+            case JobType.Warrior:
+                return stateMachine.Player.Data.AttackData.AttackSkillStates[index];
+                break;
+            default:
+                return stateMachine.Player.Data.AttackData.AttackSkillStates[0];
+                break;
         }
     }
 
@@ -145,8 +158,6 @@ public class PlayerBaseState : IState
     private Vector3 GetMovementDirection()
     {
         Vector3 right = new Vector3(1f, 0f, 0f);
-
-        //normalize 필요 없을듯?
         //right.Normalize();
 
         return right * stateMachine.MovementInput.x;

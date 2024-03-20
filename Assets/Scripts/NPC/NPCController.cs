@@ -172,5 +172,13 @@ public class NPCController : MonoBehaviour, IInteractive
         return false;
     }
 
+    public void Closer()
+    {
+        OpenUI();
+    }
 
+    public void Interact()
+    {
+        TryTalk();
+    }
 }
