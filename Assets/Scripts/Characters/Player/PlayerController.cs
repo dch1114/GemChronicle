@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
 
     public void Move(Vector3 _speed)
     {
-
-
         //need Camera Limit
         transform.Translate(_speed);
     }
@@ -55,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(float _jumpForce)
     {
-
         velocity.y += _jumpForce;
     }
 }

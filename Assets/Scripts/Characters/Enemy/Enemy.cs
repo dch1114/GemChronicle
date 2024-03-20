@@ -20,9 +20,13 @@ public class Enemy : MonoBehaviour
 
     private int nextMove;
     private bool isLeft = true;
+    private bool foundEnemy = false;
+    private bool canAttack = true;
 
     private void Awake()
     {
+        EnemyAnimationData.Initialize();
+
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
@@ -34,7 +38,7 @@ public class Enemy : MonoBehaviour
         rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
         if (nextMove != 0)
         {
-            animator.SetBool("isMoving", true);
+            SetState(EnemyState.Walking);
         }
 
         if ((nextMove > 0 && isLeft) || (nextMove < 0 && !isLeft))
@@ -42,8 +46,71 @@ public class Enemy : MonoBehaviour
             Flip();
         }
 
-        Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.4f, rigid.position.y);
-        Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+        NextGround();
+
+        CheckPlayer();
+    }
+
+    private void UpdateIdle()
+    {
+
+    } 
+
+    private void UpdateWalking()
+    {
+        if(foundEnemy)
+        {
+            SetState(EnemyState.Attacking);
+        } else
+        {
+            Move();
+        }
+    }
+
+    private void UpdateAttacking()
+    {
+        if(foundEnemy && canAttack)
+        {
+            canAttack = false;
+            SetState(EnemyState.Attacking);
+            Invoke("WaitAttackCoolTime", EnemyStatusData.AttackRate);
+        } else
+        {
+            SetState(EnemyState.Idle);
+        }
+    }
+
+    protected void SetState(EnemyState newState)
+    {
+        switch(newState)
+        {
+            case EnemyState.Idle:
+                animator.SetBool(EnemyAnimationData.WalkParameterHash, false);
+                break;
+            case EnemyState.Walking:
+                animator.SetBool(EnemyAnimationData.WalkParameterHash, true);
+                break;
+            case EnemyState.Attacking:
+                animator.SetTrigger(EnemyAnimationData.AttackParameterHash);
+                break;
+            case EnemyState.Dead:
+                animator.SetTrigger(EnemyAnimationData.DieParameterHash);
+                break;
+        }
+    }
+    private void WaitAttackCoolTime()
+    {
+        canAttack = true;
+    }
+
+    private void Move()
+    {
+
+    }
+
+    private void NextGround()
+    {
+        Vector2 frontVec = new Vector2(transform.position.x + nextMove * 0.4f, transform.position.y);
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Ground"));
         if (rayHit.collider == null)
         {
@@ -53,11 +120,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void CheckPlayer()
+    {
+        Vector3 direction = Vector3.left;
+        Debug.DrawRay(transform.position, direction, new Color(0, 1, 0));
+        RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector3.left, 2f, LayerMask.GetMask("Player"));
+        if(rayHit.collider == null)
+        {
+            foundEnemy = false;
+        } else
+        {
+            foundEnemy = true;
+        }
+        Debug.Log(foundEnemy);
+    }
+
     // Àç±Í ÇÔ¼ö
     void Think()
     {
         nextMove = Random.Range(-1, 2);
-        animator.SetBool("isMoving", false);
+        SetState(EnemyState.Idle);
 
         float nextThinkTime = Random.Range(2f, 5f);
         Invoke("Think", nextThinkTime);

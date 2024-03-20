@@ -158,8 +158,6 @@ public class PlayerBaseState : IState
     private Vector3 GetMovementDirection()
     {
         Vector3 right = new Vector3(1f, 0f, 0f);
-
-        //normalize 필요 없을듯?
         //right.Normalize();
 
         return right * stateMachine.MovementInput.x;

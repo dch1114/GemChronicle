@@ -8,9 +8,12 @@ using UnityEngine;
 public class EnemyStatusData : Status, IDamageable
 {
     [SerializeField] protected SkillType type; //冻绢飘副 联 加己阑 困秦
+    [SerializeField] protected int walkSpeed;
+    [SerializeField] protected float attackRate;
 
     public SkillType Type { get { return type; } set { type = value; } }
-
+    public int WalkSpeed { get { return walkSpeed; } set {  walkSpeed = value; } }
+    public float AttackRate { get { return attackRate; } set { attackRate = value; } }
     public void TakeDamage(int damage)
     {
         if (hp - damage > 0)
