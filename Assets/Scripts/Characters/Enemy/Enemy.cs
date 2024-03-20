@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     private Vector3 leftDirection;
     private Vector3 rightDirection;
 
+    private IDamageable playerCollider;
     private void Awake()
     {
         EnemyAnimationData.Initialize();
@@ -97,6 +98,10 @@ public class Enemy : MonoBehaviour
     {
         if(foundEnemy && canAttack)
         {
+            if (playerCollider != null)
+            {
+                playerCollider.TakeDamage(EnemyStatusData.Atk);
+            }
             canAttack = false;
             Invoke("WaitAttackCoolTime", EnemyStatusData.AttackRate);
         } else
@@ -157,6 +162,7 @@ public class Enemy : MonoBehaviour
             foundEnemy = false;
         } else
         {
+            playerCollider = rayHit.collider.gameObject.GetComponent<IDamageable>();
             foundEnemy = true;
         }
     }
