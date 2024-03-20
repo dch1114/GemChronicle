@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
     }
     public void OpenSoundSet(bool _OnOff)
     {
-        Debug.Log(_OnOff);
+
         soundSetting.SetActive(_OnOff);
        
 
