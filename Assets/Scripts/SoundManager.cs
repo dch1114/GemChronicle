@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -12,9 +13,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField][Range(0f, 1f)] private float musicVolume;
     private ObjectPool objectPool;
 
-    private AudioSource musicAudioSource;
-    public AudioClip musicClip;
-
+    private AudioSource musicAudioSource;             
+    public AudioClip musicClip;                       
+    public List<AudioSource> EffectAudioSource;
     private void Awake()
     {
         instance = this;
@@ -36,7 +37,18 @@ public class SoundManager : MonoBehaviour
         instance.musicAudioSource.clip = music;
         instance.musicAudioSource.Play();
     }
-
+    public void SetMusicVolume(Slider _getslider)
+    {
+      
+        musicAudioSource.volume = _getslider.value;
+    }
+    public void SetEffectVolume(Slider _getslider)
+    {
+       for (int i = 0; i < EffectAudioSource.Count; i++)
+        {
+            EffectAudioSource[i].volume = _getslider.value;
+        }
+    }
     public static void PlayClip(AudioClip clip)
     {
         GameObject obj = instance.objectPool.SpawnFromPool("SoundSource");

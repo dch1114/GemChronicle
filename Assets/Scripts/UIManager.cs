@@ -48,7 +48,8 @@ public class UIManager : MonoBehaviour
     bool isOpenShowPopUp = false;
     public PlayerInput playerinput;
     Action selectMenuAction = null;
-
+    public GameObject soundSetting;
+ 
     //0315 [SerializeField]를 선언하면 외부 스크립트에서 접근할수 없으나 인스펙터에서 세팅 및 확인을 할 수 있음  
     [SerializeField]
     Text talkText;
@@ -67,7 +68,13 @@ public class UIManager : MonoBehaviour
                 Destroy(this.gameObject);
         }
     }
+    public void OpenSoundSet(bool _OnOff)
+    {
+        Debug.Log(_OnOff);
+        soundSetting.SetActive(_OnOff);
+       
 
+    }
     public bool IsOpenShowPopup()
     {
         return isOpenShowPopUp;
