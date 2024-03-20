@@ -11,6 +11,7 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
     [SerializeField] private TextMeshProUGUI itemText;
 
     private Shop shop;
+    private ShopTradePopup tradePopup;
 
     private InventoryUIController ui;
     public Item item;
@@ -22,6 +23,7 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
     {
         ui = GetComponentInParent<InventoryUIController>();
         shop = FindObjectOfType<Shop>();
+        tradePopup = ui.tradePopup;
         UpdateSlot(item);
     }
 
@@ -74,16 +76,11 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
 
         if (timeSinceLastClick <= clickDelay)
         {
-            shop.Buy(item);
             //UpdateSlot(item);
-            //ui.tradePopup.SetActive(true);
-
-            //if (item.datas.ItemType == ItemType.Equipment) // test
-            //{
-            //    Inventory.instance.EquipItem(item.datas);
-            //    ui.itemToopTip.HideToolTip();
-            //}
-            //ui.itemToopTip.HideToolTip();
+            Item selectItem = item;
+            ui.itemToopTip.ShowToolTip(item);
+            tradePopup.SetItem(selectItem);
+            tradePopup.gameObject.SetActive(true);
         }
         else
         {
@@ -121,5 +118,4 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
 
         ui.itemToopTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
     }
-
 }

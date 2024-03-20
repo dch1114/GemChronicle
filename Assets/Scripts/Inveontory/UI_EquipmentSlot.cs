@@ -15,7 +15,7 @@ public class UI_EquipmentSlot : UI_ItemSlot
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        if (item.stackSize == 0 || item == null)//item == null || item.datas == null)
+        if (item == null || item.stackSize == 0)//item == null || item.datas == null)
         {
             return;
         }

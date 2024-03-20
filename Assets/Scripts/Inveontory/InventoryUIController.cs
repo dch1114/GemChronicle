@@ -7,7 +7,7 @@ public class InventoryUIController : MonoBehaviour
 {
     [SerializeField] public GameObject inventoryUI;
     [SerializeField] public GameObject shopUi;
-    [SerializeField] public GameObject tradePopup;
+    [SerializeField] public ShopTradePopup tradePopup;
     //[SerializeField] private GameObject skillTreeUI;
     //[SerializeField] private GameObject optionUI;
 
@@ -63,5 +63,16 @@ public class InventoryUIController : MonoBehaviour
         }
 
         SwitchTo(_menu);
+    }
+
+    public void UseShop()
+    {
+        shopUi.SetActive(true);
+    }
+
+    public void CloseShop()
+    {
+        itemToopTip.gameObject.SetActive(false);
+        shopUi.SetActive(false);
     }
 }
