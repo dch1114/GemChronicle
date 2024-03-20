@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     private bool isLeft = true;
     private bool foundEnemy = false;
     private bool canAttack = true;
+    private Vector3 distance = new Vector3(2f, 0, 0);
 
     private void Awake()
     {
@@ -122,9 +123,8 @@ public class Enemy : MonoBehaviour
 
     private void CheckPlayer()
     {
-        Vector3 direction = Vector3.left;
-        Debug.DrawRay(transform.position, direction, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector3.left, 2f, LayerMask.GetMask("Player"));
+        Debug.DrawRay(transform.position + distance, Vector3.left, new Color(0, 1, 0));
+        RaycastHit2D rayHit = Physics2D.Raycast(transform.position + distance, Vector3.left, 4f, LayerMask.GetMask("Player"));
         if(rayHit.collider == null)
         {
             foundEnemy = false;
@@ -132,7 +132,7 @@ public class Enemy : MonoBehaviour
         {
             foundEnemy = true;
         }
-        Debug.Log(foundEnemy);
+        
     }
 
     // Àç±Í ÇÔ¼ö
