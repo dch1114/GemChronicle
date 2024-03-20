@@ -13,8 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image expPlayer;
 
     [Header("Texto")]
-    [SerializeField] private TextMeshProUGUI monedasTMP;
-    [SerializeField] private TextMeshProUGUI expTMP;
+    [SerializeField] public TextMeshProUGUI GoldTMP;
+    [SerializeField] public TextMeshProUGUI expTMP;
 
     [Header("Paneles")]
     [SerializeField] private GameObject panelInspectorQuests;
@@ -218,7 +218,6 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        ActualizarUIPersonaje();
 
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
@@ -233,18 +232,20 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void ActualizarUIPersonaje()
-    {
-        expPlayer.fillAmount = Mathf.Lerp(expPlayer.fillAmount,
-            expActual / NewLevel, 10f * Time.deltaTime);
-
-        expTMP.text = $"{((expActual/NewLevel) * 100):F2}%";
-        monedasTMP.text = MonedasManager.Instance.MonedasTotales.ToString();
-    }
-
     public void UpdateExpPersonality(float pExpActul, float pExpRequired)
     {
         expActual = pExpActul;
         NewLevel = pExpRequired;
+    }
+
+    public void ExpUpdate(float exp, float full)
+    {
+        expTMP.text = ((exp / full) * 100).ToString("N2") + "%";
+        expPlayer.fillAmount = exp/full;
+    }
+
+    public void GoldUpdate(float gold)
+    {
+        GoldTMP.text = gold.ToString();
     }
 }

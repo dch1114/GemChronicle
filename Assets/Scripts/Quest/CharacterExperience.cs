@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Cinemachine.DocumentationSortingAttribute;
 
 public class CharacterExperience : MonoBehaviour
 {
@@ -43,7 +42,8 @@ public class CharacterExperience : MonoBehaviour
             else
             {
                 expActualTemp += expObtained;
-                if(expActualTemp == ExpRequiredNextLevel)
+                UIManager.instance.ExpUpdate(expActualTemp, ExpRequiredNextLevel);
+                if (expActualTemp == ExpRequiredNextLevel)
                 {
                     UpdateLevel();
                 }

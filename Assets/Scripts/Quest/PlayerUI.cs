@@ -1,19 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GoldManager : Singleton<GoldManager>
+public class PlayerUI : MonoBehaviour
 {
+
     [SerializeField] private int goldTest;
 
-    public int GoldTotales {  get; set; }
+    [SerializeField]
+    private int gold;
+
+    public int Gold
+    {
+        get { return gold; }
+        set { gold = value; }
+    }
+
+    public PlayerStatusData playerStatusData;
+
+    public int GoldTotales { get; set; }
 
     private string KEY_Gold = "MYGAME_GOLD";
+    private float expActual;
+    private float NewLevel;
 
-    private void Start()
+    void Start()
     {
+        //playerStatusData = GetComponent<PlayerStatusData>();
         PlayerPrefs.DeleteKey(KEY_Gold);
         ChargingGold();
+    }
+
+    public void UpdateExpPersonality(float pExpActul, float pExpRequired)
+    {
+        expActual = pExpActul;
+        NewLevel = pExpRequired;
     }
 
     private void ChargingGold()
@@ -21,23 +44,22 @@ public class GoldManager : Singleton<GoldManager>
         GoldTotales = PlayerPrefs.GetInt(KEY_Gold, goldTest);
     }
 
+
     public void AddGold(int quantity)
     {
         GoldTotales += quantity;
-        UIManager.instance.GoldUpdate(GoldTotales);
         PlayerPrefs.SetInt(KEY_Gold, GoldTotales);
         PlayerPrefs.Save();
     }
 
     public void RemoverMonedas(int cantidad)
     {
-        if(cantidad > GoldTotales)
+        if (cantidad > GoldTotales)
         {
             return;
         }
 
         GoldTotales -= cantidad;
-        UIManager.instance.GoldUpdate(GoldTotales);
         PlayerPrefs.SetInt(KEY_Gold, GoldTotales);
         PlayerPrefs.Save();
     }
