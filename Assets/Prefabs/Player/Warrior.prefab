@@ -493,6 +493,8 @@ GameObject:
   - component: {fileID: 7781107090796812468}
   - component: {fileID: 3799405967087320498}
   - component: {fileID: -17210104332238769}
+  - component: {fileID: 4748749874116357194}
+  - component: {fileID: 3399789334412209554}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Untagged
@@ -733,6 +735,16 @@ MonoBehaviour:
       <Damage>k__BackingField: 0
       <SkillType>k__BackingField: 0
       <Price>k__BackingField: 0
+  <StatusData>k__BackingField:
+    atk: 0
+    def: 0
+    hp: 0
+    exp: 0
+    name: 
+    maxHp: 0
+    level: 0
+    gold: 0
+    jobType: 0
 --- !u!114 &-17210104332238769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +759,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkBtn: {fileID: 0}
   playerinput: {fileID: 0}
+--- !u!114 &4748749874116357194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856440166226088500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: aa648c1d18299184fbd5d1c2c36dac30, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &3399789334412209554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856440166226088500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f9a8448ef33b246909ae6c7b6fe003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelMax: 20
+  expBase: 2
+  incrementalvalue: 2
+  uiManagerInstance: {fileID: 0}
 --- !u!1 &986954549359711830
 GameObject:
   m_ObjectHideFlags: 0

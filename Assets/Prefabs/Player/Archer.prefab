@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7320495564661818076
 Transform:
   m_ObjectHideFlags: 0
@@ -37,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 7426720485785031732}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3903381580706384554
 MonoBehaviour:
@@ -93,9 +93,19 @@ MonoBehaviour:
     <BaseSpeed>k__BackingField: 5
     <WalkSpeedModifier>k__BackingField: 0.5
   <AirData>k__BackingField:
-    <JumpForce>k__BackingField: 0.5
+    <JumpForce>k__BackingField: 0.3
   <AttackData>k__BackingField:
     <SkillInfoDatas>k__BackingField: []
+  <StatusData>k__BackingField:
+    atk: 0
+    def: 0
+    maxHp: 0
+    hp: 0
+    name: 
+    exp: 0
+    level: 0
+    gold: 0
+    jobType: 0
 --- !u!114 &3046869253995054968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkBtn: {fileID: 0}
   playerinput: {fileID: 0}
+  uiManagerInstance: {fileID: 0}
 --- !u!1 &269946539491135751
 GameObject:
   m_ObjectHideFlags: 0

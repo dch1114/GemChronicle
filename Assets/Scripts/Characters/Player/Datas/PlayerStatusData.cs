@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,18 +10,19 @@ public enum JobType
     Magician
 }
 
-public class PlayerStatusData : Status
+[Serializable]
+public class PlayerStatusData : Status, IDamageable
 {
-    [SerializeField] protected int exp;
+    [SerializeField] protected string name;
+    [SerializeField] protected int maxHp;
     [SerializeField] protected int level;
     [SerializeField] protected int gold;
-    [SerializeField] protected string name;
     [SerializeField] protected JobType jobType;
 
-    public int Exp {  get { return exp; } set {  exp = value; } }
+    public string Name { get { return name; } set { name = value; } }
+    public int MaxHp { get { return maxHp; } set { maxHp = value; } }
     public int Level {  get { return level; } set { level = value; } }
     public int Gold { get { return gold; } set {  gold = value; } }
-    public string Name { get { return name; } set { name = value; } }
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
 
     private void Start()
@@ -40,5 +42,32 @@ public class PlayerStatusData : Status
         Gold = 2000;
         Name = "Çï·Î";
         JobType = JobType.Warrior;
+    }
+
+    private bool IsGoldEnough(int _price)
+    {
+        if (Gold - _price >= 0)
+            return true;
+        else
+            return false;
+    }
+
+    public void UseGold(int _price)
+    {
+        if (IsGoldEnough(_price))
+            gold -= _price;
+        else
+            Debug.Log("°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù");
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if(hp - damage > 0)
+        {
+            hp -= damage;
+        } else
+        {
+            //TODO: »ç¸Á ±¸Çö
+        }
     }
 }
