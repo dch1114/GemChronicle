@@ -5,13 +5,15 @@ using static UnityEditor.Progress;
 
 public class InventoryUIController : MonoBehaviour
 {
+    
     [SerializeField] public GameObject inventoryUI;
     [SerializeField] public GameObject shopUi;
-    [SerializeField] public ShopTradePopup tradePopup;
+    [SerializeField] public CheckPurchasePopup shopTradePopup;
     //[SerializeField] private GameObject skillTreeUI;
     //[SerializeField] private GameObject optionUI;
 
     public UI_ItemToolTip itemToopTip;
+    public UI_ItemToolTip shopitemToolTip;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +74,8 @@ public class InventoryUIController : MonoBehaviour
 
     public void CloseShop()
     {
-        itemToopTip.gameObject.SetActive(false);
+        shopitemToolTip.gameObject.SetActive(false);
+        shopTradePopup.gameObject.SetActive(false);
         shopUi.SetActive(false);
     }
 }

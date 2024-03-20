@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
-public class ShopTradePopup : MonoBehaviour
+public class CheckPurchasePopup : MonoBehaviour
 {
-    [SerializeField] ShopTradePopup tradepopup;
+    [SerializeField] public GameObject shopTradePopup;
+    [SerializeField] public CheckPurchasePopup checkPurchasePopup;
     [SerializeField] Button buyBtn;
     [SerializeField] Button cancelBtn;
     [SerializeField] Button closeBtn;
@@ -35,14 +36,14 @@ public class ShopTradePopup : MonoBehaviour
         if(selectItem != null)
         {
             shop.Buy(selectItem);
-            ui.itemToopTip.HideToolTip();
-            tradepopup.gameObject.SetActive(false);
+            ui.shopitemToolTip.HideToolTip();
+            checkPurchasePopup.gameObject.SetActive(false);
         }
     }
 
     public void OnClickCancel()
     {
-        ui.itemToopTip.HideToolTip();
-        tradepopup.gameObject.SetActive(false);
+        ui.shopitemToolTip.HideToolTip();
+        checkPurchasePopup.gameObject.SetActive(false);
     }
 }

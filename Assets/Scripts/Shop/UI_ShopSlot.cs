@@ -11,19 +11,19 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
     [SerializeField] private TextMeshProUGUI itemText;
 
     private Shop shop;
-    private ShopTradePopup tradePopup;
+    private CheckPurchasePopup tradePopup;
 
     private InventoryUIController ui;
     public Item item;
 
-    private float clickDelay = 0.3f;
-    private float lastClickTime = 0;
+    //private float clickDelay = 0.3f;
+    //private float lastClickTime = 0;
 
     private void Start()
     {
         ui = GetComponentInParent<InventoryUIController>();
         shop = FindObjectOfType<Shop>();
-        tradePopup = ui.tradePopup;
+        tradePopup = ui.shopTradePopup;
         UpdateSlot(item);
     }
 
@@ -70,52 +70,58 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
             return;
         }
 
-    
-        float currentTime = Time.time;
-        float timeSinceLastClick = currentTime - lastClickTime;
+        Item selectItem = item;
+        tradePopup.checkPurchasePopup.gameObject.SetActive(true);
+        tradePopup.shopTradePopup.gameObject.SetActive(true);
+        ui.shopitemToolTip.ShowToolTip(selectItem);
+        tradePopup.SetItem(selectItem);
 
-        if (timeSinceLastClick <= clickDelay)
-        {
-            //UpdateSlot(item);
-            Item selectItem = item;
-            ui.itemToopTip.ShowToolTip(item);
-            tradePopup.SetItem(selectItem);
-            tradePopup.gameObject.SetActive(true);
-        }
-        else
-        {
-            AdjustToolTipPosition();
-            ui.itemToopTip.ShowToolTip(item);   //test
-        }
 
-        lastClickTime = currentTime;
+        //float currentTime = Time.time;
+        //float timeSinceLastClick = currentTime - lastClickTime;
+
+        //if (timeSinceLastClick <= clickDelay)
+        //{
+        //    //UpdateSlot(item);
+        //    Item selectItem = item;
+        //    ui.itemToopTip.ShowToolTip(item);
+        //    tradePopup.SetItem(selectItem);
+        //    tradePopup.gameObject.SetActive(true);
+        //}
+        //else
+        //{
+        //    AdjustToolTipPosition();
+        //    ui.itemToopTip.ShowToolTip(item);   //test
+        //}
+
+        //lastClickTime = currentTime;
     }
 
-    private void AdjustToolTipPosition()
-    {
-        Vector2 mousePosition = Input.mousePosition;
+    //private void AdjustToolTipPosition()
+    //{
+    //    Vector2 mousePosition = Input.mousePosition;
 
-        float xOffset;
-        float yOffset;
+    //    float xOffset;
+    //    float yOffset;
 
-        if (mousePosition.x > 600)
-        {
-            xOffset = -150;
-        }
-        else
-        {
-            xOffset = 150;
-        }
+    //    if (mousePosition.x > 600)
+    //    {
+    //        xOffset = -150;
+    //    }
+    //    else
+    //    {
+    //        xOffset = 150;
+    //    }
 
-        if (mousePosition.y > 320)
-        {
-            yOffset = -75;
-        }
-        else
-        {
-            yOffset = 75;
-        }
+    //    if (mousePosition.y > 320)
+    //    {
+    //        yOffset = -75;
+    //    }
+    //    else
+    //    {
+    //        yOffset = 75;
+    //    }
 
-        ui.itemToopTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
-    }
+    //    ui.itemToopTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
+    //}
 }
