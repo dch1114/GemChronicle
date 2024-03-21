@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
     public Sprite unSelectButton;
     [SerializeField]
     ShowMenuType currentShowMenuType;
-
+    public Text talkBtnText;
     bool isOpenShowPopUp = false;
     public PlayerInput playerinput;
     Action selectMenuAction = null;
