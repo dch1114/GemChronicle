@@ -15,24 +15,7 @@ public class NextMap : MonoBehaviour, IInteractive
     // 충돌이 발생한지 여부를 나타내는 변수
     private bool collisionOccurred = false;
 
-    private void OnTriggerEnter2D(Collider2D _collision)
-    {
-        if (_collision.transform.CompareTag("Player"))
-        {
-            OpenUI();
-        }
-    }
 
-    private void OnTriggerExit2D(Collider2D _collision)
-    {
-        if (_collision.transform.CompareTag("Player"))
-        {
-            CloseUI();
-
-
-        }
-    }
- 
 
  
 
@@ -41,11 +24,13 @@ public class NextMap : MonoBehaviour, IInteractive
         UIManager.instance.potalTxt.text = destination;
         // 충돌이 발생하면 상태를 true로 변경
         collisionOccurred = true;
+        UIManager.instance.PotalTalk(true);
     }
 
     public void CloseUI()
     {
         collisionOccurred = false;
+        UIManager.instance.PotalTalk(false);
     }
 
     public void TryTalk()
@@ -55,7 +40,7 @@ public class NextMap : MonoBehaviour, IInteractive
 
     public void Closer()
     {
-        throw new System.NotImplementedException();
+        OpenUI();
     }
 
     public void Interact()

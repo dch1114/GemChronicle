@@ -93,14 +93,14 @@ public class PlayerAction : MonoBehaviour
                 interactiveList.Add(t);
                 // 플레이어와 가장 가까운 몬스터를 찾는 메소드입니다.
                 target = FindClosestTarget();
-                target.Closer(); //오픈 UI를 하는것이 아니라. Closer를 한다. 니가 여기서 제일 가깝다라는것을 인식.
+                t.Closer(); //오픈 UI를 하는것이 아니라. Closer를 한다. 니가 여기서 제일 가깝다라는것을 인식.
             }
             else
             {
                 interactiveList.Add(y);
-                UIManager.instance.PotalTalk(true);
+                y.Closer();
                 target = FindClosestTarget();
-                Debug.Log(target);
+                
 
             }
         }
@@ -129,7 +129,7 @@ public class PlayerAction : MonoBehaviour
             else
             {
                 interactiveList.Remove(y);
-                UIManager.instance.PotalTalk(false);
+                y.CloseUI();
             }
         }
 
