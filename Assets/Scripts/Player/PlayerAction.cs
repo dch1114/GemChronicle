@@ -26,6 +26,14 @@ public class PlayerAction : MonoBehaviour
     {
         uiManagerInstance = UIManager.instance;
     }
+    void OnPotalMove()
+    {
+        if (target != null)
+        {
+            target.Interact();
+        }
+      
+    }
     void OnInteractive()
     {
         Debug.Log("발동!");
@@ -79,7 +87,7 @@ public class PlayerAction : MonoBehaviour
         {
             //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
             IInteractive t = _other.gameObject.GetComponent<NPCController>();
-            
+            IInteractive y = _other.gameObject.GetComponent<NextMap>();
             if (t != null) 
             {
                 interactiveList.Add(t);
@@ -89,7 +97,11 @@ public class PlayerAction : MonoBehaviour
             }
             else
             {
+                interactiveList.Add(y);
                 UIManager.instance.PotalTalk(true);
+                target = FindClosestTarget();
+                Debug.Log(target);
+
             }
         }
 
@@ -103,7 +115,7 @@ public class PlayerAction : MonoBehaviour
         {
             //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
             IInteractive t = _other.gameObject.GetComponent<NPCController>();
-
+            IInteractive y = _other.gameObject.GetComponent<NextMap>();
             if (t != null)
             {
                 interactiveList.Remove(t);
@@ -116,6 +128,7 @@ public class PlayerAction : MonoBehaviour
             }
             else
             {
+                interactiveList.Remove(y);
                 UIManager.instance.PotalTalk(false);
             }
         }

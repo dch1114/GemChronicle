@@ -24,20 +24,18 @@ public class GoldManager : Singleton<GoldManager>
     public void AddGold(int quantity)
     {
         GoldTotales += quantity;
-        UIManager.instance.GoldUpdate(GoldTotales);
         PlayerPrefs.SetInt(KEY_Gold, GoldTotales);
         PlayerPrefs.Save();
     }
 
-    public void RemoverMonedas(int cantidad)
+    public void RemoverGold(int quantity)
     {
-        if(cantidad > GoldTotales)
+        if(quantity > GoldTotales)
         {
             return;
         }
 
-        GoldTotales -= cantidad;
-        UIManager.instance.GoldUpdate(GoldTotales);
+        GoldTotales -= quantity;
         PlayerPrefs.SetInt(KEY_Gold, GoldTotales);
         PlayerPrefs.Save();
     }
