@@ -88,6 +88,7 @@ public class PlayerAction : MonoBehaviour
             //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
             IInteractive t = _other.gameObject.GetComponent<NPCController>();
             IInteractive y = _other.gameObject.GetComponent<NextMap>();
+            IInteractive x = _other.gameObject.GetComponent<EveryMap>();
             if (t != null) 
             {
                 interactiveList.Add(t);
@@ -95,13 +96,12 @@ public class PlayerAction : MonoBehaviour
                 target = FindClosestTarget();
                 t.Closer(); //오픈 UI를 하는것이 아니라. Closer를 한다. 니가 여기서 제일 가깝다라는것을 인식.
             }
-            else
+            if (y != null)
             {
                 interactiveList.Add(y);
                 y.Closer();
                 target = FindClosestTarget();
                 
-
             }
         }
 
@@ -116,6 +116,7 @@ public class PlayerAction : MonoBehaviour
             //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
             IInteractive t = _other.gameObject.GetComponent<NPCController>();
             IInteractive y = _other.gameObject.GetComponent<NextMap>();
+            IInteractive x = _other.gameObject.GetComponent<EveryMap>();
             if (t != null)
             {
                 interactiveList.Remove(t);
