@@ -37,9 +37,9 @@ public class UIManager : MonoBehaviour
     public GameObject shopChoice;
     public static UIManager instance = null;
     public PlayerController playerController;
-
+    public GameObject potaltalk;
     public Button[] showMenuButton;
-
+    public Text potalTxt;
     public Sprite selectButton;
     public Sprite unSelectButton;
     [SerializeField]
@@ -253,5 +253,10 @@ public class UIManager : MonoBehaviour
     {
         expActual = pExpActul;
         NewLevel = pExpRequired;
+    }
+
+    public void PotalTalk(bool _OnOff)
+    {
+        potaltalk.SetActive(_OnOff);
     }
 }

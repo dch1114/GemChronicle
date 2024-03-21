@@ -79,13 +79,17 @@ public class PlayerAction : MonoBehaviour
         {
             //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
             IInteractive t = _other.gameObject.GetComponent<NPCController>();
-
+            
             if (t != null) 
             {
                 interactiveList.Add(t);
                 // 플레이어와 가장 가까운 몬스터를 찾는 메소드입니다.
                 target = FindClosestTarget();
                 target.Closer(); //오픈 UI를 하는것이 아니라. Closer를 한다. 니가 여기서 제일 가깝다라는것을 인식.
+            }
+            else
+            {
+                UIManager.instance.PotalTalk(true);
             }
         }
 
@@ -109,6 +113,10 @@ public class PlayerAction : MonoBehaviour
                     t.CloseUI();
                     target = null;
                 }
+            }
+            else
+            {
+                UIManager.instance.PotalTalk(false);
             }
         }
 
