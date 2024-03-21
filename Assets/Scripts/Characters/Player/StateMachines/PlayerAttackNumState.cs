@@ -28,7 +28,7 @@ public class PlayerAttackNumState : PlayerAttackState
 
     private void Shoot(int _index)
     {
-        GameObject go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(_index);
+        GameObject go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(_index.ToString());
         go.transform.position = stateMachine.Player.transform.position;
         go.SetActive(true);
     }
