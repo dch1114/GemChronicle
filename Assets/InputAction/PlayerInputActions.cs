@@ -91,7 +91,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interactive2"",
+                    ""name"": ""PotalMove"",
                     ""type"": ""Button"",
                     ""id"": ""3e2c93cc-a6d6-4bd9-b6fb-71cd407210f7"",
                     ""expectedControlType"": ""Button"",
@@ -353,11 +353,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8e19ed78-cc02-400f-a506-b75392169f0d"",
-                    ""path"": ""<Keyboard>/tab"",
+                    ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interactive2"",
+                    ""action"": ""PotalMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -375,7 +375,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_ComboAttack = m_Player.FindAction("ComboAttack", throwIfNotFound: true);
         m_Player_Quest = m_Player.FindAction("Quest", throwIfNotFound: true);
         m_Player_Interactive = m_Player.FindAction("Interactive", throwIfNotFound: true);
-        m_Player_Interactive2 = m_Player.FindAction("Interactive2", throwIfNotFound: true);
+        m_Player_PotalMove = m_Player.FindAction("PotalMove", throwIfNotFound: true);
         m_Player_SkillPage = m_Player.FindAction("SkillPage", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
     }
@@ -446,7 +446,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ComboAttack;
     private readonly InputAction m_Player_Quest;
     private readonly InputAction m_Player_Interactive;
-    private readonly InputAction m_Player_Interactive2;
+    private readonly InputAction m_Player_PotalMove;
     private readonly InputAction m_Player_SkillPage;
     private readonly InputAction m_Player_Inventory;
     public struct PlayerActions
@@ -460,7 +460,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @ComboAttack => m_Wrapper.m_Player_ComboAttack;
         public InputAction @Quest => m_Wrapper.m_Player_Quest;
         public InputAction @Interactive => m_Wrapper.m_Player_Interactive;
-        public InputAction @Interactive2 => m_Wrapper.m_Player_Interactive2;
+        public InputAction @PotalMove => m_Wrapper.m_Player_PotalMove;
         public InputAction @SkillPage => m_Wrapper.m_Player_SkillPage;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -493,9 +493,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interactive.started += instance.OnInteractive;
             @Interactive.performed += instance.OnInteractive;
             @Interactive.canceled += instance.OnInteractive;
-            @Interactive2.started += instance.OnInteractive2;
-            @Interactive2.performed += instance.OnInteractive2;
-            @Interactive2.canceled += instance.OnInteractive2;
+            @PotalMove.started += instance.OnPotalMove;
+            @PotalMove.performed += instance.OnPotalMove;
+            @PotalMove.canceled += instance.OnPotalMove;
             @SkillPage.started += instance.OnSkillPage;
             @SkillPage.performed += instance.OnSkillPage;
             @SkillPage.canceled += instance.OnSkillPage;
@@ -527,9 +527,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Interactive.started -= instance.OnInteractive;
             @Interactive.performed -= instance.OnInteractive;
             @Interactive.canceled -= instance.OnInteractive;
-            @Interactive2.started -= instance.OnInteractive2;
-            @Interactive2.performed -= instance.OnInteractive2;
-            @Interactive2.canceled -= instance.OnInteractive2;
+            @PotalMove.started -= instance.OnPotalMove;
+            @PotalMove.performed -= instance.OnPotalMove;
+            @PotalMove.canceled -= instance.OnPotalMove;
             @SkillPage.started -= instance.OnSkillPage;
             @SkillPage.performed -= instance.OnSkillPage;
             @SkillPage.canceled -= instance.OnSkillPage;
@@ -562,7 +562,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnComboAttack(InputAction.CallbackContext context);
         void OnQuest(InputAction.CallbackContext context);
         void OnInteractive(InputAction.CallbackContext context);
-        void OnInteractive2(InputAction.CallbackContext context);
+        void OnPotalMove(InputAction.CallbackContext context);
         void OnSkillPage(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
     }
