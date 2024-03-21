@@ -40,13 +40,14 @@ public class NextMap : MonoBehaviour
             UIManager.instance.potalTxt.text = destination;
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-               
+
                 PerformAction();
 
-               
+
             }
         }
     }
+    
 
     private void PerformAction()
     {
