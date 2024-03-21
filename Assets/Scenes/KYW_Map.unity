@@ -397,9 +397,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1834407487}
     m_Modifications:
+    - target: {fileID: 7909165131706137, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1291103782228728091, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
       propertyPath: m_Name
       value: PanelQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 1291103782228728091, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8352164374478411021, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
       propertyPath: m_Pivot.x
@@ -1338,7 +1346,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &356382299
@@ -9001,209 +9009,9 @@ PrefabInstance:
       propertyPath: talkBtn
       value: 
       objectReference: {fileID: 530600137}
-    - target: {fileID: -17210104332238769, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: playerinput
-      value: 
-      objectReference: {fileID: 1916086906}
     - target: {fileID: 856440166226088500, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
       propertyPath: m_Name
       value: Warrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 856440166226088500, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <StatusData>k__BackingField.hp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <StatusData>k__BackingField.atk
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <StatusData>k__BackingField.def
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <StatusData>k__BackingField.gold
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <StatusData>k__BackingField.name
-      value: "\uAE40\uC720\uC6D0"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <StatusData>k__BackingField.level
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <StatusData>k__BackingField.maxHp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[0].<Price>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[0].<Damage>k__BackingField
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[1].<Damage>k__BackingField
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[2].<Damage>k__BackingField
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[3].<Damage>k__BackingField
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[4].<Damage>k__BackingField
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[5].<Damage>k__BackingField
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[6].<Damage>k__BackingField
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[7].<Damage>k__BackingField
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[8].<Damage>k__BackingField
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[9].<Damage>k__BackingField
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[10].<Damage>k__BackingField
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[11].<Damage>k__BackingField
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[12].<Damage>k__BackingField
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[13].<Damage>k__BackingField
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[14].<Damage>k__BackingField
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[0].<SkillName>k__BackingField
-      value: "\uC5BC\uC74C \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[1].<SkillName>k__BackingField
-      value: "\uC5BC\uC74C \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[2].<SkillName>k__BackingField
-      value: "\uC5BC\uC74C \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[3].<SkillName>k__BackingField
-      value: "\uC5BC\uC74C \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[4].<SkillName>k__BackingField
-      value: "\uC5BC\uC74C \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[5].<SkillName>k__BackingField
-      value: "\uBD88 \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[5].<SkillType>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[6].<SkillName>k__BackingField
-      value: "\uBD88 \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[6].<SkillType>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[7].<SkillName>k__BackingField
-      value: "\uBD88 \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[7].<SkillType>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[8].<SkillName>k__BackingField
-      value: "\uBD88 \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[8].<SkillType>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[9].<SkillName>k__BackingField
-      value: "\uBD88 \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[9].<SkillType>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[10].<SkillName>k__BackingField
-      value: "\uBE5B \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[10].<SkillType>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[11].<SkillName>k__BackingField
-      value: "\uBE5B \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[11].<SkillType>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[12].<SkillName>k__BackingField
-      value: "\uBE5B \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[12].<SkillType>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[13].<SkillName>k__BackingField
-      value: "\uBE5B \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[13].<SkillType>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[14].<SkillName>k__BackingField
-      value: "\uBE5B \uACF5\uACA9"
-      objectReference: {fileID: 0}
-    - target: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <AttackData>k__BackingField.<SkillInfoDatas>k__BackingField.Array.data[14].<SkillType>k__BackingField
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3903399004546380253, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
       propertyPath: m_RootOrder
@@ -9249,30 +9057,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4689342327268521984, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4723362296837140801, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: m_SortingLayer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4723362296837140801, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -677228051
-      objectReference: {fileID: 0}
-    - target: {fileID: 5137826165586194487, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <GroundedData>k__BackingField.<WalkSpeedModifier>k__BackingField
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7216131085512388129, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
       propertyPath: SkillPage
       value: 
       objectReference: {fileID: 1554549334}
-    - target: {fileID: 7216131085512388129, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-      propertyPath: <Data>k__BackingField
-      value: 
-      objectReference: {fileID: 1916086905}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10079,17 +9867,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3903399004546380253, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
   m_PrefabInstance: {fileID: 1808418597}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1916086905 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3799405967087320498, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
-  m_PrefabInstance: {fileID: 1808418597}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4b6a9b5c02616488e805ae9f05074d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1916086906 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2620629338676233774, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
@@ -10485,3 +10262,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &2208079972043874583
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6426683246529086567, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_Name
+      value: RacoonEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.632
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.466
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7399507715489075386, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a26f9cdaca1900b48b0be043e714c7a0, type: 3}

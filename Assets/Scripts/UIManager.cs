@@ -6,15 +6,18 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
+
     [Header("Bar")]
     [SerializeField] private Image expPlayer;
 
     [Header("Texto")]
-    [SerializeField] private TextMeshProUGUI monedasTMP;
-    [SerializeField] private TextMeshProUGUI expTMP;
+    [SerializeField] public TextMeshProUGUI GoldTMP;
+    [SerializeField] public TextMeshProUGUI expTMP;
+    [SerializeField] public TextMeshProUGUI levelTMP;
 
     [Header("Paneles")]
     [SerializeField] private GameObject panelInspectorQuests;
@@ -37,18 +40,19 @@ public class UIManager : MonoBehaviour
     public GameObject shopChoice;
     public static UIManager instance = null;
     public PlayerController playerController;
-
+    public GameObject potaltalk;
     public Button[] showMenuButton;
-
+    public Text potalTxt;
     public Sprite selectButton;
     public Sprite unSelectButton;
     [SerializeField]
     ShowMenuType currentShowMenuType;
-
+    public Text talkBtnText;
     bool isOpenShowPopUp = false;
     public PlayerInput playerinput;
     Action selectMenuAction = null;
-
+    public GameObject soundSetting;
+ 
     //0315 [SerializeField]를 선언하면 외부 스크립트에서 접근할수 없으나 인스펙터에서 세팅 및 확인을 할 수 있음  
     [SerializeField]
     Text talkText;
@@ -67,7 +71,13 @@ public class UIManager : MonoBehaviour
                 Destroy(this.gameObject);
         }
     }
+    public void OpenSoundSet(bool _OnOff)
+    {
 
+        soundSetting.SetActive(_OnOff);
+       
+
+    }
     public bool IsOpenShowPopup()
     {
         return isOpenShowPopUp;
@@ -218,7 +228,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        ActualizarUIPersonaje();
+        UpdateUIPersonnel();
 
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
@@ -233,18 +243,30 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void ActualizarUIPersonaje()
+    private void UpdateUIPersonnel()
     {
-        expPlayer.fillAmount = Mathf.Lerp(expPlayer.fillAmount,
-            expActual / NewLevel, 10f * Time.deltaTime);
-
-        expTMP.text = $"{((expActual/NewLevel) * 100):F2}%";
-        monedasTMP.text = MonedasManager.Instance.MonedasTotales.ToString();
+        //levelTMP.text = $"Level {stats.Level}";
     }
 
     public void UpdateExpPersonality(float pExpActul, float pExpRequired)
     {
         expActual = pExpActul;
         NewLevel = pExpRequired;
+    }
+
+    public void ExpUpdate(float exp, float full)
+    {
+        expTMP.text = ((exp / full) * 100).ToString("N2") + "%";
+        expPlayer.fillAmount = exp/full;
+    }
+
+    public void GoldUpdate(float gold)
+    {
+        GoldTMP.text = gold.ToString();
+    }
+    
+    public void PotalTalk(bool _OnOff)
+    {
+        potaltalk.SetActive(_OnOff);
     }
 }

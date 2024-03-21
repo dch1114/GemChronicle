@@ -68,7 +68,7 @@ public class NPCController : MonoBehaviour, IInteractive
         else if (npcType == NPCType.Shop)
         {
         
-            UIManager.instance.shopPanelOnOff(true);
+            UIManager.instance.talkBtnOnOff(true);
 
         }
         
@@ -84,7 +84,7 @@ public class NPCController : MonoBehaviour, IInteractive
         else if (npcType == NPCType.Shop)
         {
             UIManager.instance.talkBtnOnOff(false);
-            UIManager.instance.shopPanelOnOff(false);
+           
 
         }
         
@@ -174,6 +174,7 @@ public class NPCController : MonoBehaviour, IInteractive
 
     public void Closer()
     {
+        UIManager.instance.talkBtnText.text = npcData.name;
         OpenUI();
     }
 

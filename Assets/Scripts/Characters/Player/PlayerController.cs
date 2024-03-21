@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public Vector2 velocity;
     public bool isGrounded { get; set; } = false;
 
+    private Vector3 leftDirection = new Vector3(1f, 1f, 1f);
+    private Vector3 rightDirection = new Vector3(-1f, 1f, 1f);
 
     public Vector3 Movement => impact + Vector3.up * velocity.y;
 
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     public void Look(bool isLeft)
     {
-        transform.localScale = isLeft ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);
+        transform.localScale = isLeft ? leftDirection : rightDirection;
     }
 
     public void Jump(float _jumpForce)

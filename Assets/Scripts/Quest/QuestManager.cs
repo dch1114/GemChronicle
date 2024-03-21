@@ -74,9 +74,9 @@ public class QuestManager : Singleton<QuestManager>
             return;
         }
 
-        MonedasManager.Instance.AnadirMonedas(QuestUnclaimed.RewardGold);
-        //personaje.PersonajeExperiencia.AnadirExperiencia(QuestPorReclamar.RecompensaExp);
-        //Inventario.Instance.AnadirItem(QuestPorReclamar.RecompensaItem.Item, QuestPorReclamar.RecompensaItem.Cantidad);
+        GoldManager.Instance.AddGold(QuestUnclaimed.RewardGold);
+        //Character.CharacterExperience.AddExperience(QuestUnclaimed.RewardExp);
+        //Inventory.Instance.AddItem(QuestUnclaimed.RewardItem.Item, QuestUnclaimed.RewardItem.Quantity);
         PanelQuestCompleted.SetActive(false);
         QuestUnclaimed = null;
     }
