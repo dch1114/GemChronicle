@@ -42,6 +42,7 @@ public class Item
         AddItemDescription(Damage, "Damage");
         AddItemDescription(Armor, "Armor");
         AddItemDescription(Description, "Description");
+        AddItemDescription(Price, "Price");
 
 
         if (descriptionLength < 5)

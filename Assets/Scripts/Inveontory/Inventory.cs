@@ -7,6 +7,10 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
 
+    //Gold Test
+    public Player player;
+    public int inventoryGold;
+
     // Sprite Test
     [Header("Sprite Change")]
     public GameObject characterPrefab;
@@ -71,6 +75,9 @@ public class Inventory : MonoBehaviour
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
 
+        //Gold Test
+        player.Data.StatusData.Gold = 600;
+        inventoryGold = player.Data.StatusData.Gold;
         //AddStartingItems();
     }
 

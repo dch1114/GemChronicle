@@ -56,9 +56,16 @@ public class Shop : MonoBehaviour
 
     public void Buy(Item selectItem)
     {
-        shopItems.Remove(selectItem);
-        playerInventory.AddItem(selectItem);
+        if(!(playerInventory.inventoryGold < selectItem.Price))
+        {
+            shopItems.Remove(selectItem);
+            playerInventory.AddItem(selectItem);
 
-        UpdateSlotUI();
+            UpdateSlotUI();
+        }
+        //shopItems.Remove(selectItem);
+        //playerInventory.AddItem(selectItem);
+
+        //UpdateSlotUI();
     }
 }
