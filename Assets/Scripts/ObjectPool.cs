@@ -26,7 +26,6 @@ public class ObjectPool : MonoBehaviour
                 GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
-                this.gameObject.GetComponent<SoundManager>().EffectAudioSource.Add(obj.GetComponent<AudioSource>());
             }
             poolDictionary.Add(pool.tag, objectPool);
         }
