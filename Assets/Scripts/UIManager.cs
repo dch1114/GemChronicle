@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine.Video;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -245,24 +247,18 @@ public class UIManager : Singleton<UIManager>
 
     private void UpdateUIPersonnel()
     {
-        //levelTMP.text = $"Level {stats.Level}";
+        expPlayer.fillAmount = Mathf.Lerp(expPlayer.fillAmount,
+            expActual / NewLevel, 10f * Time.deltaTime);
+
+        expTMP.text = $"{((expActual / NewLevel) * 100):F2}%";
+        //levelTMP.text = $"Nivel {stats.Nivel}";
+        GoldTMP.text = GoldManager.Instance.GoldTotales.ToString();
     }
 
     public void UpdateExpPersonality(float pExpActul, float pExpRequired)
     {
         expActual = pExpActul;
         NewLevel = pExpRequired;
-    }
-
-    public void ExpUpdate(float exp, float full)
-    {
-        expTMP.text = ((exp / full) * 100).ToString("N2") + "%";
-        expPlayer.fillAmount = exp/full;
-    }
-
-    public void GoldUpdate(float gold)
-    {
-        GoldTMP.text = gold.ToString();
     }
     
     public void PotalTalk(bool _OnOff)
