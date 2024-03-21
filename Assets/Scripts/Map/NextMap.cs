@@ -19,9 +19,7 @@ public class NextMap : MonoBehaviour, IInteractive
     {
         if (_collision.transform.CompareTag("Player"))
         {
-            UIManager.instance.potalTxt.text = destination;
-            // 충돌이 발생하면 상태를 true로 변경
-            collisionOccurred = true;
+            OpenUI();
         }
     }
 
@@ -29,8 +27,9 @@ public class NextMap : MonoBehaviour, IInteractive
     {
         if (_collision.transform.CompareTag("Player"))
         {
-            
-            collisionOccurred = false;
+            CloseUI();
+
+
         }
     }
  
@@ -39,12 +38,14 @@ public class NextMap : MonoBehaviour, IInteractive
 
     public void OpenUI()
     {
-        throw new System.NotImplementedException();
+        UIManager.instance.potalTxt.text = destination;
+        // 충돌이 발생하면 상태를 true로 변경
+        collisionOccurred = true;
     }
 
     public void CloseUI()
     {
-        throw new System.NotImplementedException();
+        collisionOccurred = false;
     }
 
     public void TryTalk()
