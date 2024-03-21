@@ -28,6 +28,7 @@ public class Item
     public string Description;
     public ItemType ItemType;
     public EquipmentType EquipmentType;
+    public int Price;
 
     private int descriptionLength;
     private StringBuilder sb = new StringBuilder();
