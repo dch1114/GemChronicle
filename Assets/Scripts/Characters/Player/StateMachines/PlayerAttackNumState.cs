@@ -16,9 +16,7 @@ public class PlayerAttackNumState : PlayerAttackState
 
         //TODO: Skill 찍는거 만들어서 반영
         List<int> skillIndex = stateMachine.SkillIndex;
-        stateMachine.Player.Animator.SetInteger("Skill1Index", skillIndex[0]);
-        stateMachine.Player.Animator.SetInteger("Skill2Index", skillIndex[1]);
-        stateMachine.Player.Animator.SetInteger("Skill3Index", skillIndex[2]);
+        Shoot(skillIndex[0]);
 
         base.Enter();
     }
@@ -26,5 +24,12 @@ public class PlayerAttackNumState : PlayerAttackState
     public override void Exit()
     {
         base.Exit();
+    }
+
+    private void Shoot(int _index)
+    {
+        GameObject go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(_index.ToString());
+        go.transform.position = stateMachine.Player.transform.position;
+        go.SetActive(true);
     }
 }

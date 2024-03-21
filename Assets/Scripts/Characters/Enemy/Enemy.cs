@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public enum EnemyState
@@ -18,11 +20,17 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rigid;
     private Animator animator;
 
-    private int nextMove;
+    private EnemyState state;
+
     private bool isLeft = true;
     private bool foundEnemy = false;
     private bool canAttack = true;
+    private Vector3 nextMove = Vector3.left;
+    private Vector3 distance = new Vector3(1.5f, 0, 0);
+    private Vector3 leftDirection;
+    private Vector3 rightDirection;
 
+    private IDamageable playerCollider;
     private void Awake()
     {
         EnemyAnimationData.Initialize();
@@ -30,40 +38,59 @@ public class Enemy : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
+        leftDirection = transform.localScale;
+        rightDirection = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+
         Invoke("Think", 5);
     }
 
     void FixedUpdate()
     {
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
-        if (nextMove != 0)
-        {
-            SetState(EnemyState.Walking);
-        }
-
-        if ((nextMove > 0 && isLeft) || (nextMove < 0 && !isLeft))
-        {
-            Flip();
-        }
-
-        NextGround();
-
         CheckPlayer();
+
+        switch (state)
+        {
+            case EnemyState.Idle:
+                UpdateIdle();
+                break;
+            case EnemyState.Walking:
+                UpdateWalking();
+                break;
+            case EnemyState.Attacking:
+                UpdateAttacking();
+                break;
+            case EnemyState.Dead:
+                break;
+        }
     }
 
     private void UpdateIdle()
-    {
-
-    } 
-
-    private void UpdateWalking()
     {
         if(foundEnemy)
         {
             SetState(EnemyState.Attacking);
         } else
         {
-            Move();
+            if(nextMove.x != 0)
+            {
+                SetState(EnemyState.Walking);
+            }
+        }
+    } 
+
+    private void UpdateWalking()
+    {
+        NextGround();
+
+        if (foundEnemy)
+        {
+            SetState(EnemyState.Attacking);
+        }
+        else
+        {
+            Move(nextMove * Time.deltaTime);
+            CheckDirection();
+            Look();
         }
     }
 
@@ -71,8 +98,11 @@ public class Enemy : MonoBehaviour
     {
         if(foundEnemy && canAttack)
         {
+            if (playerCollider != null)
+            {
+                playerCollider.TakeDamage(EnemyStatusData.Atk);
+            }
             canAttack = false;
-            SetState(EnemyState.Attacking);
             Invoke("WaitAttackCoolTime", EnemyStatusData.AttackRate);
         } else
         {
@@ -82,16 +112,19 @@ public class Enemy : MonoBehaviour
 
     protected void SetState(EnemyState newState)
     {
+        state = newState;
+
         switch(newState)
         {
             case EnemyState.Idle:
                 animator.SetBool(EnemyAnimationData.WalkParameterHash, false);
+                animator.SetBool(EnemyAnimationData.AttackParameterHash, false);
                 break;
             case EnemyState.Walking:
                 animator.SetBool(EnemyAnimationData.WalkParameterHash, true);
                 break;
             case EnemyState.Attacking:
-                animator.SetTrigger(EnemyAnimationData.AttackParameterHash);
+                animator.SetBool(EnemyAnimationData.AttackParameterHash, true);
                 break;
             case EnemyState.Dead:
                 animator.SetTrigger(EnemyAnimationData.DieParameterHash);
@@ -103,14 +136,14 @@ public class Enemy : MonoBehaviour
         canAttack = true;
     }
 
-    private void Move()
+    private void Move(Vector3 _speed)
     {
-
+        transform.Translate(_speed);
     }
 
     private void NextGround()
     {
-        Vector2 frontVec = new Vector2(transform.position.x + nextMove * 0.4f, transform.position.y);
+        Vector2 frontVec = new Vector2(transform.position.x + nextMove.x * 0.4f, transform.position.y);
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Ground"));
         if (rayHit.collider == null)
         {
@@ -122,35 +155,35 @@ public class Enemy : MonoBehaviour
 
     private void CheckPlayer()
     {
-        Vector3 direction = Vector3.left;
-        Debug.DrawRay(transform.position, direction, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(transform.position, Vector3.left, 2f, LayerMask.GetMask("Player"));
+        Debug.DrawRay(transform.position + distance, Vector3.left, new Color(0, 1, 0));
+        RaycastHit2D rayHit = Physics2D.Raycast(transform.position + distance, Vector3.left, 3f, LayerMask.GetMask("Player"));
         if(rayHit.collider == null)
         {
             foundEnemy = false;
         } else
         {
+            playerCollider = rayHit.collider.gameObject.GetComponent<IDamageable>();
             foundEnemy = true;
         }
-        Debug.Log(foundEnemy);
     }
 
-    // Àç±Í ÇÔ¼ö
     void Think()
     {
-        nextMove = Random.Range(-1, 2);
+        nextMove.x = Random.Range(-1, 2);
         SetState(EnemyState.Idle);
 
         float nextThinkTime = Random.Range(2f, 5f);
         Invoke("Think", nextThinkTime);
     }
 
-    void Flip()
+    private void Look()
     {
-        Vector3 scale = transform.localScale;
-        scale.x *= -1;
+        transform.localScale = isLeft ? leftDirection : rightDirection;
+    }
 
-        transform.localScale = scale;
-        isLeft = !isLeft;
+    private void CheckDirection()
+    {
+        if (nextMove.x > 0) isLeft = false;
+        else isLeft = true;
     }
 }

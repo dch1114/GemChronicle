@@ -16,9 +16,9 @@ public class PlayerAnimationData
 
     [SerializeField] private string attackParameterName = "@Attack";
     [SerializeField] private string attackIndexParameterName = "AttackIndex";
-    [SerializeField] private string skill1IndexParameterName = "Skill1Index";
-    [SerializeField] private string skill2IndexParameterName = "Skill2Index";
-    [SerializeField] private string skill3IndexParameterName = "Skill3Index";
+    //[SerializeField] private string skill1IndexParameterName = "Skill1Index";
+    //[SerializeField] private string skill2IndexParameterName = "Skill2Index";
+    //[SerializeField] private string skill3IndexParameterName = "Skill3Index";
 
     public int GroundParameterHash { get; private set; }
     public int IdleParameterHash { get; private set; }
@@ -30,9 +30,9 @@ public class PlayerAnimationData
 
     public int AttackParameterHash { get; private set;}
     public int AttackIndexParameterHash { get; private set; }
-    public int Skill1IndexParameterHash { get; private set; }
-    public int Skill2IndexParameterHash { get; private set; }
-    public int Skill3IndexParameterHash { get; private set; }
+    //public int Skill1IndexParameterHash { get; private set; }
+    //public int Skill2IndexParameterHash { get; private set; }
+    //public int Skill3IndexParameterHash { get; private set; }
     public void Initialize()
     {
         GroundParameterHash = Animator.StringToHash(groundParameterName);
@@ -45,8 +45,8 @@ public class PlayerAnimationData
 
         AttackParameterHash = Animator.StringToHash(attackParameterName);
         AttackIndexParameterHash = Animator.StringToHash(attackIndexParameterName);
-        Skill1IndexParameterHash = Animator.StringToHash(skill1IndexParameterName);
-        Skill2IndexParameterHash = Animator.StringToHash(skill2IndexParameterName);
-        Skill3IndexParameterHash = Animator.StringToHash(skill3IndexParameterName);
+        //Skill1IndexParameterHash = Animator.StringToHash(skill1IndexParameterName);
+        //Skill2IndexParameterHash = Animator.StringToHash(skill2IndexParameterName);
+        //Skill3IndexParameterHash = Animator.StringToHash(skill3IndexParameterName);
     }
 }

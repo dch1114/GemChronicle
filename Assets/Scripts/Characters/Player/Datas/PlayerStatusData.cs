@@ -11,7 +11,7 @@ public enum JobType
 }
 
 [Serializable]
-public class PlayerStatusData : Status, IDamageable
+public class PlayerStatusData : Status
 {
     [SerializeField] protected string name;
     [SerializeField] protected int maxHp;
