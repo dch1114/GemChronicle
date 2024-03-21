@@ -6,15 +6,18 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
+
     [Header("Bar")]
     [SerializeField] private Image expPlayer;
 
     [Header("Texto")]
     [SerializeField] public TextMeshProUGUI GoldTMP;
     [SerializeField] public TextMeshProUGUI expTMP;
+    [SerializeField] public TextMeshProUGUI levelTMP;
 
     [Header("Paneles")]
     [SerializeField] private GameObject panelInspectorQuests;
@@ -218,6 +221,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        UpdateUIPersonnel();
 
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
@@ -230,6 +234,11 @@ public class UIManager : MonoBehaviour
             PopupShopMenuSelect(++currentShowMenuType);
             //Debug.Log("현재 선택된 메뉴는 : " + currentShowMenuType);
         }
+    }
+
+    private void UpdateUIPersonnel()
+    {
+        //levelTMP.text = $"Level {stats.Level}";
     }
 
     public void UpdateExpPersonality(float pExpActul, float pExpRequired)
