@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,8 @@ public class Inventory : MonoBehaviour
     //Gold Test
     public Player player;
     public int inventoryGold;
-
+    PlayerStatusData statusData;
+    [SerializeField] private TextMeshProUGUI goldText;
     // Sprite Test
     [Header("Sprite Change")]
     public GameObject characterPrefab;
@@ -78,20 +80,24 @@ public class Inventory : MonoBehaviour
         //Gold Test
         player.Data.StatusData.Gold = 600;
         inventoryGold = player.Data.StatusData.Gold;
+        statusData = player.Data.StatusData;
+        UpdateRetainGold();
+
+
         //AddStartingItems();
     }
 
-    public void Gacha() // test
-    {
-        Item item = itemDatabase.GetRandomItem();  // 데이터베이스에서 랜덤한 데이터를 반환
+    //public void Gacha() // test
+    //{
+    //    Item item = itemDatabase.GetRandomItem();  // 데이터베이스에서 랜덤한 데이터를 반환
 
-        InventoryItem itemInstanceas = new InventoryItem(item); // 인벤토리에 들어갈 아이템 인스턴스 생성
+    //    InventoryItem itemInstanceas = new InventoryItem(item); // 인벤토리에 들어갈 아이템 인스턴스 생성
 
-        //inventory.Add(itemInstanceas);  
-        AddItem(itemInstanceas.datas); // 인벤토리에 아이템 추가
+    //    //inventory.Add(itemInstanceas);  
+    //    AddItem(itemInstanceas.datas); // 인벤토리에 아이템 추가
 
-        Debug.Log(itemInstanceas.datas.Name);
-    }
+    //    Debug.Log(itemInstanceas.datas.Name);
+    //}
 
     //public void EquipTest() // test
     //{
@@ -179,11 +185,13 @@ public class Inventory : MonoBehaviour
         if (oldEquipment != null)
         {
             UnEquipItem(oldEquipment);
+            RemoveItemStat(oldEquipment);
             AddItem(oldEquipment);
         }
 
         equipment.Add(newItem);
         equipmentDictionary.Add(newEquipment, newItem);
+        AddItemStat(_item);
         RemoveItem(_item);
 
         if(newItem.datas.EquipmentType == EquipmentType.Weapon)
@@ -207,7 +215,7 @@ public class Inventory : MonoBehaviour
             equipment.Remove(_value);
             equipmentDictionary.Remove(_itemToRemove);
 
-            //itemToRemove.RemoveModifiers();
+            RemoveItemStat(_itemToRemove);
         }
 
         if (_itemToRemove.EquipmentType == EquipmentType.Weapon)
@@ -239,6 +247,23 @@ public class Inventory : MonoBehaviour
         }
 
         UpdateSlotUI();
+    }
+
+    public void AddItemStat(Item _item)
+    {
+        statusData.Atk += _item.Damage;
+        statusData.Def += _item.Armor;
+    }
+
+    public void RemoveItemStat(Item _item)
+    {
+        statusData.Atk -= _item.Damage;
+        statusData.Def -= _item.Armor;
+    }
+
+    public void UpdateRetainGold()
+    {
+        goldText.text = inventoryGold.ToString();
     }
 
     //public void EquipItem(ItemData _item)

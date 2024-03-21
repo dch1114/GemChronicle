@@ -61,7 +61,15 @@ public class Shop : MonoBehaviour
             shopItems.Remove(selectItem);
             playerInventory.AddItem(selectItem);
 
+            playerInventory.inventoryGold -= selectItem.Price;
+
             UpdateSlotUI();
+
+            playerInventory.UpdateRetainGold();
+        }
+        else
+        {
+            Debug.Log("not enough gold");
         }
         //shopItems.Remove(selectItem);
         //playerInventory.AddItem(selectItem);
