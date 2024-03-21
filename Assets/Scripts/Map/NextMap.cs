@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NextMap : MonoBehaviour
+public class NextMap : MonoBehaviour, IInteractive
 {
     public enum NextPositionType
     {
@@ -19,6 +19,7 @@ public class NextMap : MonoBehaviour
     {
         if (_collision.transform.CompareTag("Player"))
         {
+            UIManager.instance.potalTxt.text = destination;
             // 충돌이 발생하면 상태를 true로 변경
             collisionOccurred = true;
         }
@@ -32,26 +33,32 @@ public class NextMap : MonoBehaviour
             collisionOccurred = false;
         }
     }
-    private void Update()
+ 
+
+ 
+
+    public void OpenUI()
     {
-        // 충돌이 발생했을 때만 키 입력을 검사
-        if (collisionOccurred)
-        {
-            UIManager.instance.potalTxt.text = destination;
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-
-                PerformAction();
-
-
-            }
-        }
+        throw new System.NotImplementedException();
     }
-    
 
-    private void PerformAction()
+    public void CloseUI()
     {
-        // 플레이어 오브젝트를 찾음
+        throw new System.NotImplementedException();
+    }
+
+    public void TryTalk()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Closer()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Interact()
+    {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (player != null)
@@ -68,17 +75,22 @@ public class NextMap : MonoBehaviour
                 }
                 else
                 {
-                  
+
                 }
             }
             else
             {
-               
+
             }
         }
         else
         {
-           
+
         }
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 }
