@@ -2590,6 +2590,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1834407487}
     m_Modifications:
+    - target: {fileID: 2997185642743265482, guid: 904bf95beddd378419f63b3d6734e908, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 269
+      objectReference: {fileID: 0}
     - target: {fileID: 5357879379639728070, guid: 904bf95beddd378419f63b3d6734e908, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2625,6 +2629,14 @@ PrefabInstance:
     - target: {fileID: 5357879379639728070, guid: 904bf95beddd378419f63b3d6734e908, type: 3}
       propertyPath: m_SizeDelta.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5357879379639728070, guid: 904bf95beddd378419f63b3d6734e908, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5357879379639728070, guid: 904bf95beddd378419f63b3d6734e908, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5357879379639728070, guid: 904bf95beddd378419f63b3d6734e908, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2677,6 +2689,10 @@ PrefabInstance:
     - target: {fileID: 7303686942036403927, guid: 904bf95beddd378419f63b3d6734e908, type: 3}
       propertyPath: m_Name
       value: PotraitPopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7303686942036403927, guid: 904bf95beddd378419f63b3d6734e908, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5326,6 +5342,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1554549334}
     - target: {fileID: 7216131085512388129, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
+      propertyPath: InventoryPanel
+      value: 
+      objectReference: {fileID: 379328906}
+    - target: {fileID: 7216131085512388129, guid: e8353c3cd07cbd941aa913e62ecb52dd, type: 3}
       propertyPath: <Data>k__BackingField
       value: 
       objectReference: {fileID: 1916086905}
@@ -5619,14 +5639,14 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2080702714}
   - {fileID: 1009072978}
   - {fileID: 598595116}
   - {fileID: 1883709284}
-  - {fileID: 2080702714}
+  - {fileID: 1174733280}
   - {fileID: 941946482}
   - {fileID: 1337487061}
   - {fileID: 198324748}
-  - {fileID: 1174733280}
   - {fileID: 3946390312929966695}
   - {fileID: 2042171485}
   - {fileID: 1751442329657771239}

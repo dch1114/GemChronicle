@@ -254,7 +254,7 @@ public class UIManager : Singleton<UIManager>
 
         expTMP.text = $"{((expActual / NewLevel) * 100):F2}%";
         levelTMP.text = $"Level {Level}";
-        GoldTMP.text = GoldManager.Instance.GoldTotales.ToString();
+      
     }
 
     public void UpdateExpPersonality(float pExpActul, float pExpRequired, int pLevel)
