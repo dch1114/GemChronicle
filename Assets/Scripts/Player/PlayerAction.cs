@@ -36,7 +36,7 @@ public class PlayerAction : MonoBehaviour
     }
     void OnInteractive()
     {
-        Debug.Log("발동!");
+   
         if (interactiveList.Count > 0)
         {
             playerinput.OnDisable();
@@ -105,7 +105,6 @@ public class PlayerAction : MonoBehaviour
             }
         }
 
-        Debug.Log(interactiveList.Count);
     }
 
     /// 아래 부분이 없으면 NPC와 떨어지더라도 가장 최근 접촉한 NPC와 계속 대화함
@@ -134,6 +133,6 @@ public class PlayerAction : MonoBehaviour
             }
         }
 
-        Debug.Log(interactiveList.Count);
+
     }
 }
