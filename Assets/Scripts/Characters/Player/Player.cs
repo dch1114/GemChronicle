@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
 
     public GameObject SkillPage;
 
+    //test
+    public GameObject InventoryPanel;
+
     private void Awake()
     {
         AnimationData.Initialize();

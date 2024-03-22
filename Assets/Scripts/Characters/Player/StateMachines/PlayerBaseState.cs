@@ -55,6 +55,9 @@ public class PlayerBaseState : IState
 
         input.PlayerActions.Attack.performed += OnAttackPerformed;
         input.PlayerActions.Attack.canceled += OnAttackCanceled;
+
+        //Test
+        input.PlayerActions.Inventory.started += OnInventory;
     }
 
     protected virtual void RemoveInputActionsCallbacks()
@@ -70,6 +73,9 @@ public class PlayerBaseState : IState
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
 
         input.PlayerActions.ComboAttack.canceled += OnComboAttackCanceled;
+
+        //Test
+        input.PlayerActions.Inventory.started -= OnInventory;
     }
 
 
@@ -141,6 +147,13 @@ public class PlayerBaseState : IState
     protected virtual void OnJumpStarted(InputAction.CallbackContext context)
     {
 
+    }
+
+    //test
+    private void OnInventory(InputAction.CallbackContext context)
+    {
+        bool isActive = stateMachine.Player.InventoryPanel.activeSelf;
+        stateMachine.Player.InventoryPanel.SetActive(!isActive);
     }
 
     private void ReadMovementInput()

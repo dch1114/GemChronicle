@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -21,7 +20,7 @@ public enum ItemType
 [System.Serializable]
 public class Item
 {
-    public int ID; // 이름이 동일해야 한다
+    public int ID; // 엑셀과 스크립트의 변수명이 동일해야 한다
     public string Name;
     public int Damage;
     public int Armor;
@@ -80,9 +79,9 @@ public class Item
             {
                 sb.AppendLine();
             }
-            
+
             sb.Append(_name + ": " + _value);
-            
+
             descriptionLength++;
         }
     }
@@ -104,28 +103,28 @@ public class ItemDatabase
         }
     }
 
-    public Item GetItemByKey(int id)
-    {
-        //foreach (Item item in ItemInfos)
-        //{
-        //    if (item.ID == id)
-        //    {
-        //        return item;
-        //    }
-        //}
-        //return null;
+    //public Item GetItemByKey(int id)
+    //{
+    //    //foreach (Item item in ItemInfos)
+    //    //{
+    //    //    if (item.ID == id)
+    //    //    {
+    //    //        return item;
+    //    //    }
+    //    //}
+    //    //return null;
 
-        if (itemDic.ContainsKey(id))
-            return itemDic[id];
+    //    if (itemDic.ContainsKey(id))
+    //        return itemDic[id];
 
-        return null;
-    }
+    //    return null;
+    //}
 
-    public Item GetRandomItem()
-    {
-        if (ItemDatas.Count <= 0)
-            return null;
+    //public Item GetRandomItem()
+    //{
+    //    if (ItemDatas.Count <= 0)
+    //        return null;
 
-        return ItemDatas[Random.Range(0, ItemDatas.Count)];
-    }
+    //    return ItemDatas[Random.Range(0, ItemDatas.Count)];
+    //}
 }
