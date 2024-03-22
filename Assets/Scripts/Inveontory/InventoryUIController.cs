@@ -26,10 +26,10 @@ public class InventoryUIController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            SwitchWithKeyTo(inventoryUI);
-        }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    SwitchWithKeyTo(inventoryUI);
+        //}
 
         //if (Input.GetKeyDown(KeyCode.K))
         //{
