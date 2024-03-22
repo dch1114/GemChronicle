@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +26,7 @@ public class Shop : MonoBehaviour
 
     public void SetShopItem()
     {
-        for (int i = 0; i< itemDatabase.ItemDatas.Count; i++)
+        for (int i = 0; i < itemDatabase.ItemDatas.Count; i++)
         {
             Item shopItemInstance = new Item();
             shopItemInstance = itemDatabase.ItemDatas[i];
@@ -38,11 +37,6 @@ public class Shop : MonoBehaviour
 
     private void UpdateSlotUI()
     {
-        //for (int i = 0; i < shopItems.Count; i++)
-        //{
-        //    shopItemSlot[i].UpdateSlot(shopItems[i]);
-        //}
-
         for (int i = 0; i < shopItemSlot.Length; i++)
         {
             shopItemSlot[i].CleanUpSlot();
@@ -56,7 +50,7 @@ public class Shop : MonoBehaviour
 
     public void Buy(Item selectItem)
     {
-        if(!(playerInventory.inventoryGold < selectItem.Price))
+        if (!(playerInventory.inventoryGold < selectItem.Price))
         {
             shopItems.Remove(selectItem);
             playerInventory.AddItem(selectItem);
@@ -65,15 +59,13 @@ public class Shop : MonoBehaviour
 
             UpdateSlotUI();
 
-            
+
             playerInventory.UpdateRetainGold();
         }
         else
         {
+            //TODO ÆË¾÷ Ãß°¡
             Debug.Log("not enough gold");
         }
-        //shopItems.Remove(selectItem);
-        //playerInventory.AddItem(selectItem);
-        //UpdateSlotUI();
     }
 }

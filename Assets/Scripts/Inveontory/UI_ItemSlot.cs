@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHandler, IPointerExitHandler
+public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
@@ -121,48 +121,4 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler //IPointerEnterHan
 
         ui.itemToopTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
     }
-
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    if(item == null)
-    //    {
-    //        return;
-    //    }
-
-    //    Vector2 mousePosition = Input.mousePosition;
-
-    //    float xOffset = 0;
-    //    float yOffset = 0;
-
-    //    if(mousePosition.x > 600)
-    //    {
-    //        xOffset = -75;
-    //    }
-    //    else
-    //    {
-    //        xOffset = 75;
-    //    }
-
-    //    if(mousePosition.y > 320)
-    //    {
-    //        yOffset = -75;
-    //    }
-    //    else
-    //    {
-    //        yOffset = 75;
-    //    }
-
-    //    ui.itemToopTip.ShowToolTip(item.data as ItemData_Equipment);
-    //    ui.itemToopTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
-    //}
-
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    if (item == null)
-    //    {
-    //        return;
-    //    }
-
-    //    ui.itemToopTip.HideToolTip();
-    //}
 }
