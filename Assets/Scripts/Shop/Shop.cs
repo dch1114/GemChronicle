@@ -65,6 +65,7 @@ public class Shop : MonoBehaviour
 
             UpdateSlotUI();
 
+            
             playerInventory.UpdateRetainGold();
         }
         else
@@ -73,7 +74,6 @@ public class Shop : MonoBehaviour
         }
         //shopItems.Remove(selectItem);
         //playerInventory.AddItem(selectItem);
-
         //UpdateSlotUI();
     }
 }

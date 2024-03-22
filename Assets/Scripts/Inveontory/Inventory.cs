@@ -78,9 +78,8 @@ public class Inventory : MonoBehaviour
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
 
         //Gold Test
-        player.Data.StatusData.Gold = 600;
-        inventoryGold = player.Data.StatusData.Gold;
         statusData = player.Data.StatusData;
+        inventoryGold = statusData.Gold;
         UpdateRetainGold();
 
 
@@ -263,6 +262,7 @@ public class Inventory : MonoBehaviour
 
     public void UpdateRetainGold()
     {
+        statusData.Gold = inventoryGold;
         goldText.text = inventoryGold.ToString();
     }
 
