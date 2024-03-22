@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAirState
 {
-    private bool isJumping = false;
     public PlayerJumpState(PlayerStateMachine _playerStateMachine) : base(_playerStateMachine)
     {
     }
