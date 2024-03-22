@@ -55,14 +55,17 @@ public class PlayerBaseState : IState
 
         input.PlayerActions.Attack.performed += OnAttackPerformed;
         input.PlayerActions.Attack.canceled += OnAttackCanceled;
+
+        //Test
+        input.PlayerActions.Inventory.started += OnInventory;
     }
 
     protected virtual void RemoveInputActionsCallbacks()
     {
         PlayerInput input = stateMachine.Player.Input;
-        input.PlayerActions.Movement.canceled -= OnMovementCanceled;
+        //input.PlayerActions.Movement.canceled -= OnMovementCanceled;
 
-        stateMachine.Player.Input.PlayerActions.Jump.started -= OnJumpStarted;
+        input.PlayerActions.Jump.started -= OnJumpStarted;
 
         input.PlayerActions.SkillPage.started -= OnSkillPageStarted;
 
@@ -70,6 +73,9 @@ public class PlayerBaseState : IState
         input.PlayerActions.Attack.canceled -= OnAttackCanceled;
 
         input.PlayerActions.ComboAttack.canceled += OnComboAttackCanceled;
+
+        //Test
+        input.PlayerActions.Inventory.started -= OnInventory;
     }
 
 
@@ -143,6 +149,13 @@ public class PlayerBaseState : IState
 
     }
 
+    //test
+    private void OnInventory(InputAction.CallbackContext context)
+    {
+        bool isActive = stateMachine.Player.InventoryPanel.activeSelf;
+        stateMachine.Player.InventoryPanel.SetActive(!isActive);
+    }
+
     private void ReadMovementInput()
     {
         stateMachine.MovementInput = stateMachine.Player.Input.PlayerActions.Movement.ReadValue<Vector2>();
@@ -157,8 +170,9 @@ public class PlayerBaseState : IState
 
     private Vector3 GetMovementDirection()
     {
-        Vector3 right = new Vector3(1f, 0f, 0f);
-        //right.Normalize();
+        Vector3 right = stateMachine.MainCameraTransform.right;
+        right.y = 0;
+        right.Normalize();
 
         return right * stateMachine.MovementInput.x;
     }

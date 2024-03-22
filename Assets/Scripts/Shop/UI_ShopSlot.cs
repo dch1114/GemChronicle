@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,11 +31,6 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
 
         itemImage.color = Color.white;
 
-        //if (item == null || item.stackSize == 0)
-        //{
-        //    itemImage.color = emptySlotColor;
-        //}
-
         if (item != null)
         {
             itemImage.sprite = item.sprite; // test
@@ -65,7 +58,7 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (item == null) //|| item.stackSize == 0)
+        if (item == null)
         {
             return;
         }
@@ -75,53 +68,5 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
         tradePopup.shopTradePopup.gameObject.SetActive(true);
         ui.shopitemToolTip.ShowToolTip(selectItem);
         tradePopup.SetItem(selectItem);
-
-
-        //float currentTime = Time.time;
-        //float timeSinceLastClick = currentTime - lastClickTime;
-
-        //if (timeSinceLastClick <= clickDelay)
-        //{
-        //    //UpdateSlot(item);
-        //    Item selectItem = item;
-        //    ui.itemToopTip.ShowToolTip(item);
-        //    tradePopup.SetItem(selectItem);
-        //    tradePopup.gameObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    AdjustToolTipPosition();
-        //    ui.itemToopTip.ShowToolTip(item);   //test
-        //}
-
-        //lastClickTime = currentTime;
     }
-
-    //private void AdjustToolTipPosition()
-    //{
-    //    Vector2 mousePosition = Input.mousePosition;
-
-    //    float xOffset;
-    //    float yOffset;
-
-    //    if (mousePosition.x > 600)
-    //    {
-    //        xOffset = -150;
-    //    }
-    //    else
-    //    {
-    //        xOffset = 150;
-    //    }
-
-    //    if (mousePosition.y > 320)
-    //    {
-    //        yOffset = -75;
-    //    }
-    //    else
-    //    {
-    //        yOffset = 75;
-    //    }
-
-    //    ui.itemToopTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
-    //}
 }

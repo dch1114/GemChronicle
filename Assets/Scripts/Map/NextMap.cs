@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NextMap : MonoBehaviour
+public class NextMap : MonoBehaviour, IInteractive
 {
     public enum NextPositionType
     {
@@ -15,43 +15,36 @@ public class NextMap : MonoBehaviour
     // 충돌이 발생한지 여부를 나타내는 변수
     private bool collisionOccurred = false;
 
-    private void OnTriggerEnter2D(Collider2D _collision)
+
+
+ 
+
+    public void OpenUI()
     {
-        if (_collision.transform.CompareTag("Player"))
-        {
-            // 충돌이 발생하면 상태를 true로 변경
-            collisionOccurred = true;
-        }
+        UIManager.instance.potalTxt.text = destination;
+        // 충돌이 발생하면 상태를 true로 변경
+        collisionOccurred = true;
+        UIManager.instance.PotalTalk(true);
     }
 
-    private void OnTriggerExit2D(Collider2D _collision)
+    public void CloseUI()
     {
-        if (_collision.transform.CompareTag("Player"))
-        {
-            
-            collisionOccurred = false;
-        }
+        collisionOccurred = false;
+        UIManager.instance.PotalTalk(false);
     }
-    private void Update()
+
+    public void TryTalk()
     {
-        // 충돌이 발생했을 때만 키 입력을 검사
-        if (collisionOccurred)
-        {
-            UIManager.instance.potalTxt.text = destination;
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-
-                PerformAction();
-
-
-            }
-        }
+        throw new System.NotImplementedException();
     }
-    
 
-    private void PerformAction()
+    public void Closer()
     {
-        // 플레이어 오브젝트를 찾음
+        OpenUI();
+    }
+
+    public void Interact()
+    {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (player != null)
@@ -68,17 +61,22 @@ public class NextMap : MonoBehaviour
                 }
                 else
                 {
-                  
+
                 }
             }
             else
             {
-               
+
             }
         }
         else
         {
-           
+
         }
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 }

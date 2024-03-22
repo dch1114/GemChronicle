@@ -46,7 +46,7 @@ public class NPCManager : MonoBehaviour
 
     void MakeNpcGameObject()
     {
-        Debug.Log("1");
+        
         for (int i = 0; i < npcList.Count; i++)
         {
 

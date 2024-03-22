@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -78,40 +76,13 @@ public class Inventory : MonoBehaviour
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
 
         //Gold Test
-        player.Data.StatusData.Gold = 600;
-        inventoryGold = player.Data.StatusData.Gold;
         statusData = player.Data.StatusData;
+        inventoryGold = statusData.Gold;
         UpdateRetainGold();
 
 
         //AddStartingItems();
     }
-
-    //public void Gacha() // test
-    //{
-    //    Item item = itemDatabase.GetRandomItem();  // 데이터베이스에서 랜덤한 데이터를 반환
-
-    //    InventoryItem itemInstanceas = new InventoryItem(item); // 인벤토리에 들어갈 아이템 인스턴스 생성
-
-    //    //inventory.Add(itemInstanceas);  
-    //    AddItem(itemInstanceas.datas); // 인벤토리에 아이템 추가
-
-    //    Debug.Log(itemInstanceas.datas.Name);
-    //}
-
-    //public void EquipTest() // test
-    //{
-    //    Debug.Log(inventory[0].datas.Name);
-    //    EquipItemTest(inventory[0].datas); // 인벤토리에 아이템 추가
-
-    //}
-
-    //public void UnequipTest()
-    //{
-    //    Debug.Log(equipment[0].datas.Name);
-    //    UnEquipItemTest(equipment[0].datas);
-    //}
-
 
     public void AddItem(Item _item)
     {
@@ -151,8 +122,6 @@ public class Inventory : MonoBehaviour
                 {
                     equipmentSlot[i].UpdateSlot(item.Value);
                 }
-
-                //equipmentSlot[i].UpdateSlot(item.Value);
             }
         }
 
@@ -194,12 +163,12 @@ public class Inventory : MonoBehaviour
         AddItemStat(_item);
         RemoveItem(_item);
 
-        if(newItem.datas.EquipmentType == EquipmentType.Weapon)
+        if (newItem.datas.EquipmentType == EquipmentType.Weapon)
         {
             characterSpriteOBj._weaponList[0].sprite = newItem.datas.sprite;
             equipmentSpriteOBj._weaponList[0].sprite = newItem.datas.sprite;
         }
-        else if(newItem.datas.EquipmentType == EquipmentType.Armor)
+        else if (newItem.datas.EquipmentType == EquipmentType.Armor)
         {
             characterSpriteOBj._armorList[0].sprite = newItem.datas.sprite;
             equipmentSpriteOBj._armorList[0].sprite = newItem.datas.sprite;
@@ -225,7 +194,7 @@ public class Inventory : MonoBehaviour
         }
         else if (_itemToRemove.EquipmentType == EquipmentType.Armor)
         {
-            characterSpriteOBj._armorList[0].sprite= null;
+            characterSpriteOBj._armorList[0].sprite = null;
             equipmentSpriteOBj._armorList[0].sprite = null;
         }
 
@@ -263,6 +232,7 @@ public class Inventory : MonoBehaviour
 
     public void UpdateRetainGold()
     {
+        statusData.Gold = inventoryGold;
         goldText.text = inventoryGold.ToString();
     }
 

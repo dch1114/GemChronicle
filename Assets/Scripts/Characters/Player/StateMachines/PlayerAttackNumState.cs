@@ -1,6 +1,7 @@
-using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class PlayerAttackNumState : PlayerAttackState
@@ -16,7 +17,7 @@ public class PlayerAttackNumState : PlayerAttackState
 
         //TODO: Skill 찍는거 만들어서 반영
         List<int> skillIndex = stateMachine.SkillIndex;
-        Shoot(skillIndex[0]);
+        Shoot(skillIndex);
 
         base.Enter();
     }
@@ -26,10 +27,14 @@ public class PlayerAttackNumState : PlayerAttackState
         base.Exit();
     }
 
-    private void Shoot(int _index)
+    private void Shoot(List<int> skills)
     {
-        GameObject go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(_index.ToString());
-        go.transform.position = stateMachine.Player.transform.position;
-        go.SetActive(true);
+        for(int i = 0; i < skills.Count; i++)
+        {
+            GameObject go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(skills[i].ToString());
+            //플레이어 보는 위치 확인해서 뒤집기 필요
+            go.transform.position = stateMachine.Player.transform.position;
+            go.SetActive(true);
+        }
     }
 }

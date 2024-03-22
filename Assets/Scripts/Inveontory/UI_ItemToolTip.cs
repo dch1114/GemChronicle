@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -13,7 +11,7 @@ public class UI_ItemToolTip : MonoBehaviour
 
     public void ShowToolTip(Item item)
     {
-        if(item == null)
+        if (item == null)
         {
             return;
         }
@@ -22,7 +20,7 @@ public class UI_ItemToolTip : MonoBehaviour
         itemTypeText.text = item.EquipmentType.ToString();
         itemDescription.text = item.GetDescription();
 
-        if(itemNameText.text.Length > 12)
+        if (itemNameText.text.Length > 12)
         {
             itemNameText.fontSize = itemNameText.fontSize; //* 0.7f;
         }

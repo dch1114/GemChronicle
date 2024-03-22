@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class CheckPurchasePopup : MonoBehaviour
 {
@@ -19,7 +16,7 @@ public class CheckPurchasePopup : MonoBehaviour
 
 
     private void Start()
-    {   
+    {
         ui = GetComponentInParent<InventoryUIController>();
         shop = FindObjectOfType<Shop>();
         buyBtn.onClick.AddListener(OnClickBuy);
@@ -33,7 +30,7 @@ public class CheckPurchasePopup : MonoBehaviour
 
     public void OnClickBuy()
     {
-        if(selectItem != null)
+        if (selectItem != null)
         {
             shop.Buy(selectItem);
             ui.shopitemToolTip.HideToolTip();

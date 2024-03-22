@@ -26,9 +26,17 @@ public class PlayerAction : MonoBehaviour
     {
         uiManagerInstance = UIManager.instance;
     }
+    void OnPotalMove()
+    {
+        if (target != null)
+        {
+            target.Interact();
+        }
+      
+    }
     void OnInteractive()
     {
-        Debug.Log("발동!");
+   
         if (interactiveList.Count > 0)
         {
             playerinput.OnDisable();
@@ -79,21 +87,24 @@ public class PlayerAction : MonoBehaviour
         {
             //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
             IInteractive t = _other.gameObject.GetComponent<NPCController>();
-            
+            IInteractive y = _other.gameObject.GetComponent<NextMap>();
+            IInteractive x = _other.gameObject.GetComponent<EveryMap>();
             if (t != null) 
             {
                 interactiveList.Add(t);
                 // 플레이어와 가장 가까운 몬스터를 찾는 메소드입니다.
                 target = FindClosestTarget();
-                target.Closer(); //오픈 UI를 하는것이 아니라. Closer를 한다. 니가 여기서 제일 가깝다라는것을 인식.
+                t.Closer(); //오픈 UI를 하는것이 아니라. Closer를 한다. 니가 여기서 제일 가깝다라는것을 인식.
             }
-            else
+            if (y != null)
             {
-                UIManager.instance.PotalTalk(true);
+                interactiveList.Add(y);
+                y.Closer();
+                target = FindClosestTarget();
+                
             }
         }
 
-        Debug.Log(interactiveList.Count);
     }
 
     /// 아래 부분이 없으면 NPC와 떨어지더라도 가장 최근 접촉한 NPC와 계속 대화함
@@ -103,7 +114,8 @@ public class PlayerAction : MonoBehaviour
         {
             //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
             IInteractive t = _other.gameObject.GetComponent<NPCController>();
-
+            IInteractive y = _other.gameObject.GetComponent<NextMap>();
+            IInteractive x = _other.gameObject.GetComponent<EveryMap>();
             if (t != null)
             {
                 interactiveList.Remove(t);
@@ -116,10 +128,11 @@ public class PlayerAction : MonoBehaviour
             }
             else
             {
-                UIManager.instance.PotalTalk(false);
+                interactiveList.Remove(y);
+                y.CloseUI();
             }
         }
 
-        Debug.Log(interactiveList.Count);
+
     }
 }

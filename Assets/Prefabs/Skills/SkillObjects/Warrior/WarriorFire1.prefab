@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5589210079114419063}
   - component: {fileID: 4650020744135424524}
   - component: {fileID: 5722320878932505710}
-  m_Layer: 0
+  - component: {fileID: 7401831759396518984}
+  m_Layer: 23
   m_Name: WarriorFire1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 7905706660674243485}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4650020744135424524
 Animator:
@@ -44,7 +45,7 @@ Animator:
   m_GameObject: {fileID: 1650354233769041001}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 83b379dd9580f4048b510b7c117de10e, type: 2}
+  m_Controller: {fileID: 9100000, guid: a0db3da6a6b559b408984654bc044566, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -100,6 +101,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &7401831759396518984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650354233769041001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d93f4181fb349147b69b474cc0b67b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 4650020744135424524}
 --- !u!1 &1929191950002727485
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7905706660674243485}
   - component: {fileID: 8051040190779758286}
-  m_Layer: 15
+  m_Layer: 23
   m_Name: SkillObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,8 +185,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -677228051
-  m_SortingLayer: 4
-  m_SortingOrder: 5
+  m_SortingLayer: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
