@@ -42,6 +42,5 @@ public class PlayerStateMachine : StateMachine
 
         MovementSpeed = _player.Data.GroundedData.BaseSpeed;
         JumpForce = _player.Data.AirData.JumpForce;
-
     }
 }
