@@ -28,6 +28,8 @@ public class UIManager : Singleton<UIManager>
     private float expActual;
     private float NewLevel;
 
+    public int Level { get; private set; }
+
     public enum ShowMenuType  //보기쉽게 하기위해 enum선언
     {
         Buy,
@@ -251,14 +253,15 @@ public class UIManager : Singleton<UIManager>
             expActual / NewLevel, 10f * Time.deltaTime);
 
         expTMP.text = $"{((expActual / NewLevel) * 100):F2}%";
-        //levelTMP.text = $"Nivel {stats.Nivel}";
+        levelTMP.text = $"Level {Level}";
         GoldTMP.text = GoldManager.Instance.GoldTotales.ToString();
     }
 
-    public void UpdateExpPersonality(float pExpActul, float pExpRequired)
+    public void UpdateExpPersonality(float pExpActul, float pExpRequired, int pLevel)
     {
         expActual = pExpActul;
         NewLevel = pExpRequired;
+        Level = pLevel;
     }
     
     public void PotalTalk(bool _OnOff)
