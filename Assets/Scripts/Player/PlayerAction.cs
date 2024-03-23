@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool;
@@ -28,20 +29,27 @@ public class PlayerAction : MonoBehaviour
     }
     void OnPotalMove()
     {
-        if (target != null)
+        NextMap nextMap = target as NextMap;
+        if (nextMap != null)
         {
+
             target.Interact();
         }
-      
+
     }
     void OnInteractive()
     {
-   
-        if (interactiveList.Count > 0)
+        NPCController npcController = target as NPCController;
+        if (npcController != null)
         {
-            playerinput.OnDisable();
-            target.Interact(); //trytalk 대신 interact . 가까워졌을때 시점, 상호작용하는 시점 2개를 두고 처리하는 애가 무엇인지 생각
+            if (interactiveList.Count > 0)
+            {
+
+                playerinput.OnDisable();
+                target.Interact(); //trytalk 대신 interact . 가까워졌을때 시점, 상호작용하는 시점 2개를 두고 처리하는 애가 무엇인지 생각
+            }
         }
+
     }
     void Update()  // 이부분 업데이트 제외하고 버튼클릭시 작동하도록 변경
     {
@@ -89,7 +97,7 @@ public class PlayerAction : MonoBehaviour
             IInteractive t = _other.gameObject.GetComponent<NPCController>();
             IInteractive y = _other.gameObject.GetComponent<NextMap>();
             IInteractive x = _other.gameObject.GetComponent<EveryMap>();
-            if (t != null) 
+            if (t != null)
             {
                 interactiveList.Add(t);
                 // 플레이어와 가장 가까운 몬스터를 찾는 메소드입니다.
@@ -101,7 +109,7 @@ public class PlayerAction : MonoBehaviour
                 interactiveList.Add(y);
                 y.Closer();
                 target = FindClosestTarget();
-                
+
             }
         }
 
