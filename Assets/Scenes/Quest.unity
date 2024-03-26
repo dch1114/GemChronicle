@@ -153,12 +153,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 979244031096717845, guid: 6294ae41e2bbcb34a94af715ecaeca8a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2662004325822355346, guid: 6294ae41e2bbcb34a94af715ecaeca8a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3042282649537167280, guid: 6294ae41e2bbcb34a94af715ecaeca8a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1702289457}
     - target: {fileID: 6097031213239471436, guid: 6294ae41e2bbcb34a94af715ecaeca8a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -225,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6097031213239471436, guid: 6294ae41e2bbcb34a94af715ecaeca8a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 6097031213239471436, guid: 6294ae41e2bbcb34a94af715ecaeca8a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -242,6 +246,10 @@ PrefabInstance:
     - target: {fileID: 6097031213239471436, guid: 6294ae41e2bbcb34a94af715ecaeca8a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749198742255652698, guid: 6294ae41e2bbcb34a94af715ecaeca8a, type: 3}
+      propertyPath: m_text
+      value: Uncompleted Quests
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -411,7 +419,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1291103782228728091, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4230766966164260419, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1702289457}
+    - target: {fileID: 4230766966164260419, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenClosePanelInspectorQuests
       objectReference: {fileID: 0}
     - target: {fileID: 8352164374478411021, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
       propertyPath: m_Pivot.x
@@ -479,7 +495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8352164374478411021, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -350
       objectReference: {fileID: 0}
     - target: {fileID: 8352164374478411021, guid: de01baf6fea68504c8fdd389c87ed07f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5646,11 +5662,11 @@ RectTransform:
   - {fileID: 1174733280}
   - {fileID: 941946482}
   - {fileID: 1337487061}
-  - {fileID: 198324748}
   - {fileID: 3946390312929966695}
   - {fileID: 2042171485}
   - {fileID: 1751442329657771239}
   - {fileID: 1255412800}
+  - {fileID: 198324748}
   - {fileID: 164233429}
   - {fileID: 1172393412}
   m_Father: {fileID: 0}
