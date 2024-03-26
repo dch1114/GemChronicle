@@ -92,7 +92,7 @@ public class NPCController : MonoBehaviour, IInteractive
     public void TryTalk()
     {
         //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
-        if (UIManager.instance.IsOpenShowPopup())
+        if (uiManager.IsOpenShowPopup())
         {
             uiManager.RunSelectedMenuButton();
             return;
@@ -163,7 +163,7 @@ public class NPCController : MonoBehaviour, IInteractive
             {
                 playerinput.OnDisable();
                 //상점 팝업창
-                UIManager.instance.shopChoiceOnOff(true);
+                uiManager.shopChoiceOnOff(true);
                 uiManager.PotraitPanelOnOff(true);
             }
 
