@@ -28,10 +28,10 @@ public class PlayerInteration : MonoBehaviour
                 ItemObject itemObject = hit.collider.GetComponent<ItemObject>();
                 if (itemObject != null)
                 {
-                    if(!Inventory.instance.CanAddItem()) //&& itemObject.itemData.itemType == ItemType.Equipment)
-                    {
-                        return;
-                    }
+                    //if(!Inventory.instance.CanAddItem()) //&& itemObject.itemData.itemType == ItemType.Equipment)
+                    //{
+                    //    return;
+                    //}
 
                     //Inventory.Instance.AddItem(itemObject.itemData);
                     Debug.Log("æ∆¿Ã≈€ »πµÊ");

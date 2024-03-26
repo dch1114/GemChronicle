@@ -19,29 +19,15 @@ public class Inventory : MonoBehaviour
     public GameObject characterEquipmentPrefab;
     public SPUM_SpriteList equipmentSpriteOBj;
 
-    ItemDatabase itemDatabase;
-
-    //public List<ItemData> startingItems;
-    //public List<Item> startingItems;
-
     [Header("Inventory")]
     public List<InventoryItem> equipment;
-    // public Dictionary<ItemData_Equipment, InventoryItem> equipmentDictionary;
-    //test
     public Dictionary<Item, InventoryItem> equipmentDictionary;
 
     public List<InventoryItem> inventory;
-    //public Dictionary<ItemData, InventoryItem> inventoryDictionary;
-    //test
     public Dictionary<Item, InventoryItem> inventoryDictionary;
 
-    [Header("Inventory UI")]
-    [SerializeField] private Transform inventorySlotParent;
-    [SerializeField] private Transform equipmentSlotParent;
-
-
-    private UI_ItemSlot[] inventoryItemSlot;
-    private UI_EquipmentSlot[] equipmentSlot;
+    //tset
+    [SerializeField] private InventoryUIController inventoryUIController;
 
     private void Awake()
     {
@@ -58,30 +44,16 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        itemDatabase = GameManager.instance.dataManager.itemDatabase;
-
         inventory = new List<InventoryItem>();
-        //inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
-        //test
         inventoryDictionary = new Dictionary<Item, InventoryItem>();
 
-
         equipment = new List<InventoryItem>();
-        //equipmentDictionary = new Dictionary<ItemData_Equipment, InventoryItem>();
-        //test
         equipmentDictionary = new Dictionary<Item, InventoryItem>();
-
-
-        inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
-        equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
 
         //Gold Test
         statusData = player.Data.StatusData;
         inventoryGold = statusData.Gold;
         UpdateRetainGold();
-
-
-        //AddStartingItems();
     }
 
     public void AddItem(Item _item)
@@ -91,10 +63,8 @@ public class Inventory : MonoBehaviour
         //    AddToInventory(_item);
         //}
         AddToInventory(_item);
-        //GetComponent<Image>().SetNativeSize();
-        //UpdateSlotUI();
         //test
-        UpdateSlotUI();
+        inventoryUIController.UpdateSlotUI();
 
     }
 
@@ -109,30 +79,6 @@ public class Inventory : MonoBehaviour
             InventoryItem newItem = new InventoryItem(_item);  // 이전에 인벤토리에 없으면 새로  생성해서 inventory와 딕셔너리에 추가
             inventory.Add(newItem);
             inventoryDictionary.Add(_item, newItem);
-        }
-    }
-
-    private void UpdateSlotUI()
-    {
-        for (int i = 0; i < equipmentSlot.Length; i++)
-        {
-            foreach (KeyValuePair<Item, InventoryItem> item in equipmentDictionary)
-            {
-                if (item.Key.EquipmentType == equipmentSlot[i].slotType)
-                {
-                    equipmentSlot[i].UpdateSlot(item.Value);
-                }
-            }
-        }
-
-        for (int i = 0; i < inventoryItemSlot.Length; i++)
-        {
-            inventoryItemSlot[i].CleanUpSlot();
-        }
-
-        for (int i = 0; i < inventory.Count; i++)
-        {
-            inventoryItemSlot[i].UpdateSlot(inventory[i]);
         }
     }
 
@@ -174,7 +120,7 @@ public class Inventory : MonoBehaviour
             equipmentSpriteOBj._armorList[0].sprite = newItem.datas.sprite;
         }
 
-        UpdateSlotUI();
+        inventoryUIController.UpdateSlotUI();
     }
 
     public void UnEquipItem(Item _itemToRemove)
@@ -215,7 +161,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        UpdateSlotUI();
+        inventoryUIController.UpdateSlotUI();
     }
 
     public void AddItemStat(Item _item)
@@ -236,118 +182,13 @@ public class Inventory : MonoBehaviour
         goldText.text = inventoryGold.ToString();
     }
 
-    //public void EquipItem(ItemData _item)
+    //public bool CanAddItem()
     //{
-    //    ItemData_Equipment newEquipment = _item as ItemData_Equipment;
-    //    InventoryItem newItem = new InventoryItem(newEquipment);
-
-    //    ItemData_Equipment oldEquipment = null;
-
-    //    foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
+    //    if (inventory.Count >= inventoryItemSlot.Length)
     //    {
-    //        if (item.Key.equipmentType == newEquipment.equipmentType)
-    //        {
-    //            oldEquipment = item.Key;
-    //        }
+    //        return false;
     //    }
 
-    //    if(oldEquipment != null)
-    //    {
-    //        UnEquipItem(oldEquipment);
-    //        AddItem(oldEquipment);
-    //    }
-
-    //    equipment.Add(newItem);
-    //    equipmentDictionary.Add(newEquipment, newItem);
-    //    RemoveItem(_item);
-
-    //    UpdateSlotUI();
+    //    return true;
     //}
-
-    //public void UnEquipItem(ItemData_Equipment itemToRemove)
-    //{
-    //    if (equipmentDictionary.TryGetValue(itemToRemove, out InventoryItem value))
-    //    {
-    //        equipment.Remove(value);
-    //        equipmentDictionary.Remove(itemToRemove);
-    //        //itemToRemove.RemoveModifiers();
-    //    }
-    //}
-
-    //private void UpdateSlotUI()
-    //{
-    //    for(int i=0; i < equipmentSlot.Length; i++)
-    //    {
-    //        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipmentDictionary)
-    //        {
-    //            if (item.Key.equipmentType == equipmentSlot[i].slotType)
-    //            {
-    //                equipmentSlot[i].UpdateSlot(item.Value);
-    //            }
-    //        }
-    //    }
-
-    //    for(int i= 0; i< inventoryItemSlot.Length; i++)
-    //    {
-    //        inventoryItemSlot[i].CleanUpSlot();
-    //    }
-
-    //    for (int i = 0; i < inventory.Count; i++)
-    //    {
-    //        inventoryItemSlot[i].UpdateSlot(inventory[i]);
-    //    }
-    //}
-
-    //public void AddItem(ItemData _item)
-    //{
-    //    if ((_item.itemType == ItemType.Equipment || _item.itemType == ItemType.Material) && CanAddItem())
-    //    {
-    //        AddToInventory(_item);
-    //    }
-
-    //    UpdateSlotUI();
-    //}
-
-    //private void AddToInventory(ItemData _item)
-    //{
-    //    if (inventoryDictionary.TryGetValue(_item, out InventoryItem value))
-    //    {
-    //        value.AddStack();
-    //    }
-    //    else
-    //    {
-    //        InventoryItem newItem = new InventoryItem(_item);
-    //        inventory.Add(newItem);
-    //        inventoryDictionary.Add(_item, newItem);
-    //    }
-    //}
-
-    //public void RemoveItem(ItemData _item)
-    //{
-    //    if (inventoryDictionary.TryGetValue(_item, out InventoryItem value))
-    //    {
-    //        if(value.stackSize <= 1)
-    //        {
-    //            inventory.Remove(value);
-    //            inventoryDictionary.Remove(_item);
-    //        }
-    //        else
-    //        {
-    //            value.RemoveStack();
-    //        }
-    //    }
-
-    //    UpdateSlotUI() ;
-
-    //}
-
-    public bool CanAddItem()
-    {
-        if (inventory.Count >= inventoryItemSlot.Length)
-        {
-            return false;
-        }
-
-        return true;
-    }
 }
