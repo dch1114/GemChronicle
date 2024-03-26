@@ -32,8 +32,11 @@ public class PlayerAction : MonoBehaviour
         NextMap nextMap = target as NextMap;
         if (nextMap != null)
         {
-
-            target.Interact();
+            if(interactiveList.Count > 0)
+            {
+                target.Interact();
+            }
+            
         }
 
     }
