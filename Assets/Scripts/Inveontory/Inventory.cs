@@ -13,11 +13,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldText;
     // Sprite Test
     [Header("Sprite Change")]
-    public GameObject characterPrefab;
-    public SPUM_SpriteList characterSpriteOBj;
-
-    public GameObject characterEquipmentPrefab;
-    public SPUM_SpriteList equipmentSpriteOBj;
+    [SerializeField] private SPUM_SpriteList characterSpriteOBj;
+    [SerializeField] private SPUM_SpriteList equipmentSpriteOBj;
 
     [Header("Inventory")]
     public List<InventoryItem> equipment;
