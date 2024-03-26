@@ -4,6 +4,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum InteractType
+{
+    Potal,
+    NPC
+}
 public interface IInteractive  
 {
 
@@ -11,6 +16,7 @@ public interface IInteractive
     void CloseUI();
     void TryTalk();
 
+    InteractType GetType();
     void Closer();
 
     void Interact();

@@ -20,7 +20,7 @@ public class PlayerAction : MonoBehaviour
     public PlayerInput playerinput;
     //대화가 종료되었는지 체크
     IInteractive target = null;
-    public UIManager uiManagerInstance;
+    UIManager uiManagerInstance;
     // Update is called once per frame
 
     private void Start()
@@ -29,10 +29,10 @@ public class PlayerAction : MonoBehaviour
     }
     void OnPotalMove()
     {
-        NextMap nextMap = target as NextMap;
-        if (nextMap != null)
+
+        if (interactiveList.Count > 0)
         {
-            if(interactiveList.Count > 0)
+            if (target.GetType() == InteractType.Potal)
             {
                 target.Interact();
             }
@@ -42,10 +42,9 @@ public class PlayerAction : MonoBehaviour
     }
     void OnInteractive()
     {
-        NPCController npcController = target as NPCController;
-        if (npcController != null)
+        if (interactiveList.Count > 0)
         {
-            if (interactiveList.Count > 0)
+            if (target.GetType() == InteractType.NPC)
             {
 
                 playerinput.OnDisable();

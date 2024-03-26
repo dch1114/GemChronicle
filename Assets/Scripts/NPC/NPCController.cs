@@ -62,13 +62,13 @@ public class NPCController : MonoBehaviour, IInteractive
 
         if (npcType == NPCType.Npc)
         {
-            UIManager.instance.talkBtnOnOff(true);
+            uiManager.talkBtnOnOff(true);
 
         }
         else if (npcType == NPCType.Shop)
         {
-        
-            UIManager.instance.talkBtnOnOff(true);
+
+            uiManager.talkBtnOnOff(true);
 
         }
         
@@ -78,12 +78,12 @@ public class NPCController : MonoBehaviour, IInteractive
     {
         if (npcType == NPCType.Npc)
         {
-            UIManager.instance.talkBtnOnOff(false);
+            uiManager.talkBtnOnOff(false);
 
         }
         else if (npcType == NPCType.Shop)
         {
-            UIManager.instance.talkBtnOnOff(false);
+            uiManager.talkBtnOnOff(false);
            
 
         }
@@ -94,7 +94,7 @@ public class NPCController : MonoBehaviour, IInteractive
         //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
         if (UIManager.instance.IsOpenShowPopup())
         {
-            UIManager.instance.RunSelectedMenuButton();
+            uiManager.RunSelectedMenuButton();
             return;
         }
 
@@ -180,6 +180,18 @@ public class NPCController : MonoBehaviour, IInteractive
 
     public void Interact()
     {
-        TryTalk();
+        GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
+
+        if (gameManager != null)
+        {
+            GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
+            TryTalk();
+        }
+    }
+
+
+    InteractType IInteractive.GetType()
+    {
+        return InteractType.NPC;
     }
 }

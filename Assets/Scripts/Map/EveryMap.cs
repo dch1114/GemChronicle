@@ -9,6 +9,7 @@ public class EveryMap : MonoBehaviour, IInteractive
     private bool collisionOccurred = false;
     public string destination;
     public Transform DestinationPoint;
+    UIManager uiManagerInstance;
     public void Awake()
     {
         
@@ -16,25 +17,28 @@ public class EveryMap : MonoBehaviour, IInteractive
 
 
     }
-    
-    // 충돌이 발생한지 여부를 나타내는 변수
- 
 
+    // 충돌이 발생한지 여부를 나타내는 변수
+
+    public void Start()
+    {
+        uiManagerInstance = UIManager.Instance;
+    }
 
 
 
     public void OpenUI()
     {
-        UIManager.instance.potalTxt.text = destination;
+        uiManagerInstance.potalTxt.text = destination;
         // 충돌이 발생하면 상태를 true로 변경
         collisionOccurred = true;
-        UIManager.instance.PotalTalk(true);
+        uiManagerInstance.PotalTalk(true);
     }
 
     public void CloseUI()
     {
         collisionOccurred = false;
-        UIManager.instance.PotalTalk(false);
+        uiManagerInstance.PotalTalk(false);
     }
 
     public void TryTalk()
@@ -49,17 +53,28 @@ public class EveryMap : MonoBehaviour, IInteractive
 
     public void Interact()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+        GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
+
+        if (gameManager != null)
         {
-            if (DestinationPoint != null)
+            GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
+            if (player != null)
             {
-                player.transform.position = DestinationPoint.position;
+                if (DestinationPoint != null)
+                {
+                    player.transform.position = DestinationPoint.position;
+                }
             }
         }
+
     }
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    InteractType IInteractive.GetType()
+    {
+        throw new System.NotImplementedException();
     }
 }
