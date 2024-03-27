@@ -113,6 +113,12 @@ public class PlayerAction : MonoBehaviour
                 target = FindClosestTarget();
 
             }
+            if (x != null)
+            {
+                interactiveList.Add(x);
+                x.Closer();
+                target = FindClosestTarget();
+            }
         }
 
     }
@@ -136,10 +142,22 @@ public class PlayerAction : MonoBehaviour
                     target = null;
                 }
             }
-            else
+            if(y != null)
             {
-                interactiveList.Remove(y);
-                y.CloseUI();
+                if (interactiveList.Count <= 0)
+                {
+                    interactiveList.Remove(y);
+                    y.CloseUI();
+                }
+           
+            }
+            if (x != null)
+            {
+                if (interactiveList.Count <= 0)
+                {
+                    interactiveList.Remove(x);
+                    x.CloseUI();
+                }
             }
         }
 

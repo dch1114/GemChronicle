@@ -268,4 +268,5 @@ public class UIManager : Singleton<UIManager>
     {
         potaltalk.SetActive(_OnOff);
     }
+
 }

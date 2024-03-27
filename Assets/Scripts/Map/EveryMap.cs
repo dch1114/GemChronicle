@@ -12,24 +12,21 @@ public class EveryMap : MonoBehaviour, IInteractive
     UIManager uiManagerInstance;
     public void Awake()
     {
-        
-        maps.Add(DestinationPoint);
+
+        uiManagerInstance = UIManager.Instance;
 
 
     }
 
     // 충돌이 발생한지 여부를 나타내는 변수
 
-    public void Start()
-    {
-        uiManagerInstance = UIManager.Instance;
-    }
+
 
 
 
     public void OpenUI()
     {
-        uiManagerInstance.potalTxt.text = destination;
+        uiManagerInstance.potalTxt.text = "포탈";
         // 충돌이 발생하면 상태를 true로 변경
         collisionOccurred = true;
         uiManagerInstance.PotalTalk(true);
