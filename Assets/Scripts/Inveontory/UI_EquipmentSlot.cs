@@ -24,8 +24,8 @@ public class UI_EquipmentSlot : UI_ItemSlot
         {
             if (item.datas.ItemType == ItemType.Equipment)
             {
-                Inventory.instance.UnEquipItem(item.datas);
-                Inventory.instance.AddItem(item.datas);
+                Inventory.Instance.UnEquipItem(item.datas);
+                Inventory.Instance.AddItem(item.datas);
                 CleanUpSlot();
                 ui.itemToopTip.HideToolTip();
             }

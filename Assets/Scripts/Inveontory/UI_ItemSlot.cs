@@ -74,7 +74,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
         {
             if (item.datas.ItemType == ItemType.Equipment) // test
             {
-                Inventory.instance.EquipItem(item.datas);
+                Inventory.Instance.EquipItem(item.datas);
                 ui.itemToopTip.HideToolTip();
             }
             //ui.itemToopTip.HideToolTip();

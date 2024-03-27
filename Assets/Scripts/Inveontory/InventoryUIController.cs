@@ -25,7 +25,7 @@ public class InventoryUIController : MonoBehaviour
     void Start()
     {
         //test
-        inventoryContorller = Inventory.instance;
+        inventoryContorller = Inventory.Instance;
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
 

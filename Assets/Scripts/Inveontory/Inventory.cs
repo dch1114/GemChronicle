@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : Singleton<Inventory>
 {
-    public static Inventory instance;
+    //public static Inventory instance;
 
     //Gold Test
     public Player player;
@@ -26,18 +26,18 @@ public class Inventory : MonoBehaviour
     //tset
     [SerializeField] private InventoryUIController inventoryUIController;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
 
-    }
+    //}
 
     private void Start()
     {
