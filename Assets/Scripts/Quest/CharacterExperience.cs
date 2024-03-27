@@ -74,6 +74,6 @@ public class CharacterExperience : MonoBehaviour
 
     private void UpdateBarExp()
     {
-        UIManager.instance.UpdateExpPersonality(expActualTemp, ExpRequiredNextLevel, Level);
+        UIManager.Instance.UpdateExpPersonality(expActualTemp, ExpRequiredNextLevel, Level);
     }
 }

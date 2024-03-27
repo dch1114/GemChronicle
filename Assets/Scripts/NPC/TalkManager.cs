@@ -10,6 +10,8 @@ public class TalkManager : MonoBehaviour
 
     public Sprite[] portraitArr;
 
+    public Sprite playerSprite;
+
     private void Awake()
     {
         portraitData = new Dictionary<int, Sprite>();
@@ -32,19 +34,30 @@ public class TalkManager : MonoBehaviour
 
        
     }
-    public string GetTalk(int _id, int _talkIndex)
-    {
+    //public string GetTalk(int _id, int _talkIndex)
+    //{
        
        
-        if (_talkIndex == npcDatabase.GetNPCByKey(_id).conversation.Length)
-            return null;
-        else 
-            return npcDatabase.GetNPCByKey(_id).conversation[_talkIndex];
+    //    if (_talkIndex == npcDatabase.GetNPCByKey(_id).conversation.Length)
+    //        return null;
+    //    else 
+    //        return npcDatabase.GetNPCByKey(_id).conversation[_talkIndex];
 
+    //}
+
+    public NPC NPCDataInfo(int id)
+    {
+        return npcDatabase.GetNPCByKey(id);
     }
+
+
     public Sprite GetPortrait(int _id)
     {
         return portraitData[_id];
+    }
+    public Sprite GetPlayerSprite()
+    {
+        return playerSprite;
     }
     
 }

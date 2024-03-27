@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using static NextMap;
 
+public class Potal
+{
+    public int potalId;
+    public bool isLock;
+    public Vector3 potalPosition;
+}
+
+
 public class EveryMap : MonoBehaviour, IInteractive
 {
     List<Transform> maps;
@@ -67,6 +75,8 @@ public class EveryMap : MonoBehaviour, IInteractive
     }
     public Vector3 GetPosition()
     {
+        Debug.Log(transform.position);
+
         return transform.position;
     }
 

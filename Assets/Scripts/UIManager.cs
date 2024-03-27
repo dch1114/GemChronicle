@@ -42,7 +42,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject potraitPanel;
     public GameObject shopPanel;
     public GameObject shopChoice;
-    public static UIManager instance = null;
+    //public static UIManager instance = null;
     public PlayerController playerController;
     public GameObject potaltalk;
     public Button[] showMenuButton;
@@ -61,20 +61,27 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     Text talkText;
     [SerializeField]
-    Image portraitImg;
+    Image npcPortraitImg;
+    [SerializeField]
+    Image playerPortraitImg;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            if (instance != this)
-                Destroy(this.gameObject);
-        }
+        
     }
+
+    //void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //    else
+    //    {
+    //        if (instance != this)
+    //            Destroy(this.gameObject);
+    //    }
+    //}
     public void OpenSoundSet(bool _OnOff)
     {
 
@@ -105,9 +112,13 @@ public class UIManager : Singleton<UIManager>
         talkText.text = msg;
     }
     //0315 초상화 이미지 세팅
-    public void SetPortraitImage(Sprite sp)
+    public void SetNpcPortraitImage(Sprite sp)
     {
-        portraitImg.sprite = sp;
+        npcPortraitImg.sprite = sp;
+    }
+    public void SetPlayerPortraitImage(Sprite sp)
+    {
+        playerPortraitImg.sprite = sp;
     }
     public void talkBtnOnOff(bool _OnOff)
     {
@@ -118,7 +129,14 @@ public class UIManager : Singleton<UIManager>
     {
         potraitPanel.SetActive(_OnOff);
     }
-
+    public void ShowNpcPotrait(bool _OnOff)
+    {
+        npcPortraitImg.enabled = _OnOff;
+    }
+    public void ShowPlayerPotrait(bool _OnOff)
+    {
+        playerPortraitImg.enabled = _OnOff;
+    }
     public void shopPanelOnOff(bool _OnOff)
     {
         shopPanel.SetActive(_OnOff);

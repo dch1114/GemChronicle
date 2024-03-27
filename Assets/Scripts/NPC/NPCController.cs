@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 using static UnityEditor.Progress;
 
 //0315 인터페이스 구현
@@ -11,7 +13,6 @@ public class NPCController : MonoBehaviour, IInteractive
     private NPC npcData;
     private NPCManager npcManager; // NPCManager의 역참조를 받을 필드 추가
 
-    
     TalkManager talkManager;
     PlayerInput playerinput;
 
@@ -21,10 +22,19 @@ public class NPCController : MonoBehaviour, IInteractive
     UIManager uiManager;
 
     public int talkIndex;
+
+    public int talkNpcStep;
+    public int talkPlayerStep;
+
     public bool isAction;
     public bool isNPC;
     public bool isShop = false;
     public bool isEndTalk = false;
+
+    List<string[]> npcMsgList = new List<string[]>();
+    List<string[]> playerMsgList = new List<string[]>();
+    private bool sayingNPC = true;
+
 
     //UiManager로 이동
     //public Text talkText;
@@ -40,9 +50,20 @@ public class NPCController : MonoBehaviour, IInteractive
     {
         npcData = npc;
         npcManager = manager; // NPCManager의 역참조를 받음
-        uiManager = UIManager.instance;
+        uiManager = UIManager.Instance;
         talkManager = npcManager.talkManager;
         playerinput = npcManager.playerinput;
+
+        npcMsgList.Add(npcData.npc1);
+        npcMsgList.Add(npcData.npc2);
+        npcMsgList.Add(npcData.npc3);
+        playerMsgList.Add(npcData.player1);
+        playerMsgList.Add(npcData.player2);
+        playerMsgList.Add(npcData.player3);
+
+        talkIndex = 0;
+        talkNpcStep = 0;
+        talkPlayerStep = 0;
     }
 
     public NPC GetNpcData()
@@ -89,6 +110,18 @@ public class NPCController : MonoBehaviour, IInteractive
         }
         
     }
+    public void Interact()
+    {
+
+        TryTalk();
+        //GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
+
+        //if (gameManager != null)
+        //{
+        //    GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
+        //    TryTalk();
+        //}
+    }
     public void TryTalk()
     {
         //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
@@ -105,44 +138,143 @@ public class NPCController : MonoBehaviour, IInteractive
             return;
         }
 
+
         //Talk(GetNpcData().ID);
 
-        //더이상 대화 내용이 존재 하지 않아 대화를 종료해야 한다면
-        if (CheckConversationCount()) return;
+        //Npc초상회 이미지 세팅
+        uiManager.SetNpcPortraitImage(talkManager.GetPortrait(npcData.ID));
+        //Player초상화 이미지 세팅
+        uiManager.SetPlayerPortraitImage(talkManager.GetPlayerSprite());
+        //초상화 이미지 ON
+        uiManager.PotraitPanelOnOff(true);
 
+
+        //더이상 대화 내용이 존재 하지 않아 대화를 종료해야 한다면
+        if (CheckConversationCount())
+        {
+            //초상화 OFF
+            uiManager.PotraitPanelOnOff(false);
+
+            if (npcType == NPCType.Shop)
+            {
+                //플레이어 이동 불가
+                playerinput.OnDisable();
+                //상점 팝업창 ON
+                uiManager.shopChoiceOnOff(true);
+            }
+
+            return;
+        }
+ 
         Talk();
 
     }
 
-   
+
+
     void Talk()
     {
-        //대화 불러오기
-        int msgId = GetNpcData().ID;
-        string talkData = talkManager.GetTalk(msgId, talkIndex);
+        ////대화 불러오기
+        //int msgId = GetNpcData().ID;
+        //string talkData = talkManager.GetTalk(msgId, talkIndex);
+
+        //if (talkData == null)
+        //{
+
+        //    talkIndex = 0;
+        //    isEndTalk = true;
+        //    uiManager.SetTalkMessage(talkData);
+        //    uiManager.PotraitPanelOnOff(false);
+        //    return;
+        //}
+        //else
+        //{
+
+        //    //isAction = true;
+        //    uiManager.PotraitPanelOnOff(true);
+        //    uiManager.SetTalkMessage(talkData);
+        //    uiManager.SetNpcPortraitImage(talkManager.GetPortrait(msgId));
+        //    talkIndex++;
+
+        //}
+        //uiManager.SetTalkMessage(talkData);
+        //talkIndex++;
 
 
-        if (talkData == null)
+        
+        if (sayingNPC && talkIndex < npcMsgList.Count)
         {
-  
-            talkIndex = 0;
-            isEndTalk = true;
-            uiManager.SetTalkMessage(talkData);
-            uiManager.PotraitPanelOnOff(false);
-            return;
+
+            if (npcMsgList[talkIndex].Length > 0)
+            {
+                //Npc가 말하는 중이고 아직 더 할말이 있다면
+                uiManager.SetTalkMessage(npcMsgList[talkIndex][talkNpcStep]);
+                uiManager.ShowNpcPotrait(true);
+                uiManager.ShowPlayerPotrait(false);
+                talkNpcStep++;
+
+                //대화 문장이 끝이 났다면
+                if (talkNpcStep >= npcMsgList[talkIndex].Length)
+                {
+                    //Player가 말할 차례 설정
+                    sayingNPC = false;
+                    //Player가 이미 할말을 다했다면
+                    if (talkPlayerStep >= playerMsgList[talkIndex].Length)
+                    {
+                        //다음 대화 문장으로
+                        talkIndex++;
+                    }
+                }
+            }
+            else
+            {
+                talkPlayerStep = 0;
+
+                sayingNPC = false;
+
+                Talk();
+            }
+
+
         }
-        else
+        //Player가 말 할 차례이고 문장이 더 존재한다면
+        else if (!sayingNPC && talkIndex < playerMsgList.Count)
         {
+            
+            if (playerMsgList[talkIndex].Length > 0)
+            {
+                
+                uiManager.SetTalkMessage(playerMsgList[talkIndex][talkPlayerStep]);
+                uiManager.ShowNpcPotrait(false);
+                uiManager.ShowPlayerPotrait(true);
 
-            //isAction = true;
-            uiManager.PotraitPanelOnOff(true);
-            uiManager.SetTalkMessage(talkData);
-            uiManager.SetPortraitImage(talkManager.GetPortrait(msgId));
-            talkIndex++;
+                talkPlayerStep++;
+
+                if (talkPlayerStep >= playerMsgList[talkIndex].Length)
+                {
+                    //Npc가 말할 차례 설정
+                    sayingNPC = true;
+                    //Npc가 이미 할말을 다했다면
+                    if (talkNpcStep >= npcMsgList[talkIndex].Length)
+                    {
+                        //다음 대화 문장으로
+                        talkIndex++;
+                    }
+
+                }
+            }
+            else
+            {
+                talkNpcStep = 0;
+
+                sayingNPC = false;
+
+                Talk();
+            }
+
 
         }
 
-     
 
 
     }
@@ -150,44 +282,48 @@ public class NPCController : MonoBehaviour, IInteractive
     //대화내용이 더 있는지 체크
     bool CheckConversationCount()
     {
-        if (talkIndex >= npcData.conversation.Length)
+        //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않다면
+        if (talkIndex >= npcMsgList.Count && talkIndex >= playerMsgList.Count)
         {
             isEndTalk = true;
-
             playerinput.OnEnable();
-
-            uiManager.PotraitPanelOnOff(false);
             talkIndex = 0;
-
-            if (npcType == NPCType.Shop)
-            {
-                playerinput.OnDisable();
-                //상점 팝업창
-                uiManager.shopChoiceOnOff(true);
-                uiManager.PotraitPanelOnOff(true);
-            }
+            talkNpcStep = 0;
+            talkPlayerStep = 0;
 
             return true;
         }
         return false;
+
+        //if (talkIndex >= npcData.conversation.Length)
+        //{
+        //    isEndTalk = true;
+
+        //    playerinput.OnEnable();
+
+        //    //uiManager.PotraitPanelOnOff(false);
+        //    talkIndex = 0;
+
+        //    //if (npcType == NPCType.Shop)
+        //    //{
+        //    //    playerinput.OnDisable();
+        //    //    //상점 팝업창
+        //    //    uiManager.shopChoiceOnOff(true);
+        //    //    uiManager.PotraitPanelOnOff(true);
+        //    //}
+
+        //    return true;
+        //}
+        //return false;
     }
 
     public void Closer()
     {
-        UIManager.instance.talkBtnText.text = npcData.name;
+        UIManager.Instance.talkBtnText.text = npcData.name;
         OpenUI();
     }
 
-    public void Interact()
-    {
-        GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
 
-        if (gameManager != null)
-        {
-            GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
-            TryTalk();
-        }
-    }
 
 
     InteractType IInteractive.GetType()

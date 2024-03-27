@@ -9,9 +9,18 @@ public class NPC
     public string name;
     public string place;
     public string discription;
-    public string []conversation;
+    public string[] conversation;
     public bool isNPC;
-    
+
+    public string[] npc1;
+    public string[] npc2;
+    public string[] npc3;
+    public string[] player1;
+    public string[] player2;
+    public string[] player3;
+
+
+
 }
 //0315 Npc타입을 구별하기 위해 enum 선언
 public enum NPCType
