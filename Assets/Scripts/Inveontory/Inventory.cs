@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour
 
     private void Start()
     {
-        itemDatabase = GameManager.instance.dataManager.itemDatabase;
+        itemDatabase = DataManager.instance.itemDatabase;
 
         inventory = new List<InventoryItem>();
         //inventoryDictionary = new Dictionary<ItemData, InventoryItem>();

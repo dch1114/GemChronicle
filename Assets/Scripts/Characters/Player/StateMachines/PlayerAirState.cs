@@ -33,6 +33,6 @@ public class PlayerAirState : PlayerBaseState
     private void OnAttack()
     {
         //TODO: CHECK JOB
-        stateMachine.ChangeState(stateMachine.AttackNumState);
+        stateMachine.ChangeState(stateMachine.AttackState);
     }
 }

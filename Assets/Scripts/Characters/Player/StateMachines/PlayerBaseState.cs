@@ -51,10 +51,12 @@ public class PlayerBaseState : IState
 
         input.PlayerActions.SkillPage.started += OnSkillPageStarted;
 
-        input.PlayerActions.ComboAttack.started += OnComboAttackStarted;
-
-        input.PlayerActions.Attack.performed += OnAttackPerformed;
-        input.PlayerActions.Attack.canceled += OnAttackCanceled;
+        input.PlayerActions.AttackA.performed += OnAttackAPerformed;
+        input.PlayerActions.AttackA.canceled += OnAttackCanceled;
+        input.PlayerActions.AttackS.performed += OnAttackSPerformed;
+        input.PlayerActions.AttackS.canceled += OnAttackCanceled;
+        input.PlayerActions.AttackD.performed += OnAttackDPerformed;
+        input.PlayerActions.AttackD.canceled += OnAttackCanceled;
 
         //Test
         input.PlayerActions.Inventory.started += OnInventory;
@@ -69,41 +71,38 @@ public class PlayerBaseState : IState
 
         input.PlayerActions.SkillPage.started -= OnSkillPageStarted;
 
-        input.PlayerActions.Attack.performed -= OnAttackPerformed;
-        input.PlayerActions.Attack.canceled -= OnAttackCanceled;
-
-        input.PlayerActions.ComboAttack.canceled += OnComboAttackCanceled;
+        input.PlayerActions.AttackA.performed -= OnAttackAPerformed;
+        input.PlayerActions.AttackA.canceled -= OnAttackCanceled;
+        input.PlayerActions.AttackS.performed -= OnAttackSPerformed;
+        input.PlayerActions.AttackS.canceled -= OnAttackCanceled;
+        input.PlayerActions.AttackD.performed -= OnAttackDPerformed;
+        input.PlayerActions.AttackD.canceled -= OnAttackCanceled;
 
         //Test
         input.PlayerActions.Inventory.started -= OnInventory;
     }
 
 
-    protected virtual void OnAttackPerformed(InputAction.CallbackContext context)
+    protected virtual void OnAttackAPerformed(InputAction.CallbackContext context)
     {
-        if(!stateMachine.IsComboAttacking)
-        {
-            stateMachine.IsAttacking = true;
+        SetAttackIndexs(0);
+    }
 
-            //TODO: Skill Index 연동 필요
-            InputAction action = context.action;
+    protected virtual void OnAttackSPerformed(InputAction.CallbackContext context)
+    {
+        SetAttackIndexs(1);
+    }
 
-            if (action.activeControl.Equals(action.controls[0]))
-            {
-                stateMachine.AttackIndex = 1;
-                stateMachine.SkillIndex = GetSkillNumIndexs(0);
-            }
-            else if (action.activeControl.Equals(action.controls[1]))
-            {
-                stateMachine.AttackIndex = 2;
-                stateMachine.SkillIndex = GetSkillNumIndexs(1);
-            }
-            else if (action.activeControl.Equals(action.controls[2]))
-            {
-                stateMachine.AttackIndex = 3;
-                stateMachine.SkillIndex = GetSkillNumIndexs(2);
-            }
-        }
+    protected virtual void OnAttackDPerformed(InputAction.CallbackContext context)
+    {
+        SetAttackIndexs(2);
+    }
+
+    private void SetAttackIndexs(int _index)
+    {
+        stateMachine.AttackIndex = _index;
+        stateMachine.SkillIndex = GetSkillNumIndexs(_index);
+        stateMachine.IsAttacking = true;
     }
 
     private List<int> GetSkillNumIndexs(int index)
@@ -122,15 +121,6 @@ public class PlayerBaseState : IState
     protected virtual void OnAttackCanceled(InputAction.CallbackContext obj)
     {
         stateMachine.IsAttacking = false;
-    }
-
-    protected virtual void OnComboAttackStarted(InputAction.CallbackContext context)
-    {
-        stateMachine.IsComboAttacking = true;
-    }
-    protected virtual void OnComboAttackCanceled(InputAction.CallbackContext context)
-    {
-        stateMachine.IsComboAttacking = false;
     }
 
     private void OnSkillPageStarted(InputAction.CallbackContext context)
