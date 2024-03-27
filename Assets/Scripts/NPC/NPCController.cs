@@ -92,7 +92,7 @@ public class NPCController : MonoBehaviour, IInteractive
             uiManager.talkBtnOnOff(true);
 
         }
-        
+
     }
     //Npc타입에 따라 대화창 닫기
     public void CloseUI()
@@ -105,10 +105,10 @@ public class NPCController : MonoBehaviour, IInteractive
         else if (npcType == NPCType.Shop)
         {
             uiManager.talkBtnOnOff(false);
-           
+
 
         }
-        
+
     }
     public void Interact()
     {
@@ -165,7 +165,7 @@ public class NPCController : MonoBehaviour, IInteractive
 
             return;
         }
- 
+
         Talk();
 
     }
@@ -201,8 +201,8 @@ public class NPCController : MonoBehaviour, IInteractive
         //talkIndex++;
 
 
-        
-        if (sayingNPC && talkIndex < npcMsgList.Count)
+
+        if (sayingNPC && talkIndex + 1 < npcMsgList.Count)
         {
 
             if (npcMsgList[talkIndex].Length > 0)
@@ -238,12 +238,12 @@ public class NPCController : MonoBehaviour, IInteractive
 
         }
         //Player가 말 할 차례이고 문장이 더 존재한다면
-        else if (!sayingNPC && talkIndex < playerMsgList.Count)
+        else if (!sayingNPC && talkIndex + 1 < playerMsgList.Count)
         {
-            
+
             if (playerMsgList[talkIndex].Length > 0)
             {
-                
+
                 uiManager.SetTalkMessage(playerMsgList[talkIndex][talkPlayerStep]);
                 uiManager.ShowNpcPotrait(false);
                 uiManager.ShowPlayerPotrait(true);
@@ -283,7 +283,7 @@ public class NPCController : MonoBehaviour, IInteractive
     bool CheckConversationCount()
     {
         //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않다면
-        if (talkIndex >= npcMsgList.Count && talkIndex >= playerMsgList.Count)
+        if (talkIndex + 1 >= npcMsgList.Count && talkIndex + 1 >= playerMsgList.Count)
         {
             isEndTalk = true;
             playerinput.OnEnable();
