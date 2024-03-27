@@ -10,7 +10,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
     [SerializeField] private TextMeshProUGUI itemText;
 
     protected InventoryUIController ui;
-    public InventoryItem item;
+    public InventoryItem inventoryItem;
 
     Color emptySlotColor = new Color(255, 255, 255, 0);
 
@@ -21,27 +21,27 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
     private void Start()
     {
         ui = GetComponentInParent<InventoryUIController>();
-        UpdateSlot(item);
+        UpdateSlot(inventoryItem);
     }
     public void UpdateSlot(InventoryItem _newitem)
     {
-        item = _newitem;
+        inventoryItem = _newitem;
 
         itemImage.color = Color.white;
 
-        if (item == null || item.stackSize == 0)
+        if (inventoryItem == null || inventoryItem.stackSize == 0)
         {
             itemImage.color = emptySlotColor;
         }
 
-        if (item != null)
+        if (inventoryItem != null)
         {    
-            itemImage.sprite = item.datas.sprite; // test
+            itemImage.sprite = inventoryItem.datas.sprite; // test
             itemImage.GetComponent<Image>().SetNativeSize();
 
-            if (item.stackSize > 1)
+            if (inventoryItem.stackSize > 1)
             {
-                itemText.text = item.stackSize.ToString();
+                itemText.text = inventoryItem.stackSize.ToString();
             }
             else
             {
@@ -53,7 +53,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
     public void CleanUpSlot()
     {
-        item = null;
+        inventoryItem = null;
 
         itemImage.sprite = null;
         itemImage.color = Color.clear;
@@ -62,7 +62,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if (item == null || item.stackSize == 0)
+        if (inventoryItem == null || inventoryItem.stackSize == 0)
         {
             return;
         }
@@ -72,9 +72,9 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
         if (timeSinceLastClick <= clickDelay)
         {
-            if (item.datas.ItemType == ItemType.Equipment) // test
+            if (inventoryItem.datas.ItemType == ItemType.Equipment) // test
             {
-                Inventory.Instance.EquipItem(item.datas);
+                Inventory.Instance.EquipItem(inventoryItem);
                 ui.itemToopTip.HideToolTip();
             }
             //ui.itemToopTip.HideToolTip();
@@ -82,7 +82,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
         else
         {
             AdjustToolTipPosition();
-            ui.itemToopTip.ShowToolTip(item.datas);   //test
+            ui.itemToopTip.ShowToolTip(inventoryItem.datas);   //test
         }
 
         lastClickTime = currentTime;

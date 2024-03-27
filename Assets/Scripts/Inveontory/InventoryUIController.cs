@@ -37,9 +37,10 @@ public class InventoryUIController : MonoBehaviour
     {
         for (int i = 0; i < equipmentSlot.Length; i++)
         {
-            foreach (KeyValuePair<Item, InventoryItem> item in inventoryContorller.equipmentDictionary)
+            //test
+            foreach (KeyValuePair<SlotType, InventoryItem> item in inventoryContorller.equipmentDictionary)
             {
-                if (item.Key.EquipmentType == equipmentSlot[i].slotType)
+                if (item.Key == equipmentSlot[i].slotType)
                 {
                     equipmentSlot[i].UpdateSlot(item.Value);
                 }
