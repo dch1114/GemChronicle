@@ -15,7 +15,7 @@ public class SkillManager : Singleton<SkillManager>
         {
             GameObject go = skills[i];
             go.SetActive(true);
-            go.transform.position = GameManager.instance.player.transform.position;
+
             yield return new WaitUntil(() => !go.activeSelf);
         }
     }

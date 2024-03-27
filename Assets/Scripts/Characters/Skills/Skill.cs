@@ -8,6 +8,7 @@ public class Skill : MonoBehaviour
 
     private void OnEnable()
     {
+        transform.position = GameManager.instance.player.transform.position;
         StartCoroutine(WaitForAnimationEnd());
     }
 
