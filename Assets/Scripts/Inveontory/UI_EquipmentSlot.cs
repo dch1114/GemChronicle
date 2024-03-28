@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class UI_EquipmentSlot : UI_ItemSlot
 {
-    public EquipmentType slotType;
+    public SlotType slotType;
 
     private void OnValidate()
     {
@@ -12,7 +12,7 @@ public class UI_EquipmentSlot : UI_ItemSlot
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        if (item == null || item.stackSize == 0)//item == null || item.datas == null)
+        if (inventoryItem == null || inventoryItem.stackSize == 0)//item == null || item.datas == null)
         {
             return;
         }
@@ -22,10 +22,10 @@ public class UI_EquipmentSlot : UI_ItemSlot
 
         if (timeSinceLastClick <= clickDelay)
         {
-            if (item.datas.ItemType == ItemType.Equipment)
+            if (inventoryItem.datas.ItemType == ItemType.Equipment)
             {
-                Inventory.instance.UnEquipItem(item.datas);
-                Inventory.instance.AddItem(item.datas);
+                Inventory.Instance.UnEquipItem(inventoryItem); //수정한 곳
+                Inventory.Instance.AddItem(inventoryItem.datas);
                 CleanUpSlot();
                 ui.itemToopTip.HideToolTip();
             }
@@ -33,7 +33,7 @@ public class UI_EquipmentSlot : UI_ItemSlot
         else
         {
             AdjustToolTipPosition();
-            ui.itemToopTip.ShowToolTip(item.datas);
+            ui.itemToopTip.ShowToolTip(inventoryItem.datas);
         }
 
         lastClickTime = currentTime;

@@ -16,7 +16,7 @@ public class Shop : MonoBehaviour
     {
         itemDatabase = DataManager.instance.itemDatabase;
 
-        playerInventory = Inventory.instance;
+        playerInventory = Inventory.Instance;
 
         shopItems = new List<Item>();
         shopItemSlot = shopSlotParent.GetComponentsInChildren<UI_ShopSlot>();

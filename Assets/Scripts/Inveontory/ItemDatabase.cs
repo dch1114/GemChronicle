@@ -3,12 +3,12 @@ using System.Text;
 using UnityEngine;
 
 
-public enum EquipmentType //test
+public enum SlotType // 수정한 곳
 {
     Weapon,
     Armor,
-    Amulet,
-    Flask
+    Potion,
+    Gem
 }
 
 public enum ItemType
@@ -26,7 +26,7 @@ public class Item
     public int Armor;
     public string Description;
     public ItemType ItemType;
-    public EquipmentType EquipmentType;
+    public SlotType SlotType;
     public int Price;
 
     private int descriptionLength;
