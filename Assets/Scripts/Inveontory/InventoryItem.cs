@@ -12,7 +12,7 @@ public class InventoryItem
         AddStack();
     }
 
-    public void AddStack() => stackSize++;
+    public void AddStack(int amount = 1) => stackSize += amount;
 
-    public void RemoveStack() => stackSize--;
+    public void RemoveStack(int amount = 1) => stackSize -= amount;
 }

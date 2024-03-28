@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryUIController : MonoBehaviour
@@ -9,37 +10,64 @@ public class InventoryUIController : MonoBehaviour
 
     public UI_ItemToolTip itemToopTip;
     public UI_ItemToolTip shopitemToolTip;
+
+    Inventory inventoryContorller;
+
+    //test
+    [Header("Inventory UI")]
+    [SerializeField] private Transform inventorySlotParent;
+    [SerializeField] private Transform equipmentSlotParent;
+    [SerializeField] private Transform statusParent;
+
+
+    private UI_ItemSlot[] inventoryItemSlot;
+    private UI_EquipmentSlot[] equipmentSlot;
+    private UI_Status[] uI_Statuses;
     // Start is called before the first frame update
     void Start()
     {
-        //SwitchTo(null);
+        //test
+        inventoryContorller = Inventory.Instance;
+        inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
+        equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
+        uI_Statuses = statusParent.GetComponentsInChildren<UI_Status>();
 
         itemToopTip.gameObject.SetActive(false);
     }
 
-    //public void SwitchTo(GameObject _menu)
-    //{
-    //    for (int i = 0; i < transform.childCount; i++)
-    //    {
-    //        transform.GetChild(i).gameObject.SetActive(false);
-    //    }
+    //test
+    public void UpdateSlotUI()
+    {
+        for (int i = 0; i < equipmentSlot.Length; i++)
+        {
+            //test
+            foreach (KeyValuePair<SlotType, InventoryItem> item in inventoryContorller.equipmentDictionary)
+            {
+                if (item.Key == equipmentSlot[i].slotType)
+                {
+                    equipmentSlot[i].UpdateSlot(item.Value);
+                }
+            }
+        }
 
-    //    if (_menu != null)
-    //    {
-    //        _menu.SetActive(true);
-    //    }
-    //}
+        for (int i = 0; i < inventoryItemSlot.Length; i++)
+        {
+            inventoryItemSlot[i].CleanUpSlot();
+        }
 
-    //public void SwitchWithKeyTo(GameObject _menu)
-    //{
-    //    if (_menu != null && _menu.activeSelf)
-    //    {
-    //        _menu.SetActive(false);
-    //        return;
-    //    }
+        for (int i = 0; i < inventoryContorller.inventory.Count; i++)
+        {
+            inventoryItemSlot[i].UpdateSlot(inventoryContorller.inventory[i]);
+        }
+    }
 
-    //    SwitchTo(_menu);
-    //}
+    public void UpdateStatus()
+    {
+        for (int i = 0; i< uI_Statuses.Length; i++)
+        {
+            uI_Statuses[i].UpdateStatValueUI();
+        }
+    }
 
     public void UseShop()
     {

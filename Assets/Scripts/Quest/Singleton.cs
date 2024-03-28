@@ -3,27 +3,27 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Component
 {
-    private static T _instance;
+    private static T instance;
     public static T Instance
     {
         get
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = FindObjectOfType<T>();
-                if (_instance == null)
+                instance = FindObjectOfType<T>();
+                if (instance == null)
                 {
                     GameObject nuevoGO = new GameObject();
-                    _instance = nuevoGO.AddComponent<T>();
+                    instance = nuevoGO.AddComponent<T>();
                 }
             }
 
-            return _instance;
+            return instance;
         }
     }
 
     protected virtual void Awake()
     {
-        _instance = this as T;
+        instance = this as T;
     }
 }
