@@ -26,7 +26,7 @@ public class Status
                 return Atk;
             case StatusType.Defense:
                 return Def;
-            case StatusType.MaxHp:
+            case StatusType.PlayerHP:
                 return Hp;
             default:
                 return 0;
@@ -38,5 +38,5 @@ public enum StatusType
 {
     Attack,
     Defense,
-    MaxHp
+    PlayerHP
 }
