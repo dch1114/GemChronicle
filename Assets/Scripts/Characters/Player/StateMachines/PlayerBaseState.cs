@@ -101,21 +101,8 @@ public class PlayerBaseState : IState
     private void SetAttackIndexs(int _index)
     {
         stateMachine.AttackIndex = _index;
-        stateMachine.SkillIndex = GetSkillNumIndexs(_index);
+        stateMachine.SetUseSkill(_index);
         stateMachine.IsAttacking = true;
-    }
-
-    private List<int> GetSkillNumIndexs(int index)
-    {
-        switch(stateMachine.Player.Data.StatusData.JobType)
-        {
-            case JobType.Warrior:
-                return stateMachine.Player.Data.AttackData.AttackSkillStates[index];
-                break;
-            default:
-                return stateMachine.Player.Data.AttackData.AttackSkillStates[0];
-                break;
-        }
     }
 
     protected virtual void OnAttackCanceled(InputAction.CallbackContext obj)

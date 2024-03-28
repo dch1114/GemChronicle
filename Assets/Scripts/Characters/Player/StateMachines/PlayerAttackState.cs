@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class PlayerAttackState : PlayerBaseState
 {
+    private GameObject go;
     public PlayerAttackState(PlayerStateMachine _playerStateMachine) : base(_playerStateMachine)
     {
     }
 
+    SkillInfoData skillInfoData;
     public override void Enter()
     {
-        //stateMachine.MovementSpeedModifier = 0f;
         base.Enter();
 
+        //stateMachine.MovementSpeedModifier = 0f;
+
+        StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+        
         int index = stateMachine.AttackIndex;
         stateMachine.Player.Animator.SetInteger("AttackIndex", index);
 
-        StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
-
-        List<int> skillIndex = stateMachine.SkillIndex;
-        Shoot(skillIndex);
+        skillInfoData = stateMachine.GetSkill();
+        if (skillInfoData == null) { stateMachine.ChangeState(stateMachine.IdleState); }
+        else Shoot(skillInfoData);
     }
 
     public override void Exit()
@@ -28,15 +32,27 @@ public class PlayerAttackState : PlayerBaseState
         StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
     }
 
-    private void Shoot(List<int> skills)
+    private void Shoot(SkillInfoData skill)
     {
-        List<GameObject> skillObjects = new List<GameObject>();
-        for (int i = 0; i < skills.Count; i++)
-        {
-            GameObject go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(skills[i].ToString());
-            skillObjects.Add(go);
-        }
+        go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(skill.SkillStateIndex.ToString());
+        go.transform.position = stateMachine.Player.transform.position;
+        go.SetActive(true);
+    }
 
-        SkillManager.Instance.SkillCombo(skillObjects);
+    public override void Update()
+    {
+        base.Update();
+
+        if(go != null && !go.activeSelf)
+        {
+            if (stateMachine.isCombo())
+            {
+                stateMachine.ChangeState(stateMachine.AttackState);
+            }
+            else
+            {
+                stateMachine.ChangeState(stateMachine.IdleState);
+            }
+        }
     }
 }
