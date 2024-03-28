@@ -237,12 +237,14 @@ public class Inventory : Singleton<Inventory>
     {
         statusData.Atk += _item.Damage;
         statusData.Def += _item.Armor;
+        inventoryUIController.UpdateStatus();
     }
 
     public void RemoveItemStat(Item _item)
     {
         statusData.Atk -= _item.Damage;
         statusData.Def -= _item.Armor;
+        inventoryUIController.UpdateStatus();
     }
 
     public void UpdateRetainGold()

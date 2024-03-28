@@ -17,10 +17,12 @@ public class InventoryUIController : MonoBehaviour
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform equipmentSlotParent;
+    [SerializeField] private Transform statusParent;
 
 
     private UI_ItemSlot[] inventoryItemSlot;
     private UI_EquipmentSlot[] equipmentSlot;
+    private UI_Status[] uI_Statuses;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class InventoryUIController : MonoBehaviour
         inventoryContorller = Inventory.Instance;
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
+        uI_Statuses = statusParent.GetComponentsInChildren<UI_Status>();
 
         itemToopTip.gameObject.SetActive(false);
     }
@@ -58,6 +61,13 @@ public class InventoryUIController : MonoBehaviour
         }
     }
 
+    public void UpdateStatus()
+    {
+        for (int i = 0; i< uI_Statuses.Length; i++)
+        {
+            uI_Statuses[i].UpdateStatValueUI();
+        }
+    }
 
     public void UseShop()
     {
