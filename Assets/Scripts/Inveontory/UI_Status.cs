@@ -30,11 +30,11 @@ public class UI_Status : MonoBehaviour
 
     public void UpdateStatValueUI()
     {
-        PlayerDatas playerStats = player.GetComponent<PlayerDatas>();
+        PlayerStatusData playerStats = player.Data.StatusData;
 
         if (playerStats != null)
         {
-            statusValueText.text = playerStats.StatusData.GetStatus(statType).ToString();
+            statusValueText.text = playerStats.GetStatus(statType).ToString();
         }
     }
 }
