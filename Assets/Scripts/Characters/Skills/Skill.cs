@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Skill : MonoBehaviour
 
     private void OnEnable()
     {
+        transform.position = GameManager.instance.player.transform.position;
         StartCoroutine(WaitForAnimationEnd());
     }
 

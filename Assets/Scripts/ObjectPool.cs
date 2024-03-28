@@ -15,7 +15,7 @@ public class ObjectPool : MonoBehaviour
     public List<Pool> pools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
-    private void Awake()
+    private void Start()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
         foreach (var pool in pools)

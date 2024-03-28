@@ -53,12 +53,12 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     private void Start()
     {
-        itemDatabase = GameManager.instance.dataManager.itemDatabase;
+        itemDatabase = DataManager.instance.itemDatabase;
+        player = GameManager.instance.player;
 
         inventory = new List<InventoryItem>();
         //inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
