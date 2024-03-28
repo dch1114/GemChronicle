@@ -122,6 +122,11 @@ public class NPCController : MonoBehaviour, IInteractive
         //    TryTalk();
         //}
     }
+    public void Interact()
+    {
+        TryTalk();
+    }
+
     public void TryTalk()
     {
         //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
@@ -130,6 +135,7 @@ public class NPCController : MonoBehaviour, IInteractive
             uiManager.RunSelectedMenuButton();
             return;
         }
+<<<<<<< Updated upstream
 
         isEndTalk = false;
 
@@ -141,6 +147,8 @@ public class NPCController : MonoBehaviour, IInteractive
 
         //Talk(GetNpcData().ID);
 
+=======
+>>>>>>> Stashed changes
         //Npc초상회 이미지 세팅
         uiManager.SetNpcPortraitImage(talkManager.GetPortrait(npcData.ID));
         //Player초상화 이미지 세팅
@@ -159,7 +167,11 @@ public class NPCController : MonoBehaviour, IInteractive
             //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않아 대화를 종료해야 한다면
             if (talkIndex >= npcMsgList.Count && talkIndex >= playerMsgList.Count)
             {
+<<<<<<< Updated upstream
                 isEndTalk = true;
+=======
+                //Debug.Log("NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않음");
+>>>>>>> Stashed changes
                 playerinput.OnEnable();
                 talkIndex = 0;
                 talkNpcStep = 0;
@@ -176,6 +188,7 @@ public class NPCController : MonoBehaviour, IInteractive
                     uiManager.shopChoiceOnOff(true);
                 }
 
+<<<<<<< Updated upstream
                 return;
             }
 
@@ -359,16 +372,108 @@ public class NPCController : MonoBehaviour, IInteractive
         //}
         //return false;
     }
+=======
+                break;
+            }
 
+            // 플레이어 대화 메시지가 비어있는지 확인
+            bool playerHasMessages = talkIndex < playerMsgList.Count && playerMsgList[talkIndex].Length > 0;
+            // NPC 대화 메시지가 비어있는지 확인
+            bool npcHasMessages = talkIndex < npcMsgList.Count && npcMsgList[talkIndex].Length > 0;
+            //Debug.Log("PLAYER 대화 메시지가 있는가? -> " + playerHasMessages);
+            //Debug.Log("NPC 대화 메시지가 있는가? -> " + npcHasMessages);
+>>>>>>> Stashed changes
+
+            // 대화 메시지 선택
+            string[] currentMessages;
+            int currentStep;
+
+            if (sayingNPC && npcHasMessages)//NPC의 대화메세지가 존재하고 말하는중일 때
+            {
+                currentMessages = npcMsgList[talkIndex];
+                currentStep = talkNpcStep;
+            }
+            else if (!sayingNPC && playerHasMessages)//PLAYER의 대화메세지가 존재하고 말하는중일 때
+            {
+                currentMessages = playerMsgList[talkIndex];
+                currentStep = talkPlayerStep;
+            }
+            else//NPC 또는 PLAYER의 대화메세지가 없을때
+            {
+                //Debug.Log("NPC + PLAYER 둘중 하나의 대화메세지가 없음");
+                sayingNPC = !sayingNPC;
+                continue;
+            }
+
+            //Debug.Log("sayingNPC:" + sayingNPC);
+            //Debug.Log("currentStep:" + currentStep);
+            // 대화 메시지 출력
+            if (currentStep < currentMessages.Length)
+            {
+                //Text출력 및 초상화UI 업데이트
+                uiManager.SetTalkMessage(currentMessages[currentStep]);
+                Debug.Log(currentMessages[currentStep]);
+                uiManager.ShowNpcPotrait(sayingNPC);
+                uiManager.ShowPlayerPotrait(!sayingNPC);
+
+                
+                if (sayingNPC)
+                {
+                    talkNpcStep++;
+
+                    // NPC가 모든 문장을 출력한 경우 대화 스텝 초기화
+                    if (talkNpcStep >= npcMsgList[talkIndex].Length)
+                    {
+                        talkNpcStep = 0;
+
+
+                        // 플레이어한테 다음 대화내용이 있다면
+                        if (playerHasMessages)
+                        {
+                            sayingNPC = false;
+                        }
+                        else//플레이어한테 다음 대화내용이 없다면
+                        {
+                            // 대화 인덱스 증가
+                            talkIndex++;
+                        }
+                    }
+                }
+                else
+                {
+                    talkPlayerStep++;
+                    //Debug.Log("talkPlayerStep" + talkPlayerStep);
+                    //Debug.Log("playerMsgList[talkIndex].Length" + playerMsgList[talkIndex].Length);
+                    // 플레이어가 모든 문장을 출력한 경우 대화 스텝 초기화
+                    if (talkPlayerStep >= playerMsgList[talkIndex].Length)
+                    {
+                        Debug.Log("문단종료");
+                        talkPlayerStep = 0;
+                        sayingNPC = true;
+                        talkIndex++;
+
+                    }
+                }
+
+            }
+            
+            // 대화 처리 후 종료
+            break;
+        }
+    }
+    
     public void Closer()
     {
         UIManager.Instance.talkBtnText.text = npcData.name;
         OpenUI();
     }
 
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
     InteractType IInteractive.GetType()
     {
         return InteractType.NPC;

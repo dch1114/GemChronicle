@@ -20,7 +20,7 @@ public class Quest : ScriptableObject
     public int RewardGold;
     public float RewardExp;
     public QuestRecompenseItem RewardItem;
-
+    public string potalID;
     [HideInInspector] public int CurrentQuantity;
     [HideInInspector] public bool QuestCompletedCheck;
 

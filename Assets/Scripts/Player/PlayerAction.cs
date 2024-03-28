@@ -36,9 +36,7 @@ public class PlayerAction : MonoBehaviour
             {
                 target.Interact();
             }
-            
         }
-
     }
     void OnInteractive()
     {
@@ -46,12 +44,22 @@ public class PlayerAction : MonoBehaviour
         {
             if (target.GetType() == InteractType.NPC)
             {
-
                 playerinput.OnDisable();
-                target.Interact(); //trytalk 대신 interact . 가까워졌을때 시점, 상호작용하는 시점 2개를 두고 처리하는 애가 무엇인지 생각
+                target.Interact();//trytalk 대신 interact.가까워졌을때 시점, 상호작용하는 시점 2개를 두고 처리하는 애가 무엇인지 생각
+            }
+            else if (target.GetType() == InteractType.SuperPotal)
+            {
+                //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
+                if (UIManager.Instance.IsOpenPotalPopup())
+                {
+                    UIManager.Instance.ExecuteSelectedPotalMenuAction();
+                    return;
+                }
+
+                //playerinput.OnDisable();
+                target.Interact();
             }
         }
-
     }
     void Update()  // 이부분 업데이트 제외하고 버튼클릭시 작동하도록 변경
     {

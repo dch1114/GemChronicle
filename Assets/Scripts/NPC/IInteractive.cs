@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public enum InteractType
 {
     Potal,
-    NPC
+    NPC,
+    SuperPotal
 }
 public interface IInteractive  
 {

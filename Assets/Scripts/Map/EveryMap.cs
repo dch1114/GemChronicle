@@ -1,14 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static NextMap;
 
+<<<<<<< Updated upstream
 public class Potal
 {
     public int potalId;
     public bool isLock;
     public Vector3 potalPosition;
 }
+=======
+
+>>>>>>> Stashed changes
 
 
 public class EveryMap : MonoBehaviour, IInteractive
@@ -23,16 +29,9 @@ public class EveryMap : MonoBehaviour, IInteractive
 
         uiManagerInstance = UIManager.Instance;
 
-
     }
 
-    // 충돌이 발생한지 여부를 나타내는 변수
-
-
-
-
-
-    public void OpenUI()
+     public void OpenUI()
     {
         uiManagerInstance.potalTxt.text = "포탈";
         // 충돌이 발생하면 상태를 true로 변경
@@ -44,6 +43,9 @@ public class EveryMap : MonoBehaviour, IInteractive
     {
         collisionOccurred = false;
         uiManagerInstance.PotalTalk(false);
+        //포탈 선택 UI 비활성화
+        UIManager.Instance.TogglePortalUI(false);
+
     }
 
     public void TryTalk()
@@ -58,19 +60,23 @@ public class EveryMap : MonoBehaviour, IInteractive
 
     public void Interact()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
+        //GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
 
-        if (gameManager != null)
-        {
-            GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
-            if (player != null)
-            {
-                if (DestinationPoint != null)
-                {
-                    player.transform.position = DestinationPoint.position;
-                }
-            }
-        }
+        //if (gameManager != null)
+        //{
+        //    GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
+        //    if (player != null)
+        //    {
+        //        if (DestinationPoint != null)
+        //        {
+        //            player.transform.position = DestinationPoint.position;
+        //        }
+        //    }
+        //}
+
+        //포탈 선택 UI 활성화
+        UIManager.Instance.TogglePortalUI(true);
+
 
     }
     public Vector3 GetPosition()
@@ -82,6 +88,7 @@ public class EveryMap : MonoBehaviour, IInteractive
 
     InteractType IInteractive.GetType()
     {
-        throw new System.NotImplementedException();
+        return InteractType.SuperPotal;
+        //throw new System.NotImplementedException();
     }
 }

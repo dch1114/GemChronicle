@@ -15,11 +15,13 @@ public class NextMap : MonoBehaviour, IInteractive
     // 충돌이 발생한지 여부를 나타내는 변수
     private bool collisionOccurred = false;
     UIManager uiManagerInstance;
-
+    
+    public Potal potal;
 
     public void Start()
     {
         uiManagerInstance = UIManager.Instance;
+        potal.potalPosition = transform.position;
     }
 
     public void OpenUI()
@@ -92,5 +94,28 @@ public class NextMap : MonoBehaviour, IInteractive
     InteractType IInteractive.GetType()
     {
         return InteractType.Potal;
+    }
+
+
+
+    private void OnEnable()
+    {
+        Quest.EventQuestCompleted += QuestCompleted;
+        PotalManager.Instance.AddPotal(potal);
+    }
+
+    private void OnDisable()
+    {
+        Quest.EventQuestCompleted -= QuestCompleted;
+        PotalManager.Instance.RemovePotal(potal);
+    }
+
+    private void QuestCompleted(Quest questCompleted)
+    {
+        Debug.Log("Quest Complete");
+        if (questCompleted.potalID == potal.potalId)
+        {
+            potal.isLock = false;
+        }
     }
 }
