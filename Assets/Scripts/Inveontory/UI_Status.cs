@@ -1,11 +1,13 @@
 using TMPro;
 using UnityEngine;
+using static PlayerObj;
 
 
 public class UI_Status : MonoBehaviour
 {
     private Player player;
     private InventoryUIController ui;
+    PlayerStatusData playerStats;
 
     [SerializeField] private string statusName;
     [SerializeField] private StatusType statType;
@@ -15,6 +17,7 @@ public class UI_Status : MonoBehaviour
     private void Start()
     {
         player = Inventory.Instance.player;
+        playerStats = player.Data.StatusData;
         ui = GetComponentInParent<InventoryUIController>();
         UpdateStatValueUI();
     }
@@ -30,8 +33,6 @@ public class UI_Status : MonoBehaviour
 
     public void UpdateStatValueUI()
     {
-        PlayerStatusData playerStats = player.Data.StatusData;
-
         if (playerStats != null)
         {
             statusValueText.text = playerStats.GetStatus(statType).ToString();

@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public static GameManager instance;
+    //public static GameManager instance;
 
     public Player player;
 
-    private void Awake()
-    {
-        instance = this;
-    }
+    //protected override void Awake()
+    //{
+    //    instance = this;
+    //}
 }
