@@ -55,24 +55,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Attack"",
-                    ""type"": ""Button"",
-                    ""id"": ""70b4fed8-1207-43b2-9806-f18c7954c00c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ComboAttack"",
-                    ""type"": ""Button"",
-                    ""id"": ""7f8e23ff-c1f9-4755-aa01-4afef4138963"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Quest"",
                     ""type"": ""Button"",
                     ""id"": ""36b334e5-241c-4b7d-b4ac-f0b76588e154"",
@@ -112,6 +94,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""1c2fe4dc-99b0-4c00-8238-6b09e73e5fab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackA"",
+                    ""type"": ""Button"",
+                    ""id"": ""f218562f-02eb-4ad8-bb1b-8489e91a8b67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackS"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae00eb5a-62c6-4665-8e65-a08a55b73492"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackD"",
+                    ""type"": ""Button"",
+                    ""id"": ""efb452ec-814f-442c-bddc-35156bb97c6d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -176,138 +185,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e29c024a-f9bf-49d1-bdf3-0717e98ceb2c"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ab8940a4-7b61-4551-8a25-f09c54dd89d9"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ec27687b-8b98-45c5-9766-a3ca00816545"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""QW"",
-                    ""id"": ""cd499b86-6dd3-4d4a-a9d6-a84c4732cfea"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboAttack"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""02081872-17d9-47f0-a8de-2313f96e5a5b"",
-                    ""path"": ""<NimbusGamepadHid>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""b7c357c8-f4ce-4bcc-8fea-3805511d2fc8"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""QE"",
-                    ""id"": ""0abd32b5-80a9-4f7c-b4ee-0bd75e72e00a"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboAttack"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""ab7b0aa0-fba7-4a2b-aa09-62dd9ece1f63"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""99450f26-00c4-40ca-872a-435a0c0345dc"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""WE"",
-                    ""id"": ""d05b931f-d29e-4642-b78c-35070d83941f"",
-                    ""path"": ""OneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboAttack"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""f629fa3b-837d-4db6-8b6c-4c489c4980c9"",
-                    ""path"": ""<AndroidJoystick>/stick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""70b771fd-1399-4a10-acfa-a16319eaeafc"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComboAttack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
                     ""id"": ""304cfb3e-4b4d-4b20-bf17-c16bfb0e1ed7"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -360,6 +237,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""PotalMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""237d0e6c-1bbc-471d-bc6d-7b8d28f8b1d0"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ffcb67a-4854-4940-8db5-63a7465809f1"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e06d0b1e-0aa2-4d08-b500-aa096c171f59"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AttackD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -371,13 +281,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_ComboAttack = m_Player.FindAction("ComboAttack", throwIfNotFound: true);
         m_Player_Quest = m_Player.FindAction("Quest", throwIfNotFound: true);
         m_Player_Interactive = m_Player.FindAction("Interactive", throwIfNotFound: true);
         m_Player_PotalMove = m_Player.FindAction("PotalMove", throwIfNotFound: true);
         m_Player_SkillPage = m_Player.FindAction("SkillPage", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_AttackA = m_Player.FindAction("AttackA", throwIfNotFound: true);
+        m_Player_AttackS = m_Player.FindAction("AttackS", throwIfNotFound: true);
+        m_Player_AttackD = m_Player.FindAction("AttackD", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -442,13 +353,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_ComboAttack;
     private readonly InputAction m_Player_Quest;
     private readonly InputAction m_Player_Interactive;
     private readonly InputAction m_Player_PotalMove;
     private readonly InputAction m_Player_SkillPage;
     private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_AttackA;
+    private readonly InputAction m_Player_AttackS;
+    private readonly InputAction m_Player_AttackD;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -456,13 +368,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @ComboAttack => m_Wrapper.m_Player_ComboAttack;
         public InputAction @Quest => m_Wrapper.m_Player_Quest;
         public InputAction @Interactive => m_Wrapper.m_Player_Interactive;
         public InputAction @PotalMove => m_Wrapper.m_Player_PotalMove;
         public InputAction @SkillPage => m_Wrapper.m_Player_SkillPage;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @AttackA => m_Wrapper.m_Player_AttackA;
+        public InputAction @AttackS => m_Wrapper.m_Player_AttackS;
+        public InputAction @AttackD => m_Wrapper.m_Player_AttackD;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -481,12 +394,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Attack.started += instance.OnAttack;
-            @Attack.performed += instance.OnAttack;
-            @Attack.canceled += instance.OnAttack;
-            @ComboAttack.started += instance.OnComboAttack;
-            @ComboAttack.performed += instance.OnComboAttack;
-            @ComboAttack.canceled += instance.OnComboAttack;
             @Quest.started += instance.OnQuest;
             @Quest.performed += instance.OnQuest;
             @Quest.canceled += instance.OnQuest;
@@ -502,6 +409,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @AttackA.started += instance.OnAttackA;
+            @AttackA.performed += instance.OnAttackA;
+            @AttackA.canceled += instance.OnAttackA;
+            @AttackS.started += instance.OnAttackS;
+            @AttackS.performed += instance.OnAttackS;
+            @AttackS.canceled += instance.OnAttackS;
+            @AttackD.started += instance.OnAttackD;
+            @AttackD.performed += instance.OnAttackD;
+            @AttackD.canceled += instance.OnAttackD;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -515,12 +431,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Attack.started -= instance.OnAttack;
-            @Attack.performed -= instance.OnAttack;
-            @Attack.canceled -= instance.OnAttack;
-            @ComboAttack.started -= instance.OnComboAttack;
-            @ComboAttack.performed -= instance.OnComboAttack;
-            @ComboAttack.canceled -= instance.OnComboAttack;
             @Quest.started -= instance.OnQuest;
             @Quest.performed -= instance.OnQuest;
             @Quest.canceled -= instance.OnQuest;
@@ -536,6 +446,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @AttackA.started -= instance.OnAttackA;
+            @AttackA.performed -= instance.OnAttackA;
+            @AttackA.canceled -= instance.OnAttackA;
+            @AttackS.started -= instance.OnAttackS;
+            @AttackS.performed -= instance.OnAttackS;
+            @AttackS.canceled -= instance.OnAttackS;
+            @AttackD.started -= instance.OnAttackD;
+            @AttackD.performed -= instance.OnAttackD;
+            @AttackD.canceled -= instance.OnAttackD;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -558,12 +477,13 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnAttack(InputAction.CallbackContext context);
-        void OnComboAttack(InputAction.CallbackContext context);
         void OnQuest(InputAction.CallbackContext context);
         void OnInteractive(InputAction.CallbackContext context);
         void OnPotalMove(InputAction.CallbackContext context);
         void OnSkillPage(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnAttackA(InputAction.CallbackContext context);
+        void OnAttackS(InputAction.CallbackContext context);
+        void OnAttackD(InputAction.CallbackContext context);
     }
 }

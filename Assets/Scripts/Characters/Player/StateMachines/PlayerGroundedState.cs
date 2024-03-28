@@ -70,7 +70,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     private void OnAttack()
     {
-        stateMachine.ChangeState(stateMachine.AttackNumState);
+        stateMachine.ChangeState(stateMachine.AttackState);
     }
 
 }

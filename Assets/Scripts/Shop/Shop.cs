@@ -14,7 +14,7 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        itemDatabase = GameManager.instance.dataManager.itemDatabase;
+        itemDatabase = DataManager.instance.itemDatabase;
 
         playerInventory = Inventory.Instance;
 

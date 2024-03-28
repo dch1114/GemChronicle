@@ -11,7 +11,7 @@ public class PlayerStateMachine : StateMachine
 
     public PlayerJumpState JumpState { get; }
     public PlayerFallState FallState { get; }
-    public PlayerAttackNumState AttackNumState { get; }
+    public PlayerAttackState AttackState { get; }
 
     public Vector2 MovementInput { get; set; }
     public float MovementSpeed { get; private set; }
@@ -22,7 +22,39 @@ public class PlayerStateMachine : StateMachine
     public bool IsAttacking { get; set; }
     public bool IsComboAttacking { get; set; }
     public int AttackIndex { get; set; }
+
     public List<int> SkillIndex { get; set; }
+    public List<SkillInfoData> skillInfoDatas { get; set; } = new List<SkillInfoData>();
+    public void SetUseSkill(int index)
+    {
+        SkillIndex = Player.Data.AttackData.AttackSkillStates[index];
+
+        for(int i = 0; i < SkillIndex.Count;i++)
+        {
+            SkillInfoData s = Player.Data.AttackData.GetSkillInfo(SkillIndex[i]);
+            skillInfoDatas.Add(s);
+        }
+    }
+
+    public SkillInfoData GetSkill()
+    {
+        if (skillInfoDatas == null) return null;
+        if (skillInfoDatas.Count == 0) return null;
+
+        SkillInfoData skillInfoData = skillInfoDatas[0];
+        skillInfoDatas.Remove(skillInfoData);
+
+        return skillInfoData;
+    }
+
+    public bool isCombo()
+    {
+        return skillInfoDatas.Count > 0;
+    }
+    public void ResetSkillInfos()
+    {
+        skillInfoDatas.Clear();
+    }
 
     public Transform MainCameraTransform { get; set; }
 
@@ -36,7 +68,7 @@ public class PlayerStateMachine : StateMachine
         JumpState = new PlayerJumpState(this);
         FallState = new PlayerFallState(this);
 
-        AttackNumState = new PlayerAttackNumState(this);
+        AttackState = new PlayerAttackState(this);
 
         MainCameraTransform = Camera.main.transform;
 
