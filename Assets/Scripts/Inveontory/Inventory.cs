@@ -27,11 +27,8 @@ public class Inventory : Singleton<Inventory>
 
     [SerializeField] private InventoryUIController inventoryUIController;
 
-    ItemDatabase itemDatabase;
-
     private void Start()
     {
-        itemDatabase = DataManager.instance.itemDatabase;
         inventory = new List<InventoryItem>();
         //inventoryDictionary = new Dictionary<Item, InventoryItem>();
 
