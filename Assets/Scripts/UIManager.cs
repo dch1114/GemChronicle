@@ -47,11 +47,8 @@ public class UIManager : Singleton<UIManager>
     public GameObject potraitPanel;
     public GameObject shopPanel;
     public GameObject shopChoice;
-<<<<<<< Updated upstream
-=======
 
     public GameObject potalListUI;
->>>>>>> Stashed changes
     //public static UIManager instance = null;
     public PlayerController playerController;
     public GameObject potaltalk;
@@ -80,11 +77,6 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     Image playerPortraitImg;
 
-<<<<<<< Updated upstream
-    protected override void Awake()
-    {
-        
-=======
 
     private Dictionary<PotalType, UnityAction> potalMenuAction = new Dictionary<PotalType, UnityAction>();
 
@@ -122,7 +114,6 @@ public class UIManager : Singleton<UIManager>
                 PopupShopMenuSelect(++currentShowMenuType);
             }
         }
->>>>>>> Stashed changes
     }
 
     //void Awake()

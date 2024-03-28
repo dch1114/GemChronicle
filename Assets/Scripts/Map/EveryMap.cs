@@ -5,16 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static NextMap;
 
-<<<<<<< Updated upstream
-public class Potal
-{
-    public int potalId;
-    public bool isLock;
-    public Vector3 potalPosition;
-}
-=======
 
->>>>>>> Stashed changes
 
 
 public class EveryMap : MonoBehaviour, IInteractive
