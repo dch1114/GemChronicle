@@ -54,19 +54,19 @@ public class NextMap : MonoBehaviour, IInteractive
 
         if (gameManager != null)
         {
-            GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
+            GameObject Player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
 
-            if (player != null)
+            if (Player != null)
             {
                 if (nextPositionType == NextPositionType.InitPosition)
                 {
-                    player.transform.position = Vector3.zero;
+                    Player.transform.position = Vector3.zero;
                 }
                 else if (nextPositionType == NextPositionType.SomePosition)
                 {
                     if (DestinationPoint != null)
                     {
-                        player.transform.position = DestinationPoint.position;
+                        Player.transform.position = DestinationPoint.position;
                     }
                     else
                     {

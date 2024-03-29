@@ -66,10 +66,10 @@ public class PotalManager : Singleton<PotalManager>
 
                 if (gameManager != null)
                 {
-                    GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
-                    if (player != null)
+                    GameObject Player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
+                    if (Player != null)
                     {
-                        player.transform.position = temp.potalPosition;
+                        Player.transform.position = temp.potalPosition;
                     }
                 }
 

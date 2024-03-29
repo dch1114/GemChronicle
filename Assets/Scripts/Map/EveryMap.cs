@@ -22,7 +22,7 @@ public class EveryMap : MonoBehaviour, IInteractive
 
     }
 
-     public void OpenUI()
+    public void OpenUI()
     {
         uiManagerInstance.potalTxt.text = "포탈";
         // 충돌이 발생하면 상태를 true로 변경
