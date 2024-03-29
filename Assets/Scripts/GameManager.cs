@@ -1,20 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager instance;
-    public DataManager dataManager;
-    public GameObject player;
-    private void Awake()
-    {
-        instance = this;
-        dataManager = GetComponentInChildren<DataManager>();
-    }
+    //public static GameManager instance;
 
-    public GameObject GetPlayer()
-    {
-        return player;
-    }
+    public Player player;
+
+    //protected override void Awake()
+    //{
+    //    instance = this;
+    //}
 }

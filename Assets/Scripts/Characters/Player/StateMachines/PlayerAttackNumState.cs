@@ -29,12 +29,13 @@ public class PlayerAttackNumState : PlayerAttackState
 
     private void Shoot(List<int> skills)
     {
+        List<GameObject> skillObjects = new List<GameObject>();
         for(int i = 0; i < skills.Count; i++)
         {
             GameObject go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(skills[i].ToString());
-            //플레이어 보는 위치 확인해서 뒤집기 필요
-            go.transform.position = stateMachine.Player.transform.position;
-            go.SetActive(true);
+            skillObjects.Add(go);
         }
+
+        SkillManager.Instance.SkillCombo(skillObjects);
     }
 }
