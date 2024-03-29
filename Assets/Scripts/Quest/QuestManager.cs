@@ -23,9 +23,11 @@ public class QuestManager : Singleton<QuestManager>
 
     public void SubscribeQuest(int questId)
     {
+        Debug.Log("SubscribeQuest" + questId);
+
         var questData = Database.Quest.Get(questId);
 
-        if (_subscribeQuests.ContainsKey(questData.Type))
+        if (_subscribeQuests.ContainsKey(questData.Type) == false)
             _subscribeQuests[questData.Type] = new List<QuestData>();
 
         _subscribeQuests[questData.Type].Add(questData);
@@ -33,6 +35,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public void UnsubscribeQuest(int questId)
     {
+        Debug.Log("SubscribeQuest" + questId);
         var questData = Database.Quest.Get(questId);
 
         if (_subscribeQuests.ContainsKey(questData.Type) == false)
@@ -82,7 +85,7 @@ public class QuestManager : Singleton<QuestManager>
 
         OnQuestUpdateCallback?.Invoke(questId, amount);
 
-        if (currentCount > questData.Count)
+        if (currentCount >= questData.Count)
             QuestClear(questId);
     }
 
