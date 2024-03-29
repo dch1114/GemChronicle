@@ -10,6 +10,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine.Video;
 using static Cinemachine.DocumentationSortingAttribute;
 using System.Reflection;
+using System.Linq;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -77,6 +78,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     Image playerPortraitImg;
 
+    public InventoryUIController inventoryUIController;
 
     private Dictionary<PotalType, UnityAction> potalMenuAction = new Dictionary<PotalType, UnityAction>();
 
@@ -368,7 +370,8 @@ public class UIManager : Singleton<UIManager>
     }
     void BuyShop()
     {
-
+        inventoryUIController.UseShop();
+        shopChoiceOnOff(false);
         Debug.Log("Select Buy");
     }
 
@@ -381,6 +384,7 @@ public class UIManager : Singleton<UIManager>
 
     void ExitShop()
     {
+        inventoryUIController.CloseShop();
         shopChoiceOnOff(false);
         Debug.Log("Select Exi");
 

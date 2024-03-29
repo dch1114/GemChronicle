@@ -48,14 +48,14 @@ public class Shop : MonoBehaviour
         }
     }
 
-    public void Buy(Item selectItem)
+    public void Buy(Item _selectItem)
     {
-        if (!(playerInventory.inventoryGold < selectItem.Price))
+        if (!(playerInventory.inventoryGold < _selectItem.Price))
         {
-            shopItems.Remove(selectItem);
-            playerInventory.AddItem(selectItem);
+            shopItems.Remove(_selectItem);
+            playerInventory.AddItem(_selectItem);
 
-            playerInventory.inventoryGold -= selectItem.Price;
+            playerInventory.inventoryGold -= _selectItem.Price;
 
             UpdateSlotUI();
 
@@ -66,6 +66,21 @@ public class Shop : MonoBehaviour
         {
             //TODO ÆË¾÷ Ãß°¡
             Debug.Log("not enough gold");
+        }
+    }
+
+    public void Sell(InventoryItem _inventoryItem)
+    {
+        if(_inventoryItem != null)
+        {
+            playerInventory.RemoveItem(_inventoryItem);
+            shopItems.Add(_inventoryItem.datas);
+
+            playerInventory.inventoryGold += _inventoryItem.datas.Price;
+
+            UpdateSlotUI();
+
+            playerInventory.UpdateRetainGold();
         }
     }
 }

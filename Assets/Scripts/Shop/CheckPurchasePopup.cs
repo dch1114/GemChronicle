@@ -8,11 +8,12 @@ public class CheckPurchasePopup : MonoBehaviour
     [SerializeField] Button buyBtn;
     [SerializeField] Button cancelBtn;
     [SerializeField] Button closeBtn;
+    [SerializeField] Button sellBtn;
 
     Shop shop;
     InventoryUIController ui;
     Item selectItem;
-
+    InventoryItem wantSell;
 
 
     private void Start()
@@ -21,6 +22,7 @@ public class CheckPurchasePopup : MonoBehaviour
         shop = FindObjectOfType<Shop>();
         buyBtn.onClick.AddListener(OnClickBuy);
         cancelBtn.onClick.AddListener(OnClickCancel);
+        sellBtn.onClick.AddListener(OnClickSell);
     }
 
     public void SetItem(Item _item)
@@ -33,6 +35,17 @@ public class CheckPurchasePopup : MonoBehaviour
         if (selectItem != null)
         {
             shop.Buy(selectItem);
+            ui.shopitemToolTip.HideToolTip();
+            checkPurchasePopup.gameObject.SetActive(false);
+        }
+    }
+
+    public void OnClickSell()
+    {
+        if (selectItem != null)
+        {
+
+            //shop.Sell();
             ui.shopitemToolTip.HideToolTip();
             checkPurchasePopup.gameObject.SetActive(false);
         }
