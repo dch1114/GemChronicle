@@ -20,36 +20,46 @@ public class PlayerAction : MonoBehaviour
     public PlayerInput playerinput;
     //대화가 종료되었는지 체크
     IInteractive target = null;
-    public UIManager uiManagerInstance;
+    UIManager uiManagerInstance;
     // Update is called once per frame
 
     private void Start()
     {
-        uiManagerInstance = UIManager.instance;
+        uiManagerInstance = UIManager.Instance;
     }
     void OnPotalMove()
     {
-        NextMap nextMap = target as NextMap;
-        if (nextMap != null)
+
+        if (interactiveList.Count > 0)
         {
-
-            target.Interact();
+            if (target.GetType() == InteractType.Potal)
+            {
+                target.Interact();
+            }
         }
-
     }
     void OnInteractive()
     {
-        NPCController npcController = target as NPCController;
-        if (npcController != null)
+        if (interactiveList.Count > 0)
         {
-            if (interactiveList.Count > 0)
+            if (target.GetType() == InteractType.NPC)
             {
-
                 playerinput.OnDisable();
-                target.Interact(); //trytalk 대신 interact . 가까워졌을때 시점, 상호작용하는 시점 2개를 두고 처리하는 애가 무엇인지 생각
+                target.Interact();//trytalk 대신 interact.가까워졌을때 시점, 상호작용하는 시점 2개를 두고 처리하는 애가 무엇인지 생각
+            }
+            else if (target.GetType() == InteractType.SuperPotal)
+            {
+                //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
+                if (UIManager.Instance.IsOpenPotalPopup())
+                {
+                    UIManager.Instance.ExecuteSelectedPotalMenuAction();
+                    return;
+                }
+
+                //playerinput.OnDisable();
+                target.Interact();
             }
         }
-
     }
     void Update()  // 이부분 업데이트 제외하고 버튼클릭시 작동하도록 변경
     {
@@ -93,24 +103,14 @@ public class PlayerAction : MonoBehaviour
 
         if (_other != null)
         {
-            //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
-            IInteractive t = _other.gameObject.GetComponent<NPCController>();
-            IInteractive y = _other.gameObject.GetComponent<NextMap>();
-            IInteractive x = _other.gameObject.GetComponent<EveryMap>();
-            if (t != null)
-            {
-                interactiveList.Add(t);
-                // 플레이어와 가장 가까운 몬스터를 찾는 메소드입니다.
-                target = FindClosestTarget();
-                t.Closer(); //오픈 UI를 하는것이 아니라. Closer를 한다. 니가 여기서 제일 가깝다라는것을 인식.
-            }
-            if (y != null)
-            {
-                interactiveList.Add(y);
-                y.Closer();
-                target = FindClosestTarget();
+            IInteractive irv = _other.GetComponent<IInteractive>();
 
-            }
+            interactiveList.Add(irv);
+            
+            target = FindClosestTarget();
+
+            target.Closer();
+
         }
 
     }
@@ -120,27 +120,14 @@ public class PlayerAction : MonoBehaviour
     {
         if (_other != null)
         {
-            //인터페이스는 컴포넌트 타입이 아니기때문에 인터페이스가 구현된 NPCController 클래스를 컴포넌트로 가져와야 함
-            IInteractive t = _other.gameObject.GetComponent<NPCController>();
-            IInteractive y = _other.gameObject.GetComponent<NextMap>();
-            IInteractive x = _other.gameObject.GetComponent<EveryMap>();
-            if (t != null)
-            {
-                interactiveList.Remove(t);
+            IInteractive irv = _other.GetComponent<IInteractive>();
 
-                if (interactiveList.Count <= 0)
-                {
-                    t.CloseUI();
-                    target = null;
-                }
-            }
-            else
-            {
-                interactiveList.Remove(y);
-                y.CloseUI();
-            }
+            irv.CloseUI();
+
+            target = null;
+
+            interactiveList.Remove(irv);
         }
-
 
     }
 }

@@ -1,7 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static NextMap;
+
+
+
 
 public class EveryMap : MonoBehaviour, IInteractive
 {
@@ -9,32 +14,29 @@ public class EveryMap : MonoBehaviour, IInteractive
     private bool collisionOccurred = false;
     public string destination;
     public Transform DestinationPoint;
+    UIManager uiManagerInstance;
     public void Awake()
     {
-        
-        maps.Add(DestinationPoint);
 
+        uiManagerInstance = UIManager.Instance;
 
     }
-    
-    // 충돌이 발생한지 여부를 나타내는 변수
- 
-
-
-
 
     public void OpenUI()
     {
-        UIManager.instance.potalTxt.text = destination;
+        uiManagerInstance.potalTxt.text = "포탈";
         // 충돌이 발생하면 상태를 true로 변경
         collisionOccurred = true;
-        UIManager.instance.PotalTalk(true);
+        uiManagerInstance.PotalTalk(true);
     }
 
     public void CloseUI()
     {
         collisionOccurred = false;
-        UIManager.instance.PotalTalk(false);
+        uiManagerInstance.PotalTalk(false);
+        //포탈 선택 UI 비활성화
+        UIManager.Instance.TogglePortalUI(false);
+
     }
 
     public void TryTalk()
@@ -49,17 +51,35 @@ public class EveryMap : MonoBehaviour, IInteractive
 
     public void Interact()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            if (DestinationPoint != null)
-            {
-                player.transform.position = DestinationPoint.position;
-            }
-        }
+        //GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
+
+        //if (gameManager != null)
+        //{
+        //    GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
+        //    if (player != null)
+        //    {
+        //        if (DestinationPoint != null)
+        //        {
+        //            player.transform.position = DestinationPoint.position;
+        //        }
+        //    }
+        //}
+
+        //포탈 선택 UI 활성화
+        UIManager.Instance.TogglePortalUI(true);
+
+
     }
     public Vector3 GetPosition()
     {
+        Debug.Log(transform.position);
+
         return transform.position;
+    }
+
+    InteractType IInteractive.GetType()
+    {
+        return InteractType.SuperPotal;
+        //throw new System.NotImplementedException();
     }
 }

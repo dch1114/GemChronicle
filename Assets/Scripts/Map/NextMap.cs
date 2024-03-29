@@ -14,23 +14,28 @@ public class NextMap : MonoBehaviour, IInteractive
     public string destination;
     // 충돌이 발생한지 여부를 나타내는 변수
     private bool collisionOccurred = false;
+    UIManager uiManagerInstance;
+    
+    public Potal potal;
 
-
-
- 
+    public void Start()
+    {
+        uiManagerInstance = UIManager.Instance;
+        potal.potalPosition = transform.position;
+    }
 
     public void OpenUI()
     {
-        UIManager.instance.potalTxt.text = destination;
+        uiManagerInstance.potalTxt.text = destination;
         // 충돌이 발생하면 상태를 true로 변경
         collisionOccurred = true;
-        UIManager.instance.PotalTalk(true);
+        uiManagerInstance.PotalTalk(true);
     }
 
     public void CloseUI()
     {
         collisionOccurred = false;
-        UIManager.instance.PotalTalk(false);
+        uiManagerInstance.PotalTalk(false);
     }
 
     public void TryTalk()
@@ -45,19 +50,28 @@ public class NextMap : MonoBehaviour, IInteractive
 
     public void Interact()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+       
 
-        if (player != null)
+        if (GameManager.Instance != null)
         {
-            if (nextPositionType == NextPositionType.InitPosition)
+            Player player = GameManager.Instance.player; // 게임 매니저를 통해 플레이어 얻기
+
+            if (player != null)
             {
-                player.transform.position = Vector3.zero;
-            }
-            else if (nextPositionType == NextPositionType.SomePosition)
-            {
-                if (DestinationPoint != null)
+                if (nextPositionType == NextPositionType.InitPosition)
                 {
-                    player.transform.position = DestinationPoint.position;
+                    player.transform.position = Vector3.zero;
+                }
+                else if (nextPositionType == NextPositionType.SomePosition)
+                {
+                    if (DestinationPoint != null)
+                    {
+                        player.transform.position = DestinationPoint.position;
+                    }
+                    else
+                    {
+
+                    }
                 }
                 else
                 {
@@ -69,14 +83,39 @@ public class NextMap : MonoBehaviour, IInteractive
 
             }
         }
-        else
-        {
 
-        }
     }
 
     public Vector3 GetPosition()
     {
         return transform.position;
+    }
+
+    InteractType IInteractive.GetType()
+    {
+        return InteractType.Potal;
+    }
+
+
+
+    private void OnEnable()
+    {
+        Quest.EventQuestCompleted += QuestCompleted;
+        PotalManager.Instance.AddPotal(potal);
+    }
+
+    private void OnDisable()
+    {
+        Quest.EventQuestCompleted -= QuestCompleted;
+        PotalManager.Instance.RemovePotal(potal);
+    }
+
+    private void QuestCompleted(Quest questCompleted)
+    {
+        Debug.Log("Quest Complete");
+        if (questCompleted.potalID == potal.potalId)
+        {
+            potal.isLock = false;
+        }
     }
 }

@@ -96,7 +96,6 @@ public class QuestManager : Singleton<QuestManager>
                 return questionAvailable[i];
             }
         }
-
         return null;
     }
 
