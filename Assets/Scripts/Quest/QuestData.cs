@@ -1,4 +1,5 @@
 using Constants;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestData
@@ -28,4 +29,31 @@ public class QuestData
     public int Exp => _exp;
     public int Gold => _gold;
 
+    private List<Reward> _rewardList;
+
+    public List<Reward> _RewardList
+    {
+        get
+        {
+            if(_rewardList == null)
+            {
+                _rewardList = new List<Reward>();
+                _rewardList.Add(item: new Reward(rewardID: _reward_1, _rewardCount_1));
+            }
+
+            return _rewardList;
+        }
+    }
+}
+
+public class Reward
+{
+    public int _rewardID { get; }
+    public int _rewardCount { get; }
+
+    public Reward(int rewardID, int rewardCount)
+    {
+        _rewardID = rewardID;
+        _rewardCount = rewardCount;
+    }
 }
