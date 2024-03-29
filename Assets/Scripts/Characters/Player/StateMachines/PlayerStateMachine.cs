@@ -29,7 +29,9 @@ public class PlayerStateMachine : StateMachine
     {
         SkillIndex = Player.Data.AttackData.AttackSkillStates[index];
 
-        for(int i = 0; i < SkillIndex.Count;i++)
+        int cnt = (Player.Data.StatusData.JobType == JobType.Warrior) ? SkillIndex.Count : 1;
+        
+        for(int i = 0; i < cnt; i++)
         {
             SkillInfoData s = Player.Data.AttackData.GetSkillInfo(SkillIndex[i]);
             skillInfoDatas.Add(s);

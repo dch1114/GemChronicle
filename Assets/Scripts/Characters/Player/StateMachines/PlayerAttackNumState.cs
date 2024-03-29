@@ -15,10 +15,6 @@ public class PlayerAttackNumState : PlayerAttackState
         int index = stateMachine.AttackIndex;
         stateMachine.Player.Animator.SetInteger("AttackIndex", index);
 
-        //TODO: Skill 찍는거 만들어서 반영
-        List<int> skillIndex = stateMachine.SkillIndex;
-        Shoot(skillIndex);
-
         base.Enter();
     }
 
@@ -27,15 +23,4 @@ public class PlayerAttackNumState : PlayerAttackState
         base.Exit();
     }
 
-    private void Shoot(List<int> skills)
-    {
-        List<GameObject> skillObjects = new List<GameObject>();
-        for(int i = 0; i < skills.Count; i++)
-        {
-            GameObject go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(skills[i].ToString());
-            skillObjects.Add(go);
-        }
-
-        SkillManager.Instance.SkillCombo(skillObjects);
-    }
 }

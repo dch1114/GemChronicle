@@ -29,6 +29,7 @@ public class Inventory : Singleton<Inventory>
 
     private void Start()
     {
+        player = GameManager.Instance.player;
         inventory = new List<InventoryItem>();
         //inventoryDictionary = new Dictionary<Item, InventoryItem>();
 

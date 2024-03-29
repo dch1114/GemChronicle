@@ -101,6 +101,7 @@ public class PlayerBaseState : IState
     private void SetAttackIndexs(int _index)
     {
         stateMachine.AttackIndex = _index;
+        stateMachine.ResetSkillInfos();
         stateMachine.SetUseSkill(_index);
         stateMachine.IsAttacking = true;
     }
