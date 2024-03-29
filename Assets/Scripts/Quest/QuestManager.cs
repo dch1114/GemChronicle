@@ -1,3 +1,4 @@
+using Constants;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,8 +9,110 @@ using UnityEngine.UI;
 
 public class QuestManager : Singleton<QuestManager>
 {
-    //[Header("Character")]
-    //[SerializeField] private Character character;
+    // 지금 진행중인가
+    private Dictionary<int, Quest> _ongoingQuests = new();
+
+    // 완료했는가
+    private HashSet<int> _completeQuests = new();
+
+    public event Action<int> OnQuestStartCallback;
+    public event Action<int, int> OnQuestUpdateCallback;
+    public event Action<int> OnQuestCompleteCallback;
+
+    private Dictionary<QuestType, List<QuestData>> _subscribeQuests = new();
+
+    public void SubscribeQuest(int questId)
+    {
+        var questData = Database.Quest.Get(questId);
+
+        if (_subscribeQuests.ContainsKey(questData.Type))
+            _subscribeQuests[questData.Type] = new List<QuestData>();
+
+        _subscribeQuests[questData.Type].Add(questData);
+    }
+
+    public void UnsubscribeQuest(int questId)
+    {
+        var questData = Database.Quest.Get(questId);
+
+        if (_subscribeQuests.ContainsKey(questData.Type) == false)
+            return;
+
+        _subscribeQuests[questData.Type].Remove(questData);
+    }
+
+    public void NotifyQuest(QuestType type, int target, int count)
+    {
+        if (_subscribeQuests.ContainsKey(type) == false)
+            return;
+
+        var filteredQuests = _subscribeQuests[type];
+        var targetQuests = filteredQuests.FindAll(q => q.Target == target);
+        foreach (var quest in targetQuests)
+            QuestUpdate(quest.ID, count);
+    }
+
+
+    public void QuestStart(int questId)
+    {
+        if(IsClear(questId))
+            return;
+
+        var quest = new Quest(questId);
+        quest.Start();
+
+        if(_ongoingQuests.ContainsKey(questId))
+            return;
+
+        _ongoingQuests.Add(questId, quest);
+
+        OnQuestStartCallback?.Invoke(questId);
+    }
+
+    public void QuestUpdate(int questId, int amount)
+    {
+        if(_ongoingQuests.ContainsKey(questId) == false)
+            return;
+
+        var questData = Database.Quest.Get(questId);
+
+        int currentCount = _ongoingQuests[questId].Update(amount);
+
+        _ongoingQuests[questId].Update(amount);
+
+        OnQuestUpdateCallback?.Invoke(questId, amount);
+
+        if (currentCount > questData.Count)
+            QuestClear(questId);
+    }
+
+    public void QuestClear(int questId)
+    {
+        if(_ongoingQuests.ContainsKey(questId) == false)
+            return;
+
+        _ongoingQuests[questId].Complete();
+        _ongoingQuests.Remove(questId);
+
+        _completeQuests.Add(questId);
+
+        OnQuestCompleteCallback?.Invoke(questId);
+    }
+
+    public bool IsClear(int id)
+    {
+        return _completeQuests.Contains(id);
+    }
+
+
+
+
+
+
+
+
+
+
 
     [Header("Quests")]
     [SerializeField] private Quest[] questionAvailable;

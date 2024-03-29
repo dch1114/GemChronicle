@@ -9,4 +9,11 @@ namespace Constants
         KillMonster,
         KillBoss
     }
+
+    public enum QuestState
+    {
+        Waite,
+        Progress,
+        Complete
+    }
 }
