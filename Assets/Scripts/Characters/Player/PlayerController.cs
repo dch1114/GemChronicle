@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 velocity;
     public bool isGrounded { get; set; } = false;
+    public bool isLeft { get; set; } = true;
 
     private Vector3 leftDirection = new Vector3(1f, 1f, 1f);
     private Vector3 rightDirection = new Vector3(-1f, 1f, 1f);
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
         transform.Translate(_speed);
     }
 
-    public void Look(bool isLeft)
+    public void Look()
     {
         transform.localScale = isLeft ? leftDirection : rightDirection;
     }

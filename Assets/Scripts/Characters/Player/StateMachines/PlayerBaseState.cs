@@ -166,11 +166,13 @@ public class PlayerBaseState : IState
         //이동 방향
         if (_movementDirection.x < 0f)
         {
-            stateMachine.Player.Controller.Look(true);
+            stateMachine.Player.Controller.isLeft = true;
         } else if (_movementDirection.x > 0f)
         {
-            stateMachine.Player.Controller.Look(false);
+            stateMachine.Player.Controller.isLeft = false;
         }
+
+        stateMachine.Player.Controller.Look();
     }
 
     private float GetMovementSpeed()
