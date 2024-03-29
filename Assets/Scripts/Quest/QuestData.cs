@@ -1,7 +1,9 @@
 using Constants;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class QuestData
 {
     [SerializeField] private int _id;
