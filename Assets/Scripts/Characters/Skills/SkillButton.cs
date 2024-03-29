@@ -6,17 +6,28 @@ using UnityEngine.UI;
 
 public class SkillButton : MonoBehaviour
 {
-    public SkillInfoData skillInfoData;
+    public SkillInfoData skillInfoData {  get; set; }
+
     public Image icon;
     public GameObject cover;
     public TextMeshProUGUI tmp;
-    public bool isUnlocked = false;
-    public GameObject unlockedImage;
+    public GameObject lockedImage;
+
+    public void SetSkillBtn()
+    {
+        if(skillInfoData != null)
+        {
+            bool isUnlocked = skillInfoData.IsUnlocked;
+            lockedImage.SetActive(!isUnlocked);
+            cover.SetActive(!isUnlocked);
+            tmp.text = string.Empty;
+        }
+    }
 
     public void SetUnlocked()
     {
-        isUnlocked = true;
-        unlockedImage.SetActive(false);
+        skillInfoData.IsUnlocked = true;
+        lockedImage.SetActive(false);
         cover.SetActive(false);
     }
 }
