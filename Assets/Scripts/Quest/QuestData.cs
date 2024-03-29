@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuestData
 {
-    [SerializeField]private int _id;
+    [SerializeField] private int _id;
     [SerializeField] private string _name;
     [SerializeField] private string _description;
     [SerializeField] private QuestType _type;
@@ -31,29 +31,38 @@ public class QuestData
 
     private List<Reward> _rewardList;
 
-    public List<Reward> _RewardList
+    public List<Reward> RewardList
     {
         get
         {
-            if(_rewardList == null)
+            if (_rewardList == null)
             {
                 _rewardList = new List<Reward>();
-                _rewardList.Add(item: new Reward(rewardID: _reward_1, _rewardCount_1));
+
+                CheckReward(_reward_1, _rewardCount_1);
+                CheckReward(_reward_2, _rewardCount_2);
+                CheckReward(_reward_3, _rewardCount_3);
             }
 
             return _rewardList;
         }
     }
+
+    private void CheckReward(int rewardId, int rewardCount)
+    {
+        if (rewardId != 0)
+            _rewardList.Add(new Reward(rewardId, rewardCount));
+    }
 }
 
 public class Reward
 {
-    public int _rewardID { get; }
+    public int _rewardId { get; }
     public int _rewardCount { get; }
 
-    public Reward(int rewardID, int rewardCount)
+    public Reward(int rewardId, int rewardCount)
     {
-        _rewardID = rewardID;
+        _rewardId = rewardId;
         _rewardCount = rewardCount;
     }
 }
