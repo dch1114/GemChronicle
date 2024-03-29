@@ -62,14 +62,14 @@ public class PotalManager : Singleton<PotalManager>
             {
                 Debug.Log("이 포탈은 통과 가능");
 
-                GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
+               
 
-                if (gameManager != null)
+                if (GameManager.Instance != null)
                 {
-                    GameObject Player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
-                    if (Player != null)
+                    Player player = GameManager.Instance.player; // 게임 매니저를 통해 플레이어 얻기
+                    if (player != null)
                     {
-                        Player.transform.position = temp.potalPosition;
+                        player.transform.position = temp.potalPosition;
                     }
                 }
 

@@ -50,23 +50,23 @@ public class NextMap : MonoBehaviour, IInteractive
 
     public void Interact()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
+       
 
-        if (gameManager != null)
+        if (GameManager.Instance != null)
         {
-            GameObject Player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
+            Player player = GameManager.Instance.player; // 게임 매니저를 통해 플레이어 얻기
 
-            if (Player != null)
+            if (player != null)
             {
                 if (nextPositionType == NextPositionType.InitPosition)
                 {
-                    Player.transform.position = Vector3.zero;
+                    player.transform.position = Vector3.zero;
                 }
                 else if (nextPositionType == NextPositionType.SomePosition)
                 {
                     if (DestinationPoint != null)
                     {
-                        Player.transform.position = DestinationPoint.position;
+                        player.transform.position = DestinationPoint.position;
                     }
                     else
                     {

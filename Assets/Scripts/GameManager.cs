@@ -8,14 +8,11 @@ public class GameManager : Singleton<GameManager>
     //public static GameManager instance;
 
     public Player player;
-    public GameObject Player;
+ 
     //protected override void Awake()
     //{
     //    instance = this;
     //}
 
-    public GameObject GetPlayer()
-    {
-        return Player;
-    }
+
 }
