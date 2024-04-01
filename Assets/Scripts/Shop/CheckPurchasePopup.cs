@@ -4,16 +4,17 @@ using UnityEngine.UI;
 public class CheckPurchasePopup : MonoBehaviour
 {
     [SerializeField] public GameObject shopTradePopup;
-    [SerializeField] public CheckPurchasePopup checkPurchasePopup;
+    [SerializeField] public GameObject checkPurchasePopup;
+    [SerializeField] public GameObject checkSellPopup;
     [SerializeField] Button buyBtn;
     [SerializeField] Button cancelBtn;
-    [SerializeField] Button closeBtn;
     [SerializeField] Button sellBtn;
+    [SerializeField] Button closeBtn;
 
     Shop shop;
     InventoryUIController ui;
     Item selectItem;
-    InventoryItem wantSell;
+    InventoryItem selectInventoryItem;
 
 
     private void Start()
@@ -22,12 +23,18 @@ public class CheckPurchasePopup : MonoBehaviour
         shop = FindObjectOfType<Shop>();
         buyBtn.onClick.AddListener(OnClickBuy);
         cancelBtn.onClick.AddListener(OnClickCancel);
+        closeBtn.onClick.AddListener(OnClickCancel);
         sellBtn.onClick.AddListener(OnClickSell);
     }
 
     public void SetItem(Item _item)
     {
         selectItem = _item;
+    }
+
+    public void SetItem(InventoryItem _item)
+    {
+        selectInventoryItem = _item;
     }
 
     public void OnClickBuy()
@@ -42,18 +49,19 @@ public class CheckPurchasePopup : MonoBehaviour
 
     public void OnClickSell()
     {
-        if (selectItem != null)
+        if (selectInventoryItem != null)
         {
 
-            //shop.Sell();
+            shop.Sell(selectInventoryItem);
             ui.shopitemToolTip.HideToolTip();
-            checkPurchasePopup.gameObject.SetActive(false);
+            checkSellPopup.gameObject.SetActive(false);
         }
     }
 
     public void OnClickCancel()
     {
         ui.shopitemToolTip.HideToolTip();
+        checkSellPopup.gameObject.SetActive(false);
         checkPurchasePopup.gameObject.SetActive(false);
     }
 }

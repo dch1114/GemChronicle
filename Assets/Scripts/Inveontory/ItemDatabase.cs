@@ -29,6 +29,8 @@ public class Item
     public SlotType SlotType;
     public int Price;
 
+    //test
+    public bool isSellable = false;
     private int descriptionLength;
     private StringBuilder sb = new StringBuilder();
     public Sprite sprite;

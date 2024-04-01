@@ -182,6 +182,8 @@ public class Inventory : Singleton<Inventory>
                 break;
         }
 
+        inventoryUIController.UpdateSlotUI();
+
         //if (itemToRemove.datas.SlotType == SlotType.Weapon)
         //{
         //    characterSpriteOBj._weaponList[0].sprite = null;

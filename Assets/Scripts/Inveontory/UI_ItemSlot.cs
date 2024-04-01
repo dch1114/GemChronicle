@@ -72,17 +72,28 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
         if (timeSinceLastClick <= clickDelay)
         {
-            if (inventoryItem.datas.ItemType == ItemType.Equipment) // test
+            if (ui.shopUi.activeSelf)
             {
-                Inventory.Instance.EquipItem(inventoryItem);
-                ui.itemToopTip.HideToolTip();
+                ui.shopTradePopup.SetItem(inventoryItem);
+                ui.shopTradePopup.checkSellPopup.SetActive(true);
+                ui.shopitemToolTip.ShowToolTip(inventoryItem.datas);
             }
-            //ui.itemToopTip.HideToolTip();
+            else
+            {
+                if (inventoryItem.datas.ItemType == ItemType.Equipment)
+                {
+                    Inventory.Instance.EquipItem(inventoryItem);
+                    ui.itemToopTip.HideToolTip();
+                }
+            }
         }
         else
         {
-            AdjustToolTipPosition();
-            ui.itemToopTip.ShowToolTip(inventoryItem.datas);   //test
+            if(!ui.shopUi.activeSelf)
+            {
+                AdjustToolTipPosition();
+                ui.itemToopTip.ShowToolTip(inventoryItem.datas);
+            }
         }
 
         lastClickTime = currentTime;

@@ -13,24 +13,30 @@ public class InventoryUIController : MonoBehaviour
 
     Inventory inventoryContorller;
 
-    //test
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform equipmentSlotParent;
     [SerializeField] private Transform statusParent;
 
+    //test
+    [Header("Shop UI")]
+    [SerializeField] private Transform inventoryListSlotParent;
+
 
     private UI_ItemSlot[] inventoryItemSlot;
     private UI_EquipmentSlot[] equipmentSlot;
     private UI_Status[] uI_Statuses;
+    //test
+    private UI_ItemSlot[] inventoryListItemSlot;
     // Start is called before the first frame update
     void Start()
     {
-        //test
         inventoryContorller = Inventory.Instance;
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
         uI_Statuses = statusParent.GetComponentsInChildren<UI_Status>();
+        ////test
+        inventoryListItemSlot = inventoryListSlotParent.GetComponentsInChildren<UI_ItemSlot>();
 
         itemToopTip.gameObject.SetActive(false);
     }
@@ -53,11 +59,13 @@ public class InventoryUIController : MonoBehaviour
         for (int i = 0; i < inventoryItemSlot.Length; i++)
         {
             inventoryItemSlot[i].CleanUpSlot();
+            inventoryListItemSlot[i].CleanUpSlot();
         }
 
         for (int i = 0; i < inventoryContorller.inventory.Count; i++)
         {
             inventoryItemSlot[i].UpdateSlot(inventoryContorller.inventory[i]);
+            inventoryListItemSlot[i].UpdateSlot(inventoryContorller.inventory[i]);
         }
     }
 
@@ -77,6 +85,7 @@ public class InventoryUIController : MonoBehaviour
     public void CloseShop()
     {
         shopitemToolTip.gameObject.SetActive(false);
+        itemToopTip.gameObject.SetActive(false);
         shopTradePopup.gameObject.SetActive(false);
         shopUi.SetActive(false);
     }
