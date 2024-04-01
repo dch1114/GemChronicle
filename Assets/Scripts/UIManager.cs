@@ -1,15 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using System;
 using TMPro;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEngine.Video;
-using static Cinemachine.DocumentationSortingAttribute;
-using System.Reflection;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -385,6 +379,7 @@ public class UIManager : Singleton<UIManager>
         Debug.Log("Select Exi");
 
     }
+
     public void OpenClosePanelInspectorQuests()
     {
         panelInspectorQuests.SetActive(!panelInspectorQuests.activeSelf);
