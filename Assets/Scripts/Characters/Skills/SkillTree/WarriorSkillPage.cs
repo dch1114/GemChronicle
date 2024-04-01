@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WarriorSkillPage : MonoBehaviour
+public class WarriorSkillPage : SkillPages
 {
     [SerializeField] private GameObject goSkillInfo;
     [SerializeField] private Image skillIcon;
@@ -16,7 +16,6 @@ public class WarriorSkillPage : MonoBehaviour
     [SerializeField] private TextMeshProUGUI priceTxt;
 
     [SerializeField] private List<Sprite> typeSprites;
-    [SerializeField] private List<Toggle> asdPage;
     [SerializeField] private List<Toggle> comboNumToggle;
 
     [SerializeField] private List<Sprite> icons;
@@ -24,16 +23,9 @@ public class WarriorSkillPage : MonoBehaviour
 
     [SerializeField] private GameObject buyBtn;
 
-    private Player player;
-
     private int skillInfoIndex = 0;
-    private void Start()
-    {
-        player = GameManager.Instance.player;
-        SetSkillBtns();
-    }
 
-    public void SetSkillBtns()
+    public override void SetSkillBtns()
     {
         for(int i = 0; i < skillBtns.Count; i++)
         {
@@ -68,11 +60,13 @@ public class WarriorSkillPage : MonoBehaviour
         }
     }
 
-    public void UnlockSkillBtn()
+    public override void UnlockSkillBtn()
     {
-        if(player.Data.StatusData.Gold - skillBtns[skillInfoIndex].skillInfoData.Price >= 0)
+        int price = skillBtns[skillInfoIndex].skillInfoData.Price;
+
+        if (skillBtns[skillInfoIndex].CheckCanUnlock() && player.Data.StatusData.IsGoldEnough(price))
         {
-            player.Data.StatusData.Gold -= skillBtns[skillInfoIndex].skillInfoData.Price;
+            player.Data.StatusData.UseGold(price);
             skillBtns[skillInfoIndex].SetUnlocked();
             buyBtn.SetActive(false);
         } else
@@ -97,28 +91,25 @@ public class WarriorSkillPage : MonoBehaviour
     {
         int asdIndex = GetASDIndex();
         List<int> indexs = player.Data.AttackData.AttackSkillStates[asdIndex];
-        
+
+        goSkillInfo.SetActive(false);
+
         foreach (SkillButton btn in skillBtns)
         {
             btn.SetSkillBtn();
         }
 
+        ClearSelected();
+
         skillBtns[indexs[0]].cover.SetActive(true);
+        skillBtns[indexs[0]].selected.SetActive(true);
         skillBtns[indexs[1]].cover.SetActive(true);
+        skillBtns[indexs[1]].selected.SetActive(true);
         skillBtns[indexs[2]].cover.SetActive(true);
+        skillBtns[indexs[2]].selected.SetActive(true);
         skillBtns[indexs[0]].tmp.text += "1";
         skillBtns[indexs[1]].tmp.text += "2";
         skillBtns[indexs[2]].tmp.text += "3";
-    }
-
-    private int GetASDIndex()
-    {
-        for(int i = 0; i < asdPage.Count; i++)
-        {
-            if (asdPage[i].isOn) return i;
-        }
-
-        return 0;
     }
 
     private int GetComboNumIndex()
@@ -155,6 +146,14 @@ public class WarriorSkillPage : MonoBehaviour
         foreach(Toggle toggle in comboNumToggle)
         {
             toggle.isOn = false;
+        }
+    }
+
+    private void ClearSelected()
+    {
+        foreach(SkillButton btn in skillBtns)
+        {
+            btn.selected.SetActive(false);
         }
     }
 }

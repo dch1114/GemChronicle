@@ -8,10 +8,13 @@ public class SkillButton : MonoBehaviour
 {
     public SkillInfoData skillInfoData {  get; set; }
 
+    public List<SkillButton> prevTrees;
+
     public Image icon;
     public GameObject cover;
     public TextMeshProUGUI tmp;
     public GameObject lockedImage;
+    public GameObject selected;
 
     public void SetSkillBtn()
     {
@@ -22,6 +25,22 @@ public class SkillButton : MonoBehaviour
             cover.SetActive(!isUnlocked);
             tmp.text = string.Empty;
         }
+    }
+
+    public bool CheckCanUnlock()
+    {
+        if(GameManager.Instance.player.Data.StatusData.JobType != JobType.Warrior)
+        {
+            foreach (SkillButton btn in prevTrees)
+            {
+                SkillInfoData data = btn.skillInfoData;
+
+                if (!data.IsUnlocked)
+                    return false;
+            }
+        }
+
+        return true;
     }
 
     public void SetUnlocked()

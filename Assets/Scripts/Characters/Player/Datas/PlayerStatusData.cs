@@ -44,7 +44,7 @@ public class PlayerStatusData : Status
         JobType = JobType.Warrior;
     }
 
-    private bool IsGoldEnough(int _price)
+    public bool IsGoldEnough(int _price)
     {
         if (Gold - _price >= 0)
             return true;

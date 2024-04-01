@@ -7,7 +7,9 @@ public enum SkillType
 {
     Ice,
     Fire,
-    Light
+    Light,
+    IceFire,
+    FireLight
 }
 
 //TODO: 엑셀 데이터로 입력 필요
