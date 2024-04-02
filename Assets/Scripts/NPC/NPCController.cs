@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.XR;
-using static UnityEditor.Progress;
 
 //0315 인터페이스 구현
 public class NPCController : MonoBehaviour, IInteractive
@@ -48,11 +43,6 @@ public class NPCController : MonoBehaviour, IInteractive
     //public PlayerController playerController;
 
     // 대화를 통해 퀘스트를 제안하고 수락할 때 호출되는 메서드
-    public void OfferQuestToPlayer()
-    {
-        // 플레이어 퀘스트 매니저에게 퀘스트를 제안
-        PlayerQuestManager.instance.OfferQuest(offerQuestData);
-    }
 
     public void Init(NPC npc, NPCManager manager)
     {
