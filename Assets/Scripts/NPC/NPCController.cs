@@ -31,6 +31,8 @@ public class NPCController : MonoBehaviour, IInteractive
     public bool isShop = false;
     public bool isEndTalk = false;
 
+    public QuestData offerQuestData;
+
     List<string[]> npcMsgList = new List<string[]>();
     List<string[]> playerMsgList = new List<string[]>();
     private bool sayingNPC = true;
@@ -45,6 +47,12 @@ public class NPCController : MonoBehaviour, IInteractive
     //제거
     //public PlayerController playerController;
 
+    // 대화를 통해 퀘스트를 제안하고 수락할 때 호출되는 메서드
+    public void OfferQuestToPlayer()
+    {
+        // 플레이어 퀘스트 매니저에게 퀘스트를 제안
+        PlayerQuestManager.instance.OfferQuest(offerQuestData);
+    }
 
     public void Init(NPC npc, NPCManager manager)
     {

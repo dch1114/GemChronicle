@@ -66,6 +66,7 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
         Item selectItem = item;
         tradePopup.checkPurchasePopup.gameObject.SetActive(true);
         tradePopup.shopTradePopup.gameObject.SetActive(true);
+        tradePopup.checkSellPopup.gameObject.SetActive(false);
         ui.shopitemToolTip.ShowToolTip(selectItem);
         tradePopup.SetItem(selectItem);
     }

@@ -19,9 +19,8 @@ public class NPC
     public string[] player2;
     public string[] player3;
 
-
-
 }
+
 //0315 Npc타입을 구별하기 위해 enum 선언
 public enum NPCType
 { 
