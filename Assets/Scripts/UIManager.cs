@@ -71,6 +71,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     Image playerPortraitImg;
 
+    public InventoryUIController inventoryUIController;
+
 
     private Dictionary<PotalType, UnityAction> potalMenuAction = new Dictionary<PotalType, UnityAction>();
 
@@ -362,7 +364,8 @@ public class UIManager : Singleton<UIManager>
     }
     void BuyShop()
     {
-
+        inventoryUIController.UseShop();
+        shopChoiceOnOff(false);
         Debug.Log("Select Buy");
     }
 
@@ -375,9 +378,9 @@ public class UIManager : Singleton<UIManager>
 
     void ExitShop()
     {
+        inventoryUIController.CloseShop();
         shopChoiceOnOff(false);
         Debug.Log("Select Exi");
-
     }
 
     public void OpenClosePanelInspectorQuests()
