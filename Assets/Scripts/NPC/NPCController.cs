@@ -50,7 +50,7 @@ public class NPCController : MonoBehaviour, IInteractive
         npcManager = manager; // NPCManager의 역참조를 받음
         uiManager = UIManager.Instance;
         talkManager = npcManager.talkManager;
-        playerinput = npcManager.playerinput;
+        playerinput = GameManager.Instance.player.Input;
 
         npcMsgList.Add(npcData.npc1);
         npcMsgList.Add(npcData.npc2);
@@ -140,7 +140,9 @@ public class NPCController : MonoBehaviour, IInteractive
             if (talkIndex >= npcMsgList.Count && talkIndex >= playerMsgList.Count)
             {
                 //Debug.Log("NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않음");
+                Debug.Log("이동초기화전");
                 playerinput.OnEnable();
+                Debug.Log("이동초기화후");
                 talkIndex = 0;
                 talkNpcStep = 0;
                 talkPlayerStep = 0;

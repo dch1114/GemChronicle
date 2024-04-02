@@ -59,7 +59,7 @@ public class UIManager : Singleton<UIManager>
     public Text talkBtnText;
     bool isOpenShowPopUp = false;
     bool isOpenPotalPopUp = false;
-    public PlayerInput playerinput;
+    private PlayerInput playerinput;
     UnityAction selectMenuAction = null;
     public GameObject soundSetting;
  
@@ -77,7 +77,7 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Awake()
     {
-        
+        playerinput = GameManager.Instance.player.Input;
     }
 
     private void Update()
