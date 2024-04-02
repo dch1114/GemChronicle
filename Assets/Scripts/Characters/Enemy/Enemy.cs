@@ -12,7 +12,7 @@ public enum EnemyState
     Dead
 }
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] public EnemyStatusData EnemyStatusData;
     [SerializeField] public EnemyAnimationData EnemyAnimationData;
@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
                 playerCollider.TakeDamage(EnemyStatusData.Atk);
             }
             canAttack = false;
-            Invoke("WaitAttackCoolTime", EnemyStatusData.AttackRate);
+            StartCoroutine("WaitAttackCoolTime", EnemyStatusData.AttackRate);
         } else
         {
             SetState(EnemyState.Idle);
@@ -185,5 +185,18 @@ public class Enemy : MonoBehaviour
     {
         if (nextMove.x > 0) isLeft = false;
         else isLeft = true;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (EnemyStatusData.Hp - damage > 0)
+        {
+            EnemyStatusData.Hp -= damage;
+        }
+        else
+        {
+            //TODO: »ç¸Á ±¸Çö
+            SetState(EnemyState.Dead);
+        }
     }
 }
