@@ -8,6 +8,7 @@ public class Skill : MonoBehaviour
 {
     public Animator anim;
 
+    public SkillInfoData data {  get; set; }
     private Player player;
 
     private Vector3 leftDirection = new Vector3(2f, 2f, 1f);
@@ -49,5 +50,15 @@ public class Skill : MonoBehaviour
     private void Flip(bool isLeft)
     {
         transform.localScale = isLeft ? leftDirection : rightDirection;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+
+        if(damageable != null)
+        {
+            damageable.TakeDamage(player.Data.StatusData.Atk + data.Damage);
+        }
     }
 }
