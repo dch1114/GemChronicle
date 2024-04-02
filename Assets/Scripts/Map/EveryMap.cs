@@ -51,21 +51,8 @@ public class EveryMap : MonoBehaviour, IInteractive
 
     public void Interact()
     {
-        //GameManager gameManager = FindObjectOfType<GameManager>(); // 게임 매니저 찾기
+ 
 
-        //if (gameManager != null)
-        //{
-        //    GameObject player = gameManager.GetPlayer(); // 게임 매니저를 통해 플레이어 얻기
-        //    if (player != null)
-        //    {
-        //        if (DestinationPoint != null)
-        //        {
-        //            player.transform.position = DestinationPoint.position;
-        //        }
-        //    }
-        //}
-
-        //포탈 선택 UI 활성화
         UIManager.Instance.TogglePortalUI(true);
 
 
@@ -80,6 +67,6 @@ public class EveryMap : MonoBehaviour, IInteractive
     InteractType IInteractive.GetType()
     {
         return InteractType.SuperPotal;
-        //throw new System.NotImplementedException();
+
     }
 }
