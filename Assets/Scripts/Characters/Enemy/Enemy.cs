@@ -195,8 +195,14 @@ public class Enemy : MonoBehaviour, IDamageable
         }
         else
         {
-            //TODO: »ç¸Á ±¸Çö
-            SetState(EnemyState.Dead);
+            OnDie();
         }
+    }
+
+    private void OnDie()
+    {
+        EnemyStatusData.Hp = 0;
+        SetState(EnemyState.Dead);
+        gameObject.SetActive(false);
     }
 }

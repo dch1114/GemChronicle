@@ -56,6 +56,6 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(float _jumpForce)
     {
-        velocity.y += _jumpForce;
+        if(isGrounded) velocity.y += _jumpForce;
     }
 }
