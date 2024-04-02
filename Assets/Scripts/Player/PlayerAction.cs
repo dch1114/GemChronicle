@@ -52,7 +52,7 @@ public class PlayerAction : MonoBehaviour
                 //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
                 if (UIManager.Instance.IsOpenPotalPopup())
                 {
-                    UIManager.Instance.ExecuteSelectedPotalMenuAction();
+                    UIManager.Instance.potalUIScript.ExecuteSelectedPotalMenuAction();
                     return;
                 }
 

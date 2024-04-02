@@ -9,7 +9,9 @@ public class NPC
     public string name;
     public string place;
     public string discription;
-    public string[] conversation;
+    public string[] doMessage;
+    public string[] doingMessage;
+    public string[] doneMessage;
     public bool isNPC;
 
     public string[] npc1;

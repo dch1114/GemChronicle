@@ -30,6 +30,7 @@ public class NPCController : MonoBehaviour, IInteractive
 
     List<string[]> npcMsgList = new List<string[]>();
     List<string[]> playerMsgList = new List<string[]>();
+
     private bool sayingNPC = true;
 
 
@@ -136,6 +137,10 @@ public class NPCController : MonoBehaviour, IInteractive
     {
         while (true)
         {
+            //임시방편
+            //퀘스트가 진행중일 때
+            //퀘스트를 완료하였을 때
+
             //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않아 대화를 종료해야 한다면
             if (talkIndex >= npcMsgList.Count && talkIndex >= playerMsgList.Count)
             {
