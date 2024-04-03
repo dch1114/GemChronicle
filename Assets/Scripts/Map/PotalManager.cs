@@ -50,7 +50,7 @@ public class PotalManager : Singleton<PotalManager>
     //퀘스트가 완료될 때마다 실행됨. questID와 potalID가 동일하면 포탈을 해금한다(게임오브젝트 활성화)
     public void UpdatePotalActiveState(int questID)
     {
-        Debug.Log(questID);
+        //Debug.Log(questID);
 
         for (int i = 0; i < potalArray.Length; i++)
         {

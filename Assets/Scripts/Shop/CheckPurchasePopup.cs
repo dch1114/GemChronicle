@@ -51,6 +51,7 @@ public class CheckPurchasePopup : MonoBehaviour
     {
         if (selectInventoryItem != null)
         {
+
             shop.Sell(selectInventoryItem);
             ui.shopitemToolTip.HideToolTip();
             checkSellPopup.gameObject.SetActive(false);

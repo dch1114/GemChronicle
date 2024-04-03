@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class NPCManager : Singleton<UIManager>
+public class NPCManager : Singleton<NPCManager>
 {
     public TalkManager talkManager;
     //엔피씨 게임오브젝트가 될 프리펩 리스트
@@ -13,12 +13,12 @@ public class NPCManager : Singleton<UIManager>
 
     public List<int> npcId;
 
-    void Start()
+
+    public void InitNPCManager()
     {
-        //프리펩을 게임오브젝트로 생성하고 위치도 지정해준다
         MakeNpcGameObject();
     }
-
+    //프리펩을 게임오브젝트로 생성하고 위치도 지정해준다
     void MakeNpcGameObject()
     {
         
@@ -29,7 +29,7 @@ public class NPCManager : Singleton<UIManager>
             //위치 지정
             npcInstance.transform.position = npcPosList[i].position;
             //데이터 매니저에서 NpcId에 해당하는 데이터 가져오기
-            NPC dbase = DataManager.instance.npcDatabase.GetNPCByKey(npcId[i]);
+            NPC dbase = DataManager.Instance.npcDatabase.GetNPCByKey(npcId[i]);
             //가져온 데이터를 각각의 엔피씨컨트롤러에 세팅하기
             NPCController npcController = npcInstance.GetComponent<NPCController>();
             npcController.Init(dbase, this); // NPCManager 자신을 역참조로 보냄

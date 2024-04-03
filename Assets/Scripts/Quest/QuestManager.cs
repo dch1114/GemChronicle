@@ -61,7 +61,6 @@ public class QuestManager : Singleton<QuestManager>
 
         var quest = new Quest(questId);
         quest.Start();
-
         if (_ongoingQuests.ContainsKey(questId))
             return;
 
@@ -151,13 +150,14 @@ public class QuestManager : Singleton<QuestManager>
     //    }
     //}
 
-    //private void LoadingQuestInspector()
+    //private void LoadingQuestInspector(Quest quest)
     //{
     //    for (int i = 0; i < questionAvailable.Length; i++)
     //    {
     //        InspectorQuestDescription newQuest = Instantiate(inspectorQuestPrefab, InspectorQuestContainer);
     //        newQuest.ConfigureQuestUI(questionAvailable[i]);
     //    }
+
     //}
 
     private void AddQuestToComplete(Quest questcompleted)

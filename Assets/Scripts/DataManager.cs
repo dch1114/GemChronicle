@@ -5,37 +5,79 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
     public NPCDatabase npcDatabase;
-    public static DataManager instance = null;
     public ItemDatabase itemDatabase;
 
-    void Awake()
+    public Shop shop;
+    public TalkManager talkManager;
+    void Start()
     {
-        if (instance == null) 
-        {
-            instance = this;
-           
-        }
-        else
-        {
-            if (instance != this) 
-                Destroy(this.gameObject); 
-        }
-   
         TextAsset NPCjsonFile = Resources.Load<TextAsset>("JSON/NPCData");
         TextAsset jsonFile = Resources.Load<TextAsset>("JSON/Item_Data");
-        if (jsonFile != null)
+        if (NPCjsonFile != null)
         {
-            string json = jsonFile.text;
             string NPCjson = NPCjsonFile.text;
 
             npcDatabase = JsonUtility.FromJson<NPCDatabase>(NPCjson);
             npcDatabase.Initialize();
 
+
+        }
+        else
+        {
+            Debug.Log("NPC JSON NULL");
+        }
+
+        if (jsonFile != null)
+        {
+            string json = jsonFile.text;
             itemDatabase = JsonUtility.FromJson<ItemDatabase>(json);
             itemDatabase.Initialize();
-        }    
+
+
+        }
+        else
+        {
+            Debug.Log("ITEM JSON NULL");
+        }
+        StartCoroutine(InitManagers());
+
     }
+
+    IEnumerator InitManagers()
+    {
+
+        yield return null;
+        NPCManager.Instance.InitNPCManager();
+        if (shop != null) shop.SetShopItem();
+        if (talkManager != null) talkManager.InitTalkManager();
+
+    }
+
+
+
+    public QuestTableData GetQuestTableData(int id)
+    {
+        if (npcDatabase.questTableDic.ContainsKey(id))
+            return npcDatabase.questTableDic[id];
+        return null;
+    }
+
+    public TalkTableData GetTalkTableData(int id)
+    {
+        if (npcDatabase.talkTableDic.ContainsKey(id))
+            return npcDatabase.talkTableDic[id];
+        return null;
+    }
+
+    public ScriptTableData GetScriptTableData(int id)
+    {
+        if (npcDatabase.dialogTableDic.ContainsKey(id))
+            return npcDatabase.dialogTableDic[id];
+        return null;
+    }
+
+
 }
