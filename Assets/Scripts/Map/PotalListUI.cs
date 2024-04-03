@@ -18,6 +18,7 @@ public class PotalListUI : MonoBehaviour
     int currentBtnIndex;
 
     List<int> buttonIndexList = new List<int>();
+
     private void Start()
     {
         InitPotalListUI();
@@ -42,10 +43,10 @@ public class PotalListUI : MonoBehaviour
         {
             buttons[i] = buttonGameObject[i].GetComponent<Button>();
         }
-        foreach (var button in buttonGameObject)
-        {
-            button.gameObject.SetActive(false);
-        }
+        //foreach (var button in buttonGameObject)
+        //{
+        //    button.gameObject.SetActive(false);
+        //}
     }
 
     private void SelectPotalMenu(int btnIndex)
@@ -98,6 +99,8 @@ public class PotalListUI : MonoBehaviour
 
         minActiveBtnIndex = FineMinIndex();
         maxActiveBtnIndex = FindMaxIndex();
+        currentBtnIndex = minActiveBtnIndex;
+
     }
 
     public void ExecuteSelectedPotalMenuAction()

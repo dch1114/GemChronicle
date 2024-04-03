@@ -12,20 +12,15 @@ public class TestEditor : Editor
 
         PotalManager componentScript = (PotalManager)target;
 
-        // 버튼을 생성하고 버튼을 누르면 해당 함수가 실행됩니다.
-        if (GUILayout.Button("퀘스트 다 수락하기"))
-        {
-            componentScript.AcceptAllQuest();
-        }
-        if (GUILayout.Button("퀘스트1 완료"))
+        if (GUILayout.Button("퀘스트1 수락"))
         {
             componentScript.CompleteFirstQuest();
         }
-        if (GUILayout.Button("퀘스트2 완료"))
+        if (GUILayout.Button("퀘스트2 수락"))
         {
             componentScript.CompleteSecondQuest();
         }
-        if (GUILayout.Button("퀘스트3 완료"))
+        if (GUILayout.Button("퀘스트3 수락"))
         {
             componentScript.CompleteThirdQuest();
         }

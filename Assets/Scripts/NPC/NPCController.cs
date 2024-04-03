@@ -36,6 +36,8 @@ public class NPCController : MonoBehaviour, IInteractive
 
     int currentStep;
     bool isEndSaying = false;
+
+    
     public void Init(NPC npc, NPCManager manager)
     {
         npcData = npc;
@@ -57,7 +59,6 @@ public class NPCController : MonoBehaviour, IInteractive
         doQuest = DataManager.Instance.GetTalkTableData(questData.talk_1);
         doingQuest = DataManager.Instance.GetTalkTableData(questData.talk_2);
         doneQuest = DataManager.Instance.GetTalkTableData(questData.talk_3);
-
     }
 
     public NPC GetNpcData()

@@ -79,31 +79,20 @@ public class PotalManager : Singleton<PotalManager>
     }
 
     //에디터 테스트용
-    public void AcceptAllQuest()
-    {
-        Debug.Log("모든 퀘스트 수락");
-        QuestManager.Instance.QuestStart(2001);
-        QuestManager.Instance.QuestStart(2002);
-        QuestManager.Instance.QuestStart(2003);
-        QuestManager.Instance.QuestStart(2004);
-    }
+
     public void CompleteFirstQuest()
     {
-        Debug.Log("첫번째 퀘스트 완료");
-        QuestManager.Instance.QuestClear(2001);
+        QuestManager.Instance.QuestStart(2001);
     }
     public void CompleteSecondQuest()
     {
-        Debug.Log("두번째 퀘스트 완료");
-        QuestManager.Instance.QuestClear(2002);
+        QuestManager.Instance.QuestStart(2002);
+
     }
     public void CompleteThirdQuest()
     {
-        Debug.Log("세번째 퀘스트 완료");
-        QuestManager.Instance.QuestClear(2003);
+        QuestManager.Instance.QuestStart(2003);
+
     }
-
-    
-
 
 }

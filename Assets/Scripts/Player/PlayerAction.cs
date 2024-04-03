@@ -29,7 +29,6 @@ public class PlayerAction : MonoBehaviour
     }
     void OnPotalMove()
     {
-
         if (interactiveList.Count > 0)
         {
             if (target.GetType() == InteractType.Potal)
@@ -49,7 +48,7 @@ public class PlayerAction : MonoBehaviour
             }
             else if (target.GetType() == InteractType.SuperPotal)
             {
-                //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
+                //포탈 팝업 메뉴가 활성화 되어 있다면
                 if (UIManager.Instance.IsOpenPotalPopup())
                 {
                     UIManager.Instance.potalUIScript.ExecuteSelectedPotalMenuAction();

@@ -175,14 +175,21 @@ public class UIManager : Singleton<UIManager>
 
         for (int i = 0; i < pArray.Length; i++)
         {
-            if (pArray[i].potal.isLock == false)
+            Debug.Log(i+"번째 포탈 잠김 : "+ pArray[i].potal.isLock);
+            //해금이 아직 안되었다면
+            //if (pArray[i].potal.isLock)
+            //{
+            //    potalUIScript.HideButton(i);
+            //}
+            //else
+            //{
+            //    potalUIScript.ShowButton(i);
+            //}
+            if (!pArray[i].potal.isLock)
             {
                 potalUIScript.ShowButton(i);
             }
-            else
-            {
-                potalUIScript.HideButton(i);
-            }
+
         }
 
         potalUIScript.ButtonSet();

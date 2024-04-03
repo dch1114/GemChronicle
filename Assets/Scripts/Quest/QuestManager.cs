@@ -53,7 +53,6 @@ public class QuestManager : Singleton<QuestManager>
             QuestUpdate(quest.ID, count);
     }
 
-
     public void QuestStart(int questId)
     {
         if (IsClear(questId))
