@@ -31,7 +31,7 @@ public class PotalManager : Singleton<PotalManager>
 
     void AddEvent()
     {
-        QuestManager.Instance.OnQuestCompleteCallback += UpdatePotalActiveState;
+        QuestManager.Instance.OnQuestStartCallback += UpdatePotalActiveState;
     }
 
     void InitPotal()
