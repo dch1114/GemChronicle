@@ -5,14 +5,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MagicianSkillPage : SkillPages
+public class ArcherSkillPages : SkillPages
 {
-    [SerializeField] private List<TypeIcon> typeIcons;
+    [SerializeField] private Image typeIcon;
+    [SerializeField] private TextMeshProUGUI rangeTxt;
 
     protected override void ShowSkillSettings()
     {
         int asdIndex = GetASDIndex();
         int index = player.Data.AttackData.AttackSkillStates[asdIndex][0];
+
         skillInfoIndex = index;
 
         goSkillInfo.SetActive(false);
@@ -21,10 +23,6 @@ public class MagicianSkillPage : SkillPages
         {
             btn.SetSkillBtn();
         }
-
-        ClearSelected();
-
-        skillBtns[index].selected.SetActive(true);
     }
 
     public override void UnlockSkillBtn()
@@ -52,63 +50,52 @@ public class MagicianSkillPage : SkillPages
         ShowSkillSettings();
     }
 
-
     public void ShowSkillInfo(SkillButton _skill)
     {
         SkillInfoData data = _skill.skillInfoData;
 
+        int settingInfoIndex = GetSettingSkillState();
+        SkillInfoData settingData = player.Data.AttackData.GetSkillInfo(settingInfoIndex);
+
         if(data != null)
         {
-            if (!goSkillInfo.activeSelf) goSkillInfo.SetActive(true);
-
             skillIcon.sprite = _skill.icon.sprite;
-            damageTxt.text = data.Damage.ToString();
+            string damageInfo = data.Damage.ToString();
+            if (data.Damage != settingData.Damage) damageInfo += "<color=green>( +" + settingData.Damage.ToString() + " )</color>";
+            string rangeInfo = data.Range.ToString();
+            if (data.Range != settingData.Range) rangeInfo += "<color=green>( +" + settingData.Range.ToString() + " )</color>";
+            damageTxt.text = damageInfo;
+            rangeTxt.text = rangeInfo;
             ShowSkillType(data);
+
             skillInfoIndex = data.SkillStateIndex;
 
             buyBtn.SetActive(!skillBtns[skillInfoIndex].skillInfoData.IsUnlocked);
         }
     }
-
     private void ShowSkillType(SkillInfoData _skill)
     {
         switch (_skill.SkillType)
         {
             case SkillType.Fire:
-                typeIcons[0].SetTypeIcon(typeSprites[0], _skill.Price);
-                typeIcons[1].SetTypeIcon(typeSprites[1], 0);
-                typeIcons[2].SetTypeIcon(typeSprites[2], 0);
+                typeIcon.sprite = typeSprites[0];
                 break;
             case SkillType.Ice:
-                typeIcons[0].SetTypeIcon(typeSprites[0], 0);
-                typeIcons[1].SetTypeIcon(typeSprites[1], _skill.Price);
-                typeIcons[2].SetTypeIcon(typeSprites[2], 0);
+                typeIcon.sprite = typeSprites[1];
                 break;
             case SkillType.Light:
-                typeIcons[0].SetTypeIcon(typeSprites[0], 0);
-                typeIcons[1].SetTypeIcon(typeSprites[1], 0);
-                typeIcons[2].SetTypeIcon(typeSprites[2], _skill.Price);
-                break;
-            case SkillType.IceFire:
-                typeIcons[0].SetTypeIcon(typeSprites[0], _skill.Price);
-                typeIcons[1].SetTypeIcon(typeSprites[1], _skill.Price);
-                typeIcons[2].SetTypeIcon(typeSprites[2], 0);
-                break;
-            case SkillType.FireLight:
-                typeIcons[0].SetTypeIcon(typeSprites[0], 0);
-                typeIcons[1].SetTypeIcon(typeSprites[1], _skill.Price);
-                typeIcons[2].SetTypeIcon(typeSprites[2], _skill.Price);
+                typeIcon.sprite = typeSprites[2];
                 break;
             default:
+                typeIcon.sprite = typeSprites[0];
                 break;
         }
     }
 
-    private void ClearSelected()
+    private int GetSettingSkillState()
     {
-        foreach (SkillButton btn in skillBtns)
-        {
-            btn.selected.SetActive(false);
-        }
+        int asdIndex = GetASDIndex();
+
+        return player.Data.AttackData.AttackSkillStates[asdIndex][0];
     }
 }
