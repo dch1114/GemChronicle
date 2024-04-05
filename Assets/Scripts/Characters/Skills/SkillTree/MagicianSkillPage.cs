@@ -7,32 +7,9 @@ using UnityEngine.UI;
 
 public class MagicianSkillPage : SkillPages
 {
-    [SerializeField] private GameObject goSkillInfo;
-    [SerializeField] private Image skillIcon;
-    [SerializeField] private TextMeshProUGUI damageTxt;
-
     [SerializeField] private List<TypeIcon> typeIcons;
 
-    [SerializeField] private List<Sprite> typeSprites;
-
-    [SerializeField] private List<Sprite> icons;
-    [SerializeField] private List<SkillButton> skillBtns;
-
-    [SerializeField] private GameObject buyBtn;
-
-    private int skillInfoIndex = 0;
-    public override void SetSkillBtns()
-    {
-        for (int i = 0; i < skillBtns.Count; i++)
-        {
-            skillBtns[i].skillInfoData = player.Data.AttackData.GetSkillInfo(i);
-            skillBtns[i].icon.sprite = icons[i];
-        }
-
-        ShowSkillSettings();
-    }
-
-    private void ShowSkillSettings()
+    protected override void ShowSkillSettings()
     {
         int asdIndex = GetASDIndex();
         int index = player.Data.AttackData.AttackSkillStates[asdIndex][0];
@@ -78,11 +55,11 @@ public class MagicianSkillPage : SkillPages
 
     public void ShowSkillInfo(SkillButton _skill)
     {
-        try
+        SkillInfoData data = _skill.skillInfoData;
+
+        if(data != null)
         {
             if (!goSkillInfo.activeSelf) goSkillInfo.SetActive(true);
-
-            SkillInfoData data = _skill.skillInfoData;
 
             skillIcon.sprite = _skill.icon.sprite;
             damageTxt.text = data.Damage.ToString();
@@ -90,10 +67,6 @@ public class MagicianSkillPage : SkillPages
             skillInfoIndex = data.SkillStateIndex;
 
             buyBtn.SetActive(!skillBtns[skillInfoIndex].skillInfoData.IsUnlocked);
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e);
         }
     }
 

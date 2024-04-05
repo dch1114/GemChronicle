@@ -99,19 +99,22 @@ public class PlayerAction : MonoBehaviour
     /// Istrigger가 켜져있는 콜라이더가 겹치는 곳의 npc 정보를 가져옴
     private void OnTriggerEnter2D(Collider2D _other)
     {
-
         if (_other != null)
         {
             IInteractive irv = _other.GetComponent<IInteractive>();
 
-            interactiveList.Add(irv);
-            
-            target = FindClosestTarget();
+            if (irv != null)
+            {
+                interactiveList.Add(irv);
 
-            target.Closer();
+                target = FindClosestTarget();
 
+                if (target != null)
+                {
+                    target.Closer();
+                }
+            }
         }
-
     }
 
     /// 아래 부분이 없으면 NPC와 떨어지더라도 가장 최근 접촉한 NPC와 계속 대화함

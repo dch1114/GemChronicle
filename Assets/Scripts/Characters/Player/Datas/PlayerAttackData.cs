@@ -18,7 +18,8 @@ public class SkillInfoData
 {
     [field: SerializeField] public int SkillStateIndex { get; private set; }
     [field: SerializeField] public string SkillName { get; private set; }
-    [field: SerializeField] public int Damage { get; private set; }
+    [field: SerializeField] public int Damage { get; set; }
+    [field: SerializeField] public int Range { get; set; }
     [field: SerializeField] public SkillType SkillType {get; private set;}
     [field:SerializeField] public int Price { get; private set; }
     [field: SerializeField] public bool IsUnlocked { get; set; }

@@ -9,31 +9,34 @@ using UnityEngine.UI;
 
 public class WarriorSkillPage : SkillPages
 {
-    [SerializeField] private GameObject goSkillInfo;
-    [SerializeField] private Image skillIcon;
-    [SerializeField] private TextMeshProUGUI damageTxt;
     [SerializeField] private Image typeIcon;
     [SerializeField] private TextMeshProUGUI priceTxt;
 
-    [SerializeField] private List<Sprite> typeSprites;
     [SerializeField] private List<Toggle> comboNumToggle;
 
-    [SerializeField] private List<Sprite> icons;
-    [SerializeField] private List<SkillButton> skillBtns;
-
-    [SerializeField] private GameObject buyBtn;
-
-    private int skillInfoIndex = 0;
-
-    public override void SetSkillBtns()
+    protected override void ShowSkillSettings()
     {
-        for(int i = 0; i < skillBtns.Count; i++)
+        int asdIndex = GetASDIndex();
+        List<int> indexs = player.Data.AttackData.AttackSkillStates[asdIndex];
+
+        goSkillInfo.SetActive(false);
+
+        foreach (SkillButton btn in skillBtns)
         {
-            skillBtns[i].skillInfoData = player.Data.AttackData.GetSkillInfo(i);
-            skillBtns[i].icon.sprite = icons[i];
+            btn.SetSkillBtn();
         }
 
-        ShowSkillSettings();
+        ClearSelected();
+
+        skillBtns[indexs[0]].cover.SetActive(true);
+        skillBtns[indexs[0]].selected.SetActive(true);
+        skillBtns[indexs[1]].cover.SetActive(true);
+        skillBtns[indexs[1]].selected.SetActive(true);
+        skillBtns[indexs[2]].cover.SetActive(true);
+        skillBtns[indexs[2]].selected.SetActive(true);
+        skillBtns[indexs[0]].tmp.text += "1";
+        skillBtns[indexs[1]].tmp.text += "2";
+        skillBtns[indexs[2]].tmp.text += "3";
     }
 
     public void ShowSkillInfo(SkillButton _skill)
@@ -87,30 +90,6 @@ public class WarriorSkillPage : SkillPages
         }
     }
 
-    private void ShowSkillSettings()
-    {
-        int asdIndex = GetASDIndex();
-        List<int> indexs = player.Data.AttackData.AttackSkillStates[asdIndex];
-
-        goSkillInfo.SetActive(false);
-
-        foreach (SkillButton btn in skillBtns)
-        {
-            btn.SetSkillBtn();
-        }
-
-        ClearSelected();
-
-        skillBtns[indexs[0]].cover.SetActive(true);
-        skillBtns[indexs[0]].selected.SetActive(true);
-        skillBtns[indexs[1]].cover.SetActive(true);
-        skillBtns[indexs[1]].selected.SetActive(true);
-        skillBtns[indexs[2]].cover.SetActive(true);
-        skillBtns[indexs[2]].selected.SetActive(true);
-        skillBtns[indexs[0]].tmp.text += "1";
-        skillBtns[indexs[1]].tmp.text += "2";
-        skillBtns[indexs[2]].tmp.text += "3";
-    }
 
     private int GetComboNumIndex()
     {
