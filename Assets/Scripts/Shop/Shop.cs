@@ -14,18 +14,14 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        itemDatabase = DataManager.instance.itemDatabase;
-
         playerInventory = Inventory.Instance;
-
         shopItems = new List<Item>();
         shopItemSlot = shopSlotParent.GetComponentsInChildren<UI_ShopSlot>();
-
-        SetShopItem();
     }
 
     public void SetShopItem()
     {
+        itemDatabase = DataManager.Instance.itemDatabase;
         for (int i = 0; i < itemDatabase.ItemDatas.Count; i++)
         {
             Item shopItemInstance = new Item();

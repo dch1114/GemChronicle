@@ -96,26 +96,4 @@ public class NextMap : MonoBehaviour, IInteractive
         return InteractType.Potal;
     }
 
-
-
-    private void OnEnable()
-    {
-        Quest.EventQuestCompleted += QuestCompleted;
-        PotalManager.Instance.AddPotal(potal);
-    }
-
-    private void OnDisable()
-    {
-        Quest.EventQuestCompleted -= QuestCompleted;
-        PotalManager.Instance.RemovePotal(potal);
-    }
-
-    private void QuestCompleted(Quest questCompleted)
-    {
-        Debug.Log("Quest Complete");
-        if (questCompleted.potalID == potal.potalId)
-        {
-            potal.isLock = false;
-        }
-    }
 }

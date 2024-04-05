@@ -51,11 +51,7 @@ public class EveryMap : MonoBehaviour, IInteractive
 
     public void Interact()
     {
- 
-
         UIManager.Instance.TogglePortalUI(true);
-
-
     }
     public Vector3 GetPosition()
     {

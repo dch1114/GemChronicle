@@ -18,9 +18,9 @@ public class TalkManager : MonoBehaviour
     }
 
 
-    private void Start()
+    public void InitTalkManager()
     {
-        npcDatabase = DataManager.instance.npcDatabase;
+        npcDatabase = DataManager.Instance.npcDatabase;
         GenerateData();
     }
 
