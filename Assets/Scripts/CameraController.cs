@@ -1,51 +1,50 @@
-using Cinemachine;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // 각 장소에 대한 시네머신 Virtual Camera 배열을 저장합니다.
-    public CinemachineVirtualCameraBase[] cameras;
-
-    private CinemachineVirtualCameraBase currentCamera;
+    public GameObject[] cameras; // 각 장소의 카메라를 배열로 저장
+    private int currentCameraIndex = 0; // 현재 사용 중인 카메라의 인덱스를 추적
 
     private void Start()
     {
-        // 게임 시작 시 모든 카메라를 비활성화합니다.
-        DeactivateAllCameras();
+        // 게임 시작 시 첫 번째 카메라를 활성화
+        ActivateCurrentCamera();
     }
 
-    private void OnTriggerEnter(Collider other)
+    // 포탈을 통해 다음 맵으로 이동할 때 호출되는 함수
+    public void ChangeMap(int newCameraIndex)
     {
-        // 플레이어가 다른 장소로 이동할 때 호출되는 함수입니다.
-        if (other.CompareTag("Player"))
+        // 현재 사용 중인 카메라를 비활성화
+        DeactivateCurrentCamera();
+
+        // 새로운 맵에 해당하는 카메라를 활성화
+        currentCameraIndex = newCameraIndex;
+        ActivateCurrentCamera();
+    }
+
+    // 현재 사용 중인 카메라를 활성화하는 함수
+    private void ActivateCurrentCamera()
+    {
+        if (currentCameraIndex >= 0 && currentCameraIndex < cameras.Length)
         {
-            // 새로운 장소에 맞는 Virtual Camera를 활성화합니다.
-            ActivateCameraInCurrentArea();
+            cameras[currentCameraIndex].SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("Invalid camera index: " + currentCameraIndex);
         }
     }
 
-    private void ActivateCameraInCurrentArea()
+    // 현재 사용 중인 카메라를 비활성화하는 함수
+    private void DeactivateCurrentCamera()
     {
-        // 현재 활성화된 카메라를 비활성화합니다.
-        if (currentCamera != null)
+        if (currentCameraIndex >= 0 && currentCameraIndex < cameras.Length)
         {
-            currentCamera.gameObject.SetActive(false);
+            cameras[currentCameraIndex].SetActive(false);
         }
-
-        // 새로운 장소의 Virtual Camera를 활성화합니다.
-        if (cameras.Length > 0)
+        else
         {
-            currentCamera = cameras[Random.Range(0, cameras.Length)]; // 임의의 카메라 선택 예시
-            currentCamera.gameObject.SetActive(true);
-        }
-    }
-
-    private void DeactivateAllCameras()
-    {
-        // 모든 카메라를 비활성화합니다.
-        foreach (CinemachineVirtualCameraBase camera in cameras)
-        {
-            camera.gameObject.SetActive(false);
+            Debug.LogError("Invalid camera index: " + currentCameraIndex);
         }
     }
 }
