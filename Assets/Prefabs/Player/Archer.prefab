@@ -95,8 +95,29 @@ MonoBehaviour:
   <AirData>k__BackingField:
     <JumpForce>k__BackingField: 0.3
   <AttackData>k__BackingField:
-    <SkillInfoDatas>k__BackingField: []
-    skillPool: {fileID: 0}
+    <SkillInfoDatas>k__BackingField:
+    - <SkillStateIndex>k__BackingField: 0
+      <SkillName>k__BackingField: A
+      <Damage>k__BackingField: 5
+      <Range>k__BackingField: 5
+      <SkillType>k__BackingField: 0
+      <Price>k__BackingField: 0
+      <IsUnlocked>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 1
+      <SkillName>k__BackingField: S
+      <Damage>k__BackingField: 5
+      <Range>k__BackingField: 5
+      <SkillType>k__BackingField: 1
+      <Price>k__BackingField: 0
+      <IsUnlocked>k__BackingField: 0
+    - <SkillStateIndex>k__BackingField: 2
+      <SkillName>k__BackingField: D
+      <Damage>k__BackingField: 5
+      <Range>k__BackingField: 5
+      <SkillType>k__BackingField: 2
+      <Price>k__BackingField: 0
+      <IsUnlocked>k__BackingField: 0
+    skillPool: {fileID: 8082645077302361204}
   <StatusData>k__BackingField:
     atk: 0
     def: 0
@@ -105,7 +126,7 @@ MonoBehaviour:
     name: 
     maxHp: 0
     level: 0
-    gold: 0
+    gold: 6000
     jobType: 0
 --- !u!114 &3046869253995054968
 MonoBehaviour:
@@ -218,7 +239,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7434bebad08c7a54995c1d775291ba83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pools: []
+  pools:
+  - tag: 0
+    prefab: {fileID: 1650354233769041001, guid: 61cbc4854bc99dc4fa7196e35f4c5a22, type: 3}
+    size: 3
+  - tag: 1
+    prefab: {fileID: 1650354233769041001, guid: 805cc69944a23fa4d92ba115531f3fd1, type: 3}
+    size: 3
+  - tag: 2
+    prefab: {fileID: 1650354233769041001, guid: 7f24585b4fe37864a94681b3a4c9a6aa, type: 3}
+    size: 3
 --- !u!114 &3799887039664330789
 MonoBehaviour:
   m_ObjectHideFlags: 0
