@@ -200,7 +200,7 @@ Transform:
   m_Children:
   - {fileID: 7329368421874420693}
   - {fileID: 350985131200296966}
-  m_Father: {fileID: 8536412934014992059}
+  m_Father: {fileID: 8949694067509858648}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4124084902137986861
@@ -384,7 +384,7 @@ Transform:
   m_Children:
   - {fileID: 5381647230084163725}
   - {fileID: 8015370694904309602}
-  m_Father: {fileID: 8536412934014992059}
+  m_Father: {fileID: 8949694067509858648}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2163886725290068788
@@ -484,7 +484,7 @@ Transform:
   m_Children:
   - {fileID: 4004214136998900302}
   - {fileID: 5214828508219702444}
-  m_Father: {fileID: 8536412934014992059}
+  m_Father: {fileID: 8949694067509858648}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1915693329597306236
@@ -832,13 +832,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4264223338798373904}
-  - {fileID: 1069887724985302496}
-  - {fileID: 5194051888023908109}
-  - {fileID: 930615518240573332}
-  - {fileID: 738623961237631831}
+  - {fileID: 8949694067509858648}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5350686701368707690
 GameObject:
@@ -872,7 +868,7 @@ Transform:
   m_Children:
   - {fileID: 5467967004975370486}
   - {fileID: 1727210478238074185}
-  m_Father: {fileID: 8536412934014992059}
+  m_Father: {fileID: 8949694067509858648}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8959510472213660395
@@ -1056,7 +1052,7 @@ Transform:
   m_Children:
   - {fileID: 6402467747428156154}
   - {fileID: 4541716392968496981}
-  m_Father: {fileID: 8536412934014992059}
+  m_Father: {fileID: 8949694067509858648}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6079944234385975939
@@ -1208,6 +1204,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7706690486490507546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8949694067509858648}
+  m_Layer: 0
+  m_Name: Battlezone1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8949694067509858648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7706690486490507546}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4264223338798373904}
+  - {fileID: 1069887724985302496}
+  - {fileID: 5194051888023908109}
+  - {fileID: 930615518240573332}
+  - {fileID: 738623961237631831}
+  m_Father: {fileID: 8536412934014992059}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8876876101490568092
 GameObject:
   m_ObjectHideFlags: 0

@@ -97,12 +97,12 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
         }
 
         lastClickTime = currentTime;
-        
-        //if (Input.GetKey(KeyCode.LeftControl))
-        //{
-        //    Inventory.Instance.RemoveItem(item.data);
-        //    return;
-        //}
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Inventory.Instance.RemoveItem(inventoryItem);
+            return;
+        }
     }
 
     protected void AdjustToolTipPosition()
