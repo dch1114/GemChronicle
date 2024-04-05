@@ -53,16 +53,14 @@ public class QuestManager : Singleton<QuestManager>
             QuestUpdate(quest.ID, count);
     }
 
-
     public void QuestStart(int questId)
     {
-        if(IsClear(questId))
+        if (IsClear(questId))
             return;
 
         var quest = new Quest(questId);
         quest.Start();
-
-        if(_ongoingQuests.ContainsKey(questId))
+        if (_ongoingQuests.ContainsKey(questId))
             return;
 
         _ongoingQuests.Add(questId, quest);
@@ -72,7 +70,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public void QuestUpdate(int questId, int amount)
     {
-        if(_ongoingQuests.ContainsKey(questId) == false)
+        if (_ongoingQuests.ContainsKey(questId) == false)
             return;
 
         var questData = Database.Quest.Get(questId);
@@ -89,7 +87,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public void QuestClear(int questId)
     {
-        if(_ongoingQuests.ContainsKey(questId) == false)
+        if (_ongoingQuests.ContainsKey(questId) == false)
             return;
 
         _ongoingQuests[questId].Complete();
@@ -115,8 +113,8 @@ public class QuestManager : Singleton<QuestManager>
 
 
 
-    [Header("Quests")]
-    [SerializeField] private Quest[] questionAvailable;
+    //[Header("Quests")]
+    //[SerializeField] private Quest[] questionAvailable;
 
     [Header("Inspector Quests")]
     [SerializeField] private InspectorQuestDescription inspectorQuestPrefab;
@@ -136,29 +134,30 @@ public class QuestManager : Singleton<QuestManager>
 
     public Quest QuestUnclaimed { get; private set; }
 
-    private void Start()
-    {
-        LoadingQuestInspector();
-    }
+    //private void Start()
+    //{
+    //    LoadingQuestInspector();
+    //}
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            AddProgress("Kill10", 1);
-            AddProgress("Kill25", 1);
-            AddProgress("Kill50", 1);
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.L))
+    //    {
+    //        AddProgress("Kill10", 1);
+    //        AddProgress("Kill25", 1);
+    //        AddProgress("Kill50", 1);
+    //    }
+    //}
 
-    private void LoadingQuestInspector()
-    {
-        for (int i = 0; i < questionAvailable.Length; i++)
-        {
-            InspectorQuestDescription newQuest = Instantiate(inspectorQuestPrefab, InspectorQuestContainer);
-            newQuest.ConfigureQuestUI(questionAvailable[i]);
-        }
-    }
+    //private void LoadingQuestInspector(Quest quest)
+    //{
+    //    for (int i = 0; i < questionAvailable.Length; i++)
+    //    {
+    //        InspectorQuestDescription newQuest = Instantiate(inspectorQuestPrefab, InspectorQuestContainer);
+    //        newQuest.ConfigureQuestUI(questionAvailable[i]);
+    //    }
+
+    //}
 
     private void AddQuestToComplete(Quest questcompleted)
     {
@@ -171,37 +170,37 @@ public class QuestManager : Singleton<QuestManager>
         AddQuestToComplete(questcompleted);
     }
 
-    public void ReclamarRecompensa()
-    {
-        if (QuestUnclaimed == null)
-        {
-            return;
-        }
+    //public void ReclamarRecompensa()
+    //{
+    //    if (QuestUnclaimed == null)
+    //    {
+    //        return;
+    //    }
 
-        GoldManager.Instance.AddGold(QuestUnclaimed.RewardGold);
-        //Character.CharacterExperience.AddExperience(QuestUnclaimed.RewardExp);
-        //Inventory.Instance.AddItem(QuestUnclaimed.RewardItem.Item, QuestUnclaimed.RewardItem.Quantity);
-        PanelQuestCompleted.SetActive(false);
-        QuestUnclaimed = null;
-    }
+    //    GoldManager.Instance.AddGold(QuestUnclaimed.RewardGold);
+    //    //Character.CharacterExperience.AddExperience(QuestUnclaimed.RewardExp);
+    //    //Inventory.Instance.AddItem(QuestUnclaimed.RewardItem.Item, QuestUnclaimed.RewardItem.Quantity);
+    //    PanelQuestCompleted.SetActive(false);
+    //    QuestUnclaimed = null;
+    //}
 
-    public void AddProgress(string questID, int quantity)
-    {
-        Quest questforUpdate = QuestExists(questID);
-        questforUpdate.AddProgress(quantity);
-    }
+    //public void AddProgress(string questID, int quantity)
+    //{
+    //    Quest questforUpdate = QuestExists(questID);
+    //    questforUpdate.AddProgress(quantity);
+    //}
 
-    private Quest QuestExists(string questID)
-    {
-        for (int i = 0; i < questionAvailable.Length; i++)
-        {
-            if (questionAvailable[i].ID == questID)
-            {
-                return questionAvailable[i];
-            }
-        }
-        return null;
-    }
+    //private Quest QuestExists(string questID)
+    //{
+    //    for (int i = 0; i < questionAvailable.Length; i++)
+    //    {
+    //        if (questionAvailable[i].ID == questID)
+    //        {
+    //            return questionAvailable[i];
+    //        }
+    //    }
+    //    return null;
+    //}
 
     private void ShowQuestCompleted(Quest questCompleted)
     {
@@ -213,22 +212,22 @@ public class QuestManager : Singleton<QuestManager>
         //questquestRecompenseItemIcon.sprite = questCompleted.RewardItem.Item.Icon;
     }
 
-    private void QuestCompletedResponse(Quest questCompleted)
-    {
-        QuestUnclaimed = QuestExists(questCompleted.ID);
-        if (QuestUnclaimed != null)
-        {
-            ShowQuestCompleted(QuestUnclaimed);
-        }
-    }
+    //private void QuestCompletedResponse(Quest questCompleted)
+    //{
+    //    QuestUnclaimed = QuestExists(questCompleted.ID);
+    //    if (QuestUnclaimed != null)
+    //    {
+    //        ShowQuestCompleted(QuestUnclaimed);
+    //    }
+    //}
 
-    private void OnEnable()
-    {
-        Quest.EventQuestCompleted += QuestCompletedResponse;
-    }
+    //private void OnEnable()
+    //{
+    //    Quest.EventQuestCompleted += QuestCompletedResponse;
+    //}
 
-    private void OnDisable()
-    {
-        Quest.EventQuestCompleted -= QuestCompletedResponse;
-    }
+    //private void OnDisable()
+    //{
+    //    Quest.EventQuestCompleted -= QuestCompletedResponse;
+    //}
 }

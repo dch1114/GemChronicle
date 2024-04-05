@@ -45,6 +45,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject potalListUI;
     //public static UIManager instance = null;
     public PlayerController playerController;
+    public PotalListUI potalUIScript;
     public GameObject potaltalk;
     public Button[] showMenuButton;
     public Button[] potalButton;
@@ -55,6 +56,9 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     ShowMenuType currentShowMenuType;
     PotalType currentPotalType;
+    PotalType minPotalType;
+    PotalType maxPotalType;
+
     OpenMenuType currentOpenMenuType;
     public Text talkBtnText;
     bool isOpenShowPopUp = false;
@@ -71,65 +75,27 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     Image playerPortraitImg;
 
-    public InventoryUIController inventoryUIController;
-
-
-    private Dictionary<PotalType, UnityAction> potalMenuAction = new Dictionary<PotalType, UnityAction>();
-
 
     protected override void Awake()
     {
         playerinput = GameManager.Instance.player.Input;
     }
-
+    private void Start()
+    {
+        InitializeShopMenuButtons();
+    }
     private void Update()
     {
         UpdateUIPersonnel();
 
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            if (currentOpenMenuType.Equals(OpenMenuType.Potal))
-            {
-                SelectPotalMenu(--currentPotalType);
-            }
-            else if (currentOpenMenuType.Equals(OpenMenuType.Shop))
-            {
-                PopupShopMenuSelect(--currentShowMenuType);
-            }
-           
-        }
+        if (Input.GetKeyUp(KeyCode.UpArrow) && currentOpenMenuType.Equals(OpenMenuType.Shop)) PopupShopMenuSelect(--currentShowMenuType);
 
-        if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            if (currentOpenMenuType.Equals(OpenMenuType.Potal))
-            {
-                SelectPotalMenu(++currentPotalType);
-            }
-            else if (currentOpenMenuType.Equals(OpenMenuType.Shop))
-            {
-                PopupShopMenuSelect(++currentShowMenuType);
-            }
-        }
+        if (Input.GetKeyUp(KeyCode.DownArrow) && currentOpenMenuType.Equals(OpenMenuType.Shop)) PopupShopMenuSelect(++currentShowMenuType);
     }
 
-    //void Awake()
-    //{
-    //    if (instance == null)
-    //    {
-    //        instance = this;
-    //    }
-    //    else
-    //    {
-    //        if (instance != this)
-    //            Destroy(this.gameObject);
-    //    }
-    //}
     public void OpenSoundSet(bool _OnOff)
     {
-
         soundSetting.SetActive(_OnOff);
-       
-
     }
     public bool IsOpenShowPopup()
     {
@@ -139,22 +105,6 @@ public class UIManager : Singleton<UIManager>
     {
         return isOpenPotalPopUp;
     }
-    private void Start()
-    {
-        SetPotalDictionary();
-
-        InitializeShopMenuButtons();
-    }
-    void SetPotalDictionary()
-    {
-        List<Potal> pList = PotalManager.Instance.GetPotalList();
-
-        for (int i = 0; i < pList.Count && i < Enum.GetValues(typeof(PotalType)).Length; i++)
-        {
-            int index = i;
-            potalMenuAction[(PotalType)index] = () => PotalManager.Instance.CheckUnLockPotal(pList[index]);
-        }
-    }
 
     void InitializeShopMenuButtons()
     {
@@ -162,10 +112,6 @@ public class UIManager : Singleton<UIManager>
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Buy], BuyShop, unSelectButton);
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Sell], SellShop, unSelectButton);
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Exit], ExitShop, unSelectButton);
-        InitializeShopMenuButton(potalButton[(int)PotalType.A], potalMenuAction[PotalType.A], unSelectButton);
-        InitializeShopMenuButton(potalButton[(int)PotalType.B], potalMenuAction[PotalType.B], unSelectButton);
-        InitializeShopMenuButton(potalButton[(int)PotalType.C], potalMenuAction[PotalType.C], unSelectButton);
-        InitializeShopMenuButton(potalButton[(int)PotalType.D], potalMenuAction[PotalType.D], unSelectButton);
     }
 
     void InitializeShopMenuButton(Button button, UnityAction action, Sprite sprite)
@@ -224,64 +170,33 @@ public class UIManager : Singleton<UIManager>
         //포탈 선택 UI 활성화
         potalListUI.SetActive(isVisible);
 
-
         //1.포탈매니저에서 언락이 되어있는 포탈타입만 확인하여 버튼으로 활성화하고 나머지는 비활성화
+        var pArray = PotalManager.Instance.GetPotal();
 
-        //2.활성화 되어 있는 버튼들중 제일 앞에 있는(예:Type B,D라면 B Type)포탈 타입의 버튼이 선택되게 세팅(아래 SelectPotalMenu() 함수는 사용불가)
+        for (int i = 0; i < pArray.Length; i++)
+        {
+            Debug.Log(i+"번째 포탈 잠김 : "+ pArray[i].potal.isLock);
+            //해금이 아직 안되었다면
+            //if (pArray[i].potal.isLock)
+            //{
+            //    potalUIScript.HideButton(i);
+            //}
+            //else
+            //{
+            //    potalUIScript.ShowButton(i);
+            //}
+            if (!pArray[i].potal.isLock)
+            {
+                potalUIScript.ShowButton(i);
+            }
 
-        //3.키보드 화살표 위, 아래로 선택시 활성화 된 버튼들 안에서 이동하기
+        }
 
-        //4.selectMenuAction 이벤트 액션에 선택된 버튼의 메소드 등록
-
-
-
-        //포탈 선택 UI가 활성화되면 PotalType.A 버튼이 선택된 상태로 시작
-        SelectPotalMenu(isVisible ? PotalType.A : PotalType.D);
+        potalUIScript.ButtonSet();
 
         isOpenPotalPopUp = isVisible;
 
-
     }
-
-    private void SelectPotalMenu(PotalType type)
-    {
-        currentPotalType = (PotalType)Mathf.Clamp((int)type, (int)PotalType.A, (int)PotalType.D);
-        //기존에 세팅되어 있는 버튼의 연결을 모두 해제
-        selectMenuAction = null;
-        selectMenuAction = GetSelectedPotalMenuAction(currentPotalType);
-
-    }
-
-    public void ExecuteSelectedPotalMenuAction()
-    {
-        selectMenuAction?.Invoke();
-    }
-
-    UnityAction GetSelectedPotalMenuAction(PotalType type)
-    {
-        foreach (var button in potalButton)
-        {
-            button.image.sprite = unSelectButton;
-        }
-
-        potalButton[(int)type].image.sprite = selectButton;
-
-
-        // 딕셔너리에서 해당 PotalType에 대응하는 메소드를 반환합니다.
-        if (potalMenuAction.TryGetValue(type, out UnityAction action))
-        {
-            return action;
-        }
-
-        return null; // 해당하는 PotalType에 대응하는 메소드가 없으면 null을 반환합니다.
-    }
-    //////////////////////////////////
-
-
-
-
-
-
 
 
     public void shopChoiceOnOff(bool _OnOff)
@@ -364,8 +279,7 @@ public class UIManager : Singleton<UIManager>
     }
     void BuyShop()
     {
-        inventoryUIController.UseShop();
-        shopChoiceOnOff(false);
+
         Debug.Log("Select Buy");
     }
 
@@ -378,9 +292,9 @@ public class UIManager : Singleton<UIManager>
 
     void ExitShop()
     {
-        inventoryUIController.CloseShop();
         shopChoiceOnOff(false);
         Debug.Log("Select Exi");
+
     }
 
     public void OpenClosePanelInspectorQuests()
