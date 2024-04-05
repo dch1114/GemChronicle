@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,17 +10,18 @@ public class ArcherSkillPages : SkillPages
 {
     [SerializeField] private Image typeIcon;
     [SerializeField] private TextMeshProUGUI rangeTxt;
+    [SerializeField] private GameObject descriptionTxt;
+
+    [SerializeField] private List<SkillTreeButton> skillTreeBtns;
+
+    private SkillTreeButton currentTreeBtn;
 
     protected override void ShowSkillSettings()
     {
         int asdIndex = GetASDIndex();
-        int index = player.Data.AttackData.AttackSkillStates[asdIndex][0];
+        skillInfoIndex = asdIndex;
 
-        skillInfoIndex = index;
-
-        goSkillInfo.SetActive(false);
-
-        foreach (SkillButton btn in skillBtns)
+        foreach (SkillTreeButton btn in skillTreeBtns)
         {
             btn.SetSkillBtn();
         }
@@ -27,17 +29,17 @@ public class ArcherSkillPages : SkillPages
 
     public override void UnlockSkillBtn()
     {
-        int price = skillBtns[skillInfoIndex].skillInfoData.Price;
-        //젬으로 교체 필요
-        if (skillBtns[skillInfoIndex].CheckCanUnlock() && player.Data.StatusData.IsGoldEnough(price))
+        if(currentTreeBtn != null)
         {
-            player.Data.StatusData.UseGold(price);
-            skillBtns[skillInfoIndex].SetUnlocked();
-            buyBtn.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("젬이 부족합니다.");
+            int price = currentTreeBtn.price;
+
+            if(currentTreeBtn.CheckCanUnlock() && player.Data.StatusData.IsGoldEnough(price))
+            {
+                player.Data.StatusData.UseGold(price);
+                currentTreeBtn.SetUnlocked(GetASDIndex());
+                buyBtn.SetActive(false);
+                ShowSkillInfo(currentTreeBtn);
+            }
         }
     }
 
@@ -50,52 +52,58 @@ public class ArcherSkillPages : SkillPages
         ShowSkillSettings();
     }
 
-    public void ShowSkillInfo(SkillButton _skill)
+    public void ShowSkillInfo(SkillTreeButton _skill)
     {
-        SkillInfoData data = _skill.skillInfoData;
+        currentTreeBtn = _skill;
 
-        int settingInfoIndex = GetSettingSkillState();
-        SkillInfoData settingData = player.Data.AttackData.GetSkillInfo(settingInfoIndex);
+        int asdIndex = GetASDIndex();
+        int index = player.Data.AttackData.AttackSkillStates[asdIndex][0];
 
-        if(data != null)
+        SkillInfoData data = player.Data.AttackData.GetSkillInfo(index);
+
+        if (descriptionTxt.activeSelf) descriptionTxt.SetActive(false);
+
+        string damageStr = data.Damage.ToString();
+        string rangeStr = data.Range.ToString();
+        ShowSkillType();
+
+        if(!_skill.isUnlocked)
         {
-            skillIcon.sprite = _skill.icon.sprite;
-            string damageInfo = data.Damage.ToString();
-            if (data.Damage != settingData.Damage) damageInfo += "<color=green>( +" + settingData.Damage.ToString() + " )</color>";
-            string rangeInfo = data.Range.ToString();
-            if (data.Range != settingData.Range) rangeInfo += "<color=green>( +" + settingData.Range.ToString() + " )</color>";
-            damageTxt.text = damageInfo;
-            rangeTxt.text = rangeInfo;
-            ShowSkillType(data);
-
-            skillInfoIndex = data.SkillStateIndex;
-
-            buyBtn.SetActive(!skillBtns[skillInfoIndex].skillInfoData.IsUnlocked);
+            switch (_skill.GetSkillType())
+            {
+                case SkillTreeButton.SkillTreeType.increaseAtk:
+                    damageStr += "<color=green> ( + " + _skill.amount + " )</color>";
+                    break;
+                case SkillTreeButton.SkillTreeType.increaseRange:
+                    rangeStr += "<color=green> ( + " + _skill.amount + " )</color>";
+                    break;
+                case SkillTreeButton.SkillTreeType.increaseAtkSphere:
+                    descriptionTxt.SetActive(true);
+                    break;
+            }
         }
+
+        buyBtn.SetActive(!_skill.isUnlocked);
+        damageTxt.text = damageStr;
+        rangeTxt.text = rangeStr;
     }
-    private void ShowSkillType(SkillInfoData _skill)
+
+    private void ShowSkillType()
     {
-        switch (_skill.SkillType)
+        switch (GetASDIndex())
         {
-            case SkillType.Fire:
+            case 0:
                 typeIcon.sprite = typeSprites[0];
                 break;
-            case SkillType.Ice:
+            case 1:
                 typeIcon.sprite = typeSprites[1];
                 break;
-            case SkillType.Light:
+            case 2:
                 typeIcon.sprite = typeSprites[2];
                 break;
             default:
                 typeIcon.sprite = typeSprites[0];
                 break;
         }
-    }
-
-    private int GetSettingSkillState()
-    {
-        int asdIndex = GetASDIndex();
-
-        return player.Data.AttackData.AttackSkillStates[asdIndex][0];
     }
 }
