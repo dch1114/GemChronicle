@@ -123,8 +123,8 @@ public class PlayerAction : MonoBehaviour
         if (_other != null)
         {
             IInteractive irv = _other.GetComponent<IInteractive>();
-
-            irv.CloseUI();
+            if(irv != null)
+                irv.CloseUI();
 
             target = null;
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NextMap : MonoBehaviour, IInteractive
 {
+    public PolygonCollider2D destCol;
+
     public enum NextPositionType
     {
         InitPosition,
@@ -67,6 +69,8 @@ public class NextMap : MonoBehaviour, IInteractive
                     if (DestinationPoint != null)
                     {
                         player.transform.position = DestinationPoint.position;
+                        // sdf
+                        GameManager.Instance.cine2d.m_BoundingShape2D = destCol;
                     }
                     else
                     {
