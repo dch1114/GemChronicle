@@ -27,10 +27,10 @@ public class TalkManager : MonoBehaviour
     void GenerateData()
     {
 
-        portraitData.Add(1001, portraitArr[0]);
-        portraitData.Add(1101, portraitArr[1]);
-        portraitData.Add(1201, portraitArr[2]);
-        portraitData.Add(1301, portraitArr[3]);
+        portraitData.Add(2000, portraitArr[0]);
+        portraitData.Add(3001, portraitArr[1]);
+        portraitData.Add(3002, portraitArr[2]);
+        portraitData.Add(3003, portraitArr[3]);
 
 
     }

@@ -7,115 +7,6 @@ using UnityEngine.UI;
 
 public class QuestManager : Singleton<QuestManager>
 {
-    // 지금 진행중인가
-    private Dictionary<int, Quest> _ongoingQuests = new();
-
-    // 완료했는가
-    private HashSet<int> _completeQuests = new();
-
-    public event Action<int> OnQuestStartCallback;
-    public event Action<int, int> OnQuestUpdateCallback;
-    public event Action<int> OnQuestCompleteCallback;
-
-    private Dictionary<QuestType, List<QuestData>> _subscribeQuests = new();
-
-    public void SubscribeQuest(int questId)
-    {
-        Debug.Log("SubscribeQuest" + questId);
-
-        var questData = Database.Quest.Get(questId);
-
-        if (_subscribeQuests.ContainsKey(questData.Type) == false)
-            _subscribeQuests[questData.Type] = new List<QuestData>();
-
-        _subscribeQuests[questData.Type].Add(questData);
-    }
-
-    public void UnsubscribeQuest(int questId)
-    {
-        Debug.Log("SubscribeQuest" + questId);
-        var questData = Database.Quest.Get(questId);
-
-        if (_subscribeQuests.ContainsKey(questData.Type) == false)
-            return;
-
-        _subscribeQuests[questData.Type].Remove(questData);
-    }
-
-    public void NotifyQuest(QuestType type, int target, int count)
-    {
-        if (_subscribeQuests.ContainsKey(type) == false)
-            return;
-
-        var filteredQuests = _subscribeQuests[type];
-        var targetQuests = filteredQuests.FindAll(q => q.Target == target);
-        foreach (var quest in targetQuests)
-            QuestUpdate(quest.ID, count);
-    }
-
-    public void QuestStart(int questId)
-    {
-        if (IsClear(questId))
-            return;
-
-        var quest = new Quest(questId);
-        quest.Start();
-        if (_ongoingQuests.ContainsKey(questId))
-            return;
-
-        _ongoingQuests.Add(questId, quest);
-
-        OnQuestStartCallback?.Invoke(questId);
-    }
-
-    public void QuestUpdate(int questId, int amount)
-    {
-        if (_ongoingQuests.ContainsKey(questId) == false)
-            return;
-
-        var questData = Database.Quest.Get(questId);
-
-        int currentCount = _ongoingQuests[questId].Update(amount);
-
-        _ongoingQuests[questId].Update(amount);
-
-        OnQuestUpdateCallback?.Invoke(questId, amount);
-
-        if (currentCount >= questData.Count)
-            QuestClear(questId);
-    }
-
-    public void QuestClear(int questId)
-    {
-        if (_ongoingQuests.ContainsKey(questId) == false)
-            return;
-
-        _ongoingQuests[questId].Complete();
-        _ongoingQuests.Remove(questId);
-
-        _completeQuests.Add(questId);
-
-        OnQuestCompleteCallback?.Invoke(questId);
-    }
-
-    public bool IsClear(int id)
-    {
-        return _completeQuests.Contains(id);
-    }
-
-
-
-
-
-
-
-
-
-
-
-    //[Header("Quests")]
-    //[SerializeField] private Quest[] questionAvailable;
-
     [Header("Inspector Quests")]
     [SerializeField] private InspectorQuestDescription inspectorQuestPrefab;
     [SerializeField] private Transform InspectorQuestContainer;
@@ -134,30 +25,144 @@ public class QuestManager : Singleton<QuestManager>
 
     public Quest QuestUnclaimed { get; private set; }
 
-    //private void Start()
-    //{
-    //    LoadingQuestInspector();
-    //}
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.L))
-    //    {
-    //        AddProgress("Kill10", 1);
-    //        AddProgress("Kill25", 1);
-    //        AddProgress("Kill50", 1);
-    //    }
-    //}
+    //퀘스트를 수락하면 딕셔너리에 넣음
+    private Dictionary<int, Quest> _ongoingQuests = new();
+    //퀘스트를 완료하면 해쉬셋에 넣음
+    private HashSet<int> _completeQuests = new();
+    //퀘스트 수락 콜백
+    public event Action<int> OnQuestStartCallback;
+    //퀘스트 카운트 업데이트 콜백
+    public event Action<int, int> OnQuestUpdateCallback;
+    //퀘스트 완료 콜백
+    public event Action<int> OnQuestCompleteCallback;
 
-    //private void LoadingQuestInspector(Quest quest)
-    //{
-    //    for (int i = 0; i < questionAvailable.Length; i++)
-    //    {
-    //        InspectorQuestDescription newQuest = Instantiate(inspectorQuestPrefab, InspectorQuestContainer);
-    //        newQuest.ConfigureQuestUI(questionAvailable[i]);
-    //    }
+    private Dictionary<QuestType, List<QuestData>> _subscribeQuests = new();
 
-    //}
+    /// <summary>
+    /// SubscribeQuest는 QuestData 보관 QuestStart는 퀘스트 진행도와 상태체크
+    /// </summary>
+
+    //퀘스트 구독
+    public void SubscribeQuest(int questId)
+    {
+        //만약 questID가 이미 진행중이거나 완료 햇다면 중복 구독 방지
+        if (IsClear(questId) || IsProgressQuest(questId))
+        {
+            Debug.Log($"이미 ID:{questId} 퀘스트는 진행중이거나 완료하였습니다");
+            return;
+        }
+
+        //퀘스트 데이터 불러오기
+        var questData = Database.Quest.Get(questId);
+
+        //구독 딕셔너리에 퀘스트타입이 존재하지 않으면 Add 딕셔너리
+        if (_subscribeQuests.ContainsKey(questData.Type) == false)
+        {
+            _subscribeQuests[questData.Type] = new List<QuestData>();
+        }
+
+        _subscribeQuests[questData.Type].Add(questData);
+
+        QuestStart(questId);
+
+        Debug.Log($"ID:{questId} 퀘스트 구독 완료");
+    }
+
+    //퀘스트 구독 해제
+    public void UnsubscribeQuest(int questId)
+    {
+        
+        var questData = Database.Quest.Get(questId);
+
+        if (_subscribeQuests.ContainsKey(questData.Type) == false)
+            return;
+        //구독 딕셔너리에 퀘스트 타입이 존재할 때만 Remove 딕셔너리
+        _subscribeQuests[questData.Type].Remove(questData);
+        Debug.Log($"ID:{questId} 퀘스트 구독 해제 완료");
+    }
+    
+    //퀘스트 진행도 업데이트 (QuestType:대분류, target:소분류, count:실행횟수)
+    public void NotifyQuest(QuestType type, int target, int count)
+    {
+        if (_subscribeQuests.ContainsKey(type) == false)
+            return;
+        //QuestType(대분류) 퀘스트 불러오기
+        var filteredQuests = _subscribeQuests[type];
+        //딕셔너리를 돌면서 target(소분류)와 목표와 같은 QuestData를 추출하여 List<QuestData>로 뽑아낸다
+        List<QuestData> targetQuests = filteredQuests.FindAll(q => q.Target == target);
+        //foreach돌면서 quest ID와 동일한 퀘스트만 실행횟수 업데이트
+        foreach (var quest in targetQuests)
+            QuestUpdate(quest.ID, count);
+    }
+
+    void QuestStart(int questId)
+    {
+        if (_ongoingQuests.ContainsKey(questId))
+        {
+            Debug.Log($"해당 ID:{questId} 로 이미 퀘스트가 진행중입니다");
+            return;
+        }
+        
+        //퀘스트를 생성하고 상태를 Wait에서 Progress로 변경
+        var quest = new Quest(questId);
+        quest.Start();
+        //퀘스트를 진행중 딕셔너리에 추가
+        _ongoingQuests.Add(questId, quest);
+        //퀘스트를 수락 콜백 액션
+        OnQuestStartCallback?.Invoke(questId);
+    }
+
+    public void QuestUpdate(int questId, int amount)
+    {
+        if (_ongoingQuests.ContainsKey(questId) == false)
+            return;
+
+        var questData = Database.Quest.Get(questId);
+
+        //실행횟수를 업데이트 하고 누적된 횟수를 리턴받는다
+        int currentCount = _ongoingQuests[questId].Update(amount);
+
+        //_ongoingQuests[questId].Update(amount);
+
+        //UI업데이트 용도로 사용할 예정
+        OnQuestUpdateCallback?.Invoke(questId, amount);
+
+        //현재 실행횟수가 퀘스트데이타의 목표횟수에 도달하면 퀘스트 클리어
+        if (currentCount >= questData.Count)
+            QuestClear(questId);
+    }
+
+    public void QuestClear(int questId)
+    {
+        if (_ongoingQuests.ContainsKey(questId) == false)
+            return;
+
+        _ongoingQuests[questId].Complete();
+        _ongoingQuests.Remove(questId);
+
+        _completeQuests.Add(questId);
+
+        Debug.Log($"ID:{questId} 퀘스트 클리어!");
+
+        OnQuestCompleteCallback?.Invoke(questId);
+    }
+
+    public bool IsClear(int questId)
+    {
+        return _completeQuests.Contains(questId);
+    }
+
+    public bool IsProgressQuest(int questId)
+    {
+        return _ongoingQuests.ContainsKey(questId);
+    }
+
+    
+
+
+
+
 
     private void AddQuestToComplete(Quest questcompleted)
     {
@@ -170,37 +175,20 @@ public class QuestManager : Singleton<QuestManager>
         AddQuestToComplete(questcompleted);
     }
 
-    //public void ReclamarRecompensa()
-    //{
-    //    if (QuestUnclaimed == null)
-    //    {
-    //        return;
-    //    }
+    public void ReclamarRecompensa()
+    {
+        if (QuestUnclaimed == null)
+        {
+            return;
+        }
 
-    //    GoldManager.Instance.AddGold(QuestUnclaimed.RewardGold);
-    //    //Character.CharacterExperience.AddExperience(QuestUnclaimed.RewardExp);
-    //    //Inventory.Instance.AddItem(QuestUnclaimed.RewardItem.Item, QuestUnclaimed.RewardItem.Quantity);
-    //    PanelQuestCompleted.SetActive(false);
-    //    QuestUnclaimed = null;
-    //}
+        GoldManager.Instance.AddGold(QuestUnclaimed.RewardGold);
+        //Character.CharacterExperience.AddExperience(QuestUnclaimed.RewardExp);
+        //Inventory.Instance.AddItem(QuestUnclaimed.RewardItem.Item, QuestUnclaimed.RewardItem.Quantity);
+        PanelQuestCompleted.SetActive(false);
+        QuestUnclaimed = null;
+    }
 
-    //public void AddProgress(string questID, int quantity)
-    //{
-    //    Quest questforUpdate = QuestExists(questID);
-    //    questforUpdate.AddProgress(quantity);
-    //}
-
-    //private Quest QuestExists(string questID)
-    //{
-    //    for (int i = 0; i < questionAvailable.Length; i++)
-    //    {
-    //        if (questionAvailable[i].ID == questID)
-    //        {
-    //            return questionAvailable[i];
-    //        }
-    //    }
-    //    return null;
-    //}
 
     private void ShowQuestCompleted(Quest questCompleted)
     {
@@ -212,22 +200,4 @@ public class QuestManager : Singleton<QuestManager>
         //questquestRecompenseItemIcon.sprite = questCompleted.RewardItem.Item.Icon;
     }
 
-    //private void QuestCompletedResponse(Quest questCompleted)
-    //{
-    //    QuestUnclaimed = QuestExists(questCompleted.ID);
-    //    if (QuestUnclaimed != null)
-    //    {
-    //        ShowQuestCompleted(QuestUnclaimed);
-    //    }
-    //}
-
-    //private void OnEnable()
-    //{
-    //    Quest.EventQuestCompleted += QuestCompletedResponse;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    Quest.EventQuestCompleted -= QuestCompletedResponse;
-    //}
 }

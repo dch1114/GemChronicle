@@ -8,7 +8,7 @@ public class QuestDB
 
     public QuestDB()
     {
-        var res = Resources.Load<QuestDataSheet>("DB/QuestSO");
+        var res = Resources.Load<QuestDataSheet>("DB/QuestDataSheet");
         var questSo = Object.Instantiate(res);
         var sheet1 = questSo.Sheet1;
 

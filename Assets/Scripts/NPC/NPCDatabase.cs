@@ -39,6 +39,7 @@ public class ScriptTableData
 //0315 Npc타입을 구별하기 위해 enum 선언
 public enum NPCType
 { 
+    Teacher,
     Npc,
     Shop
 }
