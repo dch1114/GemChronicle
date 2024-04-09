@@ -9,11 +9,12 @@ public class DataManager : Singleton<DataManager>
 {
     public NPCDatabase npcDatabase;
     public ItemDatabase itemDatabase;
+    private Shop shop;
 
-    public Shop shop;
     public TalkManager talkManager;
     void Start()
     {
+        shop = FindObjectOfType<Shop>();
         TextAsset NPCjsonFile = Resources.Load<TextAsset>("JSON/NPCData");
         TextAsset jsonFile = Resources.Load<TextAsset>("JSON/Item_Data");
         if (NPCjsonFile != null)
@@ -46,14 +47,18 @@ public class DataManager : Singleton<DataManager>
 
     }
 
+
     IEnumerator InitManagers()
     {
+        yield return StartCoroutine(InitManagersCoroutine());
+    }
 
+    IEnumerator InitManagersCoroutine()
+    {
         yield return null;
-        NPCManager.Instance.InitNPCManager();
         if (shop != null) shop.SetShopItem();
+        NPCManager.Instance.InitNPCManager();
         if (talkManager != null) talkManager.InitTalkManager();
-
     }
 
 
