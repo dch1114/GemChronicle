@@ -110,6 +110,13 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
+    private void OnDie()
+    {
+        EnemyStatusData.Hp = 0;
+        SetState(EnemyState.Dead);
+        gameObject.SetActive(false);
+    }
+
     protected void SetState(EnemyState newState)
     {
         state = newState;
@@ -196,7 +203,7 @@ public class Enemy : MonoBehaviour, IDamageable
         else
         {
             //TODO: »ç¸Á ±¸Çö
-            SetState(EnemyState.Dead);
+            OnDie();
         }
     }
 }
