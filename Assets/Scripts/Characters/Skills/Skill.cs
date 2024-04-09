@@ -50,21 +50,24 @@ public class Skill : MonoBehaviour
 
     IEnumerator ShootSkill()
     {
-        Vector3 originalPosition = transform.position;
-        Vector3 targetPosition = originalPosition + (player.Controller.isLeft ?  new Vector3(data.Range * -1, 0, 0) : new Vector3(data.Range, 0, 0));
-
-        do
+        if(data != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 7f);
-            yield return null;
-        } while (transform.position != targetPosition);
+            Vector3 originalPosition = transform.position;
+            Vector3 targetPosition = originalPosition + (player.Controller.isLeft ? new Vector3(data.Range * -1, 0, 0) : new Vector3(data.Range, 0, 0));
 
-        gameObject.SetActive(false);
+            do
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 7f);
+                yield return null;
+            } while (transform.position != targetPosition);
+
+            gameObject.SetActive(false);
+        }
     }
 
     private void SetTransform()
     {
-        Vector3 plus = Vector3.left;
+        Vector3 plus = new Vector3(-0.5f, 0, 0);
         if (!player.Controller.isLeft)
         {
             plus.x *= -1f;
