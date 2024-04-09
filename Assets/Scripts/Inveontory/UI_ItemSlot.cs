@@ -9,6 +9,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
 
+    private CheckPurchasePopup checkPurChasePopup;
     protected InventoryUIController ui;
     public InventoryItem inventoryItem;
 
@@ -21,6 +22,7 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
     private void Start()
     {
         ui = GetComponentInParent<InventoryUIController>();
+        checkPurChasePopup = ui.shopTradePopup;
         UpdateSlot(inventoryItem);
     }
     public void UpdateSlot(InventoryItem _newitem)
@@ -74,8 +76,9 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
         {
             if (ui.shopUi.activeSelf)
             {
-                ui.shopTradePopup.SetItem(inventoryItem);
-                ui.shopTradePopup.checkSellPopup.SetActive(true);
+                checkPurChasePopup.SetItem(inventoryItem);
+                checkPurChasePopup.gameObject.SetActive(true);
+                checkPurChasePopup.checkSellPopup.SetActive(true);
                 ui.shopitemToolTip.ShowToolTip(inventoryItem.datas);
             }
             else

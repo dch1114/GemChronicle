@@ -75,6 +75,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     Image playerPortraitImg;
 
+    public InventoryUIController inventoryUIController;
 
     protected override void Awake()
     {
@@ -279,7 +280,8 @@ public class UIManager : Singleton<UIManager>
     }
     void BuyShop()
     {
-
+        inventoryUIController.UseShop();
+        shopChoiceOnOff(false);
         Debug.Log("Select Buy");
     }
 
@@ -292,6 +294,7 @@ public class UIManager : Singleton<UIManager>
 
     void ExitShop()
     {
+        inventoryUIController.CloseShop();
         shopChoiceOnOff(false);
         Debug.Log("Select Exi");
 
