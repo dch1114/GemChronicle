@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 
-//0315 인터페이스 구현
 public class NPCController : MonoBehaviour, IInteractive
 {
     [SerializeField]
@@ -23,19 +22,20 @@ public class NPCController : MonoBehaviour, IInteractive
     public bool isShop = false;
     public bool isEndTalk = false;
 
+    int currentStep;
+    bool isLoadScriptData = false;
+    bool isEndSaying = false;
+
+    //현재 들고 있는 퀘스트데이타
     public QuestData offerQuestData;
 
+    //대화 관련 테이블 데이타
     private QuestTableData questData;
     private TalkTableData doQuest;
     private TalkTableData doingQuest;
     private TalkTableData doneQuest;
     [SerializeField] private Queue<ScriptTableData> scriptTableDatas = new Queue<ScriptTableData>();
     ScriptTableData currentScript;
-
-    bool isLoadScriptData = false;
-
-    int currentStep;
-    bool isEndSaying = false;
 
     
     public void Init(NPC npc, NPCManager manager)
@@ -45,9 +45,23 @@ public class NPCController : MonoBehaviour, IInteractive
         uiManager = UIManager.Instance;
         talkManager = npcManager.talkManager;
         playerinput = GameManager.Instance.player.Input;
-        SetNPCInfoData(2000);
+
+        //만약 NPC가 스승이라면 첫퀘스트 및 대화를 할당한다.
+        if (npcType == NPCType.Teacher)
+        {
+            offerQuestData = Database.Quest.Get(npcData.ID);
+            QuestManager.Instance.OnQuestCompleteCallback += QuestCompleteCallBack;
+        }
+
+        SetNPCInfoData(npcData.ID);
     }
 
+    void QuestCompleteCallBack(int id)
+    {
+        int questId = id + 1;
+        offerQuestData = Database.Quest.Get(questId);
+        SetNPCInfoData(questId);
+    }
 
     void SetNPCInfoData(int index)
     {
@@ -111,7 +125,7 @@ public class NPCController : MonoBehaviour, IInteractive
         TryTalk();
     }
 
-    //퀘스트가 진행중일 때, 퀘스트를 완료하였을때 상태를 알 수 있는 기능이 있어야 함
+    
     public void TryTalk()
     {
         //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
@@ -124,13 +138,58 @@ public class NPCController : MonoBehaviour, IInteractive
         if (!isLoadScriptData)
         {
             //Debug.Log("대화 스크립트 데이터 로드된 것이 없음");
-            for (int i = 0; i < doQuest.scriptId.Length; i++)
+
+            int[] scriptIds;
+
+            if (QuestManager.Instance.IsClear(offerQuestData.ID))
             {
-                scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doQuest.scriptId[i]));
+                scriptIds = doneQuest.scriptId;
             }
+            else if (QuestManager.Instance.IsProgressQuest(offerQuestData.ID))
+            {
+                scriptIds = doingQuest.scriptId;
+            }
+            else
+            {
+                scriptIds = doQuest.scriptId;
+            }
+
+            AddScriptsToQueue(scriptIds);
+
             currentStep = 0;
             isLoadScriptData = true;
             isEndSaying = true;
+
+
+            //if (QuestManager.Instance.IsClear(offerQuestData.ID))
+            //{
+            //    currentquestId++;
+            //    SetNPCInfoData(currentquestId);
+            //    //스승이 준 퀘스트를 클리어했다면
+            //    for (int i = 0; i < doneQuest.scriptId.Length; i++)
+            //    {
+            //        scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doneQuest.scriptId[i]));
+            //    }
+            //}
+            //else if (QuestManager.Instance.IsProgressQuest(offerQuestData.ID))
+            //{
+            //    //스승이 준 퀘스트를 아직 진행중이라면
+            //    for (int i = 0; i < doingQuest.scriptId.Length; i++)
+            //    {
+            //        scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doingQuest.scriptId[i]));
+            //    }
+            //}
+            //else
+            //{
+            //    for (int i = 0; i < doQuest.scriptId.Length; i++)
+            //    {
+            //        scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doQuest.scriptId[i]));
+            //    }
+            //}
+
+            //currentStep = 0;
+            //isLoadScriptData = true;
+            //isEndSaying = true;
         }
 
         //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않아 대화를 종료해야 한다면
@@ -145,6 +204,13 @@ public class NPCController : MonoBehaviour, IInteractive
             //초상화 OFF
             uiManager.PotraitPanelOnOff(false);
             isEndSaying = false;
+
+            //퀘스트 받기
+            //만약 NPC가 스승이라면 퀘스트 구독을 시도한다.
+            if (npcType == NPCType.Teacher)
+            {
+                QuestManager.Instance.SubscribeQuest(offerQuestData.ID);
+            }
 
             if (npcType == NPCType.Shop)
             {
@@ -177,6 +243,14 @@ public class NPCController : MonoBehaviour, IInteractive
 
         Talk();
 
+    }
+
+    void AddScriptsToQueue(int[] scriptIds)
+    {
+        foreach (int scriptId in scriptIds)
+        {
+            scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(scriptId));
+        }
     }
 
     void Talk()
