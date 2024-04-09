@@ -14,13 +14,25 @@ public class TestEditor : Editor
 
         if (GUILayout.Button("퀘스트1 수락"))
         {
-            componentScript.CompleteFirstQuest();
+            componentScript.AcceptFirstQuest();
         }
         if (GUILayout.Button("퀘스트2 수락"))
         {
-            componentScript.CompleteSecondQuest();
+            componentScript.AcceptSecondQuest();
         }
         if (GUILayout.Button("퀘스트3 수락"))
+        {
+            componentScript.AcceptThirdQuest();
+        }
+        if (GUILayout.Button("퀘스트1 완료"))
+        {
+            componentScript.CompleteFirstQuest();
+        }
+        if (GUILayout.Button("퀘스트2 완료"))
+        {
+            componentScript.CompleteSecondQuest();
+        }
+        if (GUILayout.Button("퀘스트3 완료"))
         {
             componentScript.CompleteThirdQuest();
         }

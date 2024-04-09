@@ -1,7 +1,7 @@
 {
 	"NPCInfos": [
 		{
-			"ID": 1001,
+			"ID": 2000,
 			"role": "튜토리얼",
 			"name": "김유원(튜토리얼)",
 			"place": "시작의마을",
@@ -10,7 +10,7 @@
 			"portraitId": 0
 		},
 		{
-			"ID": 1101,
+			"ID": 3001,
 			"role": "퀘스트1",
 			"name": "석동구",
 			"place": "시작의마을",
@@ -19,7 +19,7 @@
 			"portraitId": 1
 		},
 		{
-			"ID": 1201,
+			"ID": 3002,
 			"role": "회복",
 			"name": "이건형",
 			"place": "시작의마을",
@@ -28,7 +28,7 @@
 			"portraitId": 2
 		},
 		{
-			"ID": 1301,
+			"ID": 3003,
 			"role": "상점",
 			"name": "김승현(상점)",
 			"place": "시작의마을",
@@ -49,6 +49,30 @@
 			"talk_1": 104,
 			"talk_2": 105,
 			"talk_3": 106
+		},
+		{
+			"id": 2002,
+			"talk_1": 107,
+			"talk_2": 108,
+			"talk_3": 109
+		},
+		{
+			"id": 3001,
+			"talk_1": 110,
+			"talk_2": 111,
+			"talk_3": 112
+		},
+		{
+			"id": 3002,
+			"talk_1": 113,
+			"talk_2": 114,
+			"talk_3": 115
+		},
+		{
+			"id": 3003,
+			"talk_1": 116,
+			"talk_2": 117,
+			"talk_3": 118
 		}
 	],
 	"talkTable": [
@@ -89,6 +113,78 @@
 			"id": 106,
 			"scriptId": [
 				10
+			]
+		},
+		{
+			"id": 107,
+			"scriptId": [
+				11
+			]
+		},
+		{
+			"id": 108,
+			"scriptId": [
+				12
+			]
+		},
+		{
+			"id": 109,
+			"scriptId": [
+				13
+			]
+		},
+		{
+			"id": 110,
+			"scriptId": [
+				14
+			]
+		},
+		{
+			"id": 111,
+			"scriptId": [
+				15
+			]
+		},
+		{
+			"id": 112,
+			"scriptId": [
+				16
+			]
+		},
+		{
+			"id": 113,
+			"scriptId": [
+				17
+			]
+		},
+		{
+			"id": 114,
+			"scriptId": [
+				18
+			]
+		},
+		{
+			"id": 115,
+			"scriptId": [
+				19
+			]
+		},
+		{
+			"id": 116,
+			"scriptId": [
+				20
+			]
+		},
+		{
+			"id": 117,
+			"scriptId": [
+				21
+			]
+		},
+		{
+			"id": 118,
+			"scriptId": [
+				22
 			]
 		}
 	],
@@ -149,23 +245,107 @@
 		},
 		{
 			"id": 8,
-			"speaker": 1000,
+			"speaker": 1001,
 			"dialog": [
 				"퀘스트2 줄께"
 			]
 		},
 		{
 			"id": 9,
-			"speaker": 1000,
+			"speaker": 1001,
 			"dialog": [
 				"퀘스트2진행중"
 			]
 		},
 		{
 			"id": 10,
-			"speaker": 1000,
+			"speaker": 1001,
 			"dialog": [
 				"퀘스트2완료"
+			]
+		},
+		{
+			"id": 11,
+			"speaker": 1001,
+			"dialog": [
+				"퀘스트3 줄께"
+			]
+		},
+		{
+			"id": 12,
+			"speaker": 1001,
+			"dialog": [
+				"퀘스트3진행중"
+			]
+		},
+		{
+			"id": 13,
+			"speaker": 1001,
+			"dialog": [
+				"퀘스트3 완료"
+			]
+		},
+		{
+			"id": 14,
+			"speaker": 1001,
+			"dialog": [
+				"NPC_1 상"
+			]
+		},
+		{
+			"id": 15,
+			"speaker": 1001,
+			"dialog": [
+				"NPC_1 중"
+			]
+		},
+		{
+			"id": 16,
+			"speaker": 1001,
+			"dialog": [
+				"NPC_1 하"
+			]
+		},
+		{
+			"id": 17,
+			"speaker": 1001,
+			"dialog": [
+				"NPC_2 상"
+			]
+		},
+		{
+			"id": 18,
+			"speaker": 1001,
+			"dialog": [
+				"NPC_2 중"
+			]
+		},
+		{
+			"id": 19,
+			"speaker": 1001,
+			"dialog": [
+				"NPC_2 하"
+			]
+		},
+		{
+			"id": 20,
+			"speaker": 1001,
+			"dialog": [
+				"NPC_3 상"
+			]
+		},
+		{
+			"id": 21,
+			"speaker": 1001,
+			"dialog": [
+				"NPC_3 중"
+			]
+		},
+		{
+			"id": 22,
+			"speaker": 1001,
+			"dialog": [
+				"NPC_3 하"
 			]
 		}
 	]

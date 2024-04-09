@@ -1,3 +1,4 @@
+using Constants;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -80,19 +81,11 @@ public class PotalManager : Singleton<PotalManager>
 
     //에디터 테스트용
 
-    public void CompleteFirstQuest()
-    {
-        QuestManager.Instance.QuestStart(2001);
-    }
-    public void CompleteSecondQuest()
-    {
-        QuestManager.Instance.QuestStart(2002);
-
-    }
-    public void CompleteThirdQuest()
-    {
-        QuestManager.Instance.QuestStart(2003);
-
-    }
+    public void AcceptFirstQuest() { QuestManager.Instance.SubscribeQuest(2000); }
+    public void AcceptSecondQuest() { QuestManager.Instance.SubscribeQuest(2001); }
+    public void AcceptThirdQuest() { QuestManager.Instance.SubscribeQuest(2002); }
+    public void CompleteFirstQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc,2000,1); }
+    public void CompleteSecondQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 2000, 1); }
+    public void CompleteThirdQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillMonster, 500000, 5); }
 
 }
