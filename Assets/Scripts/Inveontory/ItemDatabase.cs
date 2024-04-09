@@ -8,7 +8,6 @@ public enum SlotType // 수정한 곳
     Weapon,
     Armor,
     Potion,
-    Gem
 }
 
 public enum ItemType
