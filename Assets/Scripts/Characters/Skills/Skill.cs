@@ -18,10 +18,23 @@ public class Skill : MonoBehaviour
     {
         player = GameManager.Instance.player;
 
-        if(player != null )
+        if(player != null)
         {
             SetTransform();
-            StartCoroutine(WaitForAnimationEnd());
+            CheckType();
+        }
+    }
+
+    private void CheckType()
+    {
+        switch(player.Data.StatusData.JobType)
+        {
+            case JobType.Archer:
+                StartCoroutine(ShootSkill());
+                break;
+            default:
+                StartCoroutine(WaitForAnimationEnd());
+                break;
         }
     }
 
@@ -35,9 +48,26 @@ public class Skill : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    IEnumerator ShootSkill()
+    {
+        if(data != null)
+        {
+            Vector3 originalPosition = transform.position;
+            Vector3 targetPosition = originalPosition + (player.Controller.isLeft ? new Vector3(data.Range * -1, 0, 0) : new Vector3(data.Range, 0, 0));
+
+            do
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * 7f);
+                yield return null;
+            } while (transform.position != targetPosition);
+
+            gameObject.SetActive(false);
+        }
+    }
+
     private void SetTransform()
     {
-        Vector3 plus = Vector3.left;
+        Vector3 plus = new Vector3(-0.5f, 0, 0);
         if (!player.Controller.isLeft)
         {
             plus.x *= -1f;
@@ -59,6 +89,7 @@ public class Skill : MonoBehaviour
         if(damageable != null)
         {
             damageable.TakeDamage(player.Data.StatusData.Atk + data.Damage);
+            gameObject.SetActive(false);
         }
     }
 }
