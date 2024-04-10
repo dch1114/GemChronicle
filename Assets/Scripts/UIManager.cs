@@ -17,8 +17,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] public TextMeshProUGUI levelTMP;
 
     [Header("Paneles")]
-    [SerializeField] private GameObject panelInspectorQuests;
-    [SerializeField] private GameObject panelPersonajeQuests;
+    [SerializeField] private GameObject panelQuest;
+    [SerializeField] private GameObject panelCompleteQuest;
 
     private float expActual;
     private float NewLevel;
@@ -300,14 +300,14 @@ public class UIManager : Singleton<UIManager>
 
     }
 
-    public void OpenClosePanelInspectorQuests()
+    public void OpenClosePanelQuest()
     {
-        panelInspectorQuests.SetActive(!panelInspectorQuests.activeSelf);
+        panelQuest.SetActive(!panelQuest.activeSelf);
     }
 
-    public void OpenClosePersonalityPanelQuests()
+    public void OpenClosePanelCompleteQuest()
     {
-        panelPersonajeQuests.SetActive(!panelPersonajeQuests.activeSelf);
+        panelCompleteQuest.SetActive(!panelCompleteQuest.activeSelf);
     }
 
 
