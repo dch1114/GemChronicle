@@ -132,7 +132,6 @@ public class Enemy : MonoBehaviour, IDamageable
     private void SpawnGems()
     {
         int amount = RandomAmount();
-        Debug.Log(amount);
 
         for(int i = 0; i < amount; i++)
         {

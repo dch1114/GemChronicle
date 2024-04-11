@@ -76,8 +76,14 @@ public class PlayerStatusData : Status
             hp -= damage;
         } else
         {
-            //TODO: 사망 구현
+            OnDie();
         }
+    }
+
+    private void OnDie()
+    {
+        //마을에서 리스폰
+        
     }
 
     public void GetGem(SkillType gemType)
