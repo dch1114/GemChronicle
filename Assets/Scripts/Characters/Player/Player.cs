@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public GameObject SkillPage;
 
     //test
-    public GameObject InventoryPanel;
+    public GameObject InventoryUIPrefab;
 
     private void Awake()
     {
