@@ -130,8 +130,8 @@ public class PlayerBaseState : IState
     //test
     private void OnInventory(InputAction.CallbackContext context)
     {
-        bool isActive = stateMachine.Player.InventoryPanel.activeSelf;
-        stateMachine.Player.InventoryPanel.SetActive(!isActive);
+        bool isActive = stateMachine.Player.InventoryUIPrefab.activeSelf;
+        stateMachine.Player.InventoryUIPrefab.SetActive(!isActive);
     }
 
     private void ReadMovementInput()

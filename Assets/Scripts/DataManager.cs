@@ -56,7 +56,7 @@ public class DataManager : Singleton<DataManager>
     IEnumerator InitManagersCoroutine()
     {
         yield return null;
-        if (shop != null) shop.SetShopItem();
+        if (shop != null && shop.shopItems.Count < 16) shop.SetShopItem();
         NPCManager.Instance.InitNPCManager();
         if (talkManager != null) talkManager.InitTalkManager();
     }

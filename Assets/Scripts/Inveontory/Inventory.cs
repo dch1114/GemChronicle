@@ -20,7 +20,14 @@ public class Inventory : Singleton<Inventory>
 
     public List<InventoryItem> inventory;
 
-    [SerializeField] private InventoryUIController inventoryUIController;
+    [SerializeField] private InventoryUIController _inventoryUIController;
+
+    public InventoryUIController InventoryUIController
+    {
+        get { return _inventoryUIController; }
+        set { _inventoryUIController = value; }
+    }
+
 
     private void Start()
     {
@@ -44,7 +51,7 @@ public class Inventory : Singleton<Inventory>
         //}
         AddToInventory(_item);
         //test
-        inventoryUIController.UpdateSlotUI();
+        _inventoryUIController.UpdateSlotUI();
 
     }
 
@@ -83,7 +90,7 @@ public class Inventory : Singleton<Inventory>
                 equipmentSpriteOBj._armorList[0].sprite = _inventoryItem.datas.sprite;
                 break;
         }
-        inventoryUIController.UpdateSlotUI();
+        _inventoryUIController.UpdateSlotUI();
     }
 
     public void UnEquipItem(InventoryItem itemToRemove)
@@ -109,7 +116,7 @@ public class Inventory : Singleton<Inventory>
                 break;
         }
 
-        inventoryUIController.UpdateSlotUI();
+        _inventoryUIController.UpdateSlotUI();
     }
 
     public void RemoveItem(InventoryItem _inventoryItem)
@@ -126,27 +133,52 @@ public class Inventory : Singleton<Inventory>
             }
         }
 
-        inventoryUIController.UpdateSlotUI();
+        _inventoryUIController.UpdateSlotUI();
     }
 
     public void AddItemStat(Item _item)
     {
         statusData.Atk += _item.Damage;
         statusData.Def += _item.Armor;
-        inventoryUIController.UpdateStatus();
+        _inventoryUIController.UpdateStatus();
     }
 
     public void RemoveItemStat(Item _item)
     {
         statusData.Atk -= _item.Damage;
         statusData.Def -= _item.Armor;
-        inventoryUIController.UpdateStatus();
+        _inventoryUIController.UpdateStatus();
     }
 
     public void UpdateRetainGold()
     {
         statusData.Gold = inventoryGold;
         goldText.text = inventoryGold.ToString();
+    }
+
+    public void UseItem(InventoryItem _potion)
+    {
+        if (_potion.datas.ItemType != ItemType.Potion)
+        {
+            return;
+        }
+        else
+        {
+            if(_potion.stackSize > 1)
+            {
+                player.Data.StatusData.TakeHeal(_potion.datas.Recovery);
+                _potion.stackSize--;
+                _inventoryUIController.UpdateSlotUI();
+                _inventoryUIController.UpdateStatus();
+            }
+            else
+            {
+                player.Data.StatusData.TakeHeal(_potion.datas.Recovery);
+                RemoveItem(_potion);
+                _inventoryUIController.UpdateSlotUI();
+                _inventoryUIController.UpdateStatus();
+            }
+        }
     }
 
     //public bool CanAddItem()

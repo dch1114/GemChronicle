@@ -101,6 +101,7 @@ public class Enemy : MonoBehaviour, IDamageable
             if (playerCollider != null)
             {
                 playerCollider.TakeDamage(EnemyStatusData.Atk);
+                Inventory.Instance.InventoryUIController.UpdateStatus();
             }
             canAttack = false;
             StartCoroutine("WaitAttackCoolTime", EnemyStatusData.AttackRate);

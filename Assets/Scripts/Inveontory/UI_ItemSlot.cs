@@ -88,6 +88,11 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
                     Inventory.Instance.EquipItem(inventoryItem);
                     ui.itemToopTip.HideToolTip();
                 }
+                else if(inventoryItem.datas.ItemType == ItemType.Potion)
+                {
+                    Inventory.Instance.UseItem(inventoryItem);
+                    ui.itemToopTip.HideToolTip();
+                }
             }
         }
         else
