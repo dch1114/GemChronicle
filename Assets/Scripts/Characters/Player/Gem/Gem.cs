@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour
 {
+    [SerializeField] private SkillType gemType;
     [SerializeField] private int xForce = 5;
     [SerializeField] private int yForce = 15;
     [SerializeField] private int gravity = 25;
@@ -46,12 +47,18 @@ public class Gem : MonoBehaviour
     private void CheckGroundHit()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.5f, LayerMask.GetMask("Ground"));
-        Debug.Log(hit.collider);
         if (hit.collider != null)
         {
             // ∂•ø° ¥Í¿Ω
             isGrounded = true;
             transform.position = hit.point;
         }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameManager.Instance.player.Data.StatusData.GetGem(gemType);
+        Destroy(gameObject);
     }
 }

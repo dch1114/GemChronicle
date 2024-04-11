@@ -18,6 +18,7 @@ public class PlayerStatusData : Status
     [SerializeField] protected int level;
     [SerializeField] protected int gold;
     [SerializeField] protected JobType jobType;
+    [SerializeField] protected Dictionary<SkillType, int> gems = new Dictionary<SkillType, int>();
 
     public string Name { get { return name; } set { name = value; } }
     public int MaxHp { get { return maxHp; } set { maxHp = value; } }
@@ -25,9 +26,9 @@ public class PlayerStatusData : Status
     public int Gold { get { return gold; } set {  gold = value; } }
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
 
-    private void Start()
+    public void InitializeData()
     {
-        SetStatus();
+        InitializeGem();
     }
 
     private void SetStatus()
@@ -42,6 +43,14 @@ public class PlayerStatusData : Status
         Gold = 2000;
         Name = "Çï·Î";
         JobType = JobType.Warrior;
+    }
+
+    private void InitializeGem()
+    {
+        gems.Add(SkillType.Ice, 0);
+        gems.Add(SkillType.Fire, 0);
+        gems.Add(SkillType.Light, 0);
+        gems.Add(SkillType.Dark, 0);
     }
 
     public bool IsGoldEnough(int _price)
@@ -69,5 +78,10 @@ public class PlayerStatusData : Status
         {
             //TODO: »ç¸Á ±¸Çö
         }
+    }
+
+    public void GetGem(SkillType gemType)
+    {
+        if (gems.ContainsKey(gemType)) gems[gemType]++;
     }
 }

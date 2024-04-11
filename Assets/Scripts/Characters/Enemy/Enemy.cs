@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum EnemyState
 {
@@ -10,6 +11,12 @@ public enum EnemyState
     Walking,
     Attacking,
     Dead
+}
+
+public enum EnemyType
+{
+    Boss,
+    Field
 }
 
 public class Enemy : MonoBehaviour, IDamageable
@@ -21,6 +28,10 @@ public class Enemy : MonoBehaviour, IDamageable
     private Animator animator;
 
     private EnemyState state;
+    [SerializeField] private EnemyType enemyType;
+    [SerializeField] private SkillType skillType;
+
+    [SerializeField] private List<GameObject> gems;
 
     private bool isLeft = true;
     private bool foundEnemy = false;
@@ -114,7 +125,54 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         EnemyStatusData.Hp = 0;
         SetState(EnemyState.Dead);
+        SpawnGems();
         gameObject.SetActive(false);
+    }
+
+    private void SpawnGems()
+    {
+        int amount = RandomAmount();
+        Debug.Log(amount);
+
+        for(int i = 0; i < amount; i++)
+        {
+            SpawnTypeGem();
+        }
+    }
+
+    private int RandomAmount()
+    {
+        int amount = 0;
+        switch (enemyType)
+        {
+            case EnemyType.Boss:
+                amount = Random.Range(10, 20);
+                break;
+            case EnemyType.Field:
+                amount = Random.Range(1, 5);
+                break;
+        }
+
+        return amount;
+    }
+
+    private void SpawnTypeGem()
+    {
+        switch(skillType)
+        {
+            case SkillType.Ice:
+                Instantiate(gems[0]).transform.position = gameObject.transform.position;
+                break;
+            case SkillType.Fire:
+                Instantiate(gems[1]).transform.position = gameObject.transform.position;
+                break;
+            case SkillType.Light:
+                Instantiate(gems[2]).transform.position = gameObject.transform.position; ;
+                break;
+            case SkillType.Dark:
+                Instantiate(gems[3]).transform.position = gameObject.transform.position; ;
+                break;
+        }
     }
 
     protected void SetState(EnemyState newState)
