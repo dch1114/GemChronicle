@@ -4,7 +4,7 @@ using UnityEngine;
 public class InventoryUIController : MonoBehaviour
 {
 
-    [SerializeField] public GameObject inventoryUI;
+    [SerializeField] public GameObject inventoryPanel;
     [SerializeField] public GameObject shopUi;
     [SerializeField] public CheckPurchasePopup shopTradePopup;
 
@@ -25,16 +25,16 @@ public class InventoryUIController : MonoBehaviour
 
     private UI_ItemSlot[] inventoryItemSlot;
     private UI_EquipmentSlot[] equipmentSlot;
-    private UI_Status[] uI_Statuses;
+    [SerializeField] private UI_Status[] uI_Statuses;
     //test
     private UI_ItemSlot[] inventoryListItemSlot;
-    // Start is called before the first frame update
+
     void Start()
     {
         inventoryContorller = Inventory.Instance;
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
-        uI_Statuses = statusParent.GetComponentsInChildren<UI_Status>();
+        //uI_Statuses = statusParent.GetComponentsInChildren<UI_Status>(); // 그냥 연결을해버리고 프리팹화?
         ////test
         inventoryListItemSlot = inventoryListSlotParent.GetComponentsInChildren<UI_ItemSlot>();
 
