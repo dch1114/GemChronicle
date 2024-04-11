@@ -70,4 +70,16 @@ public class PlayerStatusData : Status
             //TODO: »ç¸Á ±¸Çö
         }
     }
+
+    public void TakeHeal(int _recovery)
+    {
+        if(hp + _recovery >= MaxHp)
+        {
+            hp = MaxHp;
+        }
+        else
+        {
+            hp += _recovery;
+        }
+    }
 }

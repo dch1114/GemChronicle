@@ -12,7 +12,7 @@ public enum SlotType // 수정한 곳
 
 public enum ItemType
 {
-    Material,
+    Potion,
     Equipment
 }
 
@@ -23,6 +23,7 @@ public class Item
     public string Name;
     public int Damage;
     public int Armor;
+    public int Recovery; // 포션회복량
     public string Description;
     public ItemType ItemType;
     public SlotType SlotType;
@@ -41,6 +42,7 @@ public class Item
 
         AddItemDescription(Damage, "Damage");
         AddItemDescription(Armor, "Armor");
+        AddItemDescription(Recovery, "Recovery");
         AddItemDescription(Description, "Description");
         AddItemDescription(Price, "Price");
 
