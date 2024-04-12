@@ -102,7 +102,7 @@ public class PlayerStatusData : Status
 
     public void TakeHeal(int _recovery)
     {
-        if(hp + _recovery >= MaxHp)
+        if (hp + _recovery >= MaxHp)
         {
             hp = MaxHp;
         }
@@ -110,4 +110,6 @@ public class PlayerStatusData : Status
         {
             hp += _recovery;
         }
+    }
+
 }
