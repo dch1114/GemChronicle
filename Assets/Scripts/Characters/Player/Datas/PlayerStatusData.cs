@@ -15,6 +15,7 @@ public class PlayerStatusData : Status
 {
     [SerializeField] protected string name;
     [SerializeField] protected int maxHp;
+    [SerializeField] protected int requiredExp;
     [SerializeField] protected int level;
     [SerializeField] protected int gold;
     [SerializeField] protected JobType jobType;
@@ -29,6 +30,14 @@ public class PlayerStatusData : Status
     public void InitializeData()
     {
         InitializeGem();
+    }
+
+    public void LoadLevelData(LevelDatas data)
+    {
+        atk = data.atk;
+        def = data.def;
+        maxHp = data.maxHp;
+        requiredExp = data.requiredExp;
     }
 
     private void SetStatus()
