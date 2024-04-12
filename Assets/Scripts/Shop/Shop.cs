@@ -99,15 +99,48 @@ public class Shop : MonoBehaviour
 
     public void Sell(InventoryItem _inventoryItem)
     {
-        if(_inventoryItem != null)
+        //if(_inventoryItem != null)
+        //{
+        //    playerInventory.RemoveItem(_inventoryItem);
+        //    shopItems.Add(_inventoryItem.datas);
+
+        //    playerInventory.inventoryGold += _inventoryItem.datas.Price;
+
+        //    UpdateSlotUI();
+
+        //    playerInventory.UpdateRetainGold();
+        //}
+
+        if (_inventoryItem != null)
         {
-            playerInventory.RemoveItem(_inventoryItem);
-            shopItems.Add(_inventoryItem.datas);
+            if (_inventoryItem.datas.ItemType == ItemType.Potion)
+            {
+                foreach (Item shopItem in shopItems)
+                {
+                    if(shopItem == _inventoryItem.datas)
+                    {
+                        _inventoryItem.stackSize--;
+                        shopItem.Quantity++;
+                        playerInventory.InventoryUIController.UpdateSlotUI();
 
+                        if (_inventoryItem.stackSize == 0)
+                        {
+                            playerInventory.RemoveItem(_inventoryItem); // 아이템 제거
+                            UpdateSlotUI();
+                        }
+                    }
+                }
+            
+            }
+            else
+            {
+                playerInventory.RemoveItem(_inventoryItem); // 아이템 제거
+                shopItems.Add(_inventoryItem.datas); // 상점 아이템 목록에 추가
+            }
+
+            // 골드 업데이트 및 UI 갱신
             playerInventory.inventoryGold += _inventoryItem.datas.Price;
-
             UpdateSlotUI();
-
             playerInventory.UpdateRetainGold();
         }
     }
