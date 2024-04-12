@@ -34,7 +34,7 @@ public class PlayerAttackState : PlayerBaseState
 
     private void Shoot(SkillInfoData skill)
     {
-        go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(skill.SkillStateIndex.ToString());
+        go = stateMachine.Player.Data.AttackData.skillPool.SpawnFromPool(skill.ID.ToString());
         go.transform.position = stateMachine.Player.transform.position;
         go.transform.GetComponent<Skill>().data = skill;
         go.SetActive(true);

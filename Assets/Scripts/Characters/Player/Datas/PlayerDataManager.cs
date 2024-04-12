@@ -12,7 +12,6 @@ public class LevelDatas
     public int def;
     public int maxHp;
 }
-
 public class PlayerLevelDatabase
 {
     public List<LevelDatas> levelDatas;
@@ -35,6 +34,32 @@ public class PlayerLevelDatabase
     }
 }
 
+public class PlayerSkillDatabase
+{
+    public List<SkillInfoData> skillDatas;
+    public Dictionary<int, SkillInfoData> skillDic = new();
+
+    public void Initialize()
+    {
+        foreach (SkillInfoData data in skillDatas)
+        {
+            skillDic.Add(data.ID, data);
+        }
+    }
+
+    public List<SkillInfoData> GetDataSection(int start, int end)
+    {
+        List<SkillInfoData> sectionDatas = new List<SkillInfoData>();
+        foreach(SkillInfoData data in skillDatas)
+        {
+            if(data.ID >= start && data.ID <= end)
+                sectionDatas.Add(data);
+        }
+
+        return sectionDatas;
+    }
+}
+
 [Serializable]
 public class PlayerCurrentStatus //현재 상태 저장용
 {
@@ -50,6 +75,7 @@ public class PlayerCurrentStatus //현재 상태 저장용
 public class PlayerDataManager : MonoBehaviour
 {
     public PlayerLevelDatabase playerLevelDatabase;
+    public PlayerSkillDatabase playerSkillDatabase;
     public PlayerCurrentStatus currentStatus;
 
     public string saveFileName = "playerData.json";
@@ -57,6 +83,16 @@ public class PlayerDataManager : MonoBehaviour
     private Player player;
 
     private void Awake()
+    {
+        LoadLevelDatas();
+    }
+
+    private void Start()
+    {
+        player = GameManager.Instance.player;
+    }
+
+    private void LoadLevelDatas()
     {
         TextAsset LevelJson = Resources.Load<TextAsset>("JSON/LevelDatas");
 
@@ -73,9 +109,49 @@ public class PlayerDataManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void LoadSkillDatas()
     {
-        player = GameManager.Instance.player;
+        TextAsset SkillJson = Resources.Load<TextAsset>("JSON/SkillDatas");
+
+        if (SkillJson != null)
+        {
+            string json = SkillJson.text;
+
+            playerSkillDatabase = JsonUtility.FromJson<PlayerSkillDatabase>(json);
+            playerSkillDatabase.Initialize();
+
+        }
+        else
+        {
+            Debug.Log("Skill JSON NULL");
+        }
+    }
+
+    private void SetPlayerSkillInfos()
+    {
+        int start = 0;
+        int end = 0;
+
+        if(player != null)
+        {
+            switch (player.Data.StatusData.JobType)
+            {
+                case JobType.Warrior:
+                    start = 5000;
+                    end = 5999;
+                    break;
+                case JobType.Magician:
+                    start = 6000;
+                    end = 6999;
+                    break;
+                case JobType.Archer:
+                    start = 7000;
+                    end = 7999;
+                    break;
+            }
+
+            player.Data.AttackData.SkillInfoDatas = playerSkillDatabase.GetDataSection(start, end);
+        }
     }
 
     public void SetPlayerLevel()

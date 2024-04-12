@@ -17,7 +17,7 @@ public enum SkillType
 [Serializable]
 public class SkillInfoData
 {
-    [field: SerializeField] public int SkillStateIndex { get; private set; }
+    [field: SerializeField] public int ID { get; private set; }
     [field: SerializeField] public string SkillName { get; private set; }
     [field: SerializeField] public int Damage { get; set; }
     [field: SerializeField] public int Range { get; set; }
@@ -29,7 +29,7 @@ public class SkillInfoData
 [Serializable]
 public class PlayerAttackData
 {
-    [field:SerializeField] public List<SkillInfoData> SkillInfoDatas { get; private set; }
+    [field:SerializeField] public List<SkillInfoData> SkillInfoDatas { get; set; }
     public int GetSkillInfoCount() {  return SkillInfoDatas.Count; }
     public SkillInfoData GetSkillInfo(int index) {  return SkillInfoDatas[index]; }
     [field: SerializeField] public List<List<int>> AttackSkillStates = new List<List<int>>() { new List<int>() { 0, 0, 0 }, new List<int>() { 0, 0, 0 }, new List<int>() { 0, 0, 0 } };
