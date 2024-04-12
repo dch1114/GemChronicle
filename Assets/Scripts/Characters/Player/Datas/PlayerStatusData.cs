@@ -33,7 +33,7 @@ public class PlayerStatusData : Status
         InitializeGem();
     }
 
-    public void LoadLevelData(LevelDatas data)
+    public void LoadLevelData(LevelData data)
     {
         atk = data.atk;
         def = data.def;

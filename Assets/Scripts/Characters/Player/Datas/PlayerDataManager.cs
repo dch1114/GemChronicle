@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class LevelDatas
+[Serializable]
+public class LevelData
 {
     public int level; //id처럼 쓰임
     public int requiredExp;
@@ -12,20 +13,22 @@ public class LevelDatas
     public int def;
     public int maxHp;
 }
+
+[Serializable]
 public class PlayerLevelDatabase
 {
-    public List<LevelDatas> levelDatas;
-    public Dictionary<int, LevelDatas> levelDic = new();
+    public List<LevelData> LevelDatas;
+    public Dictionary<int, LevelData> levelDic = new();
 
     public void Initialize()
     {
-        foreach (LevelDatas data in levelDatas)
+        foreach (LevelData data in LevelDatas)
         {
             levelDic.Add(data.level, data);
         }
     }
 
-    public LevelDatas GetLevelDataByKey(int level)
+    public LevelData GetLevelDataByKey(int level)
     {
         if (levelDic.ContainsKey(level))
             return levelDic[level];
@@ -34,14 +37,15 @@ public class PlayerLevelDatabase
     }
 }
 
+[Serializable]
 public class PlayerSkillDatabase
 {
-    public List<SkillInfoData> skillDatas;
+    public List<SkillInfoData> SkillDatas;
     public Dictionary<int, SkillInfoData> skillDic = new();
 
     public void Initialize()
     {
-        foreach (SkillInfoData data in skillDatas)
+        foreach (SkillInfoData data in SkillDatas)
         {
             skillDic.Add(data.ID, data);
         }
@@ -50,7 +54,7 @@ public class PlayerSkillDatabase
     public List<SkillInfoData> GetDataSection(int start, int end)
     {
         List<SkillInfoData> sectionDatas = new List<SkillInfoData>();
-        foreach(SkillInfoData data in skillDatas)
+        foreach(SkillInfoData data in SkillDatas)
         {
             if(data.ID >= start && data.ID <= end)
                 sectionDatas.Add(data);
@@ -72,6 +76,7 @@ public class PlayerCurrentStatus //현재 상태 저장용
     public Dictionary<SkillType, int> gems;
 }
 
+[Serializable]
 public class PlayerDataManager : MonoBehaviour
 {
     public PlayerLevelDatabase playerLevelDatabase;
@@ -85,11 +90,13 @@ public class PlayerDataManager : MonoBehaviour
     private void Awake()
     {
         LoadLevelDatas();
+        LoadSkillDatas();
     }
 
     private void Start()
     {
         player = GameManager.Instance.player;
+        SetPlayerSkillInfos();
     }
 
     private void LoadLevelDatas()
@@ -119,7 +126,6 @@ public class PlayerDataManager : MonoBehaviour
 
             playerSkillDatabase = JsonUtility.FromJson<PlayerSkillDatabase>(json);
             playerSkillDatabase.Initialize();
-
         }
         else
         {
@@ -160,7 +166,7 @@ public class PlayerDataManager : MonoBehaviour
         {
             int level = player.Data.StatusData.Level;
 
-            LevelDatas data = playerLevelDatabase.GetLevelDataByKey(level);
+            LevelData data = playerLevelDatabase.GetLevelDataByKey(level);
             player.Data.StatusData.LoadLevelData(data);
         }
     }
