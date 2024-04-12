@@ -15,9 +15,11 @@ public class PlayerStatusData : Status
 {
     [SerializeField] protected string name;
     [SerializeField] protected int maxHp;
+    [SerializeField] protected int requiredExp;
     [SerializeField] protected int level;
     [SerializeField] protected int gold;
     [SerializeField] protected JobType jobType;
+    [SerializeField] protected Dictionary<SkillType, int> gems = new Dictionary<SkillType, int>();
 
     public string Name { get { return name; } set { name = value; } }
     public int MaxHp { get { return maxHp; } set { maxHp = value; } }
@@ -25,9 +27,17 @@ public class PlayerStatusData : Status
     public int Gold { get { return gold; } set {  gold = value; } }
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
 
-    private void Start()
+    public void InitializeData()
     {
-        SetStatus();
+        InitializeGem();
+    }
+
+    public void LoadLevelData(LevelDatas data)
+    {
+        atk = data.atk;
+        def = data.def;
+        maxHp = data.maxHp;
+        requiredExp = data.requiredExp;
     }
 
     private void SetStatus()
@@ -42,6 +52,14 @@ public class PlayerStatusData : Status
         Gold = 2000;
         Name = "헬로";
         JobType = JobType.Warrior;
+    }
+
+    private void InitializeGem()
+    {
+        gems.Add(SkillType.Ice, 0);
+        gems.Add(SkillType.Fire, 0);
+        gems.Add(SkillType.Light, 0);
+        gems.Add(SkillType.Dark, 0);
     }
 
     public bool IsGoldEnough(int _price)
@@ -67,7 +85,18 @@ public class PlayerStatusData : Status
             hp -= damage;
         } else
         {
-            //TODO: 사망 구현
+            OnDie();
         }
+    }
+
+    private void OnDie()
+    {
+        //마을에서 리스폰
+        
+    }
+
+    public void GetGem(SkillType gemType)
+    {
+        if (gems.ContainsKey(gemType)) gems[gemType]++;
     }
 }
