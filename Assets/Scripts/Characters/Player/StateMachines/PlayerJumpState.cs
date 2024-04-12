@@ -11,6 +11,8 @@ public class PlayerJumpState : PlayerAirState
     public override void Enter()
     {
         stateMachine.JumpForce = stateMachine.Player.Data.AirData.JumpForce;
+        stateMachine.MovementSpeedModifier = groundData.WalkSpeedModifier;      // TODO
+
         stateMachine.Player.Controller.Jump(stateMachine.JumpForce);
 
         base.Enter();

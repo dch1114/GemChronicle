@@ -10,6 +10,22 @@ public class PlayerGroundedState : PlayerBaseState
     {
     }
 
+    protected override void AddInputActionsCallbacks()
+    {
+        base.AddInputActionsCallbacks();
+
+        PlayerInput input = stateMachine.Player.Input;
+        input.PlayerActions.Jump.started += OnJumpStarted;
+    }
+
+    protected override void RemoveInputActionsCallbacks()
+    {
+        base.RemoveInputActionsCallbacks();
+
+        PlayerInput input = stateMachine.Player.Input;
+        input.PlayerActions.Jump.started -= OnJumpStarted;
+    }
+
     public override void Enter()
     {
         base.Enter();
