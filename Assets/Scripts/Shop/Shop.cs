@@ -24,11 +24,28 @@ public class Shop : MonoBehaviour
     {
         itemDatabase = DataManager.Instance.itemDatabase;
 
+        //for (int i = 0; i < itemDatabase.ItemDatas.Count; i++)
+        //{
+        //    Item shopItemInstance = new Item();
+        //    shopItemInstance = itemDatabase.ItemDatas[i];
+        //    shopItems.Add(shopItemInstance);
+        //    shopItemSlot[i].UpdateSlot(shopItems[i]);
+        //}
+
         for (int i = 0; i < itemDatabase.ItemDatas.Count; i++)
         {
-            Item shopItemInstance = new Item();
-            shopItemInstance = itemDatabase.ItemDatas[i];
-            shopItems.Add(shopItemInstance);
+            Item shopItemInstance = itemDatabase.ItemDatas[i];
+
+            if (shopItemInstance.ItemType == ItemType.Potion)
+            {
+                shopItemInstance.Quantity = 10;
+                shopItems.Add(shopItemInstance);
+            }
+            else
+            {
+                shopItems.Add(shopItemInstance);
+            }
+
             shopItemSlot[i].UpdateSlot(shopItems[i]);
         }
     }
@@ -50,6 +67,19 @@ public class Shop : MonoBehaviour
     {
         if (!(playerInventory.inventoryGold < _selectItem.Price))
         {
+            if(_selectItem.ItemType == ItemType.Potion)
+            {
+                if(_selectItem.Quantity > 1)
+                {
+                    _selectItem.Quantity--;
+                    playerInventory.AddItem(_selectItem);
+                    playerInventory.inventoryGold -= _selectItem.Price;
+                    UpdateSlotUI();
+                    playerInventory.UpdateRetainGold();
+                    return;
+                }
+            }
+
             shopItems.Remove(_selectItem);
             playerInventory.AddItem(_selectItem);
 

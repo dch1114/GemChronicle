@@ -60,6 +60,18 @@ public class Inventory : Singleton<Inventory>
 
     private void AddToInventory(Item _item)
     {
+        if(_item.ItemType == ItemType.Potion)
+        {
+            foreach(InventoryItem item in inventory)
+            {
+                if(item.datas == _item)
+                {
+                    item.AddStack();
+                    return;
+                }
+            }
+        }
+
         InventoryItem newItem = new InventoryItem(_item);
         inventory.Add(newItem);
     }
