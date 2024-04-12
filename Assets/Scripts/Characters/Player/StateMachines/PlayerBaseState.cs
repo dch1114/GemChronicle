@@ -47,7 +47,7 @@ public class PlayerBaseState : IState
         PlayerInput input = stateMachine.Player.Input;
         input.PlayerActions.Movement.canceled += OnMovementCanceled;
 
-        input.PlayerActions.Jump.started += OnJumpStarted;
+
 
         input.PlayerActions.SkillPage.started += OnSkillPageStarted;
 
@@ -65,9 +65,9 @@ public class PlayerBaseState : IState
     protected virtual void RemoveInputActionsCallbacks()
     {
         PlayerInput input = stateMachine.Player.Input;
-        //input.PlayerActions.Movement.canceled -= OnMovementCanceled;
+        input.PlayerActions.Movement.canceled -= OnMovementCanceled;
 
-        input.PlayerActions.Jump.started -= OnJumpStarted;
+        
 
         input.PlayerActions.SkillPage.started -= OnSkillPageStarted;
 
