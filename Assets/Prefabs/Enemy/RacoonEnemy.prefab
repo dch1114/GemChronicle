@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 8005353923092780362}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5781502905384408825
 SpriteRenderer:
@@ -198,7 +198,7 @@ MonoBehaviour:
     atk: 5
     def: 0
     hp: 30
-    exp: 0
+    exp: 20
     type: 0
     walkSpeed: 0
     attackRate: 2
@@ -207,6 +207,13 @@ MonoBehaviour:
     walkParameterName: Walk
     attackParameterName: Attack
     dieParameterName: Die
+  enemyType: 1
+  skillType: 0
+  gems:
+  - {fileID: 1754942600076354860, guid: 37655d6ba324ce14bbe7167561bec117, type: 3}
+  - {fileID: 1754942600076354860, guid: c3eb92f08e666b840888208e3369f2f9, type: 3}
+  - {fileID: 1754942600076354860, guid: f5b122c33e7311d4d96bbe9bf484bc79, type: 3}
+  - {fileID: 1754942600076354860, guid: 244ac7a55de8e6244bb952e8f1d26a0d, type: 3}
 --- !u!1 &8105097044706947621
 GameObject:
   m_ObjectHideFlags: 0

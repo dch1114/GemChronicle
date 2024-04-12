@@ -15,9 +15,11 @@ public class PlayerStatusData : Status
 {
     [SerializeField] protected string name;
     [SerializeField] protected int maxHp;
+    [SerializeField] protected int requiredExp;
     [SerializeField] protected int level;
     [SerializeField] protected int gold;
     [SerializeField] protected JobType jobType;
+    [SerializeField] protected Dictionary<SkillType, int> gems = new Dictionary<SkillType, int>();
 
     public string Name { get { return name; } set { name = value; } }
     public int MaxHp { get { return maxHp; } set { maxHp = value; } }
@@ -25,14 +27,22 @@ public class PlayerStatusData : Status
     public int Gold { get { return gold; } set {  gold = value; } }
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
 
-    private void Start()
+    public void InitializeData()
     {
-        SetStatus();
+        InitializeGem();
+    }
+
+    public void LoadLevelData(LevelDatas data)
+    {
+        atk = data.atk;
+        def = data.def;
+        maxHp = data.maxHp;
+        requiredExp = data.requiredExp;
     }
 
     private void SetStatus()
     {
-        //TODO: ¿¢¼¿ µ¥ÀÌÅÍ ¿¬µ¿
+        //TODO: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Atk = 10;
         Def = 5;
         MaxHp = 100;
@@ -40,8 +50,16 @@ public class PlayerStatusData : Status
         Exp = 0;
         Level = 1;
         Gold = 2000;
-        Name = "Çï·Î";
+        Name = "ï¿½ï¿½ï¿½";
         JobType = JobType.Warrior;
+    }
+
+    private void InitializeGem()
+    {
+        gems.Add(SkillType.Ice, 0);
+        gems.Add(SkillType.Fire, 0);
+        gems.Add(SkillType.Light, 0);
+        gems.Add(SkillType.Dark, 0);
     }
 
     public bool IsGoldEnough(int _price)
@@ -57,7 +75,7 @@ public class PlayerStatusData : Status
         if (IsGoldEnough(_price))
             gold -= _price;
         else
-            Debug.Log("°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù");
+            Debug.Log("ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½");
     }
 
     public void TakeDamage(int damage)
@@ -67,8 +85,19 @@ public class PlayerStatusData : Status
             hp -= damage;
         } else
         {
-            //TODO: »ç¸Á ±¸Çö
+            OnDie();
         }
+    }
+
+    private void OnDie()
+    {
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        
+    }
+
+    public void GetGem(SkillType gemType)
+    {
+        if (gems.ContainsKey(gemType)) gems[gemType]++;
     }
 
     public void TakeHeal(int _recovery)
@@ -81,5 +110,4 @@ public class PlayerStatusData : Status
         {
             hp += _recovery;
         }
-    }
 }
