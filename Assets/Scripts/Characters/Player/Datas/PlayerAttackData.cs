@@ -8,6 +8,7 @@ public enum SkillType
     Ice,
     Fire,
     Light,
+    Dark,
     IceFire,
     FireLight
 }
