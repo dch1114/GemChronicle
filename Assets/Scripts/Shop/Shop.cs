@@ -12,6 +12,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private Transform shopSlotParent;
     private UI_ShopSlot[] shopItemSlot;
 
+
     private void Start()
     {
         playerInventory = Inventory.Instance;
@@ -22,6 +23,7 @@ public class Shop : MonoBehaviour
     public void SetShopItem()
     {
         itemDatabase = DataManager.Instance.itemDatabase;
+
         for (int i = 0; i < itemDatabase.ItemDatas.Count; i++)
         {
             Item shopItemInstance = new Item();
