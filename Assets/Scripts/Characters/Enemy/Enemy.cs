@@ -196,9 +196,10 @@ public class Enemy : MonoBehaviour, IDamageable
                 break;
         }
     }
-    private void WaitAttackCoolTime()
+    IEnumerator WaitAttackCoolTime()
     {
         canAttack = true;
+        yield return null;
     }
 
     private void Move(Vector3 _speed)
