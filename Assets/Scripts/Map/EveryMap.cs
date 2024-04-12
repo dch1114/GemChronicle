@@ -10,6 +10,7 @@ using static NextMap;
 
 public class EveryMap : MonoBehaviour, IInteractive
 {
+    public PolygonCollider2D destCol;
     List<Transform> maps;
     private bool collisionOccurred = false;
     public string destination;
