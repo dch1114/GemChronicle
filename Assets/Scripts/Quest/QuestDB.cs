@@ -35,6 +35,12 @@ public class QuestDB
         return null;
     }
 
+    public Dictionary<int, QuestData> GetTotalQuest()
+    {
+        return _quest;
+    }
+
+
     public IEnumerator Obenumerator()
     {
         return _quest.GetEnumerator();

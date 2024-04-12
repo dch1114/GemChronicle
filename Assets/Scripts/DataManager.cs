@@ -12,6 +12,8 @@ public class DataManager : Singleton<DataManager>
     private Shop shop;
 
     public TalkManager talkManager;
+    public QuestManager questManager;
+
     void Start()
     {
         shop = FindObjectOfType<Shop>();
@@ -43,6 +45,7 @@ public class DataManager : Singleton<DataManager>
         {
             Debug.Log("ITEM JSON NULL");
         }
+
         StartCoroutine(InitManagers());
 
     }
@@ -51,6 +54,7 @@ public class DataManager : Singleton<DataManager>
     IEnumerator InitManagers()
     {
         yield return StartCoroutine(InitManagersCoroutine());
+        yield return StartCoroutine(questManager.InitQuestManager());
     }
 
     IEnumerator InitManagersCoroutine()
@@ -60,7 +64,6 @@ public class DataManager : Singleton<DataManager>
         NPCManager.Instance.InitNPCManager();
         if (talkManager != null) talkManager.InitTalkManager();
     }
-
 
 
     public QuestTableData GetQuestTableData(int id)
