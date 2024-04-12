@@ -102,7 +102,11 @@ public class NPCController : MonoBehaviour, IInteractive
             uiManager.talkBtnOnOff(true);
 
         }
-        
+        else if (npcType == NPCType.Teacher)
+        {
+            uiManager.talkBtnOnOff(true);
+        }
+
     }
     //Npc타입에 따라 대화창 닫기
     public void CloseUI()
@@ -116,7 +120,10 @@ public class NPCController : MonoBehaviour, IInteractive
         {
             uiManager.talkBtnOnOff(false);
         }
-
+        else if (npcType == NPCType.Teacher)
+        {
+            uiManager.talkBtnOnOff(false);
+        }
         isLoadScriptData = false;
 
     }
