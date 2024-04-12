@@ -4,27 +4,27 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Linq;
+using UnityEditor.PackageManager.Requests;
 
 public class QuestManager : Singleton<QuestManager>
 {
-    [Header("Inspector Quests")]
-    [SerializeField] private InspectorQuestDescription inspectorQuestPrefab;
-    [SerializeField] private Transform InspectorQuestContainer;
+    [Header("Waiting Quests")]
+    [SerializeField] private WaitingQuestDescription waitingQuestPrefab;
+    [SerializeField] private Transform waitingQuestParent;
 
-    [Header("Character Quests")]
-    [SerializeField] private CharacterQuestDescription characterQuestPrefab;
-    [SerializeField] private Transform characterQuestContainer;
+    [Header("Progress Quests")]
+    [SerializeField] private ProgressQuestDescription progressQuestPrefab;
+    [SerializeField] private Transform progressQuestParent;
 
     [Header("Panel Quest Completed")]
-    [SerializeField] private GameObject PanelQuestCompleted;
-    [SerializeField] private TextMeshProUGUI questName;
-    [SerializeField] private TextMeshProUGUI questRecompenseGold;
-    [SerializeField] private TextMeshProUGUI questRecompenseExp;
-    [SerializeField] private TextMeshProUGUI questRecompenseItemQuantity;
-    [SerializeField] private Image questquestRecompenseItemIcon;
+    [SerializeField] private Transform completeQuestParent;
+
 
     public Quest QuestUnclaimed { get; private set; }
 
+    [SerializeField] PanelQuestUI panelQuestUI;
 
     //퀘스트를 수락하면 딕셔너리에 넣음
     private Dictionary<int, Quest> _ongoingQuests = new();
@@ -42,6 +42,13 @@ public class QuestManager : Singleton<QuestManager>
     /// <summary>
     /// SubscribeQuest는 QuestData 보관 QuestStart는 퀘스트 진행도와 상태체크
     /// </summary>
+
+    public IEnumerator InitQuestManager()
+    {
+        yield return null;
+        SetAllQuestUI();
+    }
+
 
     //퀘스트 구독
     public void SubscribeQuest(int questId)
@@ -103,12 +110,13 @@ public class QuestManager : Singleton<QuestManager>
             Debug.Log($"해당 ID:{questId} 로 이미 퀘스트가 진행중입니다");
             return;
         }
-        
+        var questData = Database.Quest.Get(questId);
+
         //퀘스트를 생성하고 상태를 Wait에서 Progress로 변경
-        var quest = new Quest(questId);
-        quest.Start();
+        var quest = new Quest(questId, questData.Count);
         //퀘스트를 진행중 딕셔너리에 추가
         _ongoingQuests.Add(questId, quest);
+        SetAddProgressQuestUI(quest, questData);
         //퀘스트를 수락 콜백 액션
         OnQuestStartCallback?.Invoke(questId);
     }
@@ -123,8 +131,6 @@ public class QuestManager : Singleton<QuestManager>
         //실행횟수를 업데이트 하고 누적된 횟수를 리턴받는다
         int currentCount = _ongoingQuests[questId].Update(amount);
 
-        //_ongoingQuests[questId].Update(amount);
-
         //UI업데이트 용도로 사용할 예정
         OnQuestUpdateCallback?.Invoke(questId, amount);
 
@@ -138,13 +144,13 @@ public class QuestManager : Singleton<QuestManager>
         if (_ongoingQuests.ContainsKey(questId) == false)
             return;
 
-        _ongoingQuests[questId].Complete();
         _ongoingQuests.Remove(questId);
 
         _completeQuests.Add(questId);
 
         Debug.Log($"ID:{questId} 퀘스트 클리어!");
 
+        //SetClearProgressQuestUI(questId);
         OnQuestCompleteCallback?.Invoke(questId);
     }
 
@@ -158,46 +164,42 @@ public class QuestManager : Singleton<QuestManager>
         return _ongoingQuests.ContainsKey(questId);
     }
 
-    
-
-
-
-
-
-    private void AddQuestToComplete(Quest questcompleted)
+    //수락 가능한 모든 퀘스트를 UI에 세팅
+    void SetAllQuestUI()
     {
-        CharacterQuestDescription newQuest = Instantiate(characterQuestPrefab, characterQuestContainer);
-        newQuest.ConfigureQuestUI(questcompleted);
-    }
+        var totalQuests = Database.Quest.GetTotalQuest();
 
-    public void AddQuest(Quest questcompleted)
-    {
-        AddQuestToComplete(questcompleted);
-    }
-
-    public void ReclamarRecompensa()
-    {
-        if (QuestUnclaimed == null)
+        foreach (var questData in totalQuests)
         {
-            return;
+            WaitingQuestDescription newQuest = Instantiate(waitingQuestPrefab, waitingQuestParent);
+            //questData.Key는 ID를 의미
+            var quest = new Quest(questData.Key, questData.Value.Count);
+            //questData.Value는 QuestData를 의미
+            newQuest.ConfigureQuestUI(quest, questData.Value);
+
+            panelQuestUI.AddWaitingQuest(questData.Key, newQuest.gameObject);
         }
 
-        GoldManager.Instance.AddGold(QuestUnclaimed.RewardGold);
-        //Character.CharacterExperience.AddExperience(QuestUnclaimed.RewardExp);
-        //Inventory.Instance.AddItem(QuestUnclaimed.RewardItem.Item, QuestUnclaimed.RewardItem.Quantity);
-        PanelQuestCompleted.SetActive(false);
-        QuestUnclaimed = null;
+    }
+
+    void SetUIRemoveWaitingQuest(int key)
+    {
+        panelQuestUI.RemoveWaitingQuest(key);
+
     }
 
 
-    private void ShowQuestCompleted(Quest questCompleted)
+    void SetAddProgressQuestUI(Quest questcompleted, QuestData qData)
     {
-        PanelQuestCompleted.SetActive(true);
-        questName.text = questCompleted.Name;
-        questRecompenseGold.text = questCompleted.RewardGold.ToString();
-        questRecompenseExp.text = questCompleted.RewardExp.ToString();
-        questRecompenseItemQuantity.text = questCompleted.RewardItem.Quantity.ToString();
-        //questquestRecompenseItemIcon.sprite = questCompleted.RewardItem.Item.Icon;
+        ProgressQuestDescription newQuest = Instantiate(progressQuestPrefab, progressQuestParent);
+        newQuest.ConfigureQuestUI(questcompleted, qData);
+        panelQuestUI.AddProgressQuest(questcompleted.QuestId, newQuest.gameObject);
+        SetUIRemoveWaitingQuest(questcompleted.QuestId);
+    }
+
+    public void SetClearProgressQuestUI(int key)
+    {
+        panelQuestUI.RemoveProgressQuest(key);
     }
 
 }
