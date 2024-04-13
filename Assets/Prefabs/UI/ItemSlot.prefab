@@ -169,17 +169,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 5071543415207707115}
   itemText: {fileID: 2884539201346948431}
-  item:
+  inventoryItem:
     datas:
       ID: 0
       Name: 
       Damage: 0
       Armor: 0
+      Recovery: 0
       Description: 
       ItemType: 0
-      EquipmentType: 0
+      SlotType: 0
+      Price: 0
+      Quantity: 0
+      isSellable: 0
       sprite: {fileID: 0}
     stackSize: 0
+    isEquip: 0
 --- !u!1 &6987133491964144994
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -21, y: 14}
+  m_AnchoredPosition: {x: -26, y: 14}
   m_SizeDelta: {x: 42, y: 28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8973306408023911275
@@ -273,15 +278,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 4
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

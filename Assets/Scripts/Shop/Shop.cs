@@ -24,11 +24,28 @@ public class Shop : MonoBehaviour
     {
         itemDatabase = DataManager.Instance.itemDatabase;
 
+        //for (int i = 0; i < itemDatabase.ItemDatas.Count; i++)
+        //{
+        //    Item shopItemInstance = new Item();
+        //    shopItemInstance = itemDatabase.ItemDatas[i];
+        //    shopItems.Add(shopItemInstance);
+        //    shopItemSlot[i].UpdateSlot(shopItems[i]);
+        //}
+
         for (int i = 0; i < itemDatabase.ItemDatas.Count; i++)
         {
-            Item shopItemInstance = new Item();
-            shopItemInstance = itemDatabase.ItemDatas[i];
-            shopItems.Add(shopItemInstance);
+            Item shopItemInstance = itemDatabase.ItemDatas[i];
+
+            if (shopItemInstance.ItemType == ItemType.Potion)
+            {
+                shopItemInstance.Quantity = 10;
+                shopItems.Add(shopItemInstance);
+            }
+            else
+            {
+                shopItems.Add(shopItemInstance);
+            }
+
             shopItemSlot[i].UpdateSlot(shopItems[i]);
         }
     }
@@ -50,6 +67,19 @@ public class Shop : MonoBehaviour
     {
         if (!(playerInventory.inventoryGold < _selectItem.Price))
         {
+            if(_selectItem.ItemType == ItemType.Potion)
+            {
+                if(_selectItem.Quantity > 1)
+                {
+                    _selectItem.Quantity--;
+                    playerInventory.AddItem(_selectItem);
+                    playerInventory.inventoryGold -= _selectItem.Price;
+                    UpdateSlotUI();
+                    playerInventory.UpdateRetainGold();
+                    return;
+                }
+            }
+
             shopItems.Remove(_selectItem);
             playerInventory.AddItem(_selectItem);
 
@@ -69,15 +99,48 @@ public class Shop : MonoBehaviour
 
     public void Sell(InventoryItem _inventoryItem)
     {
-        if(_inventoryItem != null)
+        //if(_inventoryItem != null)
+        //{
+        //    playerInventory.RemoveItem(_inventoryItem);
+        //    shopItems.Add(_inventoryItem.datas);
+
+        //    playerInventory.inventoryGold += _inventoryItem.datas.Price;
+
+        //    UpdateSlotUI();
+
+        //    playerInventory.UpdateRetainGold();
+        //}
+
+        if (_inventoryItem != null)
         {
-            playerInventory.RemoveItem(_inventoryItem);
-            shopItems.Add(_inventoryItem.datas);
+            if (_inventoryItem.datas.ItemType == ItemType.Potion)
+            {
+                foreach (Item shopItem in shopItems)
+                {
+                    if(shopItem == _inventoryItem.datas)
+                    {
+                        _inventoryItem.stackSize--;
+                        shopItem.Quantity++;
+                        playerInventory.InventoryUIController.UpdateSlotUI();
 
+                        if (_inventoryItem.stackSize == 0)
+                        {
+                            playerInventory.RemoveItem(_inventoryItem); // 아이템 제거
+                            UpdateSlotUI();
+                        }
+                    }
+                }
+            
+            }
+            else
+            {
+                playerInventory.RemoveItem(_inventoryItem); // 아이템 제거
+                shopItems.Add(_inventoryItem.datas); // 상점 아이템 목록에 추가
+            }
+
+            // 골드 업데이트 및 UI 갱신
             playerInventory.inventoryGold += _inventoryItem.datas.Price;
-
             UpdateSlotUI();
-
             playerInventory.UpdateRetainGold();
         }
     }
