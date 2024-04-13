@@ -36,14 +36,14 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
             itemImage.sprite = item.sprite; // test
             itemImage.GetComponent<Image>().SetNativeSize();
 
-            //if (item.stackSize > 1)
-            //{
-            //    itemText.text = item.stackSize.ToString();
-            //}
-            //else
-            //{
-            //    itemText.text = "";
-            //}
+            if (item.Quantity > 1)
+            {
+                itemText.text = item.Quantity.ToString();
+            }
+            else
+            {
+                itemText.text = "";
+            }
         }
     }
 

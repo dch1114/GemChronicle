@@ -79,6 +79,7 @@ public class InventoryUIController : MonoBehaviour
 
     public void UseShop()
     {
+        inventoryPanel.SetActive(false);
         shopUi.SetActive(true);
     }
 
