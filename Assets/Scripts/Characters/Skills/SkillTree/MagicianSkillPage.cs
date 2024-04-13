@@ -64,7 +64,7 @@ public class MagicianSkillPage : SkillPages
             skillIcon.sprite = _skill.icon.sprite;
             damageTxt.text = data.Damage.ToString();
             ShowSkillType(data);
-            skillInfoIndex = data.SkillStateIndex;
+            skillInfoIndex = data.ID;
 
             buyBtn.SetActive(!skillBtns[skillInfoIndex].skillInfoData.IsUnlocked);
         }

@@ -26,13 +26,14 @@ public class PlayerStatusData : Status
     public int Level {  get { return level; } set { level = value; } }
     public int Gold { get { return gold; } set {  gold = value; } }
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
+    public Dictionary<SkillType, int> Gems { get { return gems; } set { gems = value; } }
 
     public void InitializeData()
     {
         InitializeGem();
     }
 
-    public void LoadLevelData(LevelDatas data)
+    public void LoadLevelData(LevelData data)
     {
         atk = data.atk;
         def = data.def;
