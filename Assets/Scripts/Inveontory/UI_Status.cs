@@ -16,7 +16,7 @@ public class UI_Status : MonoBehaviour
 
     private void Start()
     {
-        player = Inventory.Instance.player;
+        player = GameManager.Instance.player;
         playerStats = player.Data.StatusData;
         ui = GetComponentInParent<InventoryUIController>();
         UpdateStatValueUI();
