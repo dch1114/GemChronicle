@@ -43,8 +43,6 @@ public class UIManager : Singleton<UIManager>
     public GameObject shopChoice;
 
     public GameObject potalListUI;
-    //public static UIManager instance = null;
-    public PlayerController playerController;
     public PotalListUI potalUIScript;
     public GameObject potaltalk;
     public Button[] showMenuButton;
