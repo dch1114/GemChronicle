@@ -125,6 +125,7 @@ public class PlayerDataManager : MonoBehaviour
             string json = SkillJson.text;
 
             playerSkillDatabase = JsonUtility.FromJson<PlayerSkillDatabase>(json);
+
             playerSkillDatabase.Initialize();
         }
         else

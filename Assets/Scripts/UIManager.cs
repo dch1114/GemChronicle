@@ -318,7 +318,7 @@ public class UIManager : Singleton<UIManager>
             expActual / NewLevel, 10f * Time.deltaTime);
 
         expTMP.text = $"{((expActual / NewLevel) * 100):F2}%";
-        levelTMP.text = $"Level {Level}";
+        levelTMP.text = Level.ToString();
       
     }
 
