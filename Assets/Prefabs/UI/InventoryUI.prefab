@@ -1104,7 +1104,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 812001324892377060}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Switch, Assembly-CSharp
         m_MethodName: UpButtonClick
         m_Mode: 1
@@ -1372,7 +1372,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 812001324892377060}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Switch, Assembly-CSharp
         m_MethodName: DownButtonClick
         m_Mode: 1
@@ -1988,7 +1988,6 @@ GameObject:
   - component: {fileID: 719921946966325435}
   - component: {fileID: 1391519211579542496}
   - component: {fileID: 6063029158198359162}
-  - component: {fileID: 812001324892377060}
   m_Layer: 5
   m_Name: CheckPotionSellPopup
   m_TagString: Untagged
@@ -2059,22 +2058,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &812001324892377060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8639526539088284234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c871fec4c93d7b41a13e7d78bc0022a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  downBtn: {fileID: 4467507708095572357}
-  upBtn: {fileID: 3687518309573624424}
-  amountText: {fileID: 1533290986421375327}
-  amount: 0
 --- !u!1001 &177133335052529940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2502,7 +2485,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downBtn: {fileID: 8043696080968560985}
   upBtn: {fileID: 1851548680508520418}
-  amountText: {fileID: 3871171910062054707}
+  amountBuyText: {fileID: 0}
+  amountSellText: {fileID: 0}
   amount: 0
 --- !u!1001 &4592533632848829258
 PrefabInstance:

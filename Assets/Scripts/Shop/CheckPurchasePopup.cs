@@ -41,7 +41,7 @@ public class CheckPurchasePopup : MonoBehaviour
         sellBtn.onClick.AddListener(OnClickSell);
         potionBuyBtn.onClick.AddListener(OnClickPotionBuy);
         potionCancelBtn.onClick.AddListener(OnClickPotionCancel);
-        potionSellBtn.onClick.AddListener(OnClickSell);
+        potionSellBtn.onClick.AddListener(OnClickPotionSell);
         potioncloseBtn.onClick.AddListener(OnClickPotionCancel);
     }
 
@@ -69,7 +69,6 @@ public class CheckPurchasePopup : MonoBehaviour
     {
         if (selectInventoryItem != null)
         {
-
             shop.Sell(selectInventoryItem);
             ui.shopitemToolTip.HideToolTip();
             checkSellPopup.gameObject.SetActive(false);
@@ -95,7 +94,12 @@ public class CheckPurchasePopup : MonoBehaviour
 
     public void OnClickPotionSell()
     {
-
+        if (selectInventoryItem != null && selectInventoryItem.datas.ItemType == ItemType.Potion)
+        {
+            shop.SellPotion(selectInventoryItem, amountSwitch.amount);
+            ui.shopitemToolTip.HideToolTip();
+            checkPotionSellPopup.gameObject.SetActive(false);
+        }
     }
 
     public void OnClickPotionCancel()

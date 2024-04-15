@@ -7,8 +7,8 @@ public class Switch : MonoBehaviour
 {
     public GameObject downBtn;
     public GameObject upBtn;
-    public TextMeshProUGUI amountText;
-
+    public TextMeshProUGUI amountBuyText;
+    public TextMeshProUGUI amountSellText;
     public int amount = 0;
     int maxAmount = 999;
 
@@ -42,6 +42,7 @@ public class Switch : MonoBehaviour
 
     public void UpdateText()
     {
-        amountText.text = amount.ToString();
+        amountBuyText.text = amount.ToString();
+        amountSellText.text = amount.ToString();
     }
 }
