@@ -917,6 +917,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1883709285}
     - target: {fileID: 3975635628999208247, guid: 4151edea34d05e84f90eaa13c7348d38, type: 3}
+      propertyPath: QuestPanel
+      value: 
+      objectReference: {fileID: 5066935947886788146}
+    - target: {fileID: 3975635628999208247, guid: 4151edea34d05e84f90eaa13c7348d38, type: 3}
       propertyPath: monedasTMP
       value: 
       objectReference: {fileID: 0}
@@ -7023,15 +7027,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2855982071063643860, guid: 7aae2bb6be0cfca47bc6d971e046296c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3233474038927118047, guid: 7aae2bb6be0cfca47bc6d971e046296c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4184744616824928058, guid: 7aae2bb6be0cfca47bc6d971e046296c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5531685819647185577, guid: 7aae2bb6be0cfca47bc6d971e046296c, type: 3}
       propertyPath: m_Pivot.x
@@ -7132,6 +7136,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2855982071063643860, guid: 7aae2bb6be0cfca47bc6d971e046296c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5066935947886788144}
+    - targetCorrespondingSourceObject: {fileID: 2855982071063643860, guid: 7aae2bb6be0cfca47bc6d971e046296c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5066935947886788146}
   m_SourcePrefab: {fileID: 100100000, guid: 7aae2bb6be0cfca47bc6d971e046296c, type: 3}
 --- !u!212 &58266454883318514
 SpriteRenderer:
@@ -10322,6 +10329,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444766f91a6944f429e642685e8b84c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &5066935947886788146
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134507846507472657}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!222 &5102845840579788023
 CanvasRenderer:
   m_ObjectHideFlags: 0

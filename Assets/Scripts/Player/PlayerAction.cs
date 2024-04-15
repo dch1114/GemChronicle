@@ -65,7 +65,7 @@ public class PlayerAction : MonoBehaviour
         // Q 키를 눌렀을 때 퀘스트 창을 열거나 닫기
         if (Keyboard.current.qKey.wasPressedThisFrame)
         {
-            uiManagerInstance.OpenClosePanelQuest();
+            uiManagerInstance.TogglePanelQuest();
 
             if (isQuestPanelOpen)
             {
