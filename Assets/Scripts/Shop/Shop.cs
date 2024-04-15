@@ -38,7 +38,7 @@ public class Shop : MonoBehaviour
 
             if (shopItemInstance.ItemType == ItemType.Potion)
             {
-                shopItemInstance.Quantity = 10;
+                shopItemInstance.Quantity = 9999;
                 shopItems.Add(shopItemInstance);
             }
             else
@@ -67,13 +67,47 @@ public class Shop : MonoBehaviour
     {
         if (!(playerInventory.inventoryGold < _selectItem.Price))
         {
+            //if(_selectItem.ItemType == ItemType.Potion)
+            //{
+            //    if(_selectItem.Quantity > 1)
+            //    {
+            //        _selectItem.Quantity--;
+            //        playerInventory.AddItem(_selectItem);
+            //        playerInventory.inventoryGold -= _selectItem.Price;
+            //        UpdateSlotUI();
+            //        playerInventory.UpdateRetainGold();
+            //        return;
+            //    }
+            //}
+
+            shopItems.Remove(_selectItem);
+            playerInventory.AddItem(_selectItem);
+
+            playerInventory.inventoryGold -= _selectItem.Price;
+
+            UpdateSlotUI();
+
+
+            playerInventory.UpdateRetainGold();
+        }
+        else
+        {
+            //TODO ÆË¾÷ Ãß°¡
+            Debug.Log("not enough gold");
+        }
+    }
+
+    public void BuyPotion(Item _selectItem, int _amount)
+    {
+        if (!(playerInventory.inventoryGold < _selectItem.Price))
+        {
             if(_selectItem.ItemType == ItemType.Potion)
             {
                 if(_selectItem.Quantity > 1)
                 {
                     _selectItem.Quantity--;
-                    playerInventory.AddItem(_selectItem);
-                    playerInventory.inventoryGold -= _selectItem.Price;
+                    playerInventory.AddItem(_selectItem, _amount);
+                    playerInventory.inventoryGold -= _selectItem.Price * _amount;
                     UpdateSlotUI();
                     playerInventory.UpdateRetainGold();
                     return;
@@ -81,9 +115,9 @@ public class Shop : MonoBehaviour
             }
 
             shopItems.Remove(_selectItem);
-            playerInventory.AddItem(_selectItem);
+            playerInventory.AddItem(_selectItem, _amount);
 
-            playerInventory.inventoryGold -= _selectItem.Price;
+            playerInventory.inventoryGold -= _selectItem.Price * _amount;
 
             UpdateSlotUI();
 
