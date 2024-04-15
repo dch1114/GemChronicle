@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     private PlayerStateMachine stateMachine;
 
-    public GameObject SkillPage;
+    public GameObject SkillPage { get; set; }
 
     //test
     public GameObject InventoryUIPanel;

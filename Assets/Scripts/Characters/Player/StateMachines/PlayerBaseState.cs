@@ -47,8 +47,6 @@ public class PlayerBaseState : IState
         PlayerInput input = stateMachine.Player.Input;
         input.PlayerActions.Movement.canceled += OnMovementCanceled;
 
-
-
         input.PlayerActions.SkillPage.started += OnSkillPageStarted;
 
         input.PlayerActions.AttackA.performed += OnAttackAPerformed;
@@ -66,8 +64,6 @@ public class PlayerBaseState : IState
     {
         PlayerInput input = stateMachine.Player.Input;
         input.PlayerActions.Movement.canceled -= OnMovementCanceled;
-
-        
 
         input.PlayerActions.SkillPage.started -= OnSkillPageStarted;
 
@@ -113,6 +109,11 @@ public class PlayerBaseState : IState
 
     private void OnSkillPageStarted(InputAction.CallbackContext context)
     {
+        if(stateMachine.Player.SkillPage == null)
+        {
+            UIManager.Instance.skillPages.SetJobPage();
+        }
+
         bool isActive = stateMachine.Player.SkillPage.activeSelf;
         stateMachine.Player.SkillPage.SetActive(!isActive);
     }
