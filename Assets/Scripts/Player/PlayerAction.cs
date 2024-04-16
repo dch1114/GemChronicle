@@ -65,18 +65,6 @@ public class PlayerAction : MonoBehaviour
         if (Keyboard.current.qKey.wasPressedThisFrame)
         {
             uiManagerInstance.TogglePanelQuest();
-<<<<<<< Updated upstream
-
-            if (isQuestPanelOpen)
-            {
-                isQuestPanelOpen = false;
-            }
-            else
-            {
-                isQuestPanelOpen = true;
-            }
-=======
->>>>>>> Stashed changes
         }
     }
 

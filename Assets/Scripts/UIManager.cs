@@ -17,12 +17,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] public TextMeshProUGUI levelTMP;
 
     [Header("Paneles")]
-<<<<<<< Updated upstream
-    [SerializeField] private CanvasGroup QuestPanel;
-=======
     [SerializeField] private CanvasGroup panelQuestCanvasGroup;
 
->>>>>>> Stashed changes
     [SerializeField] private GameObject panelCompleteQuest;
 
     private float expActual;
@@ -304,10 +300,6 @@ public class UIManager : Singleton<UIManager>
         Debug.Log("Select Exi");
 
     }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     bool bOpenQuestPanel = false;
     public void TogglePanelQuest()
     {
@@ -315,24 +307,14 @@ public class UIManager : Singleton<UIManager>
         if (!bOpenQuestPanel)
         {
             bOpenQuestPanel = true;
-<<<<<<< Updated upstream
-            QuestPanel.alpha = 1f;
-            QuestPanel.blocksRaycasts = true;
-=======
             panelQuestCanvasGroup.alpha = 1f;
             panelQuestCanvasGroup.blocksRaycasts = true;
->>>>>>> Stashed changes
         }
         else
         {
             bOpenQuestPanel = false;
-<<<<<<< Updated upstream
-            QuestPanel.alpha = 0f;
-            QuestPanel.blocksRaycasts = false;
-=======
             panelQuestCanvasGroup.alpha = 0f;
             panelQuestCanvasGroup.blocksRaycasts = false;
->>>>>>> Stashed changes
         }
     }
 
