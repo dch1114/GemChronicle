@@ -15,7 +15,6 @@ public class PlayerAction : MonoBehaviour
     public GameObject talkBtn;
     List<IInteractive> interactiveList = new List<IInteractive>();
     private PlayerInputActions inputActions;
-    bool isQuestPanelOpen = false;
 
     public PlayerInput playerinput;
     //대화가 종료되었는지 체크
@@ -66,6 +65,7 @@ public class PlayerAction : MonoBehaviour
         if (Keyboard.current.qKey.wasPressedThisFrame)
         {
             uiManagerInstance.TogglePanelQuest();
+<<<<<<< Updated upstream
 
             if (isQuestPanelOpen)
             {
@@ -75,6 +75,8 @@ public class PlayerAction : MonoBehaviour
             {
                 isQuestPanelOpen = true;
             }
+=======
+>>>>>>> Stashed changes
         }
     }
 

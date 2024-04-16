@@ -25,7 +25,7 @@ public class QuestManager : Singleton<QuestManager>
     public Quest QuestUnclaimed { get; private set; }
 
     [SerializeField] PanelQuestUI panelQuestUI;
-
+    [SerializeField] MiniQuest miniQuest;
     //퀘스트를 수락하면 딕셔너리에 넣음
     private Dictionary<int, Quest> _ongoingQuests = new();
     //퀘스트를 완료하면 해쉬셋에 넣음
@@ -195,6 +195,7 @@ public class QuestManager : Singleton<QuestManager>
         newQuest.ConfigureQuestUI(questcompleted, qData);
         panelQuestUI.AddProgressQuest(questcompleted.QuestId, newQuest.gameObject);
         SetUIRemoveWaitingQuest(questcompleted.QuestId);
+        miniQuest.SetMiniQuestPanel(questcompleted, qData);
     }
 
     public void SetClearProgressQuestUI(int key)
