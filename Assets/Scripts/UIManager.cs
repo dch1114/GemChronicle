@@ -60,7 +60,7 @@ public class UIManager : Singleton<UIManager>
     PotalType maxPotalType;
 
     OpenMenuType currentOpenMenuType;
-    public Text talkBtnText;
+    public TextMeshProUGUI talkBtnText;
     bool isOpenShowPopUp = false;
     bool isOpenPotalPopUp = false;
     private PlayerInput playerinput;

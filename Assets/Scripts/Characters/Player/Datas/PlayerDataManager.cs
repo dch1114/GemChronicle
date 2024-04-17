@@ -5,66 +5,6 @@ using System.IO;
 using UnityEngine;
 
 [Serializable]
-public class LevelData
-{
-    public int level; //id처럼 쓰임
-    public int requiredExp;
-    public int atk;
-    public int def;
-    public int maxHp;
-}
-
-[Serializable]
-public class PlayerLevelDatabase
-{
-    public List<LevelData> LevelDatas;
-    public Dictionary<int, LevelData> levelDic = new();
-
-    public void Initialize()
-    {
-        foreach (LevelData data in LevelDatas)
-        {
-            levelDic.Add(data.level, data);
-        }
-    }
-
-    public LevelData GetLevelDataByKey(int level)
-    {
-        if (levelDic.ContainsKey(level))
-            return levelDic[level];
-
-        return null;
-    }
-}
-
-[Serializable]
-public class PlayerSkillDatabase
-{
-    public List<SkillInfoData> SkillDatas;
-    public Dictionary<int, SkillInfoData> skillDic = new();
-
-    public void Initialize()
-    {
-        foreach (SkillInfoData data in SkillDatas)
-        {
-            skillDic.Add(data.ID, data);
-        }
-    }
-
-    public List<SkillInfoData> GetDataSection(int start, int end)
-    {
-        List<SkillInfoData> sectionDatas = new List<SkillInfoData>();
-        foreach(SkillInfoData data in SkillDatas)
-        {
-            if(data.ID >= start && data.ID <= end)
-                sectionDatas.Add(data);
-        }
-
-        return sectionDatas;
-    }
-}
-
-[Serializable]
 public class PlayerCurrentStatus //현재 상태 저장용
 {
     public string name;
