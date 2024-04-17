@@ -10,7 +10,8 @@ public enum PotalType
     A,
     B,
     C,
-    D
+    D,
+    E
 }
 [Serializable]
 public class Potal
@@ -85,7 +86,8 @@ public class PotalManager : Singleton<PotalManager>
     public void AcceptSecondQuest() { QuestManager.Instance.SubscribeQuest(2001); }
     public void AcceptThirdQuest() { QuestManager.Instance.SubscribeQuest(2002); }
     public void CompleteFirstQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc,2000,1); }
-    public void CompleteSecondQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 2000, 1); }
-    public void CompleteThirdQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillMonster, 500000, 5); }
+    public void CompleteSecondQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss,500000, 1); }
+    public void CompleteThirdQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 3004, 1); }
+    public void CompleteFourthQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500001, 1); }
 
 }

@@ -65,6 +65,7 @@ public class NPCController : MonoBehaviour, IInteractive
 
     void SetNPCInfoData(int index)
     {
+        Debug.Log(index);
         questData = null;
         doQuest = null;
         doingQuest = null;

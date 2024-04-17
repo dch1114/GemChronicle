@@ -15,7 +15,6 @@ public class PlayerAction : MonoBehaviour
     public GameObject talkBtn;
     List<IInteractive> interactiveList = new List<IInteractive>();
     private PlayerInputActions inputActions;
-    bool isQuestPanelOpen = false;
 
     public PlayerInput playerinput;
     //대화가 종료되었는지 체크
@@ -65,16 +64,7 @@ public class PlayerAction : MonoBehaviour
         // Q 키를 눌렀을 때 퀘스트 창을 열거나 닫기
         if (Keyboard.current.qKey.wasPressedThisFrame)
         {
-            uiManagerInstance.OpenClosePanelQuest();
-
-            if (isQuestPanelOpen)
-            {
-                isQuestPanelOpen = false;
-            }
-            else
-            {
-                isQuestPanelOpen = true;
-            }
+            uiManagerInstance.TogglePanelQuest();
         }
     }
 

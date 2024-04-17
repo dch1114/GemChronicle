@@ -17,7 +17,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] public TextMeshProUGUI levelTMP;
 
     [Header("Paneles")]
-    [SerializeField] private GameObject panelQuest;
+    [SerializeField] private CanvasGroup panelQuestCanvasGroup;
+
     [SerializeField] private GameObject panelCompleteQuest;
 
     private float expActual;
@@ -299,10 +300,22 @@ public class UIManager : Singleton<UIManager>
         Debug.Log("Select Exi");
 
     }
-
-    public void OpenClosePanelQuest()
+    bool bOpenQuestPanel = false;
+    public void TogglePanelQuest()
     {
-        panelQuest.SetActive(!panelQuest.activeSelf);
+
+        if (!bOpenQuestPanel)
+        {
+            bOpenQuestPanel = true;
+            panelQuestCanvasGroup.alpha = 1f;
+            panelQuestCanvasGroup.blocksRaycasts = true;
+        }
+        else
+        {
+            bOpenQuestPanel = false;
+            panelQuestCanvasGroup.alpha = 0f;
+            panelQuestCanvasGroup.blocksRaycasts = false;
+        }
     }
 
     public void OpenClosePanelCompleteQuest()
