@@ -36,14 +36,14 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
             itemImage.sprite = item.sprite; // test
             itemImage.GetComponent<Image>().SetNativeSize();
 
-            if (item.Quantity > 1)
-            {
-                itemText.text = item.Quantity.ToString();
-            }
-            else
-            {
-                itemText.text = "";
-            }
+            //if (item.Quantity > 1)
+            //{
+            //    itemText.text = item.Quantity.ToString();
+            //}
+            //else
+            //{
+            //    itemText.text = "";
+            //}
         }
     }
 
@@ -63,11 +63,31 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
             return;
         }
 
-        Item selectItem = item;
-        tradePopup.checkPurchasePopup.gameObject.SetActive(true);
-        tradePopup.shopTradePopup.gameObject.SetActive(true);
-        tradePopup.checkSellPopup.gameObject.SetActive(false);
-        ui.shopitemToolTip.ShowToolTip(selectItem);
-        tradePopup.SetItem(selectItem);
+        if ((item.ItemType != ItemType.Potion))
+        {
+            Item selectItem = item;
+            tradePopup.checkPurchasePopup.gameObject.SetActive(true);
+            tradePopup.checkPotionPurchasePopup.gameObject.SetActive(false);
+            tradePopup.shopTradePopup.gameObject.SetActive(true);
+            tradePopup.checkSellPopup.gameObject.SetActive(false);
+            ui.shopitemToolTip.ShowToolTip(selectItem);
+            tradePopup.SetItem(selectItem); 
+        }
+        else
+        {
+            if (tradePopup.amountSwitch.amount > 0)
+            {
+                tradePopup.amountSwitch.amount = 0;
+                tradePopup.amountSwitch.UpdateText();
+            }
+
+            Item selectItem = item;
+            tradePopup.checkPotionPurchasePopup.gameObject.SetActive(true);
+            tradePopup.checkPurchasePopup.gameObject.SetActive(false);
+            tradePopup.shopTradePopup.gameObject.SetActive(true);
+            tradePopup.checkPotionSellPopup.gameObject.SetActive(false);
+            ui.shopitemToolTip.ShowToolTip(selectItem);
+            tradePopup.SetItem(selectItem);
+        }
     }
 }

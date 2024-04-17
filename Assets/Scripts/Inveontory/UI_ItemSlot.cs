@@ -78,7 +78,19 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
             {
                 checkPurChasePopup.SetItem(inventoryItem);
                 checkPurChasePopup.gameObject.SetActive(true);
-                checkPurChasePopup.checkSellPopup.SetActive(true);
+
+                if(inventoryItem.datas.ItemType != ItemType.Potion)
+                {
+                    checkPurChasePopup.checkSellPopup.SetActive(true);
+                    checkPurChasePopup.checkPotionSellPopup.SetActive(false);
+                }
+                else
+                {
+                    checkPurChasePopup.amountSwitch.amount = 0;
+                    checkPurChasePopup.amountSwitch.UpdateText();
+                    checkPurChasePopup.checkPotionSellPopup.SetActive(true);
+                    checkPurChasePopup.checkSellPopup.SetActive(false);
+                }
                 ui.shopitemToolTip.ShowToolTip(inventoryItem.datas);
             }
             else

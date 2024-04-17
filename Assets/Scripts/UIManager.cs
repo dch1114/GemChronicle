@@ -43,9 +43,9 @@ public class UIManager : Singleton<UIManager>
     public GameObject shopPanel;
     public GameObject shopChoice;
 
+    public SkillPagesUI skillPages;
+
     public GameObject potalListUI;
-    //public static UIManager instance = null;
-    public PlayerController playerController;
     public PotalListUI potalUIScript;
     public GameObject potaltalk;
     public Button[] showMenuButton;
@@ -70,7 +70,7 @@ public class UIManager : Singleton<UIManager>
  
     //0315 [SerializeField]를 선언하면 외부 스크립트에서 접근할수 없으나 인스펙터에서 세팅 및 확인을 할 수 있음  
     [SerializeField]
-    Text talkText;
+    TextMeshProUGUI talkText;
     [SerializeField]
     Image npcPortraitImg;
     [SerializeField]

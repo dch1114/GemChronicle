@@ -1,7 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -10,4 +7,17 @@ public class GameManager : Singleton<GameManager>
 
     public Player player;
     public int saveDataID;
+
+    //background test
+    public GameObject[] backgrounds;
+
+    public void SwitchBackground(int _mapIndex)
+    {
+        foreach (var background in backgrounds)
+        {
+            background.SetActive(false);
+        }
+
+        backgrounds[_mapIndex].SetActive(true);
+    }
 }

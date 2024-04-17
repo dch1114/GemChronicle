@@ -53,26 +53,49 @@ public class Inventory : Singleton<Inventory>
         //    AddToInventory(_item);
         //}
         AddToInventory(_item);
-        //test
         _inventoryUIController.UpdateSlotUI();
 
     }
 
+    public void AddItem(Item _item, int _amount)
+    {
+        AddToInventory(_item, _amount);
+        _inventoryUIController.UpdateSlotUI();
+    }
+
     private void AddToInventory(Item _item)
     {
-        if(_item.ItemType == ItemType.Potion)
+        //if(_item.ItemType == ItemType.Potion)
+        //{
+        //    foreach(InventoryItem item in inventory)
+        //    {
+        //        if(item.datas == _item)
+        //        {
+        //            item.AddStack();
+        //            return;
+        //        }
+        //    }
+        //}
+
+        InventoryItem newItem = new InventoryItem(_item);
+        inventory.Add(newItem);
+    }
+
+    private void AddToInventory(Item _item, int _amount)
+    {
+        if (_item.ItemType == ItemType.Potion)
         {
-            foreach(InventoryItem item in inventory)
+            foreach (InventoryItem item in inventory)
             {
-                if(item.datas == _item)
+                if (item.datas == _item)
                 {
-                    item.AddStack();
+                    item.AddStack(_amount);
                     return;
                 }
             }
         }
 
-        InventoryItem newItem = new InventoryItem(_item);
+        InventoryItem newItem = new InventoryItem(_item, _amount);
         inventory.Add(newItem);
     }
 
