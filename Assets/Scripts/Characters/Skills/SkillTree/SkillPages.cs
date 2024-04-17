@@ -29,6 +29,16 @@ public abstract class SkillPages : MonoBehaviour
         SetSkillBtns();
     }
 
+    private void OnEnable()
+    {
+        UIManager.Instance.skillPages.ActiveGems();
+    }
+
+    private void OnDisable()
+    {
+        UIManager.Instance.skillPages.OffGems();
+    }
+
 
     public void SetSkillBtns()
     {
