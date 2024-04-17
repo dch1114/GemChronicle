@@ -17,7 +17,7 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform equipmentSlotParent;
     [SerializeField] private Transform statusParent;
-
+    [HideInInspector] public Switch _amountSwitch;
     //test
     [Header("Shop UI")]
     [SerializeField] private Transform inventoryListSlotParent;
@@ -35,6 +35,7 @@ public class InventoryUIController : MonoBehaviour
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
         equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
         //uI_Statuses = statusParent.GetComponentsInChildren<UI_Status>(); // 그냥 연결을해버리고 프리팹화?
+        _amountSwitch = GetComponentInChildren<Switch>();
         ////test
         inventoryListItemSlot = inventoryListSlotParent.GetComponentsInChildren<UI_ItemSlot>();
 
