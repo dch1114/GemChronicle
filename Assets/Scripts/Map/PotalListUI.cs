@@ -191,6 +191,11 @@ public class PotalListUI : MonoBehaviour
     public void PotalD()
     {
         PotalManager.Instance.MovePotal(3);
+    } 
+    
+    public void PotalE()
+    {
+        PotalManager.Instance.MovePotal(4);
     }
 
 
