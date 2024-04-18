@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 959081967554574253}
   - component: {fileID: 78335476682858140}
   - component: {fileID: 4016396091440967872}
-  - component: {fileID: 2652081599412791760}
+  - component: {fileID: 4392040520398516054}
   m_Layer: 0
   m_Name: WarriorFire4
   m_TagString: Untagged
@@ -117,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 3618536744577966477}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &78335476682858140
 Animator:
@@ -185,7 +185,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &2652081599412791760
+--- !u!114 &4392040520398516054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,7 +194,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8659800452487026591}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d93f4181fb349147b69b474cc0b67b5, type: 3}
+  m_Script: {fileID: 11500000, guid: ef8a4bc2dd6af9b4eb546d930ad981f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 78335476682858140}
+  data:
+    ID: 0
+    SkillName: 
+    Damage: 0
+    Range: 0
+    SkillType: 0
+    Price: 0
+    IsUnlocked: 0

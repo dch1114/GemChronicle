@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7329952591501691671}
   - component: {fileID: 7295901726538396738}
   - component: {fileID: 148376041606045534}
-  - component: {fileID: 2262255008070749150}
+  - component: {fileID: 3943418002541546569}
   m_Layer: 0
   m_Name: MagicianFire2
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 2638609681560476693}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7295901726538396738
 Animator:
@@ -101,7 +101,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2262255008070749150
+--- !u!114 &3943418002541546569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,10 +110,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2695431896675414018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d93f4181fb349147b69b474cc0b67b5, type: 3}
+  m_Script: {fileID: 11500000, guid: ef8a4bc2dd6af9b4eb546d930ad981f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7295901726538396738}
+  data:
+    ID: 0
+    SkillName: 
+    Damage: 0
+    Range: 0
+    SkillType: 0
+    Price: 0
+    IsUnlocked: 0
 --- !u!1 &3095007345636377701
 GameObject:
   m_ObjectHideFlags: 0

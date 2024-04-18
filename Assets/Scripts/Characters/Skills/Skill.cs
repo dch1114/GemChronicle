@@ -8,33 +8,19 @@ public class Skill : MonoBehaviour
 {
     public Animator anim;
 
-    public SkillInfoData data {  get; set; }
-    private Player player;
+    [SerializeField]
+    public SkillInfoData data;
 
-    private Vector3 leftDirection = new Vector3(2f, 2f, 1f);
-    private Vector3 rightDirection = new Vector3(-2f, 2f, 1f);
+    protected IDamageable damageable;
 
-    private void OnEnable()
+    protected void CheckType()
     {
-        player = GameManager.Instance.player;
-
-        if(player != null)
+        if(data.Range > 0)
         {
-            SetTransform();
-            CheckType();
-        }
-    }
-
-    private void CheckType()
-    {
-        switch(player.Data.StatusData.JobType)
+            StartCoroutine(ShootSkill());
+        } else
         {
-            case JobType.Archer:
-                StartCoroutine(ShootSkill());
-                break;
-            default:
-                StartCoroutine(WaitForAnimationEnd());
-                break;
+            StartCoroutine(WaitForAnimationEnd());
         }
     }
 
@@ -53,7 +39,7 @@ public class Skill : MonoBehaviour
         if(data != null)
         {
             Vector3 originalPosition = transform.position;
-            Vector3 targetPosition = originalPosition + (player.Controller.isLeft ? new Vector3(data.Range * -1, 0, 0) : new Vector3(data.Range, 0, 0));
+            Vector3 targetPosition = originalPosition + GetTargetPosition();
 
             do
             {
@@ -65,31 +51,12 @@ public class Skill : MonoBehaviour
         }
     }
 
-    private void SetTransform()
-    {
-        Vector3 plus = new Vector3(-0.5f, 0, 0);
-        if (!player.Controller.isLeft)
-        {
-            plus.x *= -1f;
-            Flip(false);
-        }
-        else Flip(true);
-        transform.position = player.transform.position + plus;
-    }
+    protected virtual void SetTransform() { }
 
-    private void Flip(bool isLeft)
-    {
-        transform.localScale = isLeft ? leftDirection : rightDirection;
-    }
+    protected virtual Vector3 GetTargetPosition() { return Vector3.left; }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-
-        if(damageable != null)
-        {
-            damageable.TakeDamage(player.Data.StatusData.Atk + data.Damage);
-            gameObject.SetActive(false);
-        }
+        damageable = collision.gameObject.GetComponent<IDamageable>();
     }
 }

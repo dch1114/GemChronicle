@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3732679152890606695}
   - component: {fileID: 5680506079716249437}
   - component: {fileID: 69862233178680451}
-  - component: {fileID: 5549249212867797339}
+  - component: {fileID: 4266983765090367489}
   m_Layer: 0
   m_Name: MagicianIce2
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 468751681120710239}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &5680506079716249437
 BoxCollider2D:
@@ -101,7 +101,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5549249212867797339
+--- !u!114 &4266983765090367489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,10 +110,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2620717644793416254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d93f4181fb349147b69b474cc0b67b5, type: 3}
+  m_Script: {fileID: 11500000, guid: ef8a4bc2dd6af9b4eb546d930ad981f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 69862233178680451}
+  data:
+    ID: 0
+    SkillName: 
+    Damage: 0
+    Range: 0
+    SkillType: 0
+    Price: 0
+    IsUnlocked: 0
 --- !u!1 &6845181092273244691
 GameObject:
   m_ObjectHideFlags: 0

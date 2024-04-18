@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 9052321348773017150}
   - component: {fileID: 3909731697407091347}
   - component: {fileID: 5718758612881674296}
-  - component: {fileID: 3010034510056771088}
+  - component: {fileID: 7272442652963840885}
   m_Layer: 0
   m_Name: MagicianFire3
   m_TagString: Untagged
@@ -111,13 +111,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785478049035021007}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.104037344, y: 0.06576801, z: 0.088952765}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6189163642198393639}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3909731697407091347
 Animator:
@@ -185,7 +185,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3010034510056771088
+--- !u!114 &7272442652963840885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,7 +194,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 785478049035021007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d93f4181fb349147b69b474cc0b67b5, type: 3}
+  m_Script: {fileID: 11500000, guid: ef8a4bc2dd6af9b4eb546d930ad981f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 3909731697407091347}
+  data:
+    ID: 0
+    SkillName: 
+    Damage: 0
+    Range: 0
+    SkillType: 0
+    Price: 0
+    IsUnlocked: 0

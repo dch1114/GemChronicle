@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 912508061946961486}
   - component: {fileID: 7843351951830551402}
   - component: {fileID: 4617636760601725495}
-  - component: {fileID: 2874472774942411245}
+  - component: {fileID: 7673288083882611012}
   m_Layer: 0
   m_Name: MagicianLight1
   m_TagString: Untagged
@@ -117,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 5499924023933014247}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7843351951830551402
 Animator:
@@ -185,7 +185,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2874472774942411245
+--- !u!114 &7673288083882611012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,7 +194,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4583942188270384558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d93f4181fb349147b69b474cc0b67b5, type: 3}
+  m_Script: {fileID: 11500000, guid: ef8a4bc2dd6af9b4eb546d930ad981f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 7843351951830551402}
+  data:
+    ID: 0
+    SkillName: 
+    Damage: 0
+    Range: 0
+    SkillType: 0
+    Price: 0
+    IsUnlocked: 0

@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5178968117096038566}
   - component: {fileID: 2154096555894904151}
   - component: {fileID: 5307536288633652872}
-  - component: {fileID: 7548861414233434081}
+  - component: {fileID: 4182690035500252706}
   m_Layer: 0
   m_Name: WarriorIce4
   m_TagString: Untagged
@@ -117,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 3606769600284401027}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2154096555894904151
 Animator:
@@ -185,7 +185,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &7548861414233434081
+--- !u!114 &4182690035500252706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,7 +194,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8852598858449786657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d93f4181fb349147b69b474cc0b67b5, type: 3}
+  m_Script: {fileID: 11500000, guid: ef8a4bc2dd6af9b4eb546d930ad981f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 2154096555894904151}
+  data:
+    ID: 0
+    SkillName: 
+    Damage: 0
+    Range: 0
+    SkillType: 0
+    Price: 0
+    IsUnlocked: 0

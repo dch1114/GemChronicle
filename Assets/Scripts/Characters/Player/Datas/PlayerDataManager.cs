@@ -27,7 +27,20 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     private Player player;
 
-    [SerializeField] private List<Player> players;
+    [SerializeField] private List<GameObject> players;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        SetGameManagerPlayer(2); //юс╫ц
+    }
+
+    private void Start()
+    {
+        LoadDatas();
+        SetDatas();
+    }
 
     public void LoadDatas()
     {
@@ -40,11 +53,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         SetPlayerSkillInfos();
     }
 
-    private void Start()
-    {
-        LoadDatas();
-        SetDatas();
-    }
 
     private void LoadLevelDatas()
     {
@@ -202,10 +210,10 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         {
             if (i == _jobType)
             {
-                players[i].gameObject.SetActive(true);
-                GameManager.Instance.player = players[i];
+                players[i].SetActive(true);
+                GameManager.Instance.player = players[i].GetComponent<Player>();
             }
-            else players[i].gameObject.SetActive(false);
+            else players[i].SetActive(false);
         }
     }
 }
