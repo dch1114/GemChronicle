@@ -316,6 +316,67 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &311991062
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942378585894115242, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4340889026878812074, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
+      propertyPath: m_Name
+      value: pref_Plasma_Flare_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 352ba2587769e2d47bc46305d408eff7, type: 3}
 --- !u!212 &547026353
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4753,9 +4814,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278674614228909555}
+  - component: {fileID: 7573831301283759576}
   - component: {fileID: 3790982328259853670}
   - component: {fileID: 7573831301283759574}
-  - component: {fileID: 7573831301283759576}
   - component: {fileID: 7573831301283759577}
   m_Layer: 17
   m_Name: TeamSkeleton7
@@ -4805,7 +4866,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &7573831301283759577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4819,10 +4880,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1187729868}
+  health: 5000
   speed: 1
   attackDamage: 20
   detectionRange: 10
   attackRange: 4
+  AttackPrefab: {fileID: 7016724230178805097, guid: 540784267a640674cb6b3a21cf18b7f8, type: 3}
+  BossRender: {fileID: 0}
 --- !u!1 &7641525738903615486
 GameObject:
   m_ObjectHideFlags: 0
