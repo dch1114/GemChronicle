@@ -14,6 +14,8 @@ public class QuestData
     [SerializeField] private int _count;
     [SerializeField] private int _exp;
     [SerializeField] private int _gold;
+    [SerializeField] private bool _continue;
+    [SerializeField] private bool _talk;
 
     [SerializeField] private int _reward_1;
     [SerializeField] private int _rewardCount_1;
@@ -32,6 +34,9 @@ public class QuestData
     public int Count => _count;
     public int Exp => _exp;
     public int Gold => _gold;
+    public bool Continue => _continue;
+    public bool Talk => _talk;
+
     public int UnLockPotalIndex => _unlockpotalindex;
 
     private List<Reward> _rewardList;

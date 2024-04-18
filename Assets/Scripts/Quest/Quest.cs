@@ -9,6 +9,7 @@ public class Quest
     private int _questId;
     private int targetCount;
     private int currentCount;
+    private bool bClear;
     public QuestRecompenseItem RewardItem;
 
     public int QuestId
@@ -28,6 +29,11 @@ public class Quest
         private set => currentCount = value;
     }
 
+    public bool IsClearQuest
+    {
+        get => bClear;
+        set => bClear = value;
+    }
 
     public Quest(int questId, int questProgress)
     {
@@ -37,8 +43,11 @@ public class Quest
 
     public int Update(int amount)
     {
-        targetCount += amount;
-        return targetCount;
+        currentCount += amount;
+
+        if (currentCount > targetCount)
+            currentCount = targetCount;
+        return currentCount;
     }
 
 }
