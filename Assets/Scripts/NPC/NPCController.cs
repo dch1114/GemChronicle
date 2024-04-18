@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor.PackageManager.Requests;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour, IInteractive
@@ -50,10 +51,13 @@ public class NPCController : MonoBehaviour, IInteractive
         if (npcType == NPCType.Teacher)
         {
             offerQuestData = Database.Quest.Get(npcData.ID);
-            QuestManager.Instance.OnQuestCompleteCallback += QuestCompleteCallBack;
         }
 
         SetNPCInfoData(npcData.ID);
+        QuestManager.Instance.OnQuestCompleteCallback += QuestCompleteCallBack;
+        //EventManager.Instance.AddCallBackEvent(CallBackEventType.TYPES.OnTalkNPC, TryTalk);
+        //EventManager.Instance.RunEvent(CallBackEventType.TYPES.OnTalkNPC);
+
     }
 
     void QuestCompleteCallBack(int id)
@@ -61,6 +65,7 @@ public class NPCController : MonoBehaviour, IInteractive
         int questId = id + 1;
         offerQuestData = Database.Quest.Get(questId);
         SetNPCInfoData(questId);
+
     }
 
     void SetNPCInfoData(int index)
@@ -152,14 +157,18 @@ public class NPCController : MonoBehaviour, IInteractive
             if (QuestManager.Instance.IsClear(offerQuestData.ID))
             {
                 scriptIds = doneQuest.scriptId;
+                Debug.Log("doneQuest");
+
             }
             else if (QuestManager.Instance.IsProgressQuest(offerQuestData.ID))
             {
                 scriptIds = doingQuest.scriptId;
+                Debug.Log("doingQuest");
             }
             else
             {
                 scriptIds = doQuest.scriptId;
+                Debug.Log("doQuest");
             }
 
             AddScriptsToQueue(scriptIds);
@@ -168,41 +177,15 @@ public class NPCController : MonoBehaviour, IInteractive
             isLoadScriptData = true;
             isEndSaying = true;
 
-
-            //if (QuestManager.Instance.IsClear(offerQuestData.ID))
-            //{
-            //    currentquestId++;
-            //    SetNPCInfoData(currentquestId);
-            //    //스승이 준 퀘스트를 클리어했다면
-            //    for (int i = 0; i < doneQuest.scriptId.Length; i++)
-            //    {
-            //        scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doneQuest.scriptId[i]));
-            //    }
-            //}
-            //else if (QuestManager.Instance.IsProgressQuest(offerQuestData.ID))
-            //{
-            //    //스승이 준 퀘스트를 아직 진행중이라면
-            //    for (int i = 0; i < doingQuest.scriptId.Length; i++)
-            //    {
-            //        scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doingQuest.scriptId[i]));
-            //    }
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < doQuest.scriptId.Length; i++)
-            //    {
-            //        scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doQuest.scriptId[i]));
-            //    }
-            //}
-
-            //currentStep = 0;
-            //isLoadScriptData = true;
-            //isEndSaying = true;
         }
 
         //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않아 대화를 종료해야 한다면
         if (scriptTableDatas.Count <= 0)
         {
+            if (QuestManager.Instance.IsProgressQuest(npcData.ID))
+            {
+                QuestManager.Instance.NotifyQuest(Constants.QuestType.TalkNpc, npcData.ID, 1);
+            }
             //Debug.Log("NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않음");
             //Debug.Log("이동초기화전");
             playerinput.OnEnable();
@@ -227,6 +210,8 @@ public class NPCController : MonoBehaviour, IInteractive
                 //상점 팝업창 ON
                 uiManager.shopChoiceOnOff(true);
             }
+
+
 
             return;
         }

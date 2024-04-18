@@ -5,28 +5,22 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MiniQuest : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI qName;
-    [SerializeField] TextMeshProUGUI qDescript;
-    [SerializeField] TextMeshProUGUI qTask;
+
     [SerializeField] GameObject panel;
-    [SerializeField] Button btn;
+    [SerializeField] Transform parent;
+    [SerializeField] Button closeBtn;
     bool bVisible = false;
     Quest quest;
     QuestData questData;
     bool bActiveQuest = false;
-    
-
+    public List<SlotMiniQuest> slotMiniQuests;
+    public SlotMiniQuest miniQuestPrefab;
     private void Awake()
     {
-        btn.onClick.AddListener(ToggleButton);
+        closeBtn.onClick.AddListener(ToggleButton);
     }
 
-    private void OnEnable()
-    {
-        QuestManager.Instance.OnQuestUpdateCallback += UpdateTask;
-        QuestManager.Instance.OnQuestCompleteCallback += CompleteQuest;
-
-    }
+    //미니퀘스트창 활성화/비활성화
     public void ToggleButton() 
     {
         if (!bActiveQuest) return;
@@ -44,33 +38,18 @@ public class MiniQuest : MonoBehaviour
         bVisible = !bVisible;
     }
 
-    public void SetMiniQuestPanel(Quest q, QuestData qData)
+    public void SetMiniQuest(Quest questcompleted, QuestData qData)
     {
-        quest = q;
-        questData = qData;
-        bActiveQuest = true;
-        ToggleButton();
-        qName.text = qData.Name;
-        qDescript.text = qData.Description;
-        UpdateTask(quest.QuestId, 0);
+        SlotMiniQuest miniQuest = Instantiate(miniQuestPrefab, parent);
+        miniQuest.SetSlot(questcompleted, qData);
+        miniQuest.rewardCallBackAction = RemoveList;
+        slotMiniQuests.Add(miniQuest);
     }
-    void UpdateTask(int id,int k)
-    {
-        if (id == quest.QuestId)
-        {
-            qTask.text = $" {quest.CurrentCount} / {quest.TargetCount}";
-        }
 
-    }
-    void CompleteQuest(int id)
+    void RemoveList(SlotMiniQuest slot)
     {
-        if (id == quest.QuestId)
-        {
-            panel.SetActive(false);
-            bVisible = false;
-            bActiveQuest = false;
-
-        }
+        slotMiniQuests.Remove(slot);
     }
+
 
 }
