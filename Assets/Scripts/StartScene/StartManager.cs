@@ -50,11 +50,27 @@ public class StartManager : MonoBehaviour
 
     public void StartNewGame()
     {
-
+        LoadingSceneController.LoadScene("KSH");
     }
 
     public void ContinueGame()
     {
 
     }
+
+    //public IEnumerator LoadScene()
+    //{
+    //    yield return null;
+
+    //    AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("KSH");
+
+    //    Debug.Log("Pro : " + asyncOperation.progress);
+
+    //    while (asyncOperation.isDone)
+    //    {
+    //        progressText.text = "Loading " + (asyncOperation.progress * 100) + "%";
+
+    //        yield return null;
+    //    }
+    //}
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class StartSceneButton : MonoBehaviour
 {
     public Button newGame;
+    public Button createCharacter;
     public Button turnBack;
 
     StartManager startManager;
@@ -14,8 +15,11 @@ public class StartSceneButton : MonoBehaviour
         startManager = GetComponent<StartManager>();
 
         newGame.onClick.AddListener(OnClickNewGameButton);
+        createCharacter.onClick.AddListener(OnClickCreateCharacter);
         turnBack.onClick.AddListener(OnClickTurnBackButton);
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -36,4 +40,10 @@ public class StartSceneButton : MonoBehaviour
         startManager.gameStart.SetActive(true);
         startManager.CharacterChoosPrefab.SetActive(false);
     }
+
+    private void OnClickCreateCharacter()
+    {
+        startManager.StartNewGame();
+    }
+
 }
