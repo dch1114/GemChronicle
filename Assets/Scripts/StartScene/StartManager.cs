@@ -1,14 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StartManager : MonoBehaviour
 {
     [SerializeField] private GameObject startText;
-    [SerializeField] private RectTransform gameTitle;
-    [SerializeField] private GameObject gameStart;
     [SerializeField] private GameObject loadErrorMsg;
+    public RectTransform gameTitle;
+    public GameObject gameStart;
+    public GameObject CharacterChoosPrefab;
 
 
     private bool gameStarted = false;
@@ -30,23 +29,23 @@ public class StartManager : MonoBehaviour
 
     private IEnumerator PressAnyButton()
     {
+        if (startText != null)
+        {
+            startText.SetActive(false);
+        }
+
         while (Vector3.Distance(gameTitle.anchoredPosition3D, titleTargetPosition) > 0.01f)
         {
             gameTitle.anchoredPosition3D = Vector3.MoveTowards(gameTitle.anchoredPosition3D, titleTargetPosition, titleMoveSpeed * Time.deltaTime);
             yield return null;
         }
 
-        gameStarted = true;
-
-        if (startText != null)
-        {
-            startText.SetActive(false);
-        }
-
         if (gameStart != null)
         {
             gameStart.SetActive(true);
         }
+
+        gameStarted = true;
     }
 
     public void StartNewGame()
