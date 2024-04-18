@@ -17,7 +17,7 @@ public class PlayerCurrentStatus //현재 상태 저장용
 }
 
 [Serializable]
-public class PlayerDataManager : MonoBehaviour
+public class PlayerDataManager : Singleton<PlayerDataManager>
 {
     public PlayerLevelDatabase playerLevelDatabase;
     public PlayerSkillDatabase playerSkillDatabase;
@@ -27,16 +27,23 @@ public class PlayerDataManager : MonoBehaviour
 
     private Player player;
 
-    private void Awake()
+    [SerializeField] private List<Player> players;
+
+    public void LoadDatas()
     {
         LoadLevelDatas();
         LoadSkillDatas();
     }
 
+    public void SetDatas()
+    {
+        SetPlayerSkillInfos();
+    }
+
     private void Start()
     {
-        player = GameManager.Instance.player;
-        SetPlayerSkillInfos();
+        LoadDatas();
+        SetDatas();
     }
 
     private void LoadLevelDatas()
@@ -79,6 +86,7 @@ public class PlayerDataManager : MonoBehaviour
         int start = 0;
         int end = 0;
 
+        player = GameManager.Instance.player;
         if(player != null)
         {
             switch (player.Data.StatusData.JobType)
@@ -161,10 +169,43 @@ public class PlayerDataManager : MonoBehaviour
             string jsonData = File.ReadAllText(path);
 
             currentStatus = JsonUtility.FromJson<PlayerCurrentStatus>(jsonData);
+            SetPlayerByJob();
             SaveCurrentDatas();
         } else
         {
             Debug.Log("게임 이어하기 불가");
+        }
+    }
+
+    private void SetPlayerByJob()
+    {
+        if(currentStatus != null)
+        {
+            int jobType = 0;
+            switch(currentStatus.jobType)
+            {
+                case JobType.Warrior:
+                    jobType = 0; break;
+                case JobType.Archer:
+                    jobType = 1; break;
+                case JobType.Magician:
+                    jobType = 2; break;
+            }
+
+            SetGameManagerPlayer(jobType);
+        }
+    }
+
+    private void SetGameManagerPlayer(int _jobType)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (i == _jobType)
+            {
+                players[i].gameObject.SetActive(true);
+                GameManager.Instance.player = players[i];
+            }
+            else players[i].gameObject.SetActive(false);
         }
     }
 }
