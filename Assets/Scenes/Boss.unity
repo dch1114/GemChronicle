@@ -4777,6 +4777,8 @@ GameObject:
   - component: {fileID: 3790982328259853670}
   - component: {fileID: 7573831301283759574}
   - component: {fileID: 7573831301283759577}
+  - component: {fileID: 7573831301283759579}
+  - component: {fileID: 7573831301283759578}
   m_Layer: 17
   m_Name: BossMonster
   m_TagString: Untagged
@@ -4844,8 +4846,37 @@ MonoBehaviour:
   attackDamage: 20
   detectionRange: 10
   attackRange: 4
-  AttackPrefab: {fileID: 0}
+  AttackPrefab: {fileID: 7362169689272085053, guid: 16618d73632186d429da24768e8c6eff, type: 3}
   BossRender: {fileID: 0}
+--- !u!114 &7573831301283759578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7573831301283759573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23bd6af604ea5fb4a97a3410d2f7c876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 6450018808882553613, guid: 536bc4cc41a2cdc49959509ce85d8770, type: 3}
+  bossAppearPoint: 2.5
+  numberOfProjectiles: 10
+  projectileSpeed: 5
+--- !u!114 &7573831301283759579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7573831301283759573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4491ead352ae0c449b08d5daadf251c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 6450018808882553613, guid: 536bc4cc41a2cdc49959509ce85d8770, type: 3}
 --- !u!1 &7641525738903615486
 GameObject:
   m_ObjectHideFlags: 0
