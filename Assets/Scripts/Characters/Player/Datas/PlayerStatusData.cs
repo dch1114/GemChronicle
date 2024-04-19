@@ -101,6 +101,11 @@ public class PlayerStatusData : Status
         if (gems.ContainsKey(gemType)) gems[gemType]++;
     }
 
+    public void GetGems(SkillType gemType, int amount)
+    {
+        if (gems.ContainsKey(gemType)) gems[gemType] += amount;
+    }
+
     public void TakeHeal(int _recovery)
     {
         if (hp + _recovery >= MaxHp)
