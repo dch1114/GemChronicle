@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Switch : MonoBehaviour
 {
-    public GameObject downBtn;
-    public GameObject upBtn;
+    //public GameObject downBtn;
+    //public GameObject upBtn;
     public TextMeshProUGUI amountBuyText;
     public TextMeshProUGUI amountSellText;
     public int amount = 0;

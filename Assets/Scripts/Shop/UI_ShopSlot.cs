@@ -75,7 +75,7 @@ public class UI_ShopSlot : MonoBehaviour, IPointerDownHandler
         }
         else
         {
-            if (tradePopup.amountSwitch.amount > 0)
+            if (ui._amountSwitch.amount > 0)
             {
                 tradePopup.amountSwitch.amount = 0;
                 tradePopup.amountSwitch.UpdateText();

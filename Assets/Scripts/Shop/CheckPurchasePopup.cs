@@ -33,8 +33,8 @@ public class CheckPurchasePopup : MonoBehaviour
     private void Start()
     {
         ui = GetComponentInParent<InventoryUIController>();
+        _amountSwitch = ui._amountSwitch;
         shop = FindObjectOfType<Shop>();
-        amountSwitch = GetComponentInChildren<Switch>();
         buyBtn.onClick.AddListener(OnClickBuy);
         cancelBtn.onClick.AddListener(OnClickCancel);
         closeBtn.onClick.AddListener(OnClickCancel);
