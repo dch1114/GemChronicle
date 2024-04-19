@@ -44,7 +44,7 @@ public class PlayerSkill : Skill
         if (damageable != null)
         {
             damageable.TakeDamage(player.Data.StatusData.Atk + data.Damage);
-            gameObject.SetActive(false);
+            if(data.Range > 0) gameObject.SetActive(false);
         }
     }
 
