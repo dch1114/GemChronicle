@@ -33,7 +33,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     {
         base.Awake();
 
-        SetGameManagerPlayer(2); //임시
+        SetGameManagerPlayer(0); //임시
     }
 
     private void Start()
