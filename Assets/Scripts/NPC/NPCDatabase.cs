@@ -40,6 +40,7 @@ public class ScriptTableData
 public enum NPCType
 { 
     Teacher,
+    Friend,
     Npc,
     Shop
 }

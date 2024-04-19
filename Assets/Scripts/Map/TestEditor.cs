@@ -12,18 +12,6 @@ public class TestEditor : Editor
 
         PotalManager componentScript = (PotalManager)target;
 
-        if (GUILayout.Button("퀘스트1 수락"))
-        {
-            componentScript.AcceptFirstQuest();
-        }
-        if (GUILayout.Button("퀘스트2 수락"))
-        {
-            componentScript.AcceptSecondQuest();
-        }
-        if (GUILayout.Button("퀘스트3 수락"))
-        {
-            componentScript.AcceptThirdQuest();
-        }
         if (GUILayout.Button("퀘스트1 완료"))
         {
             componentScript.CompleteFirstQuest();
@@ -39,6 +27,30 @@ public class TestEditor : Editor
         if (GUILayout.Button("퀘스트4 완료"))
         {
             componentScript.CompleteFourthQuest();
+        }
+        if (GUILayout.Button("퀘스트5 완료"))
+        {
+            componentScript.CompleteFiveQuest();
+        }
+        if (GUILayout.Button("퀘스트6 완료"))
+        {
+            componentScript.CompleteSixQuest();
+        }
+        if (GUILayout.Button("퀘스트7 완료"))
+        {
+            componentScript.CompleteSevenQuest();
+        }
+        if (GUILayout.Button("퀘스트8 완료"))
+        {
+            componentScript.CompleteEightQuest();
+        }
+        if (GUILayout.Button("퀘스트9 완료"))
+        {
+            componentScript.CompleteNineQuest();
+        }
+        if (GUILayout.Button("퀘스트10 완료"))
+        {
+            componentScript.CompleteTenQuest();
         }
     }
 }

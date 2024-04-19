@@ -82,12 +82,15 @@ public class PotalManager : Singleton<PotalManager>
 
     //에디터 테스트용
 
-    public void AcceptFirstQuest() { QuestManager.Instance.SubscribeQuest(2000); }
-    public void AcceptSecondQuest() { QuestManager.Instance.SubscribeQuest(2001); }
-    public void AcceptThirdQuest() { QuestManager.Instance.SubscribeQuest(2002); }
     public void CompleteFirstQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc,2000,1); }
-    public void CompleteSecondQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss,500000, 1); }
-    public void CompleteThirdQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 3004, 1); }
-    public void CompleteFourthQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500001, 1); }
+    public void CompleteSecondQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 2000, 1); }
+    public void CompleteThirdQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
+    public void CompleteFourthQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 3000, 1); }
+    public void CompleteFiveQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
+    public void CompleteSixQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 4000, 1); }
+    public void CompleteSevenQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
+    public void CompleteEightQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
+    public void CompleteNineQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
+    public void CompleteTenQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
 
 }

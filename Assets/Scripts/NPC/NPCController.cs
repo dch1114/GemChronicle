@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor.PackageManager.Requests;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour, IInteractive
@@ -26,8 +27,7 @@ public class NPCController : MonoBehaviour, IInteractive
     bool isLoadScriptData = false;
     bool isEndSaying = false;
 
-    //현재 들고 있는 퀘스트데이타
-    public QuestData offerQuestData;
+    int currentNpcIDForQuest;
 
     //대화 관련 테이블 데이타
     private QuestTableData questData;
@@ -37,7 +37,11 @@ public class NPCController : MonoBehaviour, IInteractive
     [SerializeField] private Queue<ScriptTableData> scriptTableDatas = new Queue<ScriptTableData>();
     ScriptTableData currentScript;
 
-    
+    private void OnEnable()
+    {
+        QuestManager.Instance.OnQuestCompleteCallback += SetNPCInfoData;
+    }
+
     public void Init(NPC npc, NPCManager manager)
     {
         npcData = npc;
@@ -45,35 +49,35 @@ public class NPCController : MonoBehaviour, IInteractive
         uiManager = UIManager.Instance;
         talkManager = npcManager.talkManager;
         playerinput = GameManager.Instance.player.Input;
+        currentNpcIDForQuest = npcData.ID;
 
-        //만약 NPC가 스승이라면 첫퀘스트 및 대화를 할당한다.
-        if (npcType == NPCType.Teacher)
-        {
-            offerQuestData = Database.Quest.Get(npcData.ID);
-            QuestManager.Instance.OnQuestCompleteCallback += QuestCompleteCallBack;
-        }
-
-        SetNPCInfoData(npcData.ID);
-    }
-
-    void QuestCompleteCallBack(int id)
-    {
-        int questId = id + 1;
-        offerQuestData = Database.Quest.Get(questId);
-        SetNPCInfoData(questId);
+        questData = DataManager.Instance.GetQuestTableData(npcData.ID);
+        doQuest = DataManager.Instance.GetTalkTableData(questData.talk_1);
+        doingQuest = DataManager.Instance.GetTalkTableData(questData.talk_2);
+        doneQuest = DataManager.Instance.GetTalkTableData(questData.talk_3);
     }
 
     void SetNPCInfoData(int index)
     {
-        Debug.Log(index);
-        questData = null;
-        doQuest = null;
-        doingQuest = null;
-        doneQuest = null;
-        questData = DataManager.Instance.GetQuestTableData(index);
-        doQuest = DataManager.Instance.GetTalkTableData(questData.talk_1);
-        doingQuest = DataManager.Instance.GetTalkTableData(questData.talk_2);
-        doneQuest = DataManager.Instance.GetTalkTableData(questData.talk_3);
+        Debug.Log($"index : {index} // currentNpcIDForQuest : {currentNpcIDForQuest}");
+        if (index == currentNpcIDForQuest && DataManager.Instance.GetQuestTableData(currentNpcIDForQuest) != null) 
+        {
+            currentNpcIDForQuest = index + 1;
+
+            if (npcType == NPCType.Teacher || npcType == NPCType.Friend)
+            {
+                questData = DataManager.Instance.GetQuestTableData(currentNpcIDForQuest);
+
+                if (questData != null)
+                {
+                    doQuest = DataManager.Instance.GetTalkTableData(questData.talk_1);
+                    doingQuest = DataManager.Instance.GetTalkTableData(questData.talk_2);
+                    doneQuest = DataManager.Instance.GetTalkTableData(questData.talk_3);
+                }
+
+            }
+        }
+
     }
 
     public NPC GetNpcData()
@@ -149,17 +153,21 @@ public class NPCController : MonoBehaviour, IInteractive
 
             int[] scriptIds;
 
-            if (QuestManager.Instance.IsClear(offerQuestData.ID))
+            if (QuestManager.Instance.IsClear(currentNpcIDForQuest))
             {
                 scriptIds = doneQuest.scriptId;
+                Debug.Log("doneQuest");
+
             }
-            else if (QuestManager.Instance.IsProgressQuest(offerQuestData.ID))
+            else if (QuestManager.Instance.IsProgressQuest(currentNpcIDForQuest))
             {
                 scriptIds = doingQuest.scriptId;
+                Debug.Log("doingQuest");
             }
             else
             {
                 scriptIds = doQuest.scriptId;
+                Debug.Log("doQuest");
             }
 
             AddScriptsToQueue(scriptIds);
@@ -168,41 +176,22 @@ public class NPCController : MonoBehaviour, IInteractive
             isLoadScriptData = true;
             isEndSaying = true;
 
-
-            //if (QuestManager.Instance.IsClear(offerQuestData.ID))
-            //{
-            //    currentquestId++;
-            //    SetNPCInfoData(currentquestId);
-            //    //스승이 준 퀘스트를 클리어했다면
-            //    for (int i = 0; i < doneQuest.scriptId.Length; i++)
-            //    {
-            //        scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doneQuest.scriptId[i]));
-            //    }
-            //}
-            //else if (QuestManager.Instance.IsProgressQuest(offerQuestData.ID))
-            //{
-            //    //스승이 준 퀘스트를 아직 진행중이라면
-            //    for (int i = 0; i < doingQuest.scriptId.Length; i++)
-            //    {
-            //        scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doingQuest.scriptId[i]));
-            //    }
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < doQuest.scriptId.Length; i++)
-            //    {
-            //        scriptTableDatas.Enqueue(DataManager.Instance.GetScriptTableData(doQuest.scriptId[i]));
-            //    }
-            //}
-
-            //currentStep = 0;
-            //isLoadScriptData = true;
-            //isEndSaying = true;
         }
 
         //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않아 대화를 종료해야 한다면
         if (scriptTableDatas.Count <= 0)
         {
+            if (QuestManager.Instance.IsProgressQuest(currentNpcIDForQuest) && QuestManager.Instance.CheckCompareTargetID(npcData.ID))
+            {
+                QuestManager.Instance.NotifyQuest(Constants.QuestType.TalkNpc, npcData.ID, 1);
+            }
+
+            if (npcType == NPCType.Teacher || npcType == NPCType.Friend)
+            {
+                QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
+            }
+
+
             //Debug.Log("NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않음");
             //Debug.Log("이동초기화전");
             playerinput.OnEnable();
@@ -213,13 +202,6 @@ public class NPCController : MonoBehaviour, IInteractive
             uiManager.PotraitPanelOnOff(false);
             isEndSaying = false;
 
-            //퀘스트 받기
-            //만약 NPC가 스승이라면 퀘스트 구독을 시도한다.
-            if (npcType == NPCType.Teacher)
-            {
-                QuestManager.Instance.SubscribeQuest(offerQuestData.ID);
-            }
-
             if (npcType == NPCType.Shop)
             {
                 //플레이어 이동 불가
@@ -227,6 +209,8 @@ public class NPCController : MonoBehaviour, IInteractive
                 //상점 팝업창 ON
                 uiManager.shopChoiceOnOff(true);
             }
+
+
 
             return;
         }

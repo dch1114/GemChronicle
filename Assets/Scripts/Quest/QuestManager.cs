@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Linq;
 using UnityEditor.PackageManager.Requests;
+using System.Xml.Linq;
 
 public class QuestManager : Singleton<QuestManager>
 {
@@ -21,6 +22,10 @@ public class QuestManager : Singleton<QuestManager>
     [Header("Panel Quest Completed")]
     [SerializeField] private Transform completeQuestParent;
 
+    int startQuestID = 2000;
+
+    //현재 들고 있는 퀘스트데이타
+    public QuestData currentProgressQuestData = null;
 
     public Quest QuestUnclaimed { get; private set; }
 
@@ -47,33 +52,44 @@ public class QuestManager : Singleton<QuestManager>
     {
         yield return null;
         SetAllQuestUI();
+        currentProgressQuestData = Database.Quest.Get(startQuestID);
+        SubscribeQuest(startQuestID);
     }
-
 
     //퀘스트 구독
     public void SubscribeQuest(int questId)
     {
-        //만약 questID가 이미 진행중이거나 완료 햇다면 중복 구독 방지
-        if (IsClear(questId) || IsProgressQuest(questId))
+        Debug.Log(questId);
+        if (_completeQuests.Contains(questId))
         {
-            Debug.Log($"이미 ID:{questId} 퀘스트는 진행중이거나 완료하였습니다");
+            Debug.Log($"이미 ID:{questId} 퀘스트는 완료하였습니다");
+            return;
+        } 
+        
+        if (_ongoingQuests.ContainsKey(questId))
+        {
+            Debug.Log($"이미 ID:{questId} 퀘스트는 진행중입니다");
             return;
         }
 
         //퀘스트 데이터 불러오기
         var questData = Database.Quest.Get(questId);
 
-        //구독 딕셔너리에 퀘스트타입이 존재하지 않으면 Add 딕셔너리
-        if (_subscribeQuests.ContainsKey(questData.Type) == false)
+        if (questData != null) 
         {
-            _subscribeQuests[questData.Type] = new List<QuestData>();
+            //구독 딕셔너리에 퀘스트타입이 존재하지 않으면 Add 딕셔너리
+            if (_subscribeQuests.ContainsKey(questData.Type) == false)
+            {
+                _subscribeQuests[questData.Type] = new List<QuestData>();
+            }
+
+            _subscribeQuests[questData.Type].Add(questData);
+
+            QuestStart(questId);
+
+            Debug.Log($"ID:{questId} 퀘스트 구독 완료");
         }
 
-        _subscribeQuests[questData.Type].Add(questData);
-
-        QuestStart(questId);
-
-        Debug.Log($"ID:{questId} 퀘스트 구독 완료");
     }
 
     //퀘스트 구독 해제
@@ -82,11 +98,15 @@ public class QuestManager : Singleton<QuestManager>
         
         var questData = Database.Quest.Get(questId);
 
-        if (_subscribeQuests.ContainsKey(questData.Type) == false)
-            return;
-        //구독 딕셔너리에 퀘스트 타입이 존재할 때만 Remove 딕셔너리
-        _subscribeQuests[questData.Type].Remove(questData);
-        Debug.Log($"ID:{questId} 퀘스트 구독 해제 완료");
+        if (questData != null)
+        {
+            if (_subscribeQuests.ContainsKey(questData.Type) == false)
+                return;
+            //구독 딕셔너리에 퀘스트 타입이 존재할 때만 Remove 딕셔너리
+            _subscribeQuests[questData.Type].Remove(questData);
+            Debug.Log($"ID:{questId} 퀘스트 구독 해제 완료");
+        }
+
     }
     
     //퀘스트 진행도 업데이트 (QuestType:대분류, target:소분류, count:실행횟수)
@@ -110,37 +130,58 @@ public class QuestManager : Singleton<QuestManager>
             Debug.Log($"해당 ID:{questId} 로 이미 퀘스트가 진행중입니다");
             return;
         }
+
         var questData = Database.Quest.Get(questId);
 
-        //퀘스트를 생성하고 상태를 Wait에서 Progress로 변경
-        var quest = new Quest(questId, questData.Count);
-        //퀘스트를 진행중 딕셔너리에 추가
-        _ongoingQuests.Add(questId, quest);
-        SetAddProgressQuestUI(quest, questData);
-        //퀘스트를 수락 콜백 액션
-        OnQuestStartCallback?.Invoke(questId);
+        if (questData != null)
+        {
+            //퀘스트를 생성하고 상태를 Wait에서 Progress로 변경
+            var quest = new Quest(questId, questData.Count);
+            //퀘스트를 진행중 딕셔너리에 추가
+            _ongoingQuests.Add(questId, quest);
+            Debug.Log($"ID:{questId} 퀘스트 시작");
+
+            SetAddProgressQuestUI(quest, questData);
+            //퀘스트를 수락 콜백 액션
+            OnQuestStartCallback?.Invoke(questId);
+        }
+
+
     }
 
     public void QuestUpdate(int questId, int amount)
     {
+        Debug.Log($"ID:{questId} 카운트 업데이트");
+
         if (_ongoingQuests.ContainsKey(questId) == false)
             return;
 
         var questData = Database.Quest.Get(questId);
 
-        //실행횟수를 업데이트 하고 누적된 횟수를 리턴받는다
-        int currentCount = _ongoingQuests[questId].Update(amount);
+        if (questData != null)
+        {
+            //실행횟수를 업데이트 하고 누적된 횟수를 리턴받는다
+            int currentCount = _ongoingQuests[questId].Update(amount);
+            int targetCount = _ongoingQuests[questId].TargetCount;
 
-        //UI업데이트 용도로 사용할 예정
-        OnQuestUpdateCallback?.Invoke(questId, amount);
+            //현재 실행횟수가 퀘스트데이타의 목표횟수에 도달하면 퀘스트 클리어
+            if (currentCount >= targetCount)
+            {
+                Debug.Log($"<color=red>퀘스트를 완료 받으세요</color>");
+                _ongoingQuests[questId].IsClearQuest = true;
+            }
 
-        //현재 실행횟수가 퀘스트데이타의 목표횟수에 도달하면 퀘스트 클리어
-        if (currentCount >= questData.Count)
-            QuestClear(questId);
+            //UI업데이트 용도로 사용할 예정
+            OnQuestUpdateCallback?.Invoke(questId, amount);
+        }
+
     }
+
+
 
     public void QuestClear(int questId)
     {
+
         if (_ongoingQuests.ContainsKey(questId) == false)
             return;
 
@@ -149,19 +190,58 @@ public class QuestManager : Singleton<QuestManager>
         _completeQuests.Add(questId);
 
         Debug.Log($"ID:{questId} 퀘스트 클리어!");
-
         //SetClearProgressQuestUI(questId);
         OnQuestCompleteCallback?.Invoke(questId);
+
+        QuestCompleteCallBack(questId);
+
+        if (IsContinueQuest())
+        {
+            SubscribeQuest(currentProgressQuestData.ID);
+        }
     }
 
-    public bool IsClear(int questId)
+    void QuestCompleteCallBack(int id)
     {
-        return _completeQuests.Contains(questId);
+        int questId = id + 1;
+        currentProgressQuestData = Database.Quest.Get(questId);
     }
 
-    public bool IsProgressQuest(int questId)
+    public bool IsClear(int id)
     {
-        return _ongoingQuests.ContainsKey(questId);
+        return _completeQuests.Contains(id);
+    }
+
+    public bool IsProgressQuest(int id)
+    {
+        return _ongoingQuests.ContainsKey(id);
+
+    }
+
+    public bool IsContinueQuest()
+    {
+        return currentProgressQuestData.Continue;
+    }
+    public bool IsOnTalk()
+    {
+        return currentProgressQuestData.Talk;
+    }
+
+    public bool CheckCompareTargetID(int id)
+    {
+        if (id == currentProgressQuestData.Target)
+            return true;
+        return false;
+    }
+
+    public bool IsClearProgressQuest(int questId)
+    {
+        if (_ongoingQuests[questId].IsClearQuest)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     //수락 가능한 모든 퀘스트를 UI에 세팅
@@ -191,11 +271,11 @@ public class QuestManager : Singleton<QuestManager>
 
     void SetAddProgressQuestUI(Quest questcompleted, QuestData qData)
     {
-        ProgressQuestDescription newQuest = Instantiate(progressQuestPrefab, progressQuestParent);
-        newQuest.ConfigureQuestUI(questcompleted, qData);
-        panelQuestUI.AddProgressQuest(questcompleted.QuestId, newQuest.gameObject);
+        //ProgressQuestDescription newQuest = Instantiate(progressQuestPrefab, progressQuestParent);
+        //newQuest.ConfigureQuestUI(questcompleted, qData);
+        //panelQuestUI.AddProgressQuest(questcompleted.QuestId, newQuest.gameObject);
         SetUIRemoveWaitingQuest(questcompleted.QuestId);
-        miniQuest.SetMiniQuestPanel(questcompleted, qData);
+        miniQuest.SetMiniQuest(questcompleted, qData);
     }
 
     public void SetClearProgressQuestUI(int key)
