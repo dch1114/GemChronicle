@@ -24,9 +24,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8042885039769493923}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.0711393, y: 2.7026691, z: 0.35548073}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1848968054936326072}
@@ -95,8 +95,8 @@ GameObject:
   - component: {fileID: 1848968054936326072}
   - component: {fileID: 3492408408706596650}
   - component: {fileID: 619456417210462816}
-  - component: {fileID: 1427700291938674242}
-  m_Layer: 0
+  - component: {fileID: 3793049983004038967}
+  m_Layer: 23
   m_Name: MagicianLight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 8798476460098499861}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &3492408408706596650
 BoxCollider2D:
@@ -185,7 +185,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1427700291938674242
+--- !u!114 &3793049983004038967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,7 +194,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 9040793542731957256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d93f4181fb349147b69b474cc0b67b5, type: 3}
+  m_Script: {fileID: 11500000, guid: ef8a4bc2dd6af9b4eb546d930ad981f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 619456417210462816}
+  data:
+    ID: 0
+    SkillName: 
+    Damage: 0
+    Range: 0
+    SkillType: 0
+    Price: 0
+    IsUnlocked: 0
