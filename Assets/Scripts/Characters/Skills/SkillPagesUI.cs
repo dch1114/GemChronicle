@@ -41,7 +41,7 @@ public class SkillPagesUI : MonoBehaviour
 
     public void ActiveGems()
     {
-        SetGems();
+        UpdateGems();
         gems.SetActive(true);
     }
 
@@ -50,7 +50,7 @@ public class SkillPagesUI : MonoBehaviour
         gems.SetActive(false);
     }
 
-    public void SetGems()
+    public void UpdateGems()
     {
         iceGem.text = player.Data.StatusData.Gems[SkillType.Ice].ToString();
         fireGem.text = player.Data.StatusData.Gems[SkillType.Fire].ToString();

@@ -52,6 +52,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     public void SetDatas()
     {
         SetPlayerSkillInfos();
+        SetPlayerLevel();
     }
 
     public void AddGems()
