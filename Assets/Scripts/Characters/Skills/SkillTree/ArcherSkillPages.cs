@@ -41,9 +41,8 @@ public class ArcherSkillPages : SkillPages
         {
             int price = currentTreeBtn.price;
 
-            if(currentTreeBtn.CheckCanUnlock() && player.Data.StatusData.IsGoldEnough(price))
+            if(currentTreeBtn.CheckCanUnlock() && player.Data.StatusData.UseGems((SkillType) GetASDIndex(), price))
             {
-                player.Data.StatusData.UseGold(price);
                 currentTreeBtn.SetUnlocked(GetASDIndex());
                 buyBtn.SetActive(false);
                 ShowSkillInfo(currentTreeBtn);

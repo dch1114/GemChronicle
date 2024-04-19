@@ -40,6 +40,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     {
         LoadDatas();
         SetDatas();
+        AddGems(); //юс╫ц
     }
 
     public void LoadDatas()
@@ -51,6 +52,13 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     public void SetDatas()
     {
         SetPlayerSkillInfos();
+    }
+
+    public void AddGems()
+    {
+        player.Data.StatusData.GetGems(SkillType.Ice, 10);
+        player.Data.StatusData.GetGems(SkillType.Fire, 10);
+        player.Data.StatusData.GetGems(SkillType.Light, 10);
     }
 
 

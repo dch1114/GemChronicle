@@ -63,7 +63,7 @@ public class PlayerStatusData : Status
         gems.Add(SkillType.Dark, 0);
     }
 
-    public bool IsGoldEnough(int _price)
+    private bool IsGoldEnough(int _price)
     {
         if (Gold - _price >= 0)
             return true;
@@ -71,12 +71,15 @@ public class PlayerStatusData : Status
             return false;
     }
 
-    public void UseGold(int _price)
+    public bool UseGold(int _price)
     {
         if (IsGoldEnough(_price))
+        {
             gold -= _price;
+            return true;
+        }
         else
-            Debug.Log("��尡 �����մϴ�");
+            return false;
     }
 
     public void TakeDamage(int damage)
@@ -96,6 +99,21 @@ public class PlayerStatusData : Status
         
     }
 
+    private bool IsGemEnough(SkillType gemType, int _amount)
+    {
+        if (gems.ContainsKey(gemType))
+        {
+            if (Gems[gemType] - _amount >= 0)
+                return true;
+            else
+                return false;
+        } else
+        {
+            InitializeGem();
+            return false;
+        }
+    }
+
     public void GetGem(SkillType gemType)
     {
         if (gems.ContainsKey(gemType)) gems[gemType]++;
@@ -104,6 +122,18 @@ public class PlayerStatusData : Status
     public void GetGems(SkillType gemType, int amount)
     {
         if (gems.ContainsKey(gemType)) gems[gemType] += amount;
+    }
+
+    public bool UseGems(SkillType gemType, int _amount)
+    {
+        if(IsGemEnough(gemType, _amount))
+        {
+            Gems[gemType] -= _amount;
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 
     public void TakeHeal(int _recovery)
