@@ -41,7 +41,8 @@ public class Enemy : MonoBehaviour, IDamageable
     private Vector3 leftDirection;
     private Vector3 rightDirection;
 
-    private IDamageable playerCollider;
+    [SerializeField] private ObjectPool skillPool;
+
     private void Awake()
     {
         EnemyAnimationData.Initialize();
@@ -109,17 +110,20 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if(foundEnemy && canAttack)
         {
-            if (playerCollider != null)
-            {
-                playerCollider.TakeDamage(EnemyStatusData.Atk);
-                Inventory.Instance.InventoryUIController.UpdateStatus();
-            }
+            SpawnSkill();
             canAttack = false;
-            StartCoroutine("WaitAttackCoolTime", EnemyStatusData.AttackRate);
+            StartCoroutine(WaitAttackCoolTime(EnemyStatusData.AttackRate));
         } else
         {
             SetState(EnemyState.Idle);
         }
+    }
+
+    private void SpawnSkill()
+    {
+        GameObject go = skillPool.SpawnFromPool("0");
+        go.transform.position = gameObject.transform.position;
+        go.SetActive(true);
     }
 
     private void OnDie()
@@ -196,10 +200,10 @@ public class Enemy : MonoBehaviour, IDamageable
                 break;
         }
     }
-    IEnumerator WaitAttackCoolTime()
+    IEnumerator WaitAttackCoolTime(float _coolTime)
     {
+        yield return new WaitForSeconds(_coolTime);
         canAttack = true;
-        yield return null;
     }
 
     private void Move(Vector3 _speed)
@@ -228,7 +232,6 @@ public class Enemy : MonoBehaviour, IDamageable
             foundEnemy = false;
         } else
         {
-            playerCollider = rayHit.collider.gameObject.GetComponent<IDamageable>();
             foundEnemy = true;
         }
     }

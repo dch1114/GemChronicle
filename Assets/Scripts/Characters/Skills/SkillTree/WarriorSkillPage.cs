@@ -53,7 +53,7 @@ public class WarriorSkillPage : SkillPages
             damageTxt.text = data.Damage.ToString();
             ShowSkillType(data);
             priceTxt.text = data.Price.ToString();
-            skillInfoIndex = data.ID;
+            skillInfoIndex = data.ID % 1000;
 
             buyBtn.SetActive(!skillBtns[skillInfoIndex].skillInfoData.IsUnlocked);
         }
