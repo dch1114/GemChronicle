@@ -74,7 +74,7 @@ public class WarriorSkillPage : SkillPages
             buyBtn.SetActive(false);
         } else
         {
-            Debug.Log("돈이 부족합니다.");
+            Debug.Log("젬이 부족합니다.");
         }
     }
 

@@ -129,6 +129,7 @@ public class PlayerStatusData : Status
         if(IsGemEnough(gemType, _amount))
         {
             Gems[gemType] -= _amount;
+            UIManager.Instance.skillPages.SetGems();
             return true;
         } else
         {
