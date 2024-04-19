@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private GameObject projectilePrefab; // 발사체 프리팹
@@ -12,6 +13,13 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private float projectileSpeed = 5.0f; // 발사체의 속도
 
+    //스탯
+    [SerializeField] public EnemyStatusData EnemyStatusData;
+
+    private EnemyState state;
+
+    [SerializeField] private List<GameObject> gems;
+
     private void Awake()
     {
     }
@@ -19,6 +27,18 @@ public class Boss : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Phase01());
+    }
+
+    void FixedUpdate()
+    {
+        switch (state)
+        {
+            case EnemyState.Idle:
+                break;
+            case EnemyState.Dead:
+                OnDie();
+                break;
+        }
     }
 
     private IEnumerator Phase01()
@@ -52,12 +72,59 @@ public class Boss : MonoBehaviour
             angle += angleStep;
         }
     }
+    protected void SetState(EnemyState newState)
+    {
+        state = newState;
+
+        switch (newState)
+        {
+            case EnemyState.Idle:
+                break;
+            case EnemyState.Dead:
+                //animator.SetTrigger(EnemyAnimationData.DieParameterHash);
+                break;
+        }
+    }
 
     public void OnDie()
     {
-        // 보스 파괴 파티클 생성
-        //GameObject clone = Instantiate(transform.position, Quaternion.identity);
-        // 보스 오브젝트 삭제
+        EnemyStatusData.Hp = 0;
+        SetState(EnemyState.Dead);
+        SpawnGems();
         Destroy(gameObject);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (EnemyStatusData.Hp - damage > 0)
+        {
+            EnemyStatusData.Hp -= damage;
+        }
+        else
+        {
+            SetState(EnemyState.Dead);
+        }
+    }
+
+    private void SpawnGems()
+    {
+        int amount = RandomAmount();
+
+        for (int i = 0; i < amount; i++)
+        {
+            SpawnTypeGem();
+        }
+    }
+
+    private int RandomAmount()
+    {
+        int amount = Random.Range(10, 20);
+
+        return amount;
+    }
+
+    private void SpawnTypeGem()
+    {
+        Instantiate(gems[3]).transform.position = gameObject.transform.position; ;
     }
 }
