@@ -58,6 +58,7 @@ public class Gem : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        SoundManager.Instance.PlayClip(SoundManager.Instance.gainGem); //test
         GameManager.Instance.player.Data.StatusData.GetGems(gemType, 1);
         Destroy(gameObject);
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,11 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private UI_Status[] uI_Statuses;
     //test
     private UI_ItemSlot[] inventoryListItemSlot;
+
+    //test
+    //[Header("Sound")]
+    //public AudioClip inventoryOpenSound;
+    //public AudioClip inventoryCloseSound;
 
     void Start()
     {
@@ -91,4 +97,27 @@ public class InventoryUIController : MonoBehaviour
         //shopTradePopup.gameObject.SetActive(false);
         shopUi.SetActive(false);
     }
+
+    //test
+    public void ToggleInventory()
+    {
+        if (inventoryPanel.activeSelf)
+        {
+            SoundManager.Instance.PlayClip(SoundManager.Instance.inventoryCloseSound);
+        }
+        else
+        {
+            SoundManager.Instance.PlayClip(SoundManager.Instance.inventoryOpenSound);
+        }
+    }
+
+    //private void PlayInventoryOpenSound()
+    //{
+    //    SoundManager.PlayClip(inventoryOpenSound);
+    //}
+
+    //private void PlayInventoryCloseSound()
+    //{
+    //    SoundManager.PlayClip(inventoryCloseSound);
+    //}
 }
