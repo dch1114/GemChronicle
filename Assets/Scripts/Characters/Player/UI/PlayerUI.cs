@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
+    [Header("Stat Bar")]
+    [SerializeField] Image hpBar;
+    [SerializeField] Image expBar;
+
     [Header("Slider")]
-    [SerializeField] Slider hpSlider;
-    [SerializeField] Slider expSlider;
     [SerializeField] Slider BGMSlider;
     [SerializeField] Slider SFXSlider;
 
@@ -50,7 +52,8 @@ public class PlayerUI : MonoBehaviour
         {
             if(playerData.MaxHp > 0)
             {
-                hpSlider.value = playerData.Hp / playerData.MaxHp;
+                hpBar.fillAmount = (float) playerData.Hp / (float) playerData.MaxHp;
+                Debug.Log(playerData.Hp / playerData.MaxHp);
                 hpTxt.text = playerData.Hp + " / " + playerData.MaxHp;
             }
         }
@@ -67,7 +70,8 @@ public class PlayerUI : MonoBehaviour
         {
             if(playerData.RequiredExp > 0)
             {
-                expSlider.value = playerData.Exp / playerData.RequiredExp;
+                expBar.fillAmount = playerData.Exp / playerData.RequiredExp;
+                Debug.Log(expBar.fillAmount);
                 expTxt.text = playerData.Exp + " / " + playerData.RequiredExp;
             }
         }
