@@ -43,6 +43,7 @@ public class PlayerSkill : Skill
 
         if (damageable != null)
         {
+            SoundManager.PlayClip(SoundManager.instance.attackSound); //test
             damageable.TakeDamage(player.Data.StatusData.Atk + data.Damage);
             if(data.Range > 0) gameObject.SetActive(false);
         }

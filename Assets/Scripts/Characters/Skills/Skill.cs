@@ -13,6 +13,9 @@ public class Skill : MonoBehaviour
 
     protected IDamageable damageable;
 
+    //test
+    //public AudioClip attackSound;
+
     protected void CheckType()
     {
         if(data.Range > 0)
@@ -59,4 +62,10 @@ public class Skill : MonoBehaviour
     {
         damageable = collision.gameObject.GetComponent<IDamageable>();
     }
+
+    //test
+    //protected virtual void PlayAttackSound()
+    //{
+    //    SoundManager.PlayClip(attackSound);
+    //}
 }
