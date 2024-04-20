@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private SkillType skillType;
 
-    [SerializeField] private List<GameObject> gems;
+    [SerializeField] private GameObject gem;
 
     private bool isLeft = true;
     private bool foundEnemy = false;
@@ -143,7 +143,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         for(int i = 0; i < amount; i++)
         {
-            SpawnTypeGem();
+            Instantiate(gem).transform.position = gameObject.transform.position;
         }
     }
 
@@ -161,25 +161,6 @@ public class Enemy : MonoBehaviour, IDamageable
         }
 
         return amount;
-    }
-
-    private void SpawnTypeGem()
-    {
-        switch(skillType)
-        {
-            case SkillType.Ice:
-                Instantiate(gems[0]).transform.position = gameObject.transform.position;
-                break;
-            case SkillType.Fire:
-                Instantiate(gems[1]).transform.position = gameObject.transform.position;
-                break;
-            case SkillType.Light:
-                Instantiate(gems[2]).transform.position = gameObject.transform.position; ;
-                break;
-            case SkillType.Dark:
-                Instantiate(gems[3]).transform.position = gameObject.transform.position; ;
-                break;
-        }
     }
 
     protected void SetState(EnemyState newState)
