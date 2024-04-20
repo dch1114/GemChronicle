@@ -31,9 +31,9 @@ public class InventoryUIController : MonoBehaviour
     private UI_ItemSlot[] inventoryListItemSlot;
 
     //test
-    [Header("Sound")]
-    public AudioClip inventoryOpenSound;
-    public AudioClip inventoryCloseSound;
+    //[Header("Sound")]
+    //public AudioClip inventoryOpenSound;
+    //public AudioClip inventoryCloseSound;
 
     void Start()
     {
@@ -103,21 +103,21 @@ public class InventoryUIController : MonoBehaviour
     {
         if (inventoryPanel.activeSelf)
         {
-            PlayInventoryCloseSound();
+            SoundManager.Instance.PlayClip(SoundManager.Instance.inventoryCloseSound);
         }
         else
         {
-            PlayInventoryOpenSound();
+            SoundManager.Instance.PlayClip(SoundManager.Instance.inventoryOpenSound);
         }
     }
 
-    private void PlayInventoryOpenSound()
-    {
-        SoundManager.PlayClip(inventoryOpenSound);
-    }
+    //private void PlayInventoryOpenSound()
+    //{
+    //    SoundManager.PlayClip(inventoryOpenSound);
+    //}
 
-    private void PlayInventoryCloseSound()
-    {
-        SoundManager.PlayClip(inventoryCloseSound);
-    }
+    //private void PlayInventoryCloseSound()
+    //{
+    //    SoundManager.PlayClip(inventoryCloseSound);
+    //}
 }

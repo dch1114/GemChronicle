@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 using UnityEngine.UI;
-using static ObjectPool;
 
 public class SoundManager : Singleton<SoundManager>
 {
@@ -12,13 +9,18 @@ public class SoundManager : Singleton<SoundManager>
     [SerializeField][Range(0f, 1f)] private float musicVolume;
     private ObjectPool objectPool;
 
-    private AudioSource musicAudioSource;             
-    public AudioClip musicClip;                       
+    private AudioSource musicAudioSource;
+    public AudioClip musicClip;
     public List<AudioSource> EffectAudioSource;
 
     //test
     public AudioClip attackSound;
+    public AudioClip gainGem;
 
+    public AudioClip inventoryOpenSound;
+    public AudioClip inventoryCloseSound;
+    public AudioClip SkillPageOpenSound;
+    public AudioClip SkillPageCloseSound;
     protected override void Awake()
     {
         base.Awake();
@@ -71,7 +73,7 @@ public class SoundManager : Singleton<SoundManager>
     }
     public void SetEffectVolume(Slider _getslider)
     {
-       for (int i = 0; i < EffectAudioSource.Count; i++)
+        for (int i = 0; i < EffectAudioSource.Count; i++)
         {
             EffectAudioSource[i].volume = _getslider.value;
         }

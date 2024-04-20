@@ -17,9 +17,9 @@ public class SkillPagesUI : MonoBehaviour
     private Player player;
 
     //test
-    [Header("Sound")]
-    public AudioClip SkillPageOpenSound;
-    public AudioClip SkillPageCloseSound;
+    //[Header("Sound")]
+    //public AudioClip SkillPageOpenSound;
+    //public AudioClip SkillPageCloseSound;
 
     private void Start()
     {
@@ -70,21 +70,21 @@ public class SkillPagesUI : MonoBehaviour
     {
         if (gems.activeSelf)
         {
-            PlaySkillPageCloseSound();
+            SoundManager.Instance.PlayClip(SoundManager.Instance.SkillPageCloseSound);
         }
         else
         {
-            PlaySkillPageOpenSound();
+            SoundManager.Instance.PlayClip(SoundManager.Instance.SkillPageOpenSound);
         }
     }
 
-    private void PlaySkillPageOpenSound()
-    {
-        SoundManager.PlayClip(SkillPageOpenSound);
-    }
+    //private void PlaySkillPageOpenSound()
+    //{
+    //    SoundManager.PlayClip(SkillPageOpenSound);
+    //}
 
-    private void PlaySkillPageCloseSound()
-    {
-        SoundManager.PlayClip(SkillPageCloseSound);
-    }
+    //private void PlaySkillPageCloseSound()
+    //{
+    //    SoundManager.PlayClip(SkillPageCloseSound);
+    //}
 }

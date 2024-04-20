@@ -486,7 +486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8194249473392097738, guid: 8c68253dbd5b8114fb31545c0be07505, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 50.9
+      value: 0.7000003
       objectReference: {fileID: 0}
     - target: {fileID: 8194249473392097738, guid: 8c68253dbd5b8114fb31545c0be07505, type: 3}
       propertyPath: m_LocalPosition.z
@@ -692,7 +692,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 293648148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5815942, y: 50.9, z: -10.070664}
+  m_LocalPosition: {x: -0.5815942, y: 0.7000003, z: -10.070664}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1904,7 +1904,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3764337215989346056, guid: 90e52449795e9b248a99aa6772371701, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 46.7
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3764337215989346056, guid: 90e52449795e9b248a99aa6772371701, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5452,9 +5452,29 @@ PrefabInstance:
       value: SoundManager
       objectReference: {fileID: 0}
     - target: {fileID: 3749772003178701521, guid: 8c2fed36bf5397a42817837617de31bb, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 0f2bca7ebfe17b34eb5cb086e8ce5c63, type: 3}
+    - target: {fileID: 3749772003178701521, guid: 8c2fed36bf5397a42817837617de31bb, type: 3}
       propertyPath: musicVolume
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3749772003178701521, guid: 8c2fed36bf5397a42817837617de31bb, type: 3}
+      propertyPath: SkillPageOpenSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 24c13f3ef0213f24d87503c5b6f1b5a3, type: 3}
+    - target: {fileID: 3749772003178701521, guid: 8c2fed36bf5397a42817837617de31bb, type: 3}
+      propertyPath: inventoryOpenSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 24c13f3ef0213f24d87503c5b6f1b5a3, type: 3}
+    - target: {fileID: 3749772003178701521, guid: 8c2fed36bf5397a42817837617de31bb, type: 3}
+      propertyPath: SkillPageCloseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fa3b0ff8ff7b3114f91dd906fac7750b, type: 3}
+    - target: {fileID: 3749772003178701521, guid: 8c2fed36bf5397a42817837617de31bb, type: 3}
+      propertyPath: inventoryCloseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fa3b0ff8ff7b3114f91dd906fac7750b, type: 3}
     - target: {fileID: 4101528735411375464, guid: 8c2fed36bf5397a42817837617de31bb, type: 3}
       propertyPath: m_RootOrder
       value: -1
