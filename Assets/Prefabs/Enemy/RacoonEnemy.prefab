@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5781502905384408825
 SpriteRenderer:
@@ -196,9 +196,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyStatusData:
     atk: 5
-    def: 0
+    def: 2
     hp: 30
-    exp: 20
+    exp: 5
     type: 0
     walkSpeed: 0
     attackRate: 3
@@ -215,6 +215,7 @@ MonoBehaviour:
   - {fileID: 1754942600076354860, guid: f5b122c33e7311d4d96bbe9bf484bc79, type: 3}
   - {fileID: 1754942600076354860, guid: 244ac7a55de8e6244bb952e8f1d26a0d, type: 3}
   skillPool: {fileID: 4725423103157306784}
+  damageEffect: {fileID: 8300000, guid: 82c30a37ce8f5514cb6f078fe40357c1, type: 3}
 --- !u!114 &4725423103157306784
 MonoBehaviour:
   m_ObjectHideFlags: 0
