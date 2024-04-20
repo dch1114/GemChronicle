@@ -53,7 +53,6 @@ public class PlayerUI : MonoBehaviour
             if(playerData.MaxHp > 0)
             {
                 hpBar.fillAmount = (float) playerData.Hp / (float) playerData.MaxHp;
-                Debug.Log(playerData.Hp / playerData.MaxHp);
                 hpTxt.text = playerData.Hp + " / " + playerData.MaxHp;
             }
         }
@@ -70,8 +69,7 @@ public class PlayerUI : MonoBehaviour
         {
             if(playerData.RequiredExp > 0)
             {
-                expBar.fillAmount = playerData.Exp / playerData.RequiredExp;
-                Debug.Log(expBar.fillAmount);
+                expBar.fillAmount = (float) playerData.Exp / (float) playerData.RequiredExp;
                 expTxt.text = playerData.Exp + " / " + playerData.RequiredExp;
             }
         }
@@ -109,14 +107,14 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateBGMVolume()
     {
-        if(SoundManager.instance != null)
-            SoundManager.instance.SetMusicVolume(BGMSlider);
+        if(SoundManager.Instance != null)
+            SoundManager.Instance.SetMusicVolume(BGMSlider);
     }
 
     public void UpdateSFXVolume()
     {
-        if (SoundManager.instance != null)
-            SoundManager.instance.SetMusicVolume(SFXSlider);
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.SetMusicVolume(SFXSlider);
     }
 
     public void SaveBtn()

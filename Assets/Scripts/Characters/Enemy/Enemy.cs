@@ -43,6 +43,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private ObjectPool skillPool;
 
+    [SerializeField] AudioClip damageEffect;
+
     private void Awake()
     {
         EnemyAnimationData.Initialize();
@@ -132,6 +134,7 @@ public class Enemy : MonoBehaviour, IDamageable
         SetState(EnemyState.Dead);
         SpawnGems();
         gameObject.SetActive(false);
+        GameManager.Instance.player.Data.StatusData.GetExp(EnemyStatusData.Exp);
     }
 
     private void SpawnGems()
@@ -258,9 +261,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        if (EnemyStatusData.Hp - damage > 0)
+        SoundManager.Instance.PlayClip(damageEffect);
+        float realDamage = damage * 1.2f - EnemyStatusData.Def * 0.2f;
+        if (EnemyStatusData.Hp - realDamage > 0)
         {
-            EnemyStatusData.Hp -= damage;
+            EnemyStatusData.Hp -= (int) realDamage;
         }
         else
         {
