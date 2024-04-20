@@ -85,4 +85,9 @@ public class SoundManager : Singleton<SoundManager>
         SoundSource soundSource = obj.GetComponent<SoundSource>();
         soundSource.Play(clip, soundEffectVolume, soundEffectPitchVariance);
     }
+
+    public void PlayAttackClip()
+    {
+        PlayClip(attackSound);
+    }
 }

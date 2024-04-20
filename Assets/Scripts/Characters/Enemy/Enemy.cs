@@ -43,8 +43,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private ObjectPool skillPool;
 
-    [SerializeField] AudioClip damageEffect;
-
     private void Awake()
     {
         EnemyAnimationData.Initialize();
@@ -242,7 +240,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        SoundManager.Instance.PlayClip(damageEffect);
+        SoundManager.Instance.PlayAttackClip();
         float realDamage = damage * 1.2f - EnemyStatusData.Def * 0.2f;
         if (EnemyStatusData.Hp - realDamage > 0)
         {
