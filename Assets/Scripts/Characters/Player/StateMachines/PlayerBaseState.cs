@@ -115,6 +115,7 @@ public class PlayerBaseState : IState
         }
 
         bool isActive = stateMachine.Player.SkillPage.activeSelf;
+        stateMachine.Player.skillpageUI.ToggleSkillPage(); //test
         stateMachine.Player.SkillPage.SetActive(!isActive);
     }
 
@@ -132,6 +133,7 @@ public class PlayerBaseState : IState
     private void OnInventory(InputAction.CallbackContext context)
     {
         bool isActive = stateMachine.Player.InventoryUIPanel.activeSelf;
+        stateMachine.Player.inventoryUIController.ToggleInventory();
         stateMachine.Player.InventoryUIPanel.SetActive(!isActive);
     }
 

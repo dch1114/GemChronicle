@@ -16,6 +16,11 @@ public class SkillPagesUI : MonoBehaviour
 
     private Player player;
 
+    //test
+    [Header("Sound")]
+    public AudioClip SkillPageOpenSound;
+    public AudioClip SkillPageCloseSound;
+
     private void Start()
     {
         player = GameManager.Instance.player;
@@ -55,5 +60,28 @@ public class SkillPagesUI : MonoBehaviour
         iceGem.text = player.Data.StatusData.Gems[SkillType.Ice].ToString();
         fireGem.text = player.Data.StatusData.Gems[SkillType.Fire].ToString();
         lightGem.text = player.Data.StatusData.Gems[SkillType.Light].ToString();
+    }
+
+    //test
+    public void ToggleSkillPage()
+    {
+        if (gems.activeSelf)
+        {
+            PlaySkillPageCloseSound();
+        }
+        else
+        {
+            PlaySkillPageOpenSound();
+        }
+    }
+
+    private void PlaySkillPageOpenSound()
+    {
+        SoundManager.PlayClip(SkillPageOpenSound);
+    }
+
+    private void PlaySkillPageCloseSound()
+    {
+        SoundManager.PlayClip(SkillPageCloseSound);
     }
 }

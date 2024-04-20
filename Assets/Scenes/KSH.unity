@@ -1102,7 +1102,7 @@ PrefabInstance:
     - target: {fileID: 9082890348043632067, guid: 53e4b25e956b9d246af83814135ea6f8, type: 3}
       propertyPath: miniQuest
       value: 
-      objectReference: {fileID: 752083300}
+      objectReference: {fileID: 0}
     - target: {fileID: 9082890348043632067, guid: 53e4b25e956b9d246af83814135ea6f8, type: 3}
       propertyPath: questName
       value: 
@@ -1625,22 +1625,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75f6985cd1b2b8c46995921d5c2d3549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &752083299 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6098848038444026669, guid: f8f6fa87b811e594e808a47ec25b9900, type: 3}
-  m_PrefabInstance: {fileID: 7885633053680942941}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &752083300 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3839882375144523438, guid: f8f6fa87b811e594e808a47ec25b9900, type: 3}
-  m_PrefabInstance: {fileID: 7885633053680942941}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07cc9686dfc7aeb42ac211628e525006, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &759838329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2618036221185150658, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
@@ -1798,6 +1782,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2136340426436203665, guid: 90e52449795e9b248a99aa6772371701, type: 3}
+      propertyPath: InventoryUIPanel
+      value: 
+      objectReference: {fileID: 1834345031}
     - target: {fileID: 3764337215989346056, guid: 90e52449795e9b248a99aa6772371701, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2230,6 +2218,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8014287464766654880, guid: 19ba0e675efad1741ab0ec7937cfafe8, type: 3}
   m_PrefabInstance: {fileID: 1033430804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1084648873 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 335643777698244115, guid: f8f6fa87b811e594e808a47ec25b9900, type: 3}
+  m_PrefabInstance: {fileID: 7885633053680942941}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &1210668347 stripped
 RectTransform:
@@ -3575,6 +3568,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8360587876418338889, guid: 43efa15e058fc4842bee88eeeac0938f, type: 3}
+      propertyPath: inventoryOpenSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 24c13f3ef0213f24d87503c5b6f1b5a3, type: 3}
+    - target: {fileID: 8360587876418338889, guid: 43efa15e058fc4842bee88eeeac0938f, type: 3}
+      propertyPath: inventoryCloseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fa3b0ff8ff7b3114f91dd906fac7750b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3710,7 +3711,7 @@ RectTransform:
   - {fileID: 1222222274}
   - {fileID: 1834345029}
   - {fileID: 164233429}
-  - {fileID: 752083299}
+  - {fileID: 1084648873}
   - {fileID: 2136027046}
   - {fileID: 2080702714}
   m_Father: {fileID: 0}
@@ -8368,6 +8369,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7069960505961819326, guid: 206ed6ca811296149ae3987f451d3a3a, type: 3}
+      propertyPath: SkillPageOpenSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 24c13f3ef0213f24d87503c5b6f1b5a3, type: 3}
+    - target: {fileID: 7069960505961819326, guid: 206ed6ca811296149ae3987f451d3a3a, type: 3}
+      propertyPath: SkillPageCloseSound
+      value: 
+      objectReference: {fileID: 8300000, guid: fa3b0ff8ff7b3114f91dd906fac7750b, type: 3}
     - target: {fileID: 7233461599899572910, guid: 206ed6ca811296149ae3987f451d3a3a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -9877,6 +9886,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1834407487}
     m_Modifications:
+    - target: {fileID: 5847517269723237772, guid: f8f6fa87b811e594e808a47ec25b9900, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847517269723237772, guid: f8f6fa87b811e594e808a47ec25b9900, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000061035156
+      objectReference: {fileID: 0}
     - target: {fileID: 6098848038444026669, guid: f8f6fa87b811e594e808a47ec25b9900, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
