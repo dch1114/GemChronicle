@@ -23,6 +23,7 @@ public class PlayerStatusData : Status
 
     public string Name { get { return name; } set { name = value; } }
     public int MaxHp { get { return maxHp; } set { maxHp = value; } }
+    public int RequiredExp { get { return requiredExp; } set { requiredExp = value; } }
     public int Level {  get { return level; } set { level = value; } }
     public int Gold { get { return gold; } set {  gold = value; } }
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
@@ -39,11 +40,13 @@ public class PlayerStatusData : Status
         def = data.def;
         maxHp = data.maxHp;
         requiredExp = data.requiredExp;
+
+        UIManager.Instance.playerUI.UpdateStatus();
     }
 
     private void SetStatus()
     {
-        //TODO: ���� ������ ����
+        //TODO: Maybe on GameStart
         Atk = 10;
         Def = 5;
         MaxHp = 100;
@@ -51,7 +54,7 @@ public class PlayerStatusData : Status
         Exp = 0;
         Level = 1;
         Gold = 2000;
-        Name = "���";
+        Name = "Hello";
         JobType = JobType.Warrior;
     }
 
@@ -63,7 +66,7 @@ public class PlayerStatusData : Status
         gems.Add(SkillType.Dark, 0);
     }
 
-    public bool IsGoldEnough(int _price)
+    private bool IsGoldEnough(int _price)
     {
         if (Gold - _price >= 0)
             return true;
@@ -71,19 +74,32 @@ public class PlayerStatusData : Status
             return false;
     }
 
-    public void UseGold(int _price)
+    public bool UseGold(int _price)
     {
         if (IsGoldEnough(_price))
+        {
             gold -= _price;
+            UIManager.Instance.playerUI.UpdateGold();
+            return true;
+        }
         else
-            Debug.Log("��尡 �����մϴ�");
+            return false;
     }
 
     public void TakeDamage(int damage)
     {
-        if(hp - damage > 0)
+        float realDamage = damage * 1.2f - def * 0.5f;
+
+        if(hp - realDamage > 0)
         {
-            hp -= damage;
+            if(realDamage > 0)
+            {
+                hp -= (int) Math.Floor(realDamage);
+                UIManager.Instance.playerUI.UpdateHp();
+            } else
+            {
+                //TODO: SHOW DAMAGE 0
+            }
         } else
         {
             OnDie();
@@ -92,18 +108,41 @@ public class PlayerStatusData : Status
 
     private void OnDie()
     {
-        //�������� ������
-        
+        //TODO: RESPAWN AT VILLAGE
     }
 
-    public void GetGem(SkillType gemType)
+    private bool IsGemEnough(SkillType gemType, int _amount)
     {
-        if (gems.ContainsKey(gemType)) gems[gemType]++;
+        if (gems.ContainsKey(gemType))
+        {
+            if (Gems[gemType] - _amount >= 0)
+                return true;
+            else
+                return false;
+        } else
+        {
+            InitializeGem();
+            return false;
+        }
     }
 
     public void GetGems(SkillType gemType, int amount)
     {
         if (gems.ContainsKey(gemType)) gems[gemType] += amount;
+        UIManager.Instance.skillPages.UpdateGems();
+    }
+
+    public bool UseGems(SkillType gemType, int _amount)
+    {
+        if(IsGemEnough(gemType, _amount))
+        {
+            Gems[gemType] -= _amount;
+            UIManager.Instance.skillPages.UpdateGems();
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 
     public void TakeHeal(int _recovery)
@@ -116,6 +155,8 @@ public class PlayerStatusData : Status
         {
             hp += _recovery;
         }
+
+        UIManager.Instance.playerUI.UpdateHp();
     }
 
 }

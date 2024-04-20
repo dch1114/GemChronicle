@@ -7,15 +7,6 @@ using TMPro;
 
 public class UIManager : Singleton<UIManager>
 {
-
-    [Header("Bar")]
-    [SerializeField] private Image expPlayer;
-
-    [Header("Texto")]
-    [SerializeField] public TextMeshProUGUI GoldTMP;
-    [SerializeField] public TextMeshProUGUI expTMP;
-    [SerializeField] public TextMeshProUGUI levelTMP;
-
     [Header("Paneles")]
     [SerializeField] private GameObject panelQuest;
 
@@ -43,7 +34,10 @@ public class UIManager : Singleton<UIManager>
     public GameObject shopPanel;
     public GameObject shopChoice;
 
+    [Header("UI Scripts")]
+    public PlayerUI playerUI;
     public SkillPagesUI skillPages;
+    public AlertPanelUI alertPanelUI;
 
     public GameObject potalListUI;
     public PotalListUI potalUIScript;
@@ -88,8 +82,6 @@ public class UIManager : Singleton<UIManager>
     }
     private void Update()
     {
-        UpdateUIPersonnel();
-
         if (Input.GetKeyUp(KeyCode.UpArrow) && currentOpenMenuType.Equals(OpenMenuType.Shop)) PopupShopMenuSelect(--currentShowMenuType);
 
         if (Input.GetKeyUp(KeyCode.DownArrow) && currentOpenMenuType.Equals(OpenMenuType.Shop)) PopupShopMenuSelect(++currentShowMenuType);
@@ -321,18 +313,6 @@ public class UIManager : Singleton<UIManager>
     public void OpenClosePanelCompleteQuest()
     {
         panelCompleteQuest.SetActive(!panelCompleteQuest.activeSelf);
-    }
-
-
-
-    private void UpdateUIPersonnel()
-    {
-        expPlayer.fillAmount = Mathf.Lerp(expPlayer.fillAmount,
-            expActual / NewLevel, 10f * Time.deltaTime);
-
-        expTMP.text = $"{((expActual / NewLevel) * 100):F2}%";
-        levelTMP.text = Level.ToString();
-      
     }
 
     public void UpdateExpPersonality(float pExpActul, float pExpRequired, int pLevel)

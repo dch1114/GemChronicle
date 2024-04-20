@@ -65,7 +65,6 @@ public class SoundManager : MonoBehaviour
     }
     public void SetMusicVolume(Slider _getslider)
     {
-      
         musicAudioSource.volume = _getslider.value;
     }
     public void SetEffectVolume(Slider _getslider)

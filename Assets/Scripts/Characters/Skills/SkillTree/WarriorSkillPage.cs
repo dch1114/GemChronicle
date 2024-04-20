@@ -66,15 +66,15 @@ public class WarriorSkillPage : SkillPages
     public override void UnlockSkillBtn()
     {
         int price = skillBtns[skillInfoIndex].skillInfoData.Price;
+        SkillType gemType = skillBtns[skillInfoIndex].skillInfoData.SkillType;
 
-        if (skillBtns[skillInfoIndex].CheckCanUnlock() && player.Data.StatusData.IsGoldEnough(price))
+        if (skillBtns[skillInfoIndex].CheckCanUnlock() && player.Data.StatusData.UseGems(gemType, price))
         {
-            player.Data.StatusData.UseGold(price);
             skillBtns[skillInfoIndex].SetUnlocked();
             buyBtn.SetActive(false);
         } else
         {
-            Debug.Log("돈이 부족합니다.");
+            Debug.Log("젬이 부족합니다.");
         }
     }
 

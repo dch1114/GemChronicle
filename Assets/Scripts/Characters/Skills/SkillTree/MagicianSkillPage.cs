@@ -30,16 +30,12 @@ public class MagicianSkillPage : SkillPages
     public override void UnlockSkillBtn()
     {
         int price = skillBtns[skillInfoIndex].skillInfoData.Price;
+        SkillType gemType = skillBtns[skillInfoIndex].skillInfoData.SkillType;
         //젬으로 교체 필요
-        if (skillBtns[skillInfoIndex].CheckCanUnlock() && player.Data.StatusData.IsGoldEnough(price))
+        if (skillBtns[skillInfoIndex].CheckCanUnlock() && player.Data.StatusData.UseGems(gemType, price))
         {
-            player.Data.StatusData.UseGold(price);
             skillBtns[skillInfoIndex].SetUnlocked();
             buyBtn.SetActive(false);
-        }
-        else
-        {
-            Debug.Log("젬이 부족합니다.");
         }
     }
 
