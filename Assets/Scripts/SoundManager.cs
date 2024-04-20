@@ -5,10 +5,8 @@ using UnityEngine.Pool;
 using UnityEngine.UI;
 using static ObjectPool;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
-    public static SoundManager instance;
-
     [SerializeField][Range(0f, 1f)] private float soundEffectVolume;
     [SerializeField][Range(0f, 1f)] private float soundEffectPitchVariance;
     [SerializeField][Range(0f, 1f)] private float musicVolume;
@@ -21,9 +19,10 @@ public class SoundManager : MonoBehaviour
     //test
     public AudioClip attackSound;
 
-    private void Awake()
+    protected override void Awake()
     {
-        instance = this;
+        base.Awake();
+
         musicAudioSource = GetComponent<AudioSource>();
         musicAudioSource.volume = musicVolume;
         musicAudioSource.loop = true;
@@ -60,11 +59,11 @@ public class SoundManager : MonoBehaviour
         //}
     }
 
-    public static void ChangeBackGroundMusic(AudioClip music)
+    public void ChangeBackGroundMusic(AudioClip music)
     {
-        instance.musicAudioSource.Stop();
-        instance.musicAudioSource.clip = music;
-        instance.musicAudioSource.Play();
+        musicAudioSource.Stop();
+        musicAudioSource.clip = music;
+        musicAudioSource.Play();
     }
     public void SetMusicVolume(Slider _getslider)
     {
@@ -77,11 +76,11 @@ public class SoundManager : MonoBehaviour
             EffectAudioSource[i].volume = _getslider.value;
         }
     }
-    public static void PlayClip(AudioClip clip)
+    public void PlayClip(AudioClip clip)
     {
-        GameObject obj = instance.objectPool.SpawnFromPool("SoundSource");
+        GameObject obj = objectPool.SpawnFromPool("SoundSource");
         obj.SetActive(true);
         SoundSource soundSource = obj.GetComponent<SoundSource>();
-        soundSource.Play(clip, instance.soundEffectVolume, instance.soundEffectPitchVariance);
+        soundSource.Play(clip, soundEffectVolume, soundEffectPitchVariance);
     }
 }
