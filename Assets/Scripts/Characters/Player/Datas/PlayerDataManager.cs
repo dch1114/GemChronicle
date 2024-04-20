@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -153,6 +154,24 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         }
     }
 
+    public bool IsCurrentDataSaved()
+    {
+        if(player != null)
+        {
+            PlayerStatusData data = player.Data.StatusData;
+
+            if (currentStatus.jobType != data.JobType) return false;
+            if (currentStatus.name != data.Name) return false;
+            if (currentStatus.level != data.Level) return false;
+            if (currentStatus.exp != data.Exp) return false;
+            if (currentStatus.hp != data.Hp) return false;
+            if (currentStatus.gold != data.Gold) return false;
+            if( currentStatus.gems != data.Gems) return false;
+        }
+
+        return true;
+    }
+
     public void SaveCurrentDatas()
     {
         if(player != null)
@@ -175,6 +194,11 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         string jsonData = JsonUtility.ToJson(currentStatus);
         string path = Path.Combine(Application.dataPath, saveFileName);
         File.WriteAllText(path, jsonData);
+
+        if(UIManager.Instance != null)
+        {
+            UIManager.Instance.alertPanelUI.ShowAlert("저장되었습니다.");
+        }
     }
 
     public void LoadPlayerDataToJson()

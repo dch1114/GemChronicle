@@ -37,6 +37,7 @@ public class UIManager : Singleton<UIManager>
     [Header("UI Scripts")]
     public PlayerUI playerUI;
     public SkillPagesUI skillPages;
+    public AlertPanelUI alertPanelUI;
 
     public GameObject potalListUI;
     public PotalListUI potalUIScript;

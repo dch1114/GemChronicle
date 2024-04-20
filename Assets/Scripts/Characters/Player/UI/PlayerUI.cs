@@ -9,14 +9,19 @@ public class PlayerUI : MonoBehaviour
     [Header("Slider")]
     [SerializeField] Slider hpSlider;
     [SerializeField] Slider expSlider;
+    [SerializeField] Slider BGMSlider;
+    [SerializeField] Slider SFXSlider;
 
     [Header("Text")]
     [SerializeField] TextMeshProUGUI hpTxt;
     [SerializeField] TextMeshProUGUI expTxt;
     [SerializeField] TextMeshProUGUI levelTxt;
     [SerializeField] TextMeshProUGUI goldTxt;
+    [SerializeField] TextMeshProUGUI alertTxt;
 
+    [Header("Panel")]
     [SerializeField] GameObject soundSetting;
+    [SerializeField] GameObject alertPanel;
 
     PlayerStatusData playerData;
 
@@ -96,5 +101,44 @@ public class PlayerUI : MonoBehaviour
         bool current = soundSetting.activeSelf;
 
         soundSetting.SetActive(!current);
+    }
+
+    public void UpdateBGMVolume()
+    {
+        if(SoundManager.instance != null)
+            SoundManager.instance.SetMusicVolume(BGMSlider);
+    }
+
+    public void UpdateSFXVolume()
+    {
+        if (SoundManager.instance != null)
+            SoundManager.instance.SetMusicVolume(SFXSlider);
+    }
+
+    public void SaveBtn()
+    {
+        if(PlayerDataManager.Instance != null)
+            PlayerDataManager.Instance.SavePlayerDataToJson();
+    }
+
+    public void ExitBtn()
+    {
+        if(PlayerDataManager.Instance != null)
+        {
+            if(PlayerDataManager.Instance.IsCurrentDataSaved())
+            {
+                //저장되어있으면 경고없음
+                alertTxt.text = "게임을 종료하시겠습니까?";
+            } else
+            {
+                alertTxt.text = "게임을 종료하시겠습니까?\n(※ 저장하지 않았습니다.)";
+            }
+            alertPanel.SetActive(true);
+        }
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
     }
 }

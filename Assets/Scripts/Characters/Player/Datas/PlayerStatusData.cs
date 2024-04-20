@@ -64,8 +64,6 @@ public class PlayerStatusData : Status
         gems.Add(SkillType.Fire, 0);
         gems.Add(SkillType.Light, 0);
         gems.Add(SkillType.Dark, 0);
-
-        UIManager.Instance.skillPages.UpdateGems();
     }
 
     private bool IsGoldEnough(int _price)

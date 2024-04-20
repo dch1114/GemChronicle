@@ -52,8 +52,11 @@ public class SkillPagesUI : MonoBehaviour
 
     public void UpdateGems()
     {
-        iceGem.text = player.Data.StatusData.Gems[SkillType.Ice].ToString();
-        fireGem.text = player.Data.StatusData.Gems[SkillType.Fire].ToString();
-        lightGem.text = player.Data.StatusData.Gems[SkillType.Light].ToString();
+        if(player != null)
+        {
+            iceGem.text = player.Data.StatusData.Gems[SkillType.Ice].ToString();
+            fireGem.text = player.Data.StatusData.Gems[SkillType.Fire].ToString();
+            lightGem.text = player.Data.StatusData.Gems[SkillType.Light].ToString();
+        }
     }
 }
