@@ -74,10 +74,11 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Awake()
     {
-        playerinput = GameManager.Instance.player.Input;
+        
     }
     private void Start()
     {
+        playerinput = GameManager.Instance.player.Input;
         InitializeShopMenuButtons();
     }
     private void Update()
