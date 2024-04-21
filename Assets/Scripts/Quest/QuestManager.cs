@@ -189,7 +189,7 @@ public class QuestManager : Singleton<QuestManager>
         if (_ongoingQuests.ContainsKey(questId) == false)
             return;
 
-        if (GetCurrentQuestData().Finish)
+        if (QuestManager.Instance.GetCurrentQuestData().Finish)
         {
             //특정 문구 표시후
             //씬이동
