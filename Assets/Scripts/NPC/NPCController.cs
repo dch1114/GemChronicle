@@ -65,7 +65,7 @@ public class NPCController : MonoBehaviour, IInteractive
         {
             currentNpcIDForQuest = index + 1;
 
-            if (npcType == NPCType.Teacher || npcType == NPCType.Friend)
+            if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
             {
                 questData = DataManager.Instance.GetQuestTableData(currentNpcIDForQuest);
 
@@ -189,8 +189,9 @@ public class NPCController : MonoBehaviour, IInteractive
           
 
 
-            if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.SubNpc)
+            if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.SubNpc || npcType == NPCType.Diary)
             {
+
                 QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
             }
             else if (npcType == NPCType.Healer)
