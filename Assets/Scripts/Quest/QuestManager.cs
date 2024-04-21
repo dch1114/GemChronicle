@@ -213,15 +213,23 @@ public class QuestManager : Singleton<QuestManager>
 
         Debug.Log($"ID:{questId} 퀘스트 클리어!");
         //SetClearProgressQuestUI(questId);
-        OnQuestCompleteCallback?.Invoke(questId);
 
-        QuestCompleteCallBack(questId);
+        if (questId > 10) {
+
+            OnQuestCompleteCallback?.Invoke(questId);
 
 
-        if (IsContinueQuest())
-        {
-            SubscribeQuest(currentProgressMainQuestData.ID);
+            QuestCompleteCallBack(questId);
+
+            if (IsContinueQuest())
+            {
+                SubscribeQuest(currentProgressMainQuestData.ID);
+            }
         }
+
+
+
+
     }
 
     void QuestCompleteCallBack(int id)
@@ -243,7 +251,11 @@ public class QuestManager : Singleton<QuestManager>
 
     public bool IsContinueQuest()
     {
-        return currentProgressMainQuestData.Continue;
+        if (currentProgressMainQuestData != null)
+        {
+            return currentProgressMainQuestData.Continue;
+        }
+        return false;
     }
     public bool IsOnTalk()
     {

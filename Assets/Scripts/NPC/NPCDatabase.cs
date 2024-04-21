@@ -45,6 +45,7 @@ public enum NPCType
     Shop,
     Healer,
     Diary
+
 }
 public class NPCInstance
 {

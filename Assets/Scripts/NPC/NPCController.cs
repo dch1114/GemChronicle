@@ -12,6 +12,8 @@ public class NPCController : MonoBehaviour, IInteractive
     private NPC npcData;
     private NPCManager npcManager; // NPCManager의 역참조를 받을 필드 추가
 
+    public SubQuestDataSheet subQuest;
+
     TalkManager talkManager;
     PlayerInput playerinput;
 
@@ -186,6 +188,7 @@ public class NPCController : MonoBehaviour, IInteractive
         //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않아 대화를 종료해야 한다면
         if (scriptTableDatas.Count <= 0)
         {
+<<<<<<< Updated upstream
           
 
 
@@ -193,24 +196,36 @@ public class NPCController : MonoBehaviour, IInteractive
             {
 
                 QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
-            }
-            else if (npcType == NPCType.Healer)
+=======
+            //서브 퀘스트가 존재하는 NPC라면
+            if (npcType == NPCType.SubNpc)
             {
-                if (GameManager.Instance.player.Data.StatusData.UseGold(100))
+                QuestManager.Instance.SubscribeQuest((int)npcType);
+>>>>>>> Stashed changes
+            }
+            else
+            {
+                if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
+                {
+
+                    QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
+                }
+                else if (npcType == NPCType.Healer && GameManager.Instance.player.Data.StatusData.UseGold(100))
                 {
                     GameManager.Instance.player.Data.StatusData.Hp = GameManager.Instance.player.Data.StatusData.MaxHp;
                 }
-                
-            }
-            else
-            { 
-            
-            }
+                else
+                {
+
+                }
 
                 if (QuestManager.Instance.IsProgressQuest(currentNpcIDForQuest) && QuestManager.Instance.CheckCompareTargetID(npcData.ID))
-            {
-                QuestManager.Instance.NotifyQuest(Constants.QuestType.TalkNpc, npcData.ID, 1);
+                {
+                    QuestManager.Instance.NotifyQuest(Constants.QuestType.TalkNpc, npcData.ID, 1);
+                }
             }
+
+
 
             //Debug.Log("NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않음");
             //Debug.Log("이동초기화전");
