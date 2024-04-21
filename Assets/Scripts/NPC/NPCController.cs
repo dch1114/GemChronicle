@@ -188,20 +188,10 @@ public class NPCController : MonoBehaviour, IInteractive
         //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않아 대화를 종료해야 한다면
         if (scriptTableDatas.Count <= 0)
         {
-<<<<<<< Updated upstream
-          
-
-
-            if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.SubNpc || npcType == NPCType.Diary)
-            {
-
-                QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
-=======
             //서브 퀘스트가 존재하는 NPC라면
             if (npcType == NPCType.SubNpc)
             {
                 QuestManager.Instance.SubscribeQuest((int)npcType);
->>>>>>> Stashed changes
             }
             else
             {
