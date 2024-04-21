@@ -35,6 +35,24 @@
 			"discription": "무기,방어구상점",
 			"isNPC": "TRUE",
 			"portraitId": 2
+		},
+		{
+			"ID": 6000,
+			"role": "회복",
+			"name": "회복",
+			"place": "시작의마을",
+			"discription": "회복",
+			"isNPC": "TRUE",
+			"portraitId": 4
+		},
+		{
+			"ID": 7000,
+			"role": "일기",
+			"name": "일기",
+			"place": "시작의마을",
+			"discription": "일기",
+			"isNPC": "TRUE",
+			"portraitId": 5
 		}
 	],
 	"questTable": [
@@ -76,25 +94,25 @@
 		},
 		{
 			"id": 2006,
-			"talk_1": 113,
+			"talk_1": 114,
 			"talk_2": 105,
 			"talk_3": 103
 		},
 		{
 			"id": 2007,
-			"talk_1": 113,
+			"talk_1": 114,
 			"talk_2": 105,
 			"talk_3": 103
 		},
 		{
 			"id": 2008,
-			"talk_1": 113,
+			"talk_1": 114,
 			"talk_2": 105,
 			"talk_3": 103
 		},
 		{
 			"id": 2009,
-			"talk_1": 113,
+			"talk_1": 114,
 			"talk_2": 105,
 			"talk_3": 103
 		},
@@ -112,6 +130,18 @@
 		},
 		{
 			"id": 5000,
+			"talk_1": 116,
+			"talk_2": 105,
+			"talk_3": 103
+		},
+		{
+			"id": 6000,
+			"talk_1": 116,
+			"talk_2": 105,
+			"talk_3": 103
+		},
+		{
+			"id": 7000,
 			"talk_1": 116,
 			"talk_2": 105,
 			"talk_3": 103
@@ -201,7 +231,7 @@
 		{
 			"id": 113,
 			"scriptId": [
-				17
+				25
 			]
 		},
 		{
@@ -414,6 +444,13 @@
 			"speaker": 1001,
 			"dialog": [
 				"어서오거라"
+			]
+		},
+		{
+			"id": 25,
+			"speaker": 1001,
+			"dialog": [
+				"서브퀘스트를줄께"
 			]
 		}
 	]

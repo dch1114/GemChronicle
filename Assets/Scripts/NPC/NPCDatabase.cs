@@ -41,8 +41,10 @@ public enum NPCType
 { 
     Teacher,
     Friend,
-    Npc,
-    Shop
+    SubNpc,
+    Shop,
+    Healer,
+    Diary
 }
 public class NPCInstance
 {
