@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void OnDie()
     {
-        QuestManager.Instance.QuestUpdate(500000, 1);
+        QuestManager.Instance.QuestUpdate(EnemyStatusData.MonsterId, 1);
         EnemyStatusData.Hp = 0;
         SetState(EnemyState.Dead);
         SpawnGems();
