@@ -1,14 +1,14 @@
 using System.Collections;
+using System.IO;
 using UnityEngine;
 
 public class StartManager : MonoBehaviour
 {
     [SerializeField] private GameObject startText;
     [SerializeField] private GameObject loadErrorMsg;
-    public RectTransform gameTitle;
-    public GameObject gameStart;
-    public GameObject CharacterChoosPrefab;
-
+    [SerializeField] private RectTransform gameTitle;
+    [SerializeField] private GameObject gameStart;
+    [SerializeField] private GameObject characterChooseGO;
 
     private bool gameStarted = false;
     private Vector3 titleTargetPosition;
@@ -48,29 +48,42 @@ public class StartManager : MonoBehaviour
         gameStarted = true;
     }
 
-    public void StartNewGame()
+    public void StartGame()
     {
-        LoadingSceneController.LoadScene("KSH");
+        LoadingSceneController.LoadScene("KYW_TestMain");
     }
 
-    public void ContinueGame()
+    public void ContinueGameBtn()
     {
+        string path = Path.Combine(Application.dataPath, "playerData.json");
 
+        if (File.Exists(path))
+        {
+            GameManager.Instance.isNew = false;
+            StartGame();
+        }
+        else
+        {
+            Debug.Log("저장 파일 없음");
+        }
     }
 
-    //public IEnumerator LoadScene()
-    //{
-    //    yield return null;
+    public void NewGameBtn()
+    {
+        characterChooseGO.SetActive(true);
+        gameStart.SetActive(true);
+        gameTitle.gameObject.SetActive(false);
+    }
 
-    //    AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("KSH");
+    public void TurnBackBtn()
+    {
+        gameTitle.gameObject.SetActive(true);
+        gameStart.SetActive(true);
+        characterChooseGO.SetActive(false);
+    }
 
-    //    Debug.Log("Pro : " + asyncOperation.progress);
-
-    //    while (asyncOperation.isDone)
-    //    {
-    //        progressText.text = "Loading " + (asyncOperation.progress * 100) + "%";
-
-    //        yield return null;
-    //    }
-    //}
+    public void CreateCharacter()
+    {
+        StartGame();
+    }
 }

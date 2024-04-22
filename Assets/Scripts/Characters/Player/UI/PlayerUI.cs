@@ -27,7 +27,7 @@ public class PlayerUI : MonoBehaviour
 
     PlayerStatusData playerData;
 
-    private void Start()
+    public void StartPlayerUI()
     {
         SetPlayerData();
         UpdateStatus();

@@ -33,15 +33,27 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     protected override void Awake()
     {
         base.Awake();
-
-        SetGameManagerPlayer(0); //임시
     }
 
     private void Start()
     {
         LoadDatas();
-        SetDatas();
-        AddGems(); //임시
+
+        if(GameManager.Instance != null)
+        {
+            if(GameManager.Instance.isNew)
+            {
+                CreateNewPlayer();
+            } else
+            {
+                LoadPlayerDataToJson();
+            }
+        }
+
+        if(UIManager.Instance != null)
+        {
+            UIManager.Instance.playerUI.StartPlayerUI();
+        }
     }
 
     public void LoadDatas()
@@ -52,15 +64,36 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     public void SetDatas()
     {
+        SetPlayerByJob();
+
+        SaveCurrentDatas();
         SetPlayerSkillInfos();
         SetPlayerLevel();
     }
 
-    public void AddGems()
+    public void CreateNewPlayer()
     {
-        player.Data.StatusData.GetGems(SkillType.Ice, 10);
-        player.Data.StatusData.GetGems(SkillType.Fire, 10);
-        player.Data.StatusData.GetGems(SkillType.Light, 10);
+        //currentStatus = new PlayerCurrentStatus();
+
+        currentStatus.name = GameManager.Instance.playerName;
+        currentStatus.jobType = GameManager.Instance.playerJob;
+        currentStatus.level = 1;
+        currentStatus.exp = 0;
+
+        LevelData data = playerLevelDatabase.GetLevelDataByKey(currentStatus.level);
+        currentStatus.hp = data.maxHp;
+        currentStatus.gold = 3000; //기본 얼마 줄지 정해야
+        InitGems();
+
+        SetDatas();
+    }
+
+    public void InitGems()
+    {
+        currentStatus.gems = new Dictionary<SkillType, int>();
+        currentStatus.gems.Add(SkillType.Ice, 10);
+        currentStatus.gems.Add(SkillType.Fire, 10);
+        currentStatus.gems.Add(SkillType.Light, 10);
     }
 
 
@@ -210,11 +243,11 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             string jsonData = File.ReadAllText(path);
 
             currentStatus = JsonUtility.FromJson<PlayerCurrentStatus>(jsonData);
-            SetPlayerByJob();
-            SaveCurrentDatas();
+
+            SetDatas();
         } else
         {
-            Debug.Log("게임 이어하기 불가");
+            Debug.Log("저장 파일 없음");
         }
     }
 
