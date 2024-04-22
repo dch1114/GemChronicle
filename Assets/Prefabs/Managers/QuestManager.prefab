@@ -44,11 +44,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751213f515476d54fa6960d6900635cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questDisponibles:
-  - {fileID: 11400000, guid: 127e4d72c2a03414c863cfedc16eb844, type: 2}
-  - {fileID: 11400000, guid: 80aae092d14b1b94b940e3492f3ad49d, type: 2}
-  - {fileID: 11400000, guid: 5a93ca4802dc0324589d5bee193c57c3, type: 2}
-  inspectorQuestPrefab: {fileID: 8045499874859929411, guid: 7c053a60cd1a7a44aa81ae9b9d9d4bed, type: 3}
-  inspectorQuestContenedor: {fileID: 0}
-  personajeQuestPrefab: {fileID: 5017248749649704235, guid: c120541aed6d62e48b2a1608c11ce73c, type: 3}
-  personajeQuestContenedor: {fileID: 0}
+  waitingQuestPrefab: {fileID: 8045499874859929411, guid: 7c053a60cd1a7a44aa81ae9b9d9d4bed, type: 3}
+  waitingQuestParent: {fileID: 0}
+  progressQuestPrefab: {fileID: 5017248749649704235, guid: c120541aed6d62e48b2a1608c11ce73c, type: 3}
+  progressQuestParent: {fileID: 0}
+  completeQuestParent: {fileID: 0}
+  currentProgressMainQuestData:
+    _id: 0
+    _name: 
+    _description: 
+    _type: 0
+    _target: 0
+    _count: 0
+    _exp: 0
+    _gold: 0
+    _continue: 0
+    _talk: 0
+    _finish: 0
+    _rewardType: 0
+    _rewardCount_1: 0
+    _reward_2: 0
+    _rewardCount_2: 0
+    _reward_3: 0
+    _rewardCount_3: 0
+    _unlockpotalindex: 0
+  currentProgressSubQuestData:
+    _id: 0
+    _name: 
+    _description: 
+    _type: 0
+    _target: 0
+    _count: 0
+    _exp: 0
+    _gold: 0
+    _continue: 0
+    _talk: 0
+    _finish: 0
+    _rewardType: 0
+    _rewardCount_1: 0
+    _reward_2: 0
+    _rewardCount_2: 0
+    _reward_3: 0
+    _rewardCount_3: 0
+    _unlockpotalindex: 0
+  panelQuestUI: {fileID: 0}
+  miniQuest: {fileID: 0}
