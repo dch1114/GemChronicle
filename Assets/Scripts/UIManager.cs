@@ -332,10 +332,10 @@ public class UIManager : Singleton<UIManager>
 
     public void NextPage()
     {
-        if (_page <= 5)
+        if (_page <= 6)
         {
             _page++;
-            if(_page == 6)
+            if(_page == 7)
             {
                 OnOffDiary(false);
               
@@ -358,15 +358,24 @@ public class UIManager : Singleton<UIManager>
 
     public void OnOffDiary(bool _OnOff)
     {
-        DiaryTxtArray = new string[56];
-        DiaryTxtArray[0] = "왕자께서 태어나셨다. 왕께선 왕자님의 마력 수치를 보시고선 왕가의 수치라며 죽이라고 명하셨다. 하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다. 그에게 [주인공]이라는 이름을 지어줬다.";
-        DiaryTxtArray[1] = "-중략-\r\n\r\n모든 지역에서 몬스터가 출몰한다는 상소가 빗발친다. 하지만 왕께선 마땅한 대책을 내놓지 않으신다. 지치신걸까?";
-        DiaryTxtArray[2] = "(15일뒤)\r\n\r\n최근 왕께서 새벽에 자주 사라지신다는 보고를 받았다. 사람을 붙여 왕께서 어디가시는지 알아봐야겠다.";
-        DiaryTxtArray[3] = "(2일뒤)\r\n\r\n왕께서 매일밤 오래전 폐쇄된 지하감옥에 드나드신다는 보고를 받았다. 그곳엔 아무 것도 없을텐데… 내일 한번 찾아가봐야겠다.";
-        DiaryTxtArray[4] = "(한달뒤)감옥엔 상소문들 속 모습과 같은 몬스터들이 가득했다. 그들의 몸에는 상처가 가득했지만 눈에는 광기만이 남아있었다. 기괴했다. 그곳의 보고서에는 ‘어둠의 젬’을 만드는 방법에 대한 이야기가 가득했다.";
-        DiaryTxtArray[5] = "왕이 만들어내고 있었던 것이다. 그 수많은 고통을. 이 모든 사실을 알게 된 나는 차마 왕의 밑에서 더 이상 일할 수 없었다. 도망쳤다. 언제까지 이런 삶을 살아야할지는 알 수 없지만 어떻게든 왕을 막아야한다. 시간이 얼마 남지 않았다.";
+        DiaryTxtArray = new string[7];
+        DiaryTxtArray[0] = "\r\n왕자께서 태어나셨다.\n왕께선 왕자님의 마력 수치를 보시고선 왕가의 수치라며 죽이라고 명하셨다. 하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다.\n그에게 [주인공]이라는 이름을 지어줬다.";
+        DiaryTxtArray[1] = "-중략-\r\n모든 지역에서 몬스터가 출몰한다는 상소가 빗발친다.\n하지만 왕께선 마땅한 대책을 내놓지 않으신다. 지치신걸까?";
+        DiaryTxtArray[2] = "(15일뒤)\r\n최근 왕께서 새벽에 자주 사라지신다는 보고를 받았다.\n사람을 붙여 왕께서 어디가시는지 알아봐야겠다.";
+        DiaryTxtArray[3] = "(2일뒤)\r\n왕께서 매일밤 오래전 폐쇄된 지하감옥에 드나드신다는 보고를 받았다.\n그곳엔 아무 것도 없을텐데… 내일 한번 찾아가봐야겠다.";
+        DiaryTxtArray[4] = "(한달뒤)\r\n감옥엔 상소문들 속 모습과 같은 몬스터들이 가득했다. 그들의 몸에는 상처가 가득했지만 눈에는 광기만이 남아있었다. 기괴했다.\n그곳의 보고서에는 ‘어둠의 젬’을 만드는 방법에 대한 이야기가 가득했다.";
+        DiaryTxtArray[5] = "\r\n왕이 만들어내고 있었던 것이다.\n그 수많은 고통을.\n이 모든 사실을 알게 된 나는 차마 왕의 밑에서 더 이상 일할 수 없었다.";
+        DiaryTxtArray[6] = "\r\n도망쳤다.\n언제까지 이런 삶을 살아야할지는 알 수 없지만 어떻게든 왕을 막아야한다. 시간이 얼마 남지 않았다.";
         Diary.SetActive(_OnOff);
         _page = 0;
         ShowDiary(_page);
+        if (_OnOff == true)
+        {
+            playerinput.OnDisable();
+        }
+        else
+        {
+            playerinput.OnEnable();
+        }
     }
 }

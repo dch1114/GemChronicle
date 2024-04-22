@@ -193,11 +193,7 @@ public class NPCController : MonoBehaviour, IInteractive
             {
                 QuestManager.Instance.SubscribeQuest((int)npcType);
             }
-            if (npcType == NPCType.Diary)
-            {
-              
-                UIManager.Instance.OnOffDiary(true);
-            }
+           
             else
             {
                 if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
@@ -239,7 +235,11 @@ public class NPCController : MonoBehaviour, IInteractive
                 //»óÁ¡ ÆË¾÷Ã¢ ON
                 uiManager.shopChoiceOnOff(true);
             }
+            if (npcType == NPCType.Diary)
+            {
 
+                UIManager.Instance.OnOffDiary(true);
+            }
 
 
             return;
