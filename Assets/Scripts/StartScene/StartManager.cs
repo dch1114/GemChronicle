@@ -14,6 +14,7 @@ public class StartManager : MonoBehaviour
     private Vector3 titleTargetPosition;
     private float titleMoveSpeed = 250.0f;
 
+
     private void Start()
     {
         titleTargetPosition = gameTitle.anchoredPosition3D + new Vector3(0f, 270f, 0f);
@@ -48,30 +49,10 @@ public class StartManager : MonoBehaviour
         gameStarted = true;
     }
 
-    public void StartGame()
-    {
-        LoadingSceneController.LoadScene("KYW_TestMain");
-    }
-
-    public void ContinueGameBtn()
-    {
-        string path = Path.Combine(Application.dataPath, "playerData.json");
-
-        if (File.Exists(path))
-        {
-            GameManager.Instance.isNew = false;
-            StartGame();
-        }
-        else
-        {
-            Debug.Log("저장 파일 없음");
-        }
-    }
-
     public void NewGameBtn()
     {
         characterChooseGO.SetActive(true);
-        gameStart.SetActive(true);
+        gameStart.SetActive(false);
         gameTitle.gameObject.SetActive(false);
     }
 
@@ -80,10 +61,5 @@ public class StartManager : MonoBehaviour
         gameTitle.gameObject.SetActive(true);
         gameStart.SetActive(true);
         characterChooseGO.SetActive(false);
-    }
-
-    public void CreateCharacter()
-    {
-        StartGame();
     }
 }
