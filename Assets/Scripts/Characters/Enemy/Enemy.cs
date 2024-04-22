@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private SkillType skillType;
 
-    [SerializeField] private List<GameObject> gems;
+    [SerializeField] private GameObject gem;
 
     private bool isLeft = true;
     private bool foundEnemy = false;
@@ -132,6 +132,7 @@ public class Enemy : MonoBehaviour, IDamageable
         SetState(EnemyState.Dead);
         SpawnGems();
         gameObject.SetActive(false);
+        GameManager.Instance.player.Data.StatusData.GetExp(EnemyStatusData.Exp);
     }
 
     private void SpawnGems()
@@ -140,7 +141,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         for(int i = 0; i < amount; i++)
         {
-            SpawnTypeGem();
+            Instantiate(gem).transform.position = gameObject.transform.position;
         }
     }
 
@@ -158,25 +159,6 @@ public class Enemy : MonoBehaviour, IDamageable
         }
 
         return amount;
-    }
-
-    private void SpawnTypeGem()
-    {
-        switch(skillType)
-        {
-            case SkillType.Ice:
-                Instantiate(gems[0]).transform.position = gameObject.transform.position;
-                break;
-            case SkillType.Fire:
-                Instantiate(gems[1]).transform.position = gameObject.transform.position;
-                break;
-            case SkillType.Light:
-                Instantiate(gems[2]).transform.position = gameObject.transform.position; ;
-                break;
-            case SkillType.Dark:
-                Instantiate(gems[3]).transform.position = gameObject.transform.position; ;
-                break;
-        }
     }
 
     protected void SetState(EnemyState newState)
@@ -258,9 +240,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        if (EnemyStatusData.Hp - damage > 0)
+        SoundManager.Instance.PlayAttackClip();
+        float realDamage = damage * 1.2f - EnemyStatusData.Def * 0.2f;
+        if (EnemyStatusData.Hp - realDamage > 0)
         {
-            EnemyStatusData.Hp -= damage;
+            EnemyStatusData.Hp -= (int) realDamage;
         }
         else
         {

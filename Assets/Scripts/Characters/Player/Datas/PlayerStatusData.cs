@@ -88,7 +88,7 @@ public class PlayerStatusData : Status
 
     public void TakeDamage(int damage)
     {
-        float realDamage = damage * 1.2f - def * 0.5f;
+        float realDamage = damage * 1.2f - def * 0.2f;
 
         if (hp - realDamage > 0)
         {
@@ -114,6 +114,31 @@ public class PlayerStatusData : Status
     private void OnDie()
     {
         //TODO: RESPAWN AT VILLAGE
+        //State Change
+        HealFull();
+    }
+
+    public void GetExp(int _amount)
+    {
+        if (exp + _amount >= requiredExp)
+        {
+            exp = exp + _amount - requiredExp;
+            LevelUP();
+        } else
+        {
+            exp += _amount;
+        }
+
+        UIManager.Instance.playerUI.UpdateExp();
+    }
+
+    private void LevelUP()
+    {
+        level++;
+        PlayerDataManager.Instance.SetPlayerLevel();
+
+        //레벨 2개 건너뛰는거 체크
+        GetExp(0);
     }
 
     private bool IsGemEnough(SkillType gemType, int _amount)
@@ -160,6 +185,13 @@ public class PlayerStatusData : Status
         {
             hp += _recovery;
         }
+
+        UIManager.Instance.playerUI.UpdateHp();
+    }
+
+    public void HealFull()
+    {
+        hp = maxHp;
 
         UIManager.Instance.playerUI.UpdateHp();
     }

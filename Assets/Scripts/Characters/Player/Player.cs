@@ -17,9 +17,11 @@ public class Player : MonoBehaviour
     private PlayerStateMachine stateMachine;
 
     public GameObject SkillPage { get; set; }
+    [HideInInspector] public SkillPagesUI skillpageUI; //test
 
     //test
     public GameObject InventoryUIPanel;
+    [HideInInspector] public InventoryUIController inventoryUIController;
 
     private void Awake()
     {
@@ -31,12 +33,16 @@ public class Player : MonoBehaviour
         Controller = GetComponent<PlayerController>();
 
         stateMachine = new PlayerStateMachine(this);
+        //test
+        inventoryUIController = InventoryUIPanel.GetComponentInParent<InventoryUIController>();
+
     }
 
     private void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
         stateMachine.ChangeState(stateMachine.IdleState);
+        skillpageUI = UIManager.Instance.skillPages;
     }
 
     private void Update()

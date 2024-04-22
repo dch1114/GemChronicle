@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
+    [Header("Stat Bar")]
+    [SerializeField] Image hpBar;
+    [SerializeField] Image expBar;
+
     [Header("Slider")]
-    [SerializeField] Slider hpSlider;
-    [SerializeField] Slider expSlider;
     [SerializeField] Slider BGMSlider;
     [SerializeField] Slider SFXSlider;
 
@@ -50,7 +52,7 @@ public class PlayerUI : MonoBehaviour
         {
             if(playerData.MaxHp > 0)
             {
-                hpSlider.value = playerData.Hp / playerData.MaxHp;
+                hpBar.fillAmount = (float) playerData.Hp / (float) playerData.MaxHp;
                 hpTxt.text = playerData.Hp + " / " + playerData.MaxHp;
             }
         }
@@ -67,7 +69,7 @@ public class PlayerUI : MonoBehaviour
         {
             if(playerData.RequiredExp > 0)
             {
-                expSlider.value = playerData.Exp / playerData.RequiredExp;
+                expBar.fillAmount = (float) playerData.Exp / (float) playerData.RequiredExp;
                 expTxt.text = playerData.Exp + " / " + playerData.RequiredExp;
             }
         }
@@ -105,14 +107,14 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateBGMVolume()
     {
-        if(SoundManager.instance != null)
-            SoundManager.instance.SetMusicVolume(BGMSlider);
+        if(SoundManager.Instance != null)
+            SoundManager.Instance.SetMusicVolume(BGMSlider);
     }
 
     public void UpdateSFXVolume()
     {
-        if (SoundManager.instance != null)
-            SoundManager.instance.SetMusicVolume(SFXSlider);
+        if (SoundManager.Instance != null)
+            SoundManager.Instance.SetMusicVolume(SFXSlider);
     }
 
     public void SaveBtn()

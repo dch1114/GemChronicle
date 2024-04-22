@@ -29,7 +29,6 @@ public class Inventory : Singleton<Inventory>
         set { _inventoryUIController = value; }
     }
 
-
     private void Start()
     {
         player = GameManager.Instance.player;
