@@ -285,6 +285,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 335643777698244115, guid: f8f6fa87b811e594e808a47ec25b9900, type: 3}
   m_PrefabInstance: {fileID: 865104718}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &144672735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8935099262316912193, guid: 99f9b9eacd14bc2488108aeb95c5cb53, type: 3}
+  m_PrefabInstance: {fileID: 959886055049511745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &152027404
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,11 +587,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3764337215989346056, guid: 90e52449795e9b248a99aa6772371701, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3764337215989346056, guid: 90e52449795e9b248a99aa6772371701, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.2
       objectReference: {fileID: 0}
     - target: {fileID: 3764337215989346056, guid: 90e52449795e9b248a99aa6772371701, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2047,6 +2052,11 @@ Rigidbody2D:
 --- !u!1 &1860870811 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8242635680931358852, guid: 90e52449795e9b248a99aa6772371701, type: 3}
+  m_PrefabInstance: {fileID: 385348392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1860870812 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5740609614241483629, guid: 90e52449795e9b248a99aa6772371701, type: 3}
   m_PrefabInstance: {fileID: 385348392}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1894174513
@@ -6662,7 +6672,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.19, y: -3.76}
+  m_AnchoredPosition: {x: 4.9, y: -3.4}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &3972883875141378074
@@ -7700,6 +7710,10 @@ GameObject:
   - component: {fileID: 3923958121511583720}
   - component: {fileID: 3416196338255576957}
   - component: {fileID: 8281879330057897936}
+  - component: {fileID: 8281879330057897939}
+  - component: {fileID: 8281879330057897938}
+  - component: {fileID: 8281879330057897937}
+  - component: {fileID: 8281879330057897940}
   m_Layer: 5
   m_Name: BossMonster2
   m_TagString: Untagged
@@ -7734,6 +7748,80 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &8281879330057897937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281879330057897934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567323cdb9f612c45970db56b1ab7d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1860870812}
+  health: 100
+  speed: 5
+  attackDamage: 20
+  detectionRange: 100
+  attackRange: 4
+  BossRender: {fileID: 0}
+--- !u!114 &8281879330057897938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281879330057897934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4491ead352ae0c449b08d5daadf251c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 6450018808882553613, guid: 21083ed2afc43804da128bf3ed7cd967, type: 3}
+--- !u!114 &8281879330057897939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281879330057897934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd5341fb3384704ebfc2ff12e7880ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prfHpBar: {fileID: 144672735}
+  canvas: {fileID: 152027404}
+  heught: 1.7
+--- !u!114 &8281879330057897940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281879330057897934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad0300f3c5882f4e94882fe3656e95f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 6450018808882553613, guid: 21083ed2afc43804da128bf3ed7cd967, type: 3}
+  bossAppearPoint: 2.5
+  numberOfProjectiles: 10
+  projectileSpeed: 5
+  EnemyStatusData:
+    atk: 0
+    def: 0
+    hp: 0
+    exp: 0
+    type: 0
+    walkSpeed: 0
+    attackRate: 0
+    ID: 0
+  gems: []
+  player: {fileID: 1860870812}
 --- !u!1 &8509823075222081019
 GameObject:
   m_ObjectHideFlags: 0

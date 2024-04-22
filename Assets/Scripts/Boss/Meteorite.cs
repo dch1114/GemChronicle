@@ -5,18 +5,24 @@ using UnityEngine;
 
 public class Meteorite : MonoBehaviour
 {
+    void Start()
+    {
+        // 3초 뒤에 발사체를 제거하는 코루틴 시작
+        StartCoroutine(DestroyBulletAfterDelay(3.0f));
+    }
+
+    IEnumerator DestroyBulletAfterDelay(float delay)
+    {
+        // delay초 만큼 대기
+        yield return new WaitForSeconds(delay);
+
+        // 대기 후 발사체 제거
+        Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // 만약 충돌한 오브젝트의 레이어가 "Ground"이면 Meteorite를 삭제합니다.
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             Destroy(gameObject);
         }
