@@ -291,13 +291,17 @@ public class QuestManager : Singleton<QuestManager>
 
         foreach (var questData in totalQuests)
         {
-            WaitingQuestDescription newQuest = Instantiate(waitingQuestPrefab, waitingQuestParent);
+            if (questData.Value.ID < 3000)
+            {
+                WaitingQuestDescription newQuest = Instantiate(waitingQuestPrefab, waitingQuestParent);
             //questData.Key는 ID를 의미
             var quest = new Quest(questData.Key, questData.Value.Count);
             //questData.Value는 QuestData를 의미
             newQuest.ConfigureQuestUI(quest, questData.Value);
-
-            panelQuestUI.AddWaitingQuest(questData.Key, newQuest.gameObject);
+            
+                panelQuestUI.AddWaitingQuest(questData.Key, newQuest.gameObject);
+            }
+            
         }
 
     }
