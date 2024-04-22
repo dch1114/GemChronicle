@@ -16,8 +16,9 @@ public class QuestData
     [SerializeField] private int _gold;
     [SerializeField] private bool _continue;
     [SerializeField] private bool _talk;
-
-    [SerializeField] private int _reward_1;
+    [SerializeField] private bool _finish;
+    [SerializeField] private SkillType _rewardType;
+    public SkillType RwardType => _rewardType;
     [SerializeField] private int _rewardCount_1;
     [SerializeField] private int _reward_2;
     [SerializeField] private int _rewardCount_2;
@@ -36,33 +37,15 @@ public class QuestData
     public int Gold => _gold;
     public bool Continue => _continue;
     public bool Talk => _talk;
+    public bool Finish => _finish;
+
+    public int RewardCount_1 => _rewardCount_1;
+
 
     public int UnLockPotalIndex => _unlockpotalindex;
 
-    private List<Reward> _rewardList;
 
-    public List<Reward> RewardList
-    {
-        get
-        {
-            if (_rewardList == null)
-            {
-                _rewardList = new List<Reward>();
 
-                CheckReward(_reward_1, _rewardCount_1);
-                CheckReward(_reward_2, _rewardCount_2);
-                CheckReward(_reward_3, _rewardCount_3);
-            }
-
-            return _rewardList;
-        }
-    }
-
-    private void CheckReward(int rewardId, int rewardCount)
-    {
-        if (rewardId != 0)
-            _rewardList.Add(new Reward(rewardId, rewardCount));
-    }
 }
 
 public class Reward

@@ -4,12 +4,15 @@ using System.Runtime.CompilerServices;
 using UnityEditor.PackageManager.Requests;
 using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NPCController : MonoBehaviour, IInteractive
 {
     [SerializeField]
     private NPC npcData;
     private NPCManager npcManager; // NPCManager의 역참조를 받을 필드 추가
+
+    public SubQuestDataSheet subQuest;
 
     TalkManager talkManager;
     PlayerInput playerinput;
@@ -64,7 +67,7 @@ public class NPCController : MonoBehaviour, IInteractive
         {
             currentNpcIDForQuest = index + 1;
 
-            if (npcType == NPCType.Teacher || npcType == NPCType.Friend)
+            if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
             {
                 questData = DataManager.Instance.GetQuestTableData(currentNpcIDForQuest);
 
@@ -96,39 +99,43 @@ public class NPCController : MonoBehaviour, IInteractive
         //대화창 열기 전에 닫기(Npc가 겹쳐있는 상태이고 플레이어의 이동에 따라 제일가까운 Npc가 달라지기 때문에 이 메소드로 들어오면 무조건 모든 팝업창을 닫고 시작
         CloseUI();
 
-        if (npcType == NPCType.Npc)
-        {
-            uiManager.talkBtnOnOff(true);
+        uiManager.talkBtnOnOff(true);
 
-        }
-        else if (npcType == NPCType.Shop)
-        {
+        //if (npcType == NPCType.Npc)
+        //{
+        //    uiManager.talkBtnOnOff(true);
 
-            uiManager.talkBtnOnOff(true);
+        //}
+        //else if (npcType == NPCType.Shop)
+        //{
 
-        }
-        else if (npcType == NPCType.Teacher)
-        {
-            uiManager.talkBtnOnOff(true);
-        }
+        //    uiManager.talkBtnOnOff(true);
+
+        //}
+        //else if (npcType == NPCType.Teacher)
+        //{
+        //    uiManager.talkBtnOnOff(true);
+        //}
 
     }
     //Npc타입에 따라 대화창 닫기
     public void CloseUI()
     {
-        if (npcType == NPCType.Npc)
-        {
-            uiManager.talkBtnOnOff(false);
+        uiManager.talkBtnOnOff(false);
 
-        }
-        else if (npcType == NPCType.Shop)
-        {
-            uiManager.talkBtnOnOff(false);
-        }
-        else if (npcType == NPCType.Teacher)
-        {
-            uiManager.talkBtnOnOff(false);
-        }
+        //if (npcType == NPCType.Npc)
+        //{
+        //    uiManager.talkBtnOnOff(false);
+
+        //}
+        //else if (npcType == NPCType.Shop)
+        //{
+        //    uiManager.talkBtnOnOff(false);
+        //}
+        //else if (npcType == NPCType.Teacher)
+        //{
+        //    uiManager.talkBtnOnOff(false);
+        //}
         isLoadScriptData = false;
 
     }
@@ -181,15 +188,33 @@ public class NPCController : MonoBehaviour, IInteractive
         //NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않아 대화를 종료해야 한다면
         if (scriptTableDatas.Count <= 0)
         {
-            if (QuestManager.Instance.IsProgressQuest(currentNpcIDForQuest) && QuestManager.Instance.CheckCompareTargetID(npcData.ID))
+            //서브 퀘스트가 존재하는 NPC라면
+            if (npcType == NPCType.SubNpc)
             {
-                QuestManager.Instance.NotifyQuest(Constants.QuestType.TalkNpc, npcData.ID, 1);
+                QuestManager.Instance.SubscribeQuest((int)npcType);
+            }
+            else
+            {
+                if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
+                {
+
+                    QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
+                }
+                else if (npcType == NPCType.Healer && GameManager.Instance.player.Data.StatusData.UseGold(100))
+                {
+                    GameManager.Instance.player.Data.StatusData.Hp = GameManager.Instance.player.Data.StatusData.MaxHp;
+                }
+                else
+                {
+
+                }
+
+                if (QuestManager.Instance.IsProgressQuest(currentNpcIDForQuest) && QuestManager.Instance.CheckCompareTargetID(npcData.ID))
+                {
+                    QuestManager.Instance.NotifyQuest(Constants.QuestType.TalkNpc, npcData.ID, 1);
+                }
             }
 
-            if (npcType == NPCType.Teacher || npcType == NPCType.Friend)
-            {
-                QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
-            }
 
 
             //Debug.Log("NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않음");

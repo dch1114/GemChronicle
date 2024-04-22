@@ -66,6 +66,8 @@ public class PlayerAction : MonoBehaviour
         {
             uiManagerInstance.TogglePanelQuest();
         }
+
+  
     }
 
     IInteractive FindClosestTarget()
