@@ -61,11 +61,4 @@ public class BossMeleeAttack : MonoBehaviour
     {
         canAttack = true;
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        // 공격 범위를 시각적으로 표시
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
 }
