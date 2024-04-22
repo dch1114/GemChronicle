@@ -60,6 +60,8 @@ public class UIManager : Singleton<UIManager>
     private PlayerInput playerinput;
     UnityAction selectMenuAction = null;
     public GameObject soundSetting;
+    public Text DiaryTxt;
+    public string[] DiaryTxtArray;
  
     //0315 [SerializeField]를 선언하면 외부 스크립트에서 접근할수 없으나 인스펙터에서 세팅 및 확인을 할 수 있음  
     [SerializeField]
@@ -73,7 +75,11 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Awake()
     {
-        
+        DiaryTxtArray = new string[4];
+        DiaryTxtArray[0] = "왕자께서 태어나셨다. 왕께선 왕자님의 마력 수치를 보시고선 왕가의 수치라며 죽이라고 명하셨다. 하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다. 그에게 [주인공]이라는 이름을 지어줬다.";
+
+
+
     }
     private void Start()
     {
@@ -315,6 +321,11 @@ public class UIManager : Singleton<UIManager>
     public void PotalTalk(bool _OnOff)
     {
         potaltalk.SetActive(_OnOff);
+    }
+
+    public void ShowDiary()
+    {
+
     }
 
 }
