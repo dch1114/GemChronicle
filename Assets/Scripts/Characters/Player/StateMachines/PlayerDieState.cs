@@ -11,14 +11,14 @@ public class PlayerDieState : PlayerBaseState
     public override void Enter()
     {
         base.Enter();
+        stateMachine.Player.Animator.SetTrigger(stateMachine.Player.AnimationData.DieParameterHash);
 
-        StartAnimation(stateMachine.Player.AnimationData.DieParameterHash);
-        //UIManagerÀÇ »ç¸Á panel ÄÑ±â
+        if (UIManager.Instance != null) UIManager.Instance.diePanelUI.ActiveDiePanel();
     }
 
     public override void Exit()
     {
         base.Exit();
-        StopAnimation(stateMachine.Player.AnimationData.DieParameterHash);
+        //stateMachine.Player.Animator.SetTrigger(stateMachine.Player.AnimationData.DieParameterHash);
     }
 }

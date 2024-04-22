@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         EnemyAnimationData.Initialize();
 
-        rigid = GetComponent<Rigidbody2D>();
+        //rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         leftDirection = transform.localScale;

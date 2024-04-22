@@ -106,16 +106,19 @@ public class PlayerStatusData : Status
         }
         else
         {
+            hp = 0;
             OnDie();
         }
+        UIManager.Instance.playerUI.UpdateHp();
     }
 
 
     private void OnDie()
     {
-        //TODO: RESPAWN AT VILLAGE
         //State Change
-        HealFull();
+        PlayerStateMachine stateMachine = GameManager.Instance.player.GetStateMachine();
+
+        stateMachine.ChangeState(stateMachine.DieState);
     }
 
     public void GetExp(int _amount)
