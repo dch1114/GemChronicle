@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StopAttack : MonoBehaviour
+public class GetBackToIdle : MonoBehaviour
 {
     public Player player;
 
-    public void StopAttacking()
+    public void ToIdleState()
     {
         PlayerStateMachine stateMachine = player.GetStateMachine();
 

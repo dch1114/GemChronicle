@@ -37,7 +37,9 @@ public class UIManager : Singleton<UIManager>
     public PlayerUI playerUI;
     public SkillPagesUI skillPages;
     public AlertPanelUI alertPanelUI;
+    public DiePanelUI diePanelUI;
 
+    [Header("Potal")]
     public GameObject potalListUI;
     public PotalListUI potalUIScript;
     public GameObject potaltalk;
