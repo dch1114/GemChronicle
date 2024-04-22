@@ -26,14 +26,15 @@ public class MiniQuest : MonoBehaviour
         if (bVisible)
         {
             panel.SetActive(false);
+            bVisible = false;
         }
         else
         {
             panel.SetActive(true);
-
+            bVisible = true;
         }
 
-        bVisible = !bVisible;
+      
     }
 
     public void SetMiniQuest(Quest questcompleted, QuestData qData)
