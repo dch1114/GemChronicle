@@ -20,7 +20,6 @@ public class UIManager : Singleton<UIManager>
     public enum ShowMenuType  //보기쉽게 하기위해 enum선언
     {
         Buy,
-        Sell,
         Exit,
         Max
     }
@@ -105,7 +104,6 @@ public class UIManager : Singleton<UIManager>
     {
         // 버튼에 클릭 리스너를 할당하고 이미지 스프라이트를 설정합니다.
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Buy], BuyShop, unSelectButton);
-        InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Sell], SellShop, unSelectButton);
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Exit], ExitShop, unSelectButton);
     }
 
@@ -250,7 +248,6 @@ public class UIManager : Singleton<UIManager>
     UnityAction GetSelectedShopMenu(ShowMenuType type)
     {
         showMenuButton[(int)ShowMenuType.Buy].image.sprite = unSelectButton;
-        showMenuButton[(int)ShowMenuType.Sell].image.sprite = unSelectButton;
         showMenuButton[(int)ShowMenuType.Exit].image.sprite = unSelectButton;
 
         switch (type)
@@ -260,10 +257,7 @@ public class UIManager : Singleton<UIManager>
 
                 return BuyShop;
 
-            case ShowMenuType.Sell:
-                showMenuButton[(int)ShowMenuType.Sell].image.sprite = selectButton;
 
-                return SellShop;
             case ShowMenuType.Exit:
                 showMenuButton[(int)ShowMenuType.Exit].image.sprite = selectButton;
 
@@ -279,12 +273,7 @@ public class UIManager : Singleton<UIManager>
         Debug.Log("Select Buy");
     }
 
-    void SellShop()
-    {
 
-        Debug.Log("Select Sell");
-
-    }
 
     void ExitShop()
     {
