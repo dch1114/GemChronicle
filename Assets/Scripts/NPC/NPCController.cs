@@ -195,6 +195,7 @@ public class NPCController : MonoBehaviour, IInteractive
             }
             if (npcType == NPCType.Diary)
             {
+              
                 UIManager.Instance.OnOffDiary(true);
             }
             else
