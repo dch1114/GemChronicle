@@ -37,9 +37,9 @@ public class PlayerSkill : Skill
         transform.localScale = isLeft ? leftDirection : rightDirection;
     }
 
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        base.OnCollisionEnter2D(collision);
+        base.OnTriggerEnter2D(collision);
 
         if (damageable != null)
         {
