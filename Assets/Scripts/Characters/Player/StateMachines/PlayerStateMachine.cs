@@ -13,6 +13,8 @@ public class PlayerStateMachine : StateMachine
     public PlayerFallState FallState { get; }
     public PlayerAttackState AttackState { get; }
 
+    public PlayerDieState DieState { get; }
+
     public Vector2 MovementInput { get; set; }
     public float MovementSpeed { get; private set; }
     public float MovementSpeedModifier { get; set; } = 1f;
@@ -71,6 +73,8 @@ public class PlayerStateMachine : StateMachine
         FallState = new PlayerFallState(this);
 
         AttackState = new PlayerAttackState(this);
+
+        DieState = new PlayerDieState(this);
 
         MainCameraTransform = Camera.main.transform;
 

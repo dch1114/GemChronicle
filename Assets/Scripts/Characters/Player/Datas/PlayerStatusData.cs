@@ -109,6 +109,8 @@ public class PlayerStatusData : Status
     private void OnDie()
     {
         //TODO: RESPAWN AT VILLAGE
+        //State Change
+        HealFull();
     }
 
     public void GetExp(int _amount)
@@ -178,6 +180,13 @@ public class PlayerStatusData : Status
         {
             hp += _recovery;
         }
+
+        UIManager.Instance.playerUI.UpdateHp();
+    }
+
+    public void HealFull()
+    {
+        hp = maxHp;
 
         UIManager.Instance.playerUI.UpdateHp();
     }
