@@ -7,22 +7,24 @@ public class BossMonsterPattern : MonoBehaviour
 {
 
     public Transform player;
-    public int health = 5000;
+    public int health = 100;
     public float speed = 5.0f;
     public int attackDamage = 20;
-    public float detectionRange = 10.0f;  // ÇÃ·¹ÀÌ¾î °¨Áö ¹üÀ§
-    public float attackRange = 4.0f;      // °ø°İ ¹üÀ§
+    public float detectionRange = 10.0f;  // í”Œë ˆì´ì–´ ê°ì§€ ë²”ìœ„
+    public float attackRange = 4.0f;      // ê³µê²© ë²”ìœ„
     public GameObject AttackPrefab;
     public SpriteRenderer BossRender;
 
     private Transform target;
     private Collider2D collider;
     private Rigidbody2D rigid;
+    private Animator animator;
 
     private void Awake()
     {
         collider = GetComponent<Collider2D>();
         rigid = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -39,10 +41,10 @@ public class BossMonsterPattern : MonoBehaviour
 
     IEnumerator FireContinuously()
     {
-        while (true) // ¹«ÇÑ ·çÇÁ·Î ÄÚ·çÆ¾ ½ÇÇà
+        while (true) // ë¬´í•œ ë£¨í”„ë¡œ ì½”ë£¨í‹´ ì‹¤í–‰
         {
             Fire();
-            yield return new WaitForSeconds(3f); // ´ÙÀ½ ¹ß»ç±îÁö 3ÃÊ µ¿¾È ´ë±â
+            yield return new WaitForSeconds(3f); // ë‹¤ìŒ ë°œì‚¬ê¹Œì§€ 3ì´ˆ ë™ì•ˆ ëŒ€ê¸°
         }
     }
 
@@ -52,6 +54,12 @@ public class BossMonsterPattern : MonoBehaviour
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
         Vector2 direction = (target.position - transform.position).normalized;
         rigid.AddForce(direction * 500);
+
+        // ì• ë‹ˆë©”ì´ì…˜ ì¬ìƒ
+        if (animator != null)
+        {
+            animator.SetTrigger("Shoot"); // Shoot íŠ¸ë¦¬ê±°ë¥¼ ì„¤ì •í•˜ì—¬ ì• ë‹ˆë©”ì´ì…˜ì„ ì¬ìƒí•©ë‹ˆë‹¤.
+        }
     }
 
     void DetectAndAttackPlayer()
@@ -64,13 +72,13 @@ public class BossMonsterPattern : MonoBehaviour
             {
                 if (distanceToPlayer > attackRange)
                 {
-                    // ÇÃ·¹ÀÌ¾î¸¦ ÇâÇØ ÀÌµ¿
+                    // í”Œë ˆì´ì–´ë¥¼ í–¥í•´ ì´ë™
                     Vector3 direction = (player.position - transform.position).normalized;
                     transform.position += direction * speed * Time.deltaTime;
                 }
                 else
                 {
-                    // °ø°İ ¹üÀ§ ³»¿¡ ÀÖÀ¸¸é °ø°İ
+                    // ê³µê²© ë²”ìœ„ ë‚´ì— ìˆìœ¼ë©´ ê³µê²©
                     AttackPlayer();
                 }
             }
@@ -79,7 +87,7 @@ public class BossMonsterPattern : MonoBehaviour
 
     void AttackPlayer()
     {
-        // °ø°İ ·ÎÁ÷ ½ÇÇà,  Ã¼·Â °¨¼Ò
+        // ê³µê²© ë¡œì§ ì‹¤í–‰,  ì²´ë ¥ ê°ì†Œ
         Player playerComponent = player.GetComponent<Player>();
         if (playerComponent != null)
         {
@@ -99,7 +107,7 @@ public class BossMonsterPattern : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damageAmount) // ´ë¹ÌÁö ¹Ş´Â ÇÔ¼ö
+    public void TakeDamage(int damageAmount) // ëŒ€ë¯¸ì§€ ë°›ëŠ” í•¨ìˆ˜
     {
 
         health -= damageAmount;

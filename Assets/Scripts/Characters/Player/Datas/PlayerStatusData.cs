@@ -90,21 +90,26 @@ public class PlayerStatusData : Status
     {
         float realDamage = damage * 1.2f - def * 0.5f;
 
-        if(hp - realDamage > 0)
+        if (hp - realDamage > 0)
         {
-            if(realDamage > 0)
+            if (realDamage > 0)
             {
-                hp -= (int) Math.Floor(realDamage);
+                hp -= (int)Math.Floor(realDamage);
                 UIManager.Instance.playerUI.UpdateHp();
-            } else
+            }
+            else
             {
+                hp -= (int)Math.Floor(realDamage); // HP 감소
+                UIManager.Instance.playerUI.UpdateHp(); // UI 업데이트
                 //TODO: SHOW DAMAGE 0
             }
-        } else
+        }
+        else
         {
             OnDie();
         }
     }
+
 
     private void OnDie()
     {
