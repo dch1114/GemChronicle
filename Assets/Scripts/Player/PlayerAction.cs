@@ -66,6 +66,11 @@ public class PlayerAction : MonoBehaviour
         {
             uiManagerInstance.TogglePanelQuest();
         }
+
+        if (Keyboard.current.tKey.wasPressedThisFrame)
+        {
+            PotalManager.Instance.MovePotal(5);
+        }
     }
 
     IInteractive FindClosestTarget()
