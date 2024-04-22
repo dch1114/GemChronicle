@@ -20,7 +20,6 @@ public class UIManager : Singleton<UIManager>
     public enum ShowMenuType  //보기쉽게 하기위해 enum선언
     {
         Buy,
-        Sell,
         Exit,
         Max
     }
@@ -63,6 +62,8 @@ public class UIManager : Singleton<UIManager>
     private PlayerInput playerinput;
     UnityAction selectMenuAction = null;
     public GameObject soundSetting;
+    public Text DiaryTxt;
+    public string[] DiaryTxtArray;
  
     //0315 [SerializeField]를 선언하면 외부 스크립트에서 접근할수 없으나 인스펙터에서 세팅 및 확인을 할 수 있음  
     [SerializeField]
@@ -76,7 +77,11 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Awake()
     {
-        
+        DiaryTxtArray = new string[4];
+        DiaryTxtArray[0] = "왕자께서 태어나셨다. 왕께선 왕자님의 마력 수치를 보시고선 왕가의 수치라며 죽이라고 명하셨다. 하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다. 그에게 [주인공]이라는 이름을 지어줬다.";
+
+
+
     }
     private void Start()
     {
@@ -107,7 +112,6 @@ public class UIManager : Singleton<UIManager>
     {
         // 버튼에 클릭 리스너를 할당하고 이미지 스프라이트를 설정합니다.
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Buy], BuyShop, unSelectButton);
-        InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Sell], SellShop, unSelectButton);
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Exit], ExitShop, unSelectButton);
     }
 
@@ -252,7 +256,6 @@ public class UIManager : Singleton<UIManager>
     UnityAction GetSelectedShopMenu(ShowMenuType type)
     {
         showMenuButton[(int)ShowMenuType.Buy].image.sprite = unSelectButton;
-        showMenuButton[(int)ShowMenuType.Sell].image.sprite = unSelectButton;
         showMenuButton[(int)ShowMenuType.Exit].image.sprite = unSelectButton;
 
         switch (type)
@@ -262,10 +265,7 @@ public class UIManager : Singleton<UIManager>
 
                 return BuyShop;
 
-            case ShowMenuType.Sell:
-                showMenuButton[(int)ShowMenuType.Sell].image.sprite = selectButton;
 
-                return SellShop;
             case ShowMenuType.Exit:
                 showMenuButton[(int)ShowMenuType.Exit].image.sprite = selectButton;
 
@@ -281,12 +281,7 @@ public class UIManager : Singleton<UIManager>
         Debug.Log("Select Buy");
     }
 
-    void SellShop()
-    {
 
-        Debug.Log("Select Sell");
-
-    }
 
     void ExitShop()
     {
@@ -328,6 +323,11 @@ public class UIManager : Singleton<UIManager>
     public void PotalTalk(bool _OnOff)
     {
         potaltalk.SetActive(_OnOff);
+    }
+
+    public void ShowDiary()
+    {
+
     }
 
 }
