@@ -43,7 +43,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject potaltalk;
     public Button[] showMenuButton;
     public Button[] potalButton;
-
+    public GameObject Diary;
     public Text potalTxt;
     public Sprite selectButton;
     public Sprite unSelectButton;
@@ -60,7 +60,7 @@ public class UIManager : Singleton<UIManager>
     private PlayerInput playerinput;
     UnityAction selectMenuAction = null;
     public GameObject soundSetting;
-    public Text DiaryTxt;
+    public TextMeshProUGUI DiaryTxt;
     public string[] DiaryTxtArray;
  
     //0315 [SerializeField]를 선언하면 외부 스크립트에서 접근할수 없으나 인스펙터에서 세팅 및 확인을 할 수 있음  
@@ -75,16 +75,15 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Awake()
     {
-        DiaryTxtArray = new string[4];
-        DiaryTxtArray[0] = "왕자께서 태어나셨다. 왕께선 왕자님의 마력 수치를 보시고선 왕가의 수치라며 죽이라고 명하셨다. 하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다. 그에게 [주인공]이라는 이름을 지어줬다.";
 
-
+   
 
     }
     private void Start()
     {
         playerinput = GameManager.Instance.player.Input;
         InitializeShopMenuButtons();
+
     }
     private void Update()
     {
@@ -323,9 +322,32 @@ public class UIManager : Singleton<UIManager>
         potaltalk.SetActive(_OnOff);
     }
 
-    public void ShowDiary()
+    public void ShowDiary(int _page)
     {
-
+        DiaryTxt.text = DiaryTxtArray[_page];
     }
 
+    public void NextPage(int _page)
+    {
+        if (_page <= 4)
+        {
+            DiaryTxt.text = DiaryTxtArray[_page];
+            _page++;
+        }
+        else
+        {
+            OnOffDiary(false);
+        }
+    }
+    public void OnOffDiary(bool _OnOff)
+    {
+        DiaryTxtArray = new string[5];
+        DiaryTxtArray[0] = "왕자께서 태어나셨다. 왕께선 왕자님의 마력 수치를 보시고선 왕가의 수치라며 죽이라고 명하셨다. 하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다. 그에게 [주인공]이라는 이름을 지어줬다.";
+        DiaryTxtArray[1] = "-중략-\r\n\r\n모든 지역에서 몬스터가 출몰한다는 상소가 빗발친다. 하지만 왕께선 마땅한 대책을 내놓지 않으신다. 지치신걸까?";
+        DiaryTxtArray[2] = "(15일뒤)\r\n\r\n최근 왕께서 새벽에 자주 사라지신다는 보고를 받았다. 사람을 붙여 왕께서 어디가시는지 알아봐야겠다.\r\n\r\n(2일뒤)\r\n\r\n왕께서 매일밤 오래전 폐쇄된 지하감옥에 드나드신다는 보고를 받았다. 그곳엔 아무 것도 없을텐데… 내일 한번 찾아가봐야겠다.";
+        DiaryTxtArray[3] = "(한달뒤)\r\n\r\n감옥엔 상소문들 속 모습과 같은 몬스터들이 가득했다. 그들의 몸에는 상처가 가득했지만 눈에는 광기만이 남아있었다. 기괴했다. 그곳의 보고서에는 ‘어둠의 젬’을 만드는 방법에 대한 이야기가 가득했다.";
+        DiaryTxtArray[4] = "왕이 만들어내고 있었던 것이다. 그 수많은 고통을. 이 모든 사실을 알게 된 나는 차마 왕의 밑에서 더 이상 일할 수 없었다. 도망쳤다. 언제까지 이런 삶을 살아야할지는 알 수 없지만 어떻게든 왕을 막아야한다. 시간이 얼마 남지 않았다.";
+        Diary.SetActive(_OnOff);
+        ShowDiary(0);
+    }
 }

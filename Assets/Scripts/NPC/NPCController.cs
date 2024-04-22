@@ -193,6 +193,10 @@ public class NPCController : MonoBehaviour, IInteractive
             {
                 QuestManager.Instance.SubscribeQuest((int)npcType);
             }
+            if (npcType == NPCType.Diary)
+            {
+                UIManager.Instance.OnOffDiary(true);
+            }
             else
             {
                 if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
