@@ -201,10 +201,7 @@ public class NPCController : MonoBehaviour, IInteractive
 
                     QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
                 }
-                else if (npcType == NPCType.Healer && GameManager.Instance.player.Data.StatusData.UseGold(100))
-                {
-                    GameManager.Instance.player.Data.StatusData.Hp = GameManager.Instance.player.Data.StatusData.MaxHp;
-                }
+             
                 else
                 {
 
@@ -234,6 +231,11 @@ public class NPCController : MonoBehaviour, IInteractive
                 playerinput.OnDisable();
                 //»óÁ¡ ÆË¾÷Ã¢ ON
                 uiManager.shopChoiceOnOff(true);
+            }
+            if (npcType == NPCType.Healer)
+            {
+                playerinput.OnDisable();
+                uiManager.HealChoiceOnOff(true);
             }
             if (npcType == NPCType.Diary)
             {
