@@ -85,8 +85,6 @@ public class PlayerStatusData : Status
     {
         float realDamage = damage * 1.2f - def * 0.2f;
 
-        Debug.Log("real = " + realDamage);
-
         if (hp - realDamage > 0)
         {
             if (realDamage > 0)

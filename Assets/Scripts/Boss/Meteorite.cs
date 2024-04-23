@@ -30,7 +30,6 @@ public class Meteorite : MonoBehaviour
             if (pData != null)
             {
                 pData.TakeDamage(attack);
-                Debug.Log("colli2");
             }
         }
     }

@@ -29,8 +29,8 @@ public class Bullet : MonoBehaviour
             if (pData != null)
             {
                 pData.TakeDamage(attack);
-                Debug.Log("colli");
             }
+            Destroy(gameObject);
         }
     }
 }
