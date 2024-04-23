@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Boss2 : MonoBehaviour, IDamageable
 {
+    [field: Header("Animations")]
+    [field: SerializeField] public BossAnimationData AnimationData { get; private set; }
+
     [SerializeField]
     private GameObject projectilePrefab; // 발사체 프리팹
     [SerializeField]
@@ -17,6 +20,8 @@ public class Boss2 : MonoBehaviour, IDamageable
     [SerializeField] public EnemyStatusData EnemyStatusData;
 
     [SerializeField] private List<GameObject> gems;
+
+    public Animator Animator { get; private set; }
 
     public Transform player;
 
