@@ -32,10 +32,21 @@ public class Inventory : Singleton<Inventory>
     private void Start()
     {
         player = GameManager.Instance.player;
-        inventoryItems = new List<InventoryItem>();
+        
+        if(inventoryItems.Count == 0)
+        {
+            inventoryItems = new List<InventoryItem>();
+        }
 
-        equipmentItems = new List<InventoryItem>();
-        equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
+        if(equipmentItems.Count == 0)
+        {
+            equipmentItems = new List<InventoryItem>();
+        }
+
+        if(equipmentDictionary.Count == 0)
+        {
+            equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
+        }
 
         characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
 
@@ -222,6 +233,11 @@ public class Inventory : Singleton<Inventory>
     {
         SlotType slotType = _inventoryItem.datas.SlotType;
 
+        if (equipmentDictionary == null)
+        {
+            equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
+        }
+
         if (equipmentDictionary.ContainsKey(slotType))
         {
             InventoryItem itemToRemove = equipmentDictionary[slotType];
@@ -232,8 +248,12 @@ public class Inventory : Singleton<Inventory>
         }
 
         equipmentDictionary[slotType] = _inventoryItem;
+        _inventoryUIController.UpdateSlotUI();
         AddItemStat(_inventoryItem.datas);
-        RemoveItem(_inventoryItem);
+        Debug.Log("0");
+        //RemoveItem(_inventoryItem);
+
+
 
         switch (slotType)
         {
@@ -246,12 +266,13 @@ public class Inventory : Singleton<Inventory>
                 equipmentSpriteOBj._armorList[0].sprite = _inventoryItem.datas.sprite;
                 break;
         }
+        Debug.Log("1");
         _inventoryUIController.UpdateSlotUI();
     }
 
     public void UpdateLoadInventoryItems()
     {
-        //PlayerDataManager playerDataManager = PlayerDataManager.Instance;
+        equipmentDictionary = GameManager.Instance.inventory.equipmentDictionary;
 
         foreach (var item in equipmentItems)
         {

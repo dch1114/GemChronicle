@@ -69,7 +69,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             UIManager.Instance.playerUI.StartPlayerUI();
         }
 
-        
+        UpdateInventoryUI();
     }
 
     public void LoadDatas()
@@ -328,5 +328,11 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     private void SetGameManagerInventory()
     {
         GameManager.Instance.inventory = inventory.GetComponent<Inventory>();
+
+    }
+
+    private void UpdateInventoryUI()
+    {
+        inventory.UpdateLoadInventoryItems();
     }
 }
