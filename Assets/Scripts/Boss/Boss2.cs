@@ -128,6 +128,6 @@ public class Boss2 : MonoBehaviour, IDamageable
 
     private void SpawnTypeGem()
     {
-        Instantiate(gems[3]).transform.position = gameObject.transform.position; ;
+        Instantiate(gems[3]).transform.position = gameObject.transform.position;
     }
 }
