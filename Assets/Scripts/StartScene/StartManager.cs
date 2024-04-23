@@ -62,4 +62,20 @@ public class StartManager : MonoBehaviour
         gameStart.SetActive(true);
         characterChooseGO.SetActive(false);
     }
+
+    public void ContinueGameBtn()
+    {
+        string path = Path.Combine(Application.dataPath, "playerData.json");
+        string path2 = Path.Combine(Application.dataPath, "playerItemData.json");
+
+        if (File.Exists(path) && File.Exists(path2))
+        {
+            GameManager.Instance.isNew = false;
+            LoadingSceneController.LoadScene("KYW_TestMain");
+        }
+        else
+        {
+            Debug.Log("저장 파일 없음");
+        }
+    }
 }

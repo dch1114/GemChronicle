@@ -18,6 +18,8 @@ public class GameManager : Singleton<GameManager>
 
     //background test
     public GameObject[] backgrounds;
+    //inventory save test
+    public Inventory inventory;
 
     protected override void Awake()
     {

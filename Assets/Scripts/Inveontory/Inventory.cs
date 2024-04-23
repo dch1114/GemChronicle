@@ -16,10 +16,10 @@ public class Inventory : Singleton<Inventory>
     [SerializeField] private SPUM_SpriteList equipmentSpriteOBj;
 
     [Header("Inventory")]
-    public List<InventoryItem> equipment;
+    public List<InventoryItem> equipmentItems;
     public Dictionary<SlotType, InventoryItem> equipmentDictionary;
 
-    public List<InventoryItem> inventory;
+    public List<InventoryItem> inventoryItems;
 
     [SerializeField] private InventoryUIController _inventoryUIController;
 
@@ -32,9 +32,9 @@ public class Inventory : Singleton<Inventory>
     private void Start()
     {
         player = GameManager.Instance.player;
-        inventory = new List<InventoryItem>();
+        inventoryItems = new List<InventoryItem>();
 
-        equipment = new List<InventoryItem>();
+        equipmentItems = new List<InventoryItem>();
         equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
 
         characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
@@ -77,14 +77,14 @@ public class Inventory : Singleton<Inventory>
         //}
 
         InventoryItem newItem = new InventoryItem(_item);
-        inventory.Add(newItem);
+        inventoryItems.Add(newItem);
     }
 
     private void AddToInventory(Item _item, int _amount)
     {
         if (_item.ItemType == ItemType.Potion)
         {
-            foreach (InventoryItem item in inventory)
+            foreach (InventoryItem item in inventoryItems)
             {
                 if (item.datas == _item)
                 {
@@ -95,7 +95,7 @@ public class Inventory : Singleton<Inventory>
         }
 
         InventoryItem newItem = new InventoryItem(_item, _amount);
-        inventory.Add(newItem);
+        inventoryItems.Add(newItem);
     }
 
     public void EquipItem(InventoryItem _inventoryItem)
@@ -106,13 +106,13 @@ public class Inventory : Singleton<Inventory>
         {
             InventoryItem itemToRemove = equipmentDictionary[slotType];
             equipmentDictionary.Remove(slotType);
-            equipment.Remove(itemToRemove);
+            equipmentItems.Remove(itemToRemove);
             RemoveItemStat(itemToRemove.datas);
             AddItem(itemToRemove.datas);
         }
 
         equipmentDictionary[slotType] = _inventoryItem;
-        equipment.Add(_inventoryItem);
+        equipmentItems.Add(_inventoryItem);
         AddItemStat(_inventoryItem.datas);
         RemoveItem(_inventoryItem);
 
@@ -137,7 +137,7 @@ public class Inventory : Singleton<Inventory>
         if (equipmentDictionary.TryGetValue(slotType, out InventoryItem value))
         {
             equipmentDictionary.Remove(slotType);
-            equipment.Remove(value);
+            equipmentItems.Remove(value);
             RemoveItemStat(itemToRemove.datas);
         }
 
@@ -158,11 +158,11 @@ public class Inventory : Singleton<Inventory>
 
     public void RemoveItem(InventoryItem _inventoryItem)
     {
-        if (inventory.Contains(_inventoryItem))
+        if (inventoryItems.Contains(_inventoryItem))
         {
             if (_inventoryItem.stackSize <= 1)
             {
-                inventory.Remove(_inventoryItem);
+                inventoryItems.Remove(_inventoryItem);
             }
             else
             {
@@ -218,6 +218,54 @@ public class Inventory : Singleton<Inventory>
         }
     }
 
+    public void LoadEquipItem(InventoryItem _inventoryItem)
+    {
+        SlotType slotType = _inventoryItem.datas.SlotType;
+
+        if (equipmentDictionary.ContainsKey(slotType))
+        {
+            InventoryItem itemToRemove = equipmentDictionary[slotType];
+            equipmentDictionary.Remove(slotType);
+            equipmentItems.Remove(itemToRemove);
+            RemoveItemStat(itemToRemove.datas);
+            AddItem(itemToRemove.datas);
+        }
+
+        equipmentDictionary[slotType] = _inventoryItem;
+        AddItemStat(_inventoryItem.datas);
+        RemoveItem(_inventoryItem);
+
+        switch (slotType)
+        {
+            case SlotType.Weapon:
+                characterSpriteOBj._weaponList[0].sprite = _inventoryItem.datas.sprite;
+                equipmentSpriteOBj._weaponList[0].sprite = _inventoryItem.datas.sprite;
+                break;
+            case SlotType.Armor:
+                characterSpriteOBj._armorList[0].sprite = _inventoryItem.datas.sprite;
+                equipmentSpriteOBj._armorList[0].sprite = _inventoryItem.datas.sprite;
+                break;
+        }
+        _inventoryUIController.UpdateSlotUI();
+    }
+
+    public void UpdateLoadInventoryItems()
+    {
+        //PlayerDataManager playerDataManager = PlayerDataManager.Instance;
+
+        foreach (var item in equipmentItems)
+        {
+            LoadEquipItem(item);
+            _inventoryUIController.UpdateSlotUI();
+        }
+        
+        foreach(var item in inventoryItems)
+        {
+            _inventoryUIController.UpdateSlotUI();
+        }
+
+        UpdateRetainGold();
+    }
     //public bool CanAddItem()
     //{
     //    if (inventory.Count >= inventoryItemSlot.Length)

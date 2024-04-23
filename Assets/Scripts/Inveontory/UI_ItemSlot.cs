@@ -152,4 +152,5 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
 
         ui.itemToopTip.transform.position = new Vector2(mousePosition.x + xOffset, mousePosition.y + yOffset);
     }
+
 }
