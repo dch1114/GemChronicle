@@ -1,18 +1,19 @@
 using System.Collections;
+using System.IO;
 using UnityEngine;
 
 public class StartManager : MonoBehaviour
 {
     [SerializeField] private GameObject startText;
     [SerializeField] private GameObject loadErrorMsg;
-    public RectTransform gameTitle;
-    public GameObject gameStart;
-    public GameObject CharacterChoosPrefab;
-
+    [SerializeField] private RectTransform gameTitle;
+    [SerializeField] private GameObject gameStart;
+    [SerializeField] private GameObject characterChooseGO;
 
     private bool gameStarted = false;
     private Vector3 titleTargetPosition;
     private float titleMoveSpeed = 250.0f;
+
 
     private void Start()
     {
@@ -48,29 +49,17 @@ public class StartManager : MonoBehaviour
         gameStarted = true;
     }
 
-    public void StartNewGame()
+    public void NewGameBtn()
     {
-        LoadingSceneController.LoadScene("KSH");
+        characterChooseGO.SetActive(true);
+        gameStart.SetActive(false);
+        gameTitle.gameObject.SetActive(false);
     }
 
-    public void ContinueGame()
+    public void TurnBackBtn()
     {
-
+        gameTitle.gameObject.SetActive(true);
+        gameStart.SetActive(true);
+        characterChooseGO.SetActive(false);
     }
-
-    //public IEnumerator LoadScene()
-    //{
-    //    yield return null;
-
-    //    AsyncOperation asyncOperation = SceneManager.LoadSceneAsync("KSH");
-
-    //    Debug.Log("Pro : " + asyncOperation.progress);
-
-    //    while (asyncOperation.isDone)
-    //    {
-    //        progressText.text = "Loading " + (asyncOperation.progress * 100) + "%";
-
-    //        yield return null;
-    //    }
-    //}
 }

@@ -19,10 +19,6 @@ public class Player : MonoBehaviour
     public GameObject SkillPage { get; set; }
     [HideInInspector] public SkillPagesUI skillpageUI; //test
 
-    //test
-    public GameObject InventoryUIPanel;
-    [HideInInspector] public InventoryUIController inventoryUIController;
-
     private void Awake()
     {
         AnimationData.Initialize();
@@ -33,9 +29,7 @@ public class Player : MonoBehaviour
         Controller = GetComponent<PlayerController>();
 
         stateMachine = new PlayerStateMachine(this);
-        //test
-        inventoryUIController = InventoryUIPanel.GetComponentInParent<InventoryUIController>();
-
+        
     }
 
     private void Start()
