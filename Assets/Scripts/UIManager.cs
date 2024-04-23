@@ -151,6 +151,7 @@ public class UIManager : Singleton<UIManager>
     //0315 대회메세지 세팅
     public void SetTalkMessage(string msg)
     {
+        string playerName = GameManager.Instance.player.Data.StatusData.Name;
         talkText.text = msg;
     }
     //0315 초상화 이미지 세팅
