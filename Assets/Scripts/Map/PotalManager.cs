@@ -91,6 +91,6 @@ public class PotalManager : Singleton<PotalManager>
     public void CompleteSevenQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
     public void CompleteEightQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
     public void CompleteNineQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
-    public void CompleteTenQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
+    public void CompleteTenQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500003, 1); }
 
 }

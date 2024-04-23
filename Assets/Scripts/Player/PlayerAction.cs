@@ -21,7 +21,8 @@ public class PlayerAction : MonoBehaviour
     IInteractive target = null;
     UIManager uiManagerInstance;
     // Update is called once per frame
-
+    public BossTalk bosstalk;
+    private int talkIndex = 0;
     private void Start()
     {
         uiManagerInstance = UIManager.Instance;
@@ -38,6 +39,16 @@ public class PlayerAction : MonoBehaviour
     }
     void OnInteractive()
     {
+        if (QuestManager.Instance.EndingBossDie == true)
+        {
+            bosstalk.Bosstalk(talkIndex);
+            talkIndex++;
+        }
+        else
+        { 
+
+        }
+
         if (interactiveList.Count > 0)
         {
             if (target.GetType() == InteractType.NPC)
