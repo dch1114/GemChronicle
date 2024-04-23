@@ -33,7 +33,7 @@ public class TalkManager : MonoBehaviour
         portraitData.Add(5000, portraitArr[3]);
         portraitData.Add(6000, portraitArr[4]);
         portraitData.Add(7000, portraitArr[5]);
-
+        portraitData.Add(8000, portraitArr[6]);
 
     }
     //public string GetTalk(int _id, int _talkIndex)
