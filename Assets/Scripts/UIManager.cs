@@ -275,6 +275,7 @@ public class UIManager : Singleton<UIManager>
             PotraitPanelOnOff(false);
             //btn.SetActive(_OnOff);
             HealChoice.SetActive(_OnOff);
+            SetPlayerInput();
             playerinput.OnEnable();
             isOpenShowPopUp = false;
         }
