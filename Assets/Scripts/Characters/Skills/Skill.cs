@@ -63,6 +63,11 @@ public class Skill : MonoBehaviour
         damageable = collision.gameObject.GetComponent<IDamageable>();
     }
 
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        damageable = collision.gameObject.GetComponent<IDamageable>();
+    }
+
     //test
     //protected virtual void PlayAttackSound()
     //{

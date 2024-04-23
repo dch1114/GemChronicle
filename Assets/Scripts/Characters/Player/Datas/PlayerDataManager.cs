@@ -6,17 +6,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
-public class PlayerCurrentStatus //ÇöÀç »óÅÂ ÀúÀå¿ë
+public class PlayerCurrentStatus //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 {
     public string name;
     public int level;
-    public int exp; //ÇöÀç °æÇèÄ¡
-    public int hp;  //ÇöÀç Ã¼·Â
+    public int exp; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡
+    public int hp;  //ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½
     public int gold;
     public JobType jobType;
     public Dictionary<SkillType, int> gems;
-    public List<InventoryItem> equipmentItems; // ÀåÂøÁßÀÎ ¾ÆÀÌÅÛ ¸ñ·Ï
-    public List<InventoryItem> inventoryItems; // ÀÎº¥Åä¸® ¾ÆÀÌÅÛ ¸ñ·Ï
+    public List<InventoryItem> equipmentItems; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    public List<InventoryItem> inventoryItems; // ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    public Vector3 currentPos;
 }
 
 [Serializable]
@@ -37,16 +38,28 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     protected override void Awake()
     {
         base.Awake();
-
-        SetGameManagerPlayer(0); //ÀÓ½Ã
     }
 
     private void Start()
     {
         LoadDatas();
-        SetDatas();
-        AddGems(); //ÀÓ½Ã
-        inventory = GameManager.Instance.inventory; //test
+        nventory = GameManager.Instance.inventory; //test
+
+        if(GameManager.Instance != null)
+        {
+            if(GameManager.Instance.isNew)
+            {
+                CreateNewPlayer();
+            } else
+            {
+                LoadPlayerDataToJson();
+            }
+        }
+
+        if(UIManager.Instance != null)
+        {
+            UIManager.Instance.playerUI.StartPlayerUI();
+        }
     }
 
     public void LoadDatas()
@@ -57,15 +70,38 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     public void SetDatas()
     {
+        SetPlayerByJob();
+
+        SaveCurrentDatas();
         SetPlayerSkillInfos();
         SetPlayerLevel();
     }
 
-    public void AddGems()
+    public void CreateNewPlayer()
     {
-        player.Data.StatusData.GetGems(SkillType.Ice, 10);
-        player.Data.StatusData.GetGems(SkillType.Fire, 10);
-        player.Data.StatusData.GetGems(SkillType.Light, 10);
+        //currentStatus = new PlayerCurrentStatus();
+
+        currentStatus.name = GameManager.Instance.playerName;
+        currentStatus.jobType = GameManager.Instance.playerJob;
+        currentStatus.level = 1;
+        currentStatus.exp = 0;
+
+        LevelData data = playerLevelDatabase.GetLevelDataByKey(currentStatus.level);
+        currentStatus.hp = data.maxHp;
+        currentStatus.gold = 3000; //ï¿½âº» ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¾ï¿½
+        currentStatus.currentPos = new Vector3(0f, 0f, 0f);
+
+        InitGems();
+
+        SetDatas();
+    }
+
+    public void InitGems()
+    {
+        currentStatus.gems = new Dictionary<SkillType, int>();
+        currentStatus.gems.Add(SkillType.Ice, 10);
+        currentStatus.gems.Add(SkillType.Fire, 10);
+        currentStatus.gems.Add(SkillType.Light, 10);
     }
 
 
@@ -145,6 +181,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     public void LoadCurrentDatas()
     {
+        player = GameManager.Instance.player;
         if(player != null)
         {
             PlayerStatusData data = player.Data.StatusData;
@@ -157,15 +194,17 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             currentStatus.jobType = data.JobType;
             currentStatus.gems = data.Gems;
 
-            // ÇÃ·¹ÀÌ¾îÀÇ ÀÎº¥Åä¸® µ¥ÀÌÅÍ
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             currentStatus.equipmentItems = inventory.equipmentItems;
             currentStatus.inventoryItems = inventory.inventoryItems;
+            currentStatus.currentPos = player.transform.position;
         }
     }
 
     public bool IsCurrentDataSaved()
     {
-        if(player != null)
+        player = GameManager.Instance.player;
+        if (player != null)
         {
             PlayerStatusData data = player.Data.StatusData;
 
@@ -175,7 +214,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             if (currentStatus.exp != data.Exp) return false;
             if (currentStatus.hp != data.Hp) return false;
             if (currentStatus.gold != data.Gold) return false;
-            if( currentStatus.gems != data.Gems) return false;
+            if (currentStatus.gems != data.Gems) return false;
+            if (currentStatus.currentPos != player.transform.position) return false;
         }
 
         return true;
@@ -183,7 +223,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     public void SaveCurrentDatas()
     {
-        if(player != null)
+        player = GameManager.Instance.player;
+        if (player != null)
         {
             PlayerStatusData data = player.Data.StatusData;
 
@@ -195,22 +236,23 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             data.JobType = currentStatus.jobType;
             data.Gems = currentStatus.gems;
 
-            // ÇÃ·¹ÀÌ¾îÀÇ ÀÎº¥Åä¸® µ¥ÀÌÅÍ
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             inventory.equipmentItems = currentStatus.equipmentItems;
             inventory.inventoryItems = currentStatus.inventoryItems;
+            player.transform.position = currentStatus.currentPos;
         }
     }
 
     public void SavePlayerDataToJson()
     {
-        LoadCurrentDatas(); //µ¥ÀÌÅÍ Áý¾î³Ö±â
+        LoadCurrentDatas(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
         string jsonData = JsonUtility.ToJson(currentStatus);
         string path = Path.Combine(Application.dataPath, saveFileName);
         File.WriteAllText(path, jsonData);
 
         if(UIManager.Instance != null)
         {
-            UIManager.Instance.alertPanelUI.ShowAlert("ÀúÀåµÇ¾ú½À´Ï´Ù.");
+            UIManager.Instance.alertPanelUI.ShowAlert("ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
         }
     }
 
@@ -223,11 +265,11 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             string jsonData = File.ReadAllText(path);
 
             currentStatus = JsonUtility.FromJson<PlayerCurrentStatus>(jsonData);
-            SetPlayerByJob();
-            SaveCurrentDatas();
+
+            SetDatas();
         } else
         {
-            Debug.Log("°ÔÀÓ ÀÌ¾îÇÏ±â ºÒ°¡");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
         }
     }
 
@@ -261,5 +303,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             }
             else players[i].SetActive(false);
         }
+
+        player = GameManager.Instance.player;
     }
 }

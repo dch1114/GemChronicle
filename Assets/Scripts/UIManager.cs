@@ -37,13 +37,16 @@ public class UIManager : Singleton<UIManager>
     public PlayerUI playerUI;
     public SkillPagesUI skillPages;
     public AlertPanelUI alertPanelUI;
+    public DiePanelUI diePanelUI;
+    public InventoryUIController inventoryUI;
 
+    [Header("Potal")]
     public GameObject potalListUI;
     public PotalListUI potalUIScript;
     public GameObject potaltalk;
     public Button[] showMenuButton;
     public Button[] potalButton;
-
+    public GameObject Diary;
     public Text potalTxt;
     public Sprite selectButton;
     public Sprite unSelectButton;
@@ -60,9 +63,10 @@ public class UIManager : Singleton<UIManager>
     private PlayerInput playerinput;
     UnityAction selectMenuAction = null;
     public GameObject soundSetting;
-    public Text DiaryTxt;
+    public TextMeshProUGUI DiaryTxt;
     public string[] DiaryTxtArray;
- 
+    public int _page;
+
     //0315 [SerializeField]를 선언하면 외부 스크립트에서 접근할수 없으나 인스펙터에서 세팅 및 확인을 할 수 있음  
     [SerializeField]
     TextMeshProUGUI talkText;
@@ -75,16 +79,14 @@ public class UIManager : Singleton<UIManager>
 
     protected override void Awake()
     {
-        DiaryTxtArray = new string[4];
-        DiaryTxtArray[0] = "왕자께서 태어나셨다. 왕께선 왕자님의 마력 수치를 보시고선 왕가의 수치라며 죽이라고 명하셨다. 하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다. 그에게 [주인공]이라는 이름을 지어줬다.";
 
-
+   
 
     }
     private void Start()
     {
-        playerinput = GameManager.Instance.player.Input;
         InitializeShopMenuButtons();
+
     }
     private void Update()
     {
@@ -219,6 +221,8 @@ public class UIManager : Singleton<UIManager>
             PotraitPanelOnOff(false);
             //btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
+
+            SetPlayerInput();
             playerinput.OnEnable();
             isOpenShowPopUp = false;
         }
@@ -323,9 +327,69 @@ public class UIManager : Singleton<UIManager>
         potaltalk.SetActive(_OnOff);
     }
 
-    public void ShowDiary()
+    public void ShowDiary(int _page)
     {
-
+        
+        DiaryTxt.text = DiaryTxtArray[_page];
+        return;
     }
 
+    public void NextPage()
+    {
+        if (_page <= 6)
+        {
+            _page++;
+            if(_page == 7)
+            {
+                OnOffDiary(false);
+              
+            }
+            DiaryTxt.text = DiaryTxtArray[_page];
+        }
+       
+        return;
+    }
+    public void PrevPage()
+    {
+        if (_page >= 1)
+        {
+            _page--;
+            DiaryTxt.text = DiaryTxt.text = DiaryTxtArray[_page];
+        }
+   
+        return;
+    }
+
+    public void OnOffDiary(bool _OnOff)
+    {
+        DiaryTxtArray = new string[7];
+        DiaryTxtArray[0] = "-1월8일-\n\n왕자께서 태어나셨다.\n왕께선 왕자님의 마력 수치를 보시고선 왕가의 수치라며 \n죽이라고 명하셨다.\n\n하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다.\n\n그에게 [주인공]이라는 이름을 지어줬다.";
+        DiaryTxtArray[1] = "-2월10일-\n\n모든 지역에서 몬스터가 출몰한다는 상소가 빗발친다.\n\n하지만 왕께선 마땅한 대책을 내놓지 않으신다.\n지치신걸까?";
+        DiaryTxtArray[2] = "-2월25일-\n\n최근 왕께서 새벽에 자주 사라지신다는 보고를 받았다.\n\n사람을 붙여 왕께서 어디가시는지 알아봐야겠다.";
+        DiaryTxtArray[3] = "-2월27일-\n\n왕께서 매일밤 오래전 폐쇄된 지하감옥에 드나드신다는 \n보고를 받았다.\n\n그곳엔 아무 것도 없을텐데… 내일 한번 찾아가봐야겠다.";
+        DiaryTxtArray[4] = "-3월27일-\n\n감옥엔  상소문들  속  모습과 같은 몬스터들이 가득했다. \n\n그들의 몸에는 상처가 가득했지만 눈에는 광기만이 남아있었다.\n\n 기괴했다.\n\n그곳의 보고서에는 ‘어둠의 젬’을  만드는  방법에  대한 이야기가 가득했다.";
+        DiaryTxtArray[5] = "\n\n왕이 만들어내고 있던 것이다.\n\n그 수많은 고통을.\n\n이 모든 사실을 알게 된 나는 차마 왕의 밑에서 더 이상 일할 수 없었다.";
+        DiaryTxtArray[6] = "\n\n도망쳤다.\n\n언제까지 이런 삶을 살아야할지는 알 수 없지만 어떻게든 왕을 막아야한다.\n\n시간이 얼마 남지 않았다.";
+        Diary.SetActive(_OnOff);
+        _page = 0;
+        ShowDiary(_page);
+
+        SetPlayerInput();
+        if (_OnOff == true)
+        {
+            playerinput.OnDisable();
+        }
+        else
+        {
+            playerinput.OnEnable();
+        }
+    }
+
+    private void SetPlayerInput()
+    {
+        if (playerinput == null)
+        {
+            playerinput = GameManager.Instance.player.Input;
+        }
+    }
 }

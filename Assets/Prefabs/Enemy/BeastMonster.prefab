@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &568917197168645706
 SpriteRenderer:
@@ -127,9 +127,10 @@ MonoBehaviour:
     def: 5
     hp: 50
     exp: 7
-    type: 0
+    type: 1
     walkSpeed: 2
     attackRate: 7
+    ID: 0
   EnemyAnimationData:
     idleParameterName: Idle
     walkParameterName: Walk
@@ -167,10 +168,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -181,7 +182,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 6
 --- !u!61 &6852601048180578262
 BoxCollider2D:
   m_ObjectHideFlags: 0

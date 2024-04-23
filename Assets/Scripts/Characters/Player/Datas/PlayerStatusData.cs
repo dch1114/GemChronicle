@@ -29,11 +29,6 @@ public class PlayerStatusData : Status
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
     public Dictionary<SkillType, int> Gems { get { return gems; } set { gems = value; } }
 
-    public void InitializeData()
-    {
-        InitializeGem();
-    }
-
     public void LoadLevelData(LevelData data)
     {
         atk = data.atk;
@@ -95,22 +90,24 @@ public class PlayerStatusData : Status
             if(realDamage > 0)
             {
                 hp -= (int) Math.Floor(realDamage);
-                UIManager.Instance.playerUI.UpdateHp();
             } else
             {
                 //TODO: SHOW DAMAGE 0
             }
         } else
         {
+            hp = 0;
             OnDie();
         }
+        UIManager.Instance.playerUI.UpdateHp();
     }
 
     private void OnDie()
     {
-        //TODO: RESPAWN AT VILLAGE
         //State Change
-        HealFull();
+        PlayerStateMachine stateMachine = GameManager.Instance.player.GetStateMachine();
+
+        stateMachine.ChangeState(stateMachine.DieState);
     }
 
     public void GetExp(int _amount)

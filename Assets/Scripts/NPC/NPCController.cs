@@ -51,7 +51,6 @@ public class NPCController : MonoBehaviour, IInteractive
         npcManager = manager; // NPCManager의 역참조를 받음
         uiManager = UIManager.Instance;
         talkManager = npcManager.talkManager;
-        playerinput = GameManager.Instance.player.Input;
         currentNpcIDForQuest = npcData.ID;
 
         questData = DataManager.Instance.GetQuestTableData(npcData.ID);
@@ -193,6 +192,7 @@ public class NPCController : MonoBehaviour, IInteractive
             {
                 QuestManager.Instance.SubscribeQuest((int)npcType);
             }
+           
             else
             {
                 if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
@@ -215,7 +215,7 @@ public class NPCController : MonoBehaviour, IInteractive
                 }
             }
 
-
+            SetPlayerInput();
 
             //Debug.Log("NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않음");
             //Debug.Log("이동초기화전");
@@ -234,7 +234,11 @@ public class NPCController : MonoBehaviour, IInteractive
                 //상점 팝업창 ON
                 uiManager.shopChoiceOnOff(true);
             }
+            if (npcType == NPCType.Diary)
+            {
 
+                UIManager.Instance.OnOffDiary(true);
+            }
 
 
             return;
@@ -261,6 +265,15 @@ public class NPCController : MonoBehaviour, IInteractive
         Talk();
 
     }
+
+    private void SetPlayerInput()
+    {
+        if (playerinput == null)
+        {
+            playerinput = GameManager.Instance.player.Input;
+        }
+    }
+
 
     void AddScriptsToQueue(int[] scriptIds)
     {

@@ -24,8 +24,6 @@ public abstract class SkillPages : MonoBehaviour
 
     public void Start()
     {
-        player = GameManager.Instance.player;
-
         SetSkillBtns();
     }
 
@@ -42,6 +40,7 @@ public abstract class SkillPages : MonoBehaviour
 
     public void SetSkillBtns()
     {
+        player = GameManager.Instance.player;
         for (int i = 0; i < skillBtns.Count; i++)
         {
             skillBtns[i].skillInfoData = player.Data.AttackData.GetSkillInfo(i);
