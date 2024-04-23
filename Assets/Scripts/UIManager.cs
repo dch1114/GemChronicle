@@ -471,7 +471,7 @@ public class UIManager : Singleton<UIManager>
     {
         string playerName = GameManager.Instance.player.Data.StatusData.Name;
         DiaryTxtArray = new string[7];
-        DiaryTxtArray[0] = $"-1월8일-\n\n왕자께서 태어나셨다.\n왕께선 왕자님의 마력 수치를 보시곤 왕가의 수치라며 \n죽이라 명하셨다.\n\n하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다.\n\n그에게 {playerName}이라는 이름을 지어줬다.";
+        DiaryTxtArray[0] = $"-1월8일-\n\n왕자께서 태어나셨다.\n왕께선 왕자님의 마력 수치를 보시곤 왕가의 수치라며 \n죽이라 명하셨다.\n\n하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다.\n\n그에게 <color=#6C00D9>{playerName}</color>이라는 이름을 지어줬다.";
         DiaryTxtArray[1] = "-2월10일-\n\n모든 지역에서 몬스터가 출몰한다는 상소가 빗발친다.\n\n하지만 왕께선 마땅한 대책을 내놓지 않으신다.\n지치신걸까?";
         DiaryTxtArray[2] = "-2월25일-\n\n최근 왕께서 새벽에 자주 사라지신다는 보고를 받았다.\n\n사람을 붙여 왕께서 어디가시는지 알아봐야겠다.";
         DiaryTxtArray[3] = "-2월27일-\n\n왕께서 매일밤 오래전 폐쇄된 지하감옥에 드나드신다는 \n보고를 받았다.\n\n그곳엔 아무 것도 없을텐데… 내일 한번 찾아가봐야겠다.";

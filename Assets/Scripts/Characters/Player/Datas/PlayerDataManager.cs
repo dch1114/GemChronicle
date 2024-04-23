@@ -269,7 +269,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             SetDatas();
         } else
         {
-            Debug.Log("���� ���� ����");
+            Debug.Log("저장되었습니다.");
         }
     }
 
