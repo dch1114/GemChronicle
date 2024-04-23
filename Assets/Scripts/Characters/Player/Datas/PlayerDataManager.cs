@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,9 +16,14 @@ public class PlayerCurrentStatus //���� ���� �����
     public int gold;
     public JobType jobType;
     public Dictionary<SkillType, int> gems;
-    public List<InventoryItem> equipmentItems; // �������� ������ ���
-    public List<InventoryItem> inventoryItems; // �κ��丮 ������ ���
     public Vector3 currentPos;
+}
+
+[Serializable]
+public class PlayerCurrentItems
+{
+    public List<InventoryItem> equipmentItems;
+    public List<InventoryItem> inventoryItems;
 }
 
 [Serializable]
@@ -26,15 +32,17 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     public PlayerLevelDatabase playerLevelDatabase;
     public PlayerSkillDatabase playerSkillDatabase;
     public PlayerCurrentStatus currentStatus;
+    public PlayerCurrentItems currentItems;
 
     public string saveFileName = "playerData.json";
+    public string saveItemFileName = "playerItemData.json";
 
     private Player player;
 
     [SerializeField] private List<GameObject> players;
 
     //test
-    private Inventory inventory;
+    [SerializeField] private Inventory inventory;
     protected override void Awake()
     {
         base.Awake();
@@ -43,9 +51,9 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     private void Start()
     {
         LoadDatas();
-        inventory = GameManager.Instance.inventory; //test
+        //SetGameManagerInventory();
 
-        if(GameManager.Instance != null)
+        if (GameManager.Instance != null)
         {
             if(GameManager.Instance.isNew)
             {
@@ -54,12 +62,16 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             {
                 LoadPlayerDataToJson();
             }
+
         }
 
         if(UIManager.Instance != null)
         {
             UIManager.Instance.playerUI.StartPlayerUI();
         }
+
+        // 먼저 inventoryUIController의 요소를 불러와야 한다.
+        UpdateInventoryUI();
     }
 
     public void LoadDatas()
@@ -75,6 +87,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         SaveCurrentDatas();
         SetPlayerSkillInfos();
         SetPlayerLevel();
+        SetPlayerDataToInventory();
     }
 
     public void CreateNewPlayer()
@@ -195,8 +208,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             currentStatus.gems = data.Gems;
 
             // �÷��̾��� �κ��丮 ������
-            currentStatus.equipmentItems = inventory.equipmentItems;
-            currentStatus.inventoryItems = inventory.inventoryItems;
+            currentItems.equipmentItems = inventory.equipmentItems;
+            currentItems.inventoryItems = inventory.inventoryItems;
             currentStatus.currentPos = player.transform.position;
         }
     }
@@ -224,6 +237,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     public void SaveCurrentDatas()
     {
         player = GameManager.Instance.player;
+        inventory = GameManager.Instance.inventory;
         if (player != null)
         {
             PlayerStatusData data = player.Data.StatusData;
@@ -237,8 +251,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             data.Gems = currentStatus.gems;
 
             // �÷��̾��� �κ��丮 ������
-            inventory.equipmentItems = currentStatus.equipmentItems;
-            inventory.inventoryItems = currentStatus.inventoryItems;
+            inventory.equipmentItems = currentItems.equipmentItems;
+            inventory.inventoryItems = currentItems.inventoryItems;
             player.transform.position = currentStatus.currentPos;
         }
     }
@@ -248,7 +262,11 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         LoadCurrentDatas(); //������ ����ֱ�
         string jsonData = JsonUtility.ToJson(currentStatus);
         string path = Path.Combine(Application.dataPath, saveFileName);
+        string itemJsonData = JsonUtility.ToJson(currentItems);
+        string itemPath = Path.Combine(Application.dataPath, saveItemFileName);
+
         File.WriteAllText(path, jsonData);
+        File.WriteAllText(itemPath, itemJsonData);
 
         if(UIManager.Instance != null)
         {
@@ -259,12 +277,15 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     public void LoadPlayerDataToJson()
     {
         string path = Path.Combine(Application.dataPath, saveFileName);
+        string itemPath = Path.Combine (Application.dataPath, saveItemFileName);
 
         if(File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
+            string itemJsonData = File.ReadAllText(itemPath);
 
             currentStatus = JsonUtility.FromJson<PlayerCurrentStatus>(jsonData);
+            currentItems = JsonUtility.FromJson<PlayerCurrentItems>(itemJsonData);
 
             SetDatas();
         } else
@@ -305,5 +326,22 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         }
 
         player = GameManager.Instance.player;
+        GameManager.Instance.inventory = inventory.GetComponent<Inventory>();
+    }
+
+    private void SetGameManagerInventory()
+    {
+        GameManager.Instance.inventory = inventory.GetComponent<Inventory>();
+
+    }
+
+    private void SetPlayerDataToInventory()
+    {
+        inventory.SetPlayerData();
+    }
+
+    private void UpdateInventoryUI()
+    {
+        inventory.UpdateLoadInventoryItems();
     }
 }

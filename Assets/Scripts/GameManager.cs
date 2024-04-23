@@ -16,8 +16,6 @@ public class GameManager : Singleton<GameManager>
     public bool isLastBossDead = false;
     public int saveDataID;
 
-    //background test
-    public GameObject[] backgrounds;
     //inventory save test
     public Inventory inventory;
 
@@ -35,13 +33,4 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void SwitchBackground(int _mapIndex)
-    {
-        foreach (var background in backgrounds)
-        {
-            background.SetActive(false);
-        }
-
-        backgrounds[_mapIndex].SetActive(true);
-    }
 }

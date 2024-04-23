@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.Progress;
 
 
 public class Inventory : Singleton<Inventory>
@@ -30,18 +32,25 @@ public class Inventory : Singleton<Inventory>
     }
 
     private void Start()
-    {
-        player = GameManager.Instance.player;
-        inventoryItems = new List<InventoryItem>();
+    {  
+        if(inventoryItems == null)
+        {
+            inventoryItems = new List<InventoryItem>();
+        }
+        
+        if(equipmentItems == null)
+        {
+            equipmentItems = new List<InventoryItem>();
+        }
+        
+        if (equipmentDictionary == null)
+        {
+            equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
+        }
+            
+        //characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
 
-        equipmentItems = new List<InventoryItem>();
-        equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
 
-        characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
-
-        //Gold Test
-        statusData = player.Data.StatusData;
-        inventoryGold = statusData.Gold;
         UpdateRetainGold();
     }
 
@@ -222,18 +231,24 @@ public class Inventory : Singleton<Inventory>
     {
         SlotType slotType = _inventoryItem.datas.SlotType;
 
-        if (equipmentDictionary.ContainsKey(slotType))
+        if (this.equipmentDictionary == null)
         {
-            InventoryItem itemToRemove = equipmentDictionary[slotType];
-            equipmentDictionary.Remove(slotType);
-            equipmentItems.Remove(itemToRemove);
-            RemoveItemStat(itemToRemove.datas);
-            AddItem(itemToRemove.datas);
+            this.equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
+
+            //foreach (var item in this.equipmentItems)
+            //{
+            //    slotType = item.datas.SlotType;
+
+            //    this.equipmentDictionary[slotType] = item;
+
+            //}
         }
 
-        equipmentDictionary[slotType] = _inventoryItem;
+        slotType = _inventoryItem.datas.SlotType;
+        this.equipmentDictionary[slotType] = _inventoryItem;
+
+        _inventoryUIController.UpdateLoadItemSlotUI();
         AddItemStat(_inventoryItem.datas);
-        RemoveItem(_inventoryItem);
 
         switch (slotType)
         {
@@ -246,26 +261,46 @@ public class Inventory : Singleton<Inventory>
                 equipmentSpriteOBj._armorList[0].sprite = _inventoryItem.datas.sprite;
                 break;
         }
-        _inventoryUIController.UpdateSlotUI();
+
+        //if (equipmentDictionary.ContainsKey(slotType))
+        //{
+        //    InventoryItem itemToRemove = equipmentDictionary[slotType];
+        //    equipmentDictionary.Remove(slotType);
+        //    equipmentItems.Remove(itemToRemove);
+        //    RemoveItemStat(itemToRemove.datas);
+        //    AddItem(itemToRemove.datas);
+        //}
+
+        //equipmentDictionary[slotType] = _inventoryItem;
+
+        //RemoveItem(_inventoryItem);
+
     }
 
     public void UpdateLoadInventoryItems()
     {
-        //PlayerDataManager playerDataManager = PlayerDataManager.Instance;
-
         foreach (var item in equipmentItems)
         {
             LoadEquipItem(item);
-            _inventoryUIController.UpdateSlotUI();
+            _inventoryUIController.UpdateLoadItemSlotUI();
         }
-        
-        foreach(var item in inventoryItems)
+
+        foreach (var item in inventoryItems)
         {
-            _inventoryUIController.UpdateSlotUI();
+            _inventoryUIController.UpdateLoadItemSlotUI();
         }
 
         UpdateRetainGold();
     }
+
+    public void SetPlayerData()
+    {
+        player = GameManager.Instance.player;
+        statusData = player.Data.StatusData;
+        inventoryGold = statusData.Gold;
+        characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
+    }
+
     //public bool CanAddItem()
     //{
     //    if (inventory.Count >= inventoryItemSlot.Length)

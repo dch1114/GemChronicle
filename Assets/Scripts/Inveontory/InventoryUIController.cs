@@ -13,7 +13,7 @@ public class InventoryUIController : MonoBehaviour
     public UI_ItemToolTip itemToopTip;
     public UI_ItemToolTip shopitemToolTip;
 
-    Inventory inventoryContorller;
+    [SerializeField] Inventory inventoryPrefab;
 
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
@@ -25,11 +25,11 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private Transform inventoryListSlotParent;
 
 
-    private UI_ItemSlot[] inventoryItemSlot;
-    private UI_EquipmentSlot[] equipmentSlot;
+    [SerializeField] private UI_ItemSlot[] inventoryItemSlot;
+    [SerializeField] private UI_EquipmentSlot[] equipmentSlot;
     [SerializeField] private UI_Status[] uI_Statuses;
     //test
-    private UI_ItemSlot[] inventoryListItemSlot;
+    [SerializeField] private UI_ItemSlot[] inventoryListItemSlot;
 
     //test
     //[Header("Sound")]
@@ -38,13 +38,12 @@ public class InventoryUIController : MonoBehaviour
 
     void Start()
     {
-        inventoryContorller = Inventory.Instance;
-        inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
-        equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
-        //uI_Statuses = statusParent.GetComponentsInChildren<UI_Status>(); // 그냥 연결을해버리고 프리팹화?
+        //inventoryPrefab = Inventory.Instance;
+        //inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
+        //equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
         _amountSwitch = GetComponentInChildren<Switch>();
         ////test
-        inventoryListItemSlot = inventoryListSlotParent.GetComponentsInChildren<UI_ItemSlot>();
+        //inventoryListItemSlot = inventoryListSlotParent.GetComponentsInChildren<UI_ItemSlot>();
 
         itemToopTip.gameObject.SetActive(false);
     }
@@ -55,7 +54,7 @@ public class InventoryUIController : MonoBehaviour
         for (int i = 0; i < equipmentSlot.Length; i++)
         {
             //test
-            foreach (KeyValuePair<SlotType, InventoryItem> item in inventoryContorller.equipmentDictionary)
+            foreach (KeyValuePair<SlotType, InventoryItem> item in inventoryPrefab.equipmentDictionary)
             {
                 if (item.Key == equipmentSlot[i].slotType)
                 {
@@ -70,10 +69,10 @@ public class InventoryUIController : MonoBehaviour
             inventoryListItemSlot[i].CleanUpSlot();
         }
 
-        for (int i = 0; i < inventoryContorller.inventoryItems.Count; i++)
+        for (int i = 0; i < inventoryPrefab.inventoryItems.Count; i++)
         {
-            inventoryItemSlot[i].UpdateSlot(inventoryContorller.inventoryItems[i]);
-            inventoryListItemSlot[i].UpdateSlot(inventoryContorller.inventoryItems[i]);
+            inventoryItemSlot[i].UpdateSlot(inventoryPrefab.inventoryItems[i]);
+            inventoryListItemSlot[i].UpdateSlot(inventoryPrefab.inventoryItems[i]);
         }
     }
 
@@ -109,6 +108,45 @@ public class InventoryUIController : MonoBehaviour
         else
         {
             SoundManager.Instance.PlayClip(SoundManager.Instance.inventoryOpenSound);
+        }
+    }
+
+    public void UpdateLoadItemSlotUI()
+    {
+        //if(inventoryPrefab.equipmentDictionary == null)
+        //{
+        //    inventoryPrefab.equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
+        //}
+
+        //foreach(var item in inventoryPrefab.equipmentItems)
+        //{
+        //    SlotType slotType = item.datas.SlotType;
+
+        //    inventoryPrefab.equipmentDictionary[slotType] = item;
+        //}
+
+        for (int i = 0; i < equipmentSlot.Length; i++)
+        {
+            //test
+            foreach (var item in inventoryPrefab.equipmentDictionary)
+            {
+                if (item.Key == equipmentSlot[i].slotType)
+                {
+                    equipmentSlot[i].UpdateSlot(item.Value);
+                }
+            }
+        }
+
+        for (int i = 0; i < inventoryItemSlot.Length; i++)
+        {
+            inventoryItemSlot[i].CleanUpSlot();
+            inventoryListItemSlot[i].CleanUpSlot();
+        }
+
+        for (int i = 0; i < inventoryPrefab.inventoryItems.Count; i++)
+        {
+            inventoryItemSlot[i].UpdateSlot(inventoryPrefab.inventoryItems[i]);
+            inventoryListItemSlot[i].UpdateSlot(inventoryPrefab.inventoryItems[i]);
         }
     }
 
