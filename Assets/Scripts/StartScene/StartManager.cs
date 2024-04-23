@@ -71,7 +71,7 @@ public class StartManager : MonoBehaviour
         if (File.Exists(path) && File.Exists(path2))
         {
             GameManager.Instance.isNew = false;
-            LoadingSceneController.LoadScene("KYW_TestMain");
+            LoadingSceneController.LoadScene("UserTestScene");
         }
         else
         {
