@@ -276,7 +276,8 @@ public class Inventory : Singleton<Inventory>
 
         foreach (var item in equipmentItems)
         {
-            LoadEquipItem(item);
+            EquipItem(item);
+            //LoadEquipItem(item);
             _inventoryUIController.UpdateSlotUI();
         }
         
