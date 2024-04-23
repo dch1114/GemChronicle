@@ -7,8 +7,9 @@ public class BossTalk : MonoBehaviour
 {
     public string[] TalkData;
     public int[] PortraitId;
-    public Sprite[] PortraitImg;
+    //public Sprite[] PortraitImg;
     TalkManager talkManager;
+    public int TalkIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +29,27 @@ public class BossTalk : MonoBehaviour
         UIManager.Instance.SetNpcPortraitImage(talkManager.GetPortrait(8000));
     }
 
-    public void Bosstalk()
+    public void Bosstalk(int TalkIndex)
     {
-       
+        if (TalkIndex < TalkData.Length)
+        {
+    
+            UIManager.Instance.SetTalkMessage(TalkData[TalkIndex]);
+            UIManager.Instance.PotraitPanelOnOff(true);
+            if (PortraitId[TalkIndex] == 1)
+            {
+                UIManager.Instance.ShowNpcPotrait(true);
+                UIManager.Instance.ShowPlayerPotrait(false);
+            }
+            else
+            {
+                UIManager.Instance.ShowNpcPotrait(false);
+                UIManager.Instance.ShowPlayerPotrait(true);
+            }
+        }
+        else
+        {
+            UIManager.Instance.PotraitPanelOnOff(false);
+        }
     }
 }
