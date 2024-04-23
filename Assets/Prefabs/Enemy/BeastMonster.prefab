@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2186554947281762117}
   - component: {fileID: 472134152437245748}
   - component: {fileID: 6852601048180578262}
+  - component: {fileID: 6177909349958444376}
   m_Layer: 17
   m_Name: BeastMonster
   m_TagString: Untagged
@@ -197,3 +198,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &6177909349958444376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6432853204314395310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 935caea52ff88814192a9b3674e40ba2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyStatusData:
+    atk: 10
+    def: 0
+    hp: 50
+    exp: 7
+    type: 0
+    walkSpeed: 0
+    attackRate: 0
+    ID: 0
+  EnemyAnimationData:
+    idleParameterName: Idle
+    walkParameterName: Walk
+    attackParameterName: Attack
+    dieParameterName: Die
+  bossTalk: {fileID: 0}
+  enemyType: 1
+  skillType: 0
+  gem: {fileID: 1754942600076354860, guid: 37655d6ba324ce14bbe7167561bec117, type: 3}
+  skillPool: {fileID: 2186554947281762117}

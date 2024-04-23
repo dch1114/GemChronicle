@@ -26,7 +26,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private Rigidbody2D rigid;
     private Animator animator;
-    public BossTalk bossTalk;
     private EnemyState state;
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private SkillType skillType;
