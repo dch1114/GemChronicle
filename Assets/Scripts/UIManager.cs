@@ -23,16 +23,24 @@ public class UIManager : Singleton<UIManager>
         Exit,
         Max
     }
+
+    public enum ShowHealType
+    {
+        Heal,
+        NotHeal
+    }
+
     public enum OpenMenuType
     { 
         Potal,
-        Shop
+        Shop,
+        Heal
     }
     public GameObject talkBtn;
     public GameObject potraitPanel;
     public GameObject shopPanel;
     public GameObject shopChoice;
-
+    public GameObject HealChoice;
     [Header("UI Scripts")]
     public PlayerUI playerUI;
     public SkillPagesUI skillPages;
@@ -46,12 +54,14 @@ public class UIManager : Singleton<UIManager>
     public GameObject potaltalk;
     public Button[] showMenuButton;
     public Button[] potalButton;
+    public Button[] showHealButton;
     public GameObject Diary;
     public Text potalTxt;
     public Sprite selectButton;
     public Sprite unSelectButton;
     [SerializeField]
     ShowMenuType currentShowMenuType;
+    ShowHealType currentShowHealType;
     PotalType currentPotalType;
     PotalType minPotalType;
     PotalType maxPotalType;
@@ -86,12 +96,19 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         InitializeShopMenuButtons();
+        InitializeHealMenuButtons();
+
+
     }
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.UpArrow) && currentOpenMenuType.Equals(OpenMenuType.Shop)) PopupShopMenuSelect(--currentShowMenuType);
 
         if (Input.GetKeyUp(KeyCode.DownArrow) && currentOpenMenuType.Equals(OpenMenuType.Shop)) PopupShopMenuSelect(++currentShowMenuType);
+
+        if (Input.GetKeyUp(KeyCode.UpArrow) && currentOpenMenuType.Equals(OpenMenuType.Heal)) PopupHealMenuSelect(--currentShowHealType);
+
+        if (Input.GetKeyUp(KeyCode.DownArrow) && currentOpenMenuType.Equals(OpenMenuType.Heal)) PopupHealMenuSelect(++currentShowHealType);
     }
 
     public void OpenSoundSet(bool _OnOff)
@@ -113,13 +130,23 @@ public class UIManager : Singleton<UIManager>
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Buy], BuyShop, unSelectButton);
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Exit], ExitShop, unSelectButton);
     }
+    void InitializeHealMenuButtons()
+    {
+        // 버튼에 클릭 리스너를 할당하고 이미지 스프라이트를 설정합니다.
+        InitializeHealMenuButton(showHealButton[(int)ShowHealType.Heal], Heal, unSelectButton);
+        InitializeHealMenuButton(showHealButton[(int)ShowHealType.NotHeal], NotHeal, unSelectButton);
+    }
 
     void InitializeShopMenuButton(Button button, UnityAction action, Sprite sprite)
     {
         button.onClick.AddListener(action); // 클릭 이벤트에 액션을 추가합니다.
         button.image.sprite = sprite; // 이미지 스프라이트를 설정합니다.
     }
-
+    void InitializeHealMenuButton(Button _button, UnityAction _action, Sprite _sprite)
+    {
+        _button.onClick.AddListener(_action); // 클릭 이벤트에 액션을 추가합니다.
+        _button.image.sprite = _sprite; // 이미지 스프라이트를 설정합니다.
+    }
 
     //0315 대회메세지 세팅
     public void SetTalkMessage(string msg)
@@ -201,7 +228,7 @@ public class UIManager : Singleton<UIManager>
 
     public void shopChoiceOnOff(bool _OnOff)
     {
-
+        talkBtn.SetActive(false);
         if (_OnOff)
         {
             currentOpenMenuType = OpenMenuType.Shop;
@@ -222,6 +249,31 @@ public class UIManager : Singleton<UIManager>
             shopChoice.SetActive(_OnOff);
 
             SetPlayerInput();
+            playerinput.OnEnable();
+            isOpenShowPopUp = false;
+        }
+    }
+    public void HealChoiceOnOff(bool _OnOff)
+    {
+        talkBtn.SetActive(false);
+        if (_OnOff)
+        {
+            currentOpenMenuType = OpenMenuType.Heal;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            //btn.SetActive(_OnOff);
+            HealChoice.SetActive(_OnOff);
+            //팝업창이 뜨면 처음에 구매탭 버튼이 선택이 되게 버튼 세팅
+            PopupHealMenuSelect(ShowHealType.Heal);
+            isOpenShowPopUp = true;
+
+        }
+        else
+        {
+            //NPCInteractive.instance.isAction = false;
+            PotraitPanelOnOff(false);
+            //btn.SetActive(_OnOff);
+            HealChoice.SetActive(_OnOff);
             playerinput.OnEnable();
             isOpenShowPopUp = false;
         }
@@ -247,6 +299,29 @@ public class UIManager : Singleton<UIManager>
         selectMenuAction = null;
         //선택될 버튼에 상점타입의 버튼을 연결한다 
         selectMenuAction = GetSelectedShopMenu(type);
+    }
+
+    public void PopupHealMenuSelect(ShowHealType type)
+    {
+        if (currentShowHealType > ShowHealType.NotHeal)
+        {
+            currentShowHealType = ShowHealType.NotHeal;
+
+            return;
+        }
+
+        if (currentShowHealType < ShowHealType.Heal)
+        {
+            currentShowHealType = ShowHealType.Heal;
+
+            return;
+        }
+
+        currentShowHealType = type;
+
+        selectMenuAction = null;
+
+        selectMenuAction = GetSelectedHealMenu(type);
     }
 
     public void RunSelectedMenuButton()
@@ -275,21 +350,53 @@ public class UIManager : Singleton<UIManager>
                 return null;
         }
     }
-    void BuyShop()
+    UnityAction GetSelectedHealMenu(ShowHealType type)
+    {
+        showHealButton[(int)ShowHealType.Heal].image.sprite = unSelectButton;
+        showHealButton[(int)ShowHealType.NotHeal].image.sprite = unSelectButton;
+
+        switch (type)
+        {
+            case ShowHealType.Heal:
+                showHealButton[(int)ShowHealType.Heal].image.sprite = selectButton;
+
+                return Heal;
+
+
+            case ShowHealType.NotHeal:
+                showHealButton[(int)ShowHealType.NotHeal].image.sprite = selectButton;
+
+                return NotHeal;
+            default:
+                return null;
+        }
+    }
+    public void BuyShop()
     {
         inventoryUIController.UseShop();
         shopChoiceOnOff(false);
         Debug.Log("Select Buy");
     }
 
+    public void Heal()
+    {
+        HealChoiceOnOff(false);
+        GameManager.Instance.player.Data.StatusData.UseGold(100);
+        GameManager.Instance.player.Data.StatusData.Hp = GameManager.Instance.player.Data.StatusData.MaxHp;
+    }
 
 
-    void ExitShop()
+    public void ExitShop()
     {
         inventoryUIController.CloseShop();
         shopChoiceOnOff(false);
         Debug.Log("Select Exi");
 
+    }
+
+    public void NotHeal()
+    {
+        HealChoiceOnOff(false);
     }
     bool bOpenQuestPanel = false;
     public void TogglePanelQuest()

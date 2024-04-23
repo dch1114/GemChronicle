@@ -8,32 +8,28 @@ public class MiniQuest : MonoBehaviour
 
     [SerializeField] GameObject panel;
     [SerializeField] Transform parent;
-    [SerializeField] Button closeBtn;
+
     bool bVisible = false;
     Quest quest;
     QuestData questData;
     public List<SlotMiniQuest> slotMiniQuests;
     public SlotMiniQuest miniQuestPrefab;
-    private void Awake()
-    {
-        closeBtn.onClick.AddListener(ToggleButton);
-    }
-
-    //¹Ì´ÏÄù½ºÆ®Ã¢ È°¼ºÈ­/ºñÈ°¼ºÈ­
+    //ï¿½Ì´ï¿½ï¿½ï¿½ï¿½ï¿½Æ®Ã¢ È°ï¿½ï¿½È­/ï¿½ï¿½È°ï¿½ï¿½È­
     public void ToggleButton() 
     {
 
         if (bVisible)
         {
             panel.SetActive(false);
+            bVisible = false;
         }
         else
         {
             panel.SetActive(true);
-
+            bVisible = true;
         }
 
-        bVisible = !bVisible;
+      
     }
 
     public void SetMiniQuest(Quest questcompleted, QuestData qData)

@@ -39,21 +39,6 @@ public class CharacterChoose : MonoBehaviour
         LoadingSceneController.LoadScene("KYW_TestMain");
     }
 
-    public void ContinueGameBtn()
-    {
-        string path = Path.Combine(Application.dataPath, "playerData.json");
-
-        if (File.Exists(path))
-        {
-            GameManager.Instance.isNew = false;
-            StartGame();
-        }
-        else
-        {
-            Debug.Log("저장 파일 없음");
-        }
-    }
-
     public void StartNewGameBtn()
     {
         GameManager.Instance.isNew = true;
