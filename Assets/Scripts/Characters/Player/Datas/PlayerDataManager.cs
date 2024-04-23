@@ -15,6 +15,8 @@ public class PlayerCurrentStatus //현재 상태 저장용
     public int gold;
     public JobType jobType;
     public Dictionary<SkillType, int> gems;
+    public List<InventoryItem> equipmentItems; // 장착중인 아이템 목록
+    public List<InventoryItem> inventoryItems; // 인벤토리 아이템 목록
 }
 
 [Serializable]
@@ -30,6 +32,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     [SerializeField] private List<GameObject> players;
 
+    //test
+    private Inventory inventory;
     protected override void Awake()
     {
         base.Awake();
@@ -42,6 +46,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         LoadDatas();
         SetDatas();
         AddGems(); //임시
+        inventory = GameManager.Instance.inventory; //test
     }
 
     public void LoadDatas()
@@ -151,6 +156,10 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             currentStatus.gold = data.Gold;
             currentStatus.jobType = data.JobType;
             currentStatus.gems = data.Gems;
+
+            // 플레이어의 인벤토리 데이터
+            currentStatus.equipmentItems = inventory.equipmentItems;
+            currentStatus.inventoryItems = inventory.inventoryItems;
         }
     }
 
@@ -185,6 +194,10 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             data.Gold = currentStatus.gold;
             data.JobType = currentStatus.jobType;
             data.Gems = currentStatus.gems;
+
+            // 플레이어의 인벤토리 데이터
+            inventory.equipmentItems = currentStatus.equipmentItems;
+            inventory.inventoryItems = currentStatus.inventoryItems;
         }
     }
 

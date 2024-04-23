@@ -10,6 +10,8 @@ public class GameManager : Singleton<GameManager>
 
     //background test
     public GameObject[] backgrounds;
+    //inventory save test
+    public Inventory inventory;
 
     public void SwitchBackground(int _mapIndex)
     {

@@ -69,10 +69,10 @@ public class InventoryUIController : MonoBehaviour
             inventoryListItemSlot[i].CleanUpSlot();
         }
 
-        for (int i = 0; i < inventoryContorller.inventory.Count; i++)
+        for (int i = 0; i < inventoryContorller.inventoryItems.Count; i++)
         {
-            inventoryItemSlot[i].UpdateSlot(inventoryContorller.inventory[i]);
-            inventoryListItemSlot[i].UpdateSlot(inventoryContorller.inventory[i]);
+            inventoryItemSlot[i].UpdateSlot(inventoryContorller.inventoryItems[i]);
+            inventoryListItemSlot[i].UpdateSlot(inventoryContorller.inventoryItems[i]);
         }
     }
 
