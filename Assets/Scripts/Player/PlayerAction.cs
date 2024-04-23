@@ -41,7 +41,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (QuestManager.Instance.EndingBossDie == true)
         {
-            bosstalk.Bosstalk(talkIndex);
+            uiManagerInstance.Bosstalk(talkIndex);
             talkIndex++;
         }
         else

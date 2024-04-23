@@ -141,7 +141,6 @@ public class Enemy : MonoBehaviour, IDamageable
         SetState(EnemyState.Dead);
         SpawnGems();
         gameObject.SetActive(false);
-        bossTalk.Bosstalk(0);
         GameManager.Instance.player.Data.StatusData.GetExp(EnemyStatusData.Exp);
        
     }

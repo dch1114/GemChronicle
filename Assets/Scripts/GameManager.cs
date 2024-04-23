@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
     public bool isNew = true;
     public string playerName { get; set; } = "±‚∫ª¿Ã";
     public JobType playerJob { get; set; } = JobType.Warrior;
-
+    public bool isLastBossDead = false;
     public int saveDataID;
 
     //background test
