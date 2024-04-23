@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss2 : MonoBehaviour, IDamageable
 {
+
     [SerializeField]
     private GameObject projectilePrefab; // 발사체 프리팹
     [SerializeField]
@@ -17,6 +18,8 @@ public class Boss2 : MonoBehaviour, IDamageable
     [SerializeField] public EnemyStatusData EnemyStatusData;
 
     [SerializeField] private List<GameObject> gems;
+
+    public Animator Animator { get; private set; }
 
     public Transform player;
 
@@ -123,6 +126,6 @@ public class Boss2 : MonoBehaviour, IDamageable
 
     private void SpawnTypeGem()
     {
-        Instantiate(gems[3]).transform.position = gameObject.transform.position; ;
+        Instantiate(gems[3]).transform.position = gameObject.transform.position;
     }
 }

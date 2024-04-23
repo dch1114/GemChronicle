@@ -10,6 +10,8 @@ public class BossMeleeAttack : MonoBehaviour
     private Transform target;
     private float nextAttackTime = 0f;
 
+    public Animator ani;
+
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -20,7 +22,16 @@ public class BossMeleeAttack : MonoBehaviour
         if (target == null)
             return;
 
-        transform.position = Vector2.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        Vector3 directionToPlayer = target.position - transform.position;
+        float directionX = Mathf.Sign(directionToPlayer.x);
+
+        transform.position += Vector3.right * directionX * moveSpeed * Time.deltaTime;
+
+        if (directionX > 0)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else
+            transform.localScale = new Vector3(1, 1, 1);
+
         float distanceToPlayer = Vector2.Distance(transform.position, target.position);
         if (distanceToPlayer < attackRange && Time.time >= nextAttackTime)
         {
@@ -31,6 +42,13 @@ public class BossMeleeAttack : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log("플레이어에게 " + damage + "의 데미지를 입힘!");
+        ani.SetTrigger("Attack");
+
+        Boss2 boss = GetComponent<Boss2>();
+        if (boss != null)
+        {
+            boss.TakeDamage(damage);
+            Debug.Log("dam");
+        }
     }
 }

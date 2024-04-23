@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Boss : MonoBehaviour, IDamageable
@@ -18,9 +19,12 @@ public class Boss : MonoBehaviour, IDamageable
 
     [SerializeField] private List<GameObject> gems;
 
+
     public Transform player;
 
     private EnemyState state;
+    public int damage = 10;
+    public Animator ani;
 
     private void Awake()
     {
@@ -29,6 +33,11 @@ public class Boss : MonoBehaviour, IDamageable
     private void Start()
     {
         StartCoroutine(Phase01());
+    }
+
+    void Update()
+    {
+        Attack();
     }
 
     void FixedUpdate()
@@ -128,4 +137,17 @@ public class Boss : MonoBehaviour, IDamageable
     {
         Instantiate(gems[3]).transform.position = gameObject.transform.position; ;
     }
+
+    void Attack()
+    {
+        ani.SetTrigger("Attack");
+
+        Boss2 boss = GetComponent<Boss2>();
+        if (boss != null)
+        {
+            boss.TakeDamage(damage);
+            Debug.Log("dam");
+        }
+    }
 }
+
