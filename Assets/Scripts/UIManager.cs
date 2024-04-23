@@ -98,6 +98,7 @@ public class UIManager : Singleton<UIManager>
         InitializeShopMenuButtons();
         InitializeHealMenuButtons();
 
+
     }
     private void Update()
     {

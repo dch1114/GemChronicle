@@ -29,7 +29,7 @@ public class Item
     public int Quantity;
 
     //test
-    public bool isSellable = false;
+    //public bool isSellable = false;
     private int descriptionLength;
     private StringBuilder sb = new StringBuilder();
     public Sprite sprite;
