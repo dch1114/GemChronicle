@@ -44,7 +44,7 @@ public class BossMeleeAttack : MonoBehaviour
     {
         ani.SetTrigger("Attack");
 
-        Boss boss = GetComponent<Boss>();
+        Boss2 boss = GetComponent<Boss2>();
         if (boss != null)
         {
             boss.TakeDamage(damage);
