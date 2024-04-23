@@ -10,11 +10,11 @@ using static NextMap;
 
 public class EveryMap : MonoBehaviour, IInteractive
 {
-    public PolygonCollider2D destCol;
+    //public PolygonCollider2D destCol;
     List<Transform> maps;
     private bool collisionOccurred = false;
-    public string destination;
-    public Transform DestinationPoint;
+    //public string destination;
+    //public Transform DestinationPoint;
     UIManager uiManagerInstance;
     public void Awake()
     {
