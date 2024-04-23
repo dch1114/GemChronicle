@@ -8,17 +8,12 @@ public class MiniQuest : MonoBehaviour
 
     [SerializeField] GameObject panel;
     [SerializeField] Transform parent;
-    [SerializeField] Button closeBtn;
+
     bool bVisible = false;
     Quest quest;
     QuestData questData;
     public List<SlotMiniQuest> slotMiniQuests;
     public SlotMiniQuest miniQuestPrefab;
-    private void Awake()
-    {
-        closeBtn.onClick.AddListener(ToggleButton);
-    }
-
     //미니퀘스트창 활성화/비활성화
     public void ToggleButton() 
     {
