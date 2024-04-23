@@ -29,11 +29,6 @@ public class PlayerStatusData : Status
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
     public Dictionary<SkillType, int> Gems { get { return gems; } set { gems = value; } }
 
-    public void InitializeData()
-    {
-        InitializeGem();
-    }
-
     public void LoadLevelData(LevelData data)
     {
         atk = data.atk;

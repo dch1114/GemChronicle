@@ -24,7 +24,13 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
-        DontDestroyOnLoad(gameObject);
+        if(Instance != null && Instance != this)
+        {
+            Destroy(Instance);
+        } else
+        {
+            DontDestroyOnLoad(Instance);
+        }
     }
 
     public void SwitchBackground(int _mapIndex)
