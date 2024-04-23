@@ -48,6 +48,8 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateHp()
     {
+        // 
+
         if (playerData != null)
         {
             if(playerData.MaxHp > 0)

@@ -19,13 +19,18 @@ public class Meteorite : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-
-        if (damageable != null)
+        //IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+        PlayerDatas pData = null;
+        if (collision.gameObject.tag == "Player")
         {
-            damageable.TakeDamage(attack);
+            pData = collision.gameObject.GetComponent<PlayerDatas>();
+
+            if (pData != null)
+            {
+                pData.TakeDamage(attack);
+            }
         }
     }
 }

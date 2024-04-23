@@ -16,7 +16,7 @@ public class BossMonsterPattern2 : MonoBehaviour
 
     private Transform target;
     private Collider2D collider;
-    //private Rigidbody2D rigid;
+    private Rigidbody2D rigid;
     private Animator animator;
 
     private void Awake()
@@ -50,7 +50,7 @@ public class BossMonsterPattern2 : MonoBehaviour
     void Fire()
     {
         Vector2 direction = (target.position - transform.position).normalized;
-        //rigid.AddForce(direction * 500);
+        rigid.AddForce(direction * 500);
 
         if (animator != null)
         {
@@ -98,28 +98,5 @@ public class BossMonsterPattern2 : MonoBehaviour
                 //player.TakeDamage(attackDamage);
             }
         }
-    }
-
-    public void TakeDamage(int damageAmount)
-    {
-
-        health -= damageAmount;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
-    {
-        BossRender = transform.GetComponentInChildren<SpriteRenderer>();
-        speed = 0;
-        collider.enabled = false;
-        Color color = BossRender.color;
-        color.a = 0.3f;
-        BossRender.color = color;
-        Destroy(gameObject, 1);
-
-        Time.timeScale = 0.1f;
     }
 }
