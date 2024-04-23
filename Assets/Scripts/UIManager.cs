@@ -46,6 +46,7 @@ public class UIManager : Singleton<UIManager>
     public SkillPagesUI skillPages;
     public AlertPanelUI alertPanelUI;
     public DiePanelUI diePanelUI;
+    public InventoryUIController inventoryUI;
 
     [Header("Potal")]
     public GameObject potalListUI;
@@ -94,7 +95,6 @@ public class UIManager : Singleton<UIManager>
     }
     private void Start()
     {
-        playerinput = GameManager.Instance.player.Input;
         InitializeShopMenuButtons();
         InitializeHealMenuButtons();
 
@@ -246,6 +246,8 @@ public class UIManager : Singleton<UIManager>
             PotraitPanelOnOff(false);
             //btn.SetActive(_OnOff);
             shopChoice.SetActive(_OnOff);
+
+            SetPlayerInput();
             playerinput.OnEnable();
             isOpenShowPopUp = false;
         }
@@ -476,6 +478,8 @@ public class UIManager : Singleton<UIManager>
         Diary.SetActive(_OnOff);
         _page = 0;
         ShowDiary(_page);
+
+        SetPlayerInput();
         if (_OnOff == true)
         {
             playerinput.OnDisable();
@@ -483,6 +487,14 @@ public class UIManager : Singleton<UIManager>
         else
         {
             playerinput.OnEnable();
+        }
+    }
+
+    private void SetPlayerInput()
+    {
+        if (playerinput == null)
+        {
+            playerinput = GameManager.Instance.player.Input;
         }
     }
 }

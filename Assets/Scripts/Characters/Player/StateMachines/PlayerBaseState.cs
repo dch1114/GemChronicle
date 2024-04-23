@@ -132,9 +132,9 @@ public class PlayerBaseState : IState
     //test
     private void OnInventory(InputAction.CallbackContext context)
     {
-        bool isActive = stateMachine.Player.InventoryUIPanel.activeSelf;
-        stateMachine.Player.inventoryUIController.ToggleInventory();
-        stateMachine.Player.InventoryUIPanel.SetActive(!isActive);
+        bool isActive = UIManager.Instance.inventoryUI.inventoryUIPanel.activeSelf;
+        UIManager.Instance.inventoryUI.ToggleInventory();
+        UIManager.Instance.inventoryUI.inventoryUIPanel.SetActive(!isActive);
     }
 
     private void ReadMovementInput()

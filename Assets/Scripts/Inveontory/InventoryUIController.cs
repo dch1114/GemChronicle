@@ -6,6 +6,7 @@ public class InventoryUIController : MonoBehaviour
 {
 
     [SerializeField] public GameObject inventoryPanel;
+    [SerializeField] public GameObject inventoryUIPanel;
     [SerializeField] public GameObject shopUi;
     [SerializeField] public CheckPurchasePopup shopTradePopup;
 
