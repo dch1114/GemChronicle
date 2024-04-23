@@ -252,7 +252,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
         if(UIManager.Instance != null)
         {
-            UIManager.Instance.alertPanelUI.ShowAlert("����Ǿ����ϴ�.");
+            UIManager.Instance.alertPanelUI.ShowAlert("저장되었습니다.");
         }
     }
 
