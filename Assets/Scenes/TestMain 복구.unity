@@ -548,22 +548,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1620151134567587545, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 21.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 1620151134567587545, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -11.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 2618036221185150658, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 188.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 2618036221185150658, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -7.79
-      objectReference: {fileID: 0}
     - target: {fileID: 3738898426213002953, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -608,41 +592,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4530871388037289568, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.97
-      objectReference: {fileID: 0}
-    - target: {fileID: 4530871388037289568, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.8
-      objectReference: {fileID: 0}
     - target: {fileID: 6911435677422233740, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
       propertyPath: m_Name
       value: NPCSpawnPoint
-      objectReference: {fileID: 0}
-    - target: {fileID: 7245242723150808006, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 198.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 7245242723150808006, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -7.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778526364934519216, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 17.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7778526364934519216, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -11.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478882304819213707, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 8478882304819213707, guid: 8e27568726f0cc6418ef5b49ff577de2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -11.83
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1591,14 +1543,17 @@ MonoBehaviour:
     hp: 0
     gold: 0
     jobType: 0
+    currentPos: {x: 0, y: 0, z: 0}
+  currentItems:
     equipmentItems: []
     inventoryItems: []
-    currentPos: {x: 0, y: 0, z: 0}
   saveFileName: playerData.json
+  saveItemFileName: playerItemData.json
   players:
   - {fileID: 780182617}
   - {fileID: 1879357831}
   - {fileID: 1885204099}
+  inventory: {fileID: 0}
 --- !u!4 &443175274
 Transform:
   m_ObjectHideFlags: 0
@@ -2253,10 +2208,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EveryPotal
       objectReference: {fileID: 0}
-    - target: {fileID: 6290233829683914424, guid: 8220a92ffd375f648b784d5a5e329eed, type: 3}
-      propertyPath: m_Name
-      value: Everportal Point
-      objectReference: {fileID: 0}
     - target: {fileID: 7618888721579006086, guid: 8220a92ffd375f648b784d5a5e329eed, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -2606,10 +2557,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2136340426436203665, guid: 90e52449795e9b248a99aa6772371701, type: 3}
-      propertyPath: InventoryUIPanel
-      value: 
-      objectReference: {fileID: 1834345031}
     - target: {fileID: 3764337215989346056, guid: 90e52449795e9b248a99aa6772371701, type: 3}
       propertyPath: m_RootOrder
       value: 12
