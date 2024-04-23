@@ -9,11 +9,6 @@ public class PlayerDatas : MonoBehaviour, IDamageable
     [field: SerializeField] public PlayerAttackData AttackData { get; private set; }
     [field: SerializeField] public PlayerStatusData StatusData { get; private set; }
 
-    private void Start()
-    {
-        StatusData.InitializeData();
-    }
-
     public void TakeDamage(int damage)
     {
         StatusData.TakeDamage(damage);
