@@ -5,19 +5,29 @@ using UnityEngine;
 
 public class BossTalk : MonoBehaviour
 {
-    public string[] TalkData;
-    public int[] PortraitId;
+    private string[] TalkData;
+    private int[] PortraitId;
     //public Sprite[] PortraitImg;
-    TalkManager talkManager;
+    public TalkManager talkManager;
     public int TalkIndex = 0;
+    public Sprite BossPotrait;
     // Start is called before the first frame update
     void Start()
     {
-        TalkData[0] = "와 너 강하구나 내가졌다."; //보스
-        TalkData[1] = "넌 약하구나 니가 졌어";     //플레이어
-        TalkData[2] = "어쩔수없지... 너가 이겼다.";//보스
-        TalkData[3] = "축하한다.";//보스
-        TalkData[4] = "잘가라";//플레이어
+
+  
+    }
+
+    public void Bosstalk(int TalkIndex)
+    {
+
+        TalkData = new string[5];
+        PortraitId = new int[5];
+        TalkData[0] = "와 너 강하구나 내가졌다.";
+        TalkData[1] = "넌 약하구나 니가 졌어";
+        TalkData[2] = "어쩔수없지... 너가 이겼다.";
+        TalkData[3] = "축하한다.";
+        TalkData[4] = "잘가라";
 
         PortraitId[0] = 1;
         PortraitId[1] = 2;
@@ -26,11 +36,7 @@ public class BossTalk : MonoBehaviour
         PortraitId[4] = 2;
 
         UIManager.Instance.SetPlayerPortraitImage(talkManager.GetPlayerSprite());
-        UIManager.Instance.SetNpcPortraitImage(talkManager.GetPortrait(8000));
-    }
-
-    public void Bosstalk(int TalkIndex)
-    {
+        UIManager.Instance.SetNpcPortraitImage(BossPotrait);
         if (TalkIndex < TalkData.Length)
         {
     
@@ -46,10 +52,14 @@ public class BossTalk : MonoBehaviour
                 UIManager.Instance.ShowNpcPotrait(false);
                 UIManager.Instance.ShowPlayerPotrait(true);
             }
+            
+            
         }
         else
         {
             UIManager.Instance.PotraitPanelOnOff(false);
         }
+
+        return;
     }
 }

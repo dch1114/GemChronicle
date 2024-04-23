@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private Rigidbody2D rigid;
     private Animator animator;
-
+    public BossTalk bossTalk;
     private EnemyState state;
     [SerializeField] private EnemyType enemyType;
     [SerializeField] private SkillType skillType;
@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour, IDamageable
         rightDirection = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
 
         Invoke("Think", 5);
+      
     }
 
     void FixedUpdate()
@@ -140,7 +141,9 @@ public class Enemy : MonoBehaviour, IDamageable
         SetState(EnemyState.Dead);
         SpawnGems();
         gameObject.SetActive(false);
+        bossTalk.Bosstalk(0);
         GameManager.Instance.player.Data.StatusData.GetExp(EnemyStatusData.Exp);
+       
     }
 
     private void SpawnGems()
