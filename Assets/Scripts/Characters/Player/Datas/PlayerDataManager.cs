@@ -6,15 +6,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
-public class PlayerCurrentStatus //ÇöÀç »óÅÂ ÀúÀå¿ë
+public class PlayerCurrentStatus //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 {
     public string name;
     public int level;
-    public int exp; //ÇöÀç °æÇèÄ¡
-    public int hp;  //ÇöÀç Ã¼·Â
+    public int exp; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡
+    public int hp;  //ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½
     public int gold;
     public JobType jobType;
     public Dictionary<SkillType, int> gems;
+    public List<InventoryItem> equipmentItems; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    public List<InventoryItem> inventoryItems; // ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public Vector3 currentPos;
 }
 
@@ -31,6 +33,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     [SerializeField] private List<GameObject> players;
 
+    //test
+    private Inventory inventory;
     protected override void Awake()
     {
         base.Awake();
@@ -39,6 +43,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     private void Start()
     {
         LoadDatas();
+        inventory = GameManager.Instance.inventory; //test
 
         if(GameManager.Instance != null)
         {
@@ -83,7 +88,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
         LevelData data = playerLevelDatabase.GetLevelDataByKey(currentStatus.level);
         currentStatus.hp = data.maxHp;
-        currentStatus.gold = 3000; //±âº» ¾ó¸¶ ÁÙÁö Á¤ÇØ¾ß
+        currentStatus.gold = 3000; //ï¿½âº» ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¾ï¿½
         currentStatus.currentPos = new Vector3(0f, 0f, 0f);
 
         InitGems();
@@ -188,6 +193,10 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             currentStatus.gold = data.Gold;
             currentStatus.jobType = data.JobType;
             currentStatus.gems = data.Gems;
+
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            currentStatus.equipmentItems = inventory.equipmentItems;
+            currentStatus.inventoryItems = inventory.inventoryItems;
             currentStatus.currentPos = player.transform.position;
         }
     }
@@ -226,20 +235,24 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             data.Gold = currentStatus.gold;
             data.JobType = currentStatus.jobType;
             data.Gems = currentStatus.gems;
+
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            inventory.equipmentItems = currentStatus.equipmentItems;
+            inventory.inventoryItems = currentStatus.inventoryItems;
             player.transform.position = currentStatus.currentPos;
         }
     }
 
     public void SavePlayerDataToJson()
     {
-        LoadCurrentDatas(); //µ¥ÀÌÅÍ Áý¾î³Ö±â
+        LoadCurrentDatas(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
         string jsonData = JsonUtility.ToJson(currentStatus);
         string path = Path.Combine(Application.dataPath, saveFileName);
         File.WriteAllText(path, jsonData);
 
         if(UIManager.Instance != null)
         {
-            UIManager.Instance.alertPanelUI.ShowAlert("ÀúÀåµÇ¾ú½À´Ï´Ù.");
+            UIManager.Instance.alertPanelUI.ShowAlert("ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
         }
     }
 
@@ -256,7 +269,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             SetDatas();
         } else
         {
-            Debug.Log("ÀúÀå ÆÄÀÏ ¾øÀ½");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
         }
     }
 

@@ -5,7 +5,7 @@ public class InventoryItem
 {
     public Item datas;
     public int stackSize;
-    public bool isEquip;
+    //public bool isEquip;
 
     public InventoryItem(Item _newItemData)
     {
