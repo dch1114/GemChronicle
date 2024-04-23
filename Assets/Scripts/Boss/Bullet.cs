@@ -4,11 +4,27 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] int attack;
+
+    void Start()
+    {
+        StartCoroutine(DestroyBulletAfterDelay(3.0f));
+    }
+
+    IEnumerator DestroyBulletAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Destroy(gameObject);
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+
+        if (damageable != null)
         {
-            Destroy(gameObject);
+            damageable.TakeDamage(attack);
         }
     }
 }
