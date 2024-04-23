@@ -97,7 +97,16 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateGold()
     {
-        goldTxt.text = playerData.Gold.ToString();
+        if (playerData != null)
+        {
+            goldTxt.text = playerData.Gold.ToString();
+            
+        }
+        else
+        {
+            SetPlayerData();
+            UpdateGold();
+        }
     }
 
     public void OnOffSoundSetting()
