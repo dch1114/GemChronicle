@@ -18,7 +18,14 @@ public class BossTalk : MonoBehaviour
         TalkData[3] = "축하한다.";//보스
         TalkData[4] = "잘가라";//플레이어
 
+        PortraitId[0] = 1;
+        PortraitId[1] = 2;
+        PortraitId[2] = 1;
+        PortraitId[3] = 1;
+        PortraitId[4] = 2;
+
         UIManager.Instance.SetPlayerPortraitImage(talkManager.GetPlayerSprite());
+        UIManager.Instance.SetNpcPortraitImage(talkManager.GetPortrait(8000));
     }
 
     public void Bosstalk()
