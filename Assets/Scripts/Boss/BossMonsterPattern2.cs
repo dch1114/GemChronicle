@@ -40,10 +40,10 @@ public class BossMonsterPattern2 : MonoBehaviour
 
     IEnumerator FireContinuously()
     {
-        while (true) // 무한 루프로 코루틴 실행
+        while (true)
         {
             Fire();
-            yield return new WaitForSeconds(3f); // 다음 발사까지 3초 동안 대기
+            yield return new WaitForSeconds(3f);
         }
     }
 
@@ -52,10 +52,9 @@ public class BossMonsterPattern2 : MonoBehaviour
         Vector2 direction = (target.position - transform.position).normalized;
         //rigid.AddForce(direction * 500);
 
-        // 애니메이션 재생
         if (animator != null)
         {
-            animator.SetTrigger("Shoot"); // Shoot 트리거를 설정하여 애니메이션을 재생합니다.
+            animator.SetTrigger("Shoot");
         }
     }
 
@@ -69,13 +68,11 @@ public class BossMonsterPattern2 : MonoBehaviour
             {
                 if (distanceToPlayer > attackRange)
                 {
-                    // 플레이어를 향해 이동
                     Vector3 direction = (player.position - transform.position).normalized;
                     transform.position += direction * speed * Time.deltaTime;
                 }
                 else
                 {
-                    // 공격 범위 내에 있으면 공격
                     AttackPlayer();
                 }
             }
@@ -84,7 +81,6 @@ public class BossMonsterPattern2 : MonoBehaviour
 
     void AttackPlayer()
     {
-        // 공격 로직 실행,  체력 감소
         Player playerComponent = player.GetComponent<Player>();
         if (playerComponent != null)
         {
@@ -104,7 +100,7 @@ public class BossMonsterPattern2 : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damageAmount) // 대미지 받는 함수
+    public void TakeDamage(int damageAmount)
     {
 
         health -= damageAmount;

@@ -6672,7 +6672,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.9, y: -3.4}
+  m_AnchoredPosition: {x: 5.11, y: -3.56}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &3972883875141378074
@@ -7714,6 +7714,7 @@ GameObject:
   - component: {fileID: 8281879330057897938}
   - component: {fileID: 8281879330057897937}
   - component: {fileID: 8281879330057897940}
+  - component: {fileID: 8281879330057897941}
   m_Layer: 5
   m_Name: BossMonster2
   m_TagString: Untagged
@@ -7822,6 +7823,22 @@ MonoBehaviour:
     ID: 0
   gems: []
   player: {fileID: 1860870812}
+--- !u!114 &8281879330057897941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8281879330057897934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0332ff86836d14782805ba0f6d9ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  attackRange: 2
+  attackRate: 1
+  damage: 10
 --- !u!1 &8509823075222081019
 GameObject:
   m_ObjectHideFlags: 0

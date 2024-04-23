@@ -5,13 +5,13 @@ using UnityEngine;
 public class Boss : MonoBehaviour, IDamageable
 {
     [SerializeField]
-    private GameObject projectilePrefab; // 발사체 프리팹
+    private GameObject projectilePrefab;
     [SerializeField]
     private float bossAppearPoint = 2.5f;
     [SerializeField]
-    private int numberOfProjectiles = 10; // 발사할 프로젝타일 수
+    private int numberOfProjectiles = 10; 
     [SerializeField]
-    private float projectileSpeed = 5.0f; // 발사체의 속도
+    private float projectileSpeed = 5.0f;
 
     //스탯
     [SerializeField] public EnemyStatusData EnemyStatusData;
@@ -47,9 +47,9 @@ public class Boss : MonoBehaviour, IDamageable
     {
         while (true)
         {
-            StartCircleFire(); // 원형 방사 시작
-            float delay = Random.Range(5f, 10f); // 5초에서 10초 사이의 랜덤 지연
-            yield return new WaitForSeconds(delay); // 다음 발사까지 대기
+            StartCircleFire();
+            float delay = Random.Range(5f, 10f);
+            yield return new WaitForSeconds(delay);
         }
     }
 
@@ -60,14 +60,12 @@ public class Boss : MonoBehaviour, IDamageable
 
         for (int i = 0; i < numberOfProjectiles; i++)
         {
-            // 각도에 따라 발사체의 방향을 계산
             float projectileDirX = Mathf.Sin((angle * Mathf.PI) / 180);
             float projectileDirY = Mathf.Cos((angle * Mathf.PI) / 180);
 
             Vector3 projectileVector = new Vector3(projectileDirX, projectileDirY, 0);
             Vector3 projectileMoveDirection = projectileVector.normalized * projectileSpeed;
 
-            // 발사체 생성 및 속도 설정
             GameObject tmpProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
             tmpProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileMoveDirection.x, projectileMoveDirection.y);
 
