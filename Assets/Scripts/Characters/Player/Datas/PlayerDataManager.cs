@@ -51,7 +51,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     private void Start()
     {
         LoadDatas();
-        SetGameManagerInventory();
+        //SetGameManagerInventory();
 
         if (GameManager.Instance != null)
         {
@@ -62,6 +62,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             {
                 LoadPlayerDataToJson();
             }
+
         }
 
         if(UIManager.Instance != null)
@@ -69,6 +70,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             UIManager.Instance.playerUI.StartPlayerUI();
         }
 
+        // 먼저 inventoryUIController의 요소를 불러와야 한다.
         UpdateInventoryUI();
     }
 
@@ -85,6 +87,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         SaveCurrentDatas();
         SetPlayerSkillInfos();
         SetPlayerLevel();
+        SetPlayerDataToInventory();
     }
 
     public void CreateNewPlayer()
@@ -323,12 +326,18 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         }
 
         player = GameManager.Instance.player;
+        GameManager.Instance.inventory = inventory.GetComponent<Inventory>();
     }
 
     private void SetGameManagerInventory()
     {
         GameManager.Instance.inventory = inventory.GetComponent<Inventory>();
 
+    }
+
+    private void SetPlayerDataToInventory()
+    {
+        inventory.SetPlayerData();
     }
 
     private void UpdateInventoryUI()

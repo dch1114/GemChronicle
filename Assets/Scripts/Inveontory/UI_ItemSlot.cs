@@ -37,7 +37,8 @@ public class UI_ItemSlot : MonoBehaviour, IPointerDownHandler
         }
 
         if (inventoryItem != null)
-        {    
+        {
+            //Debug.Log(inventoryItem.datas.sprite == null);
             itemImage.sprite = inventoryItem.datas.sprite; // test
             itemImage.GetComponent<Image>().SetNativeSize();
 
