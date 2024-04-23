@@ -3407,14 +3407,17 @@ MonoBehaviour:
     hp: 0
     gold: 0
     jobType: 0
+    currentPos: {x: 0, y: 0, z: 0}
+  currentItems:
     equipmentItems: []
     inventoryItems: []
-    currentPos: {x: 0, y: 0, z: 0}
   saveFileName: playerData.json
+  saveItemFileName: playerItemData.json
   players:
   - {fileID: 1860870811}
   - {fileID: 1079807546}
   - {fileID: 1004264374}
+  inventory: {fileID: 0}
 --- !u!4 &1806611317
 Transform:
   m_ObjectHideFlags: 0
