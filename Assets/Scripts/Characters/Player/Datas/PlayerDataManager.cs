@@ -43,7 +43,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     private void Start()
     {
         LoadDatas();
-        nventory = GameManager.Instance.inventory; //test
+        inventory = GameManager.Instance.inventory; //test
 
         if(GameManager.Instance != null)
         {

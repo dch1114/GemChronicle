@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryUIController : MonoBehaviour
 {
 
-    [SerializeField] public GameObject inventoryPanel;
+    //[SerializeField] public GameObject inventoryPanel;
     [SerializeField] public GameObject inventoryUIPanel;
     [SerializeField] public GameObject shopUi;
     [SerializeField] public CheckPurchasePopup shopTradePopup;
@@ -87,7 +87,7 @@ public class InventoryUIController : MonoBehaviour
 
     public void UseShop()
     {
-        inventoryPanel.SetActive(false);
+        inventoryUIPanel.SetActive(false);
         shopUi.SetActive(true);
     }
 
@@ -102,7 +102,7 @@ public class InventoryUIController : MonoBehaviour
     //test
     public void ToggleInventory()
     {
-        if (inventoryPanel.activeSelf)
+        if (inventoryUIPanel.activeSelf)
         {
             SoundManager.Instance.PlayClip(SoundManager.Instance.inventoryCloseSound);
         }
