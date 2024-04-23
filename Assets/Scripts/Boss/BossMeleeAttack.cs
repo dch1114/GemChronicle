@@ -10,6 +10,8 @@ public class BossMeleeAttack : MonoBehaviour
     private Transform target;
     private float nextAttackTime = 0f;
 
+    public Animator ani;
+
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -31,6 +33,6 @@ public class BossMeleeAttack : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log("플레이어에게 " + damage + "의 데미지를 입힘!");
+        ani.SetTrigger("Attack");
     }
 }
