@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss2 : MonoBehaviour, IDamageable
 {
@@ -22,7 +23,11 @@ public class Boss2 : MonoBehaviour, IDamageable
     public Animator Animator { get; private set; }
 
     public Transform player;
-
+    public Image prfHpBar;
+    public GameObject canvas;
+    public float heught = 1.7f;
+    RectTransform hpBar;
+    public Image HPBar;
     private EnemyState state;
     private bool bossAction2 = false;
     private void Awake()
@@ -31,11 +36,19 @@ public class Boss2 : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        
+        hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
+        HPBar = hpBar.GetComponent<Image>();
     }
 
+    void Update()
+    {
+        Vector3 _hpBarPos =
+   Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + heught, 0));
+        hpBar.position = _hpBarPos;
+    }
     void FixedUpdate()
     {
+
         if (QuestManager.Instance.bossAction == true && bossAction2 == false)
         {
             StartCoroutine(StartSpiralFire());
@@ -110,9 +123,11 @@ public class Boss2 : MonoBehaviour, IDamageable
         if (EnemyStatusData.Hp - damage > 0)
         {
             EnemyStatusData.Hp -= damage;
+            HPBar.fillAmount = (float)EnemyStatusData.Hp / 200;
         }
         else
         {
+            HPBar.fillAmount = 0;
             EnemyStatusData.Hp = 0;
             SetState(EnemyState.Dead);
         }

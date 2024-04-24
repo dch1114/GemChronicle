@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &725049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 896341616086976058, guid: b613966f24c23154f9fb162702fe3563, type: 3}
+  m_PrefabInstance: {fileID: 1667191287}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3693190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6580031379450243309, guid: 298a9fe0f4d49b34dbc08b042c673dc6, type: 3}
@@ -3245,6 +3256,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1536805859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8265975828353059535, guid: b613966f24c23154f9fb162702fe3563, type: 3}
+  m_PrefabInstance: {fileID: 1667191287}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1612819216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3548,6 +3564,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 48.42
       objectReference: {fileID: 0}
+    - target: {fileID: 6811106091258265540, guid: b613966f24c23154f9fb162702fe3563, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1536805859}
+    - target: {fileID: 6811106091258265540, guid: b613966f24c23154f9fb162702fe3563, type: 3}
+      propertyPath: prfHpBar
+      value: 
+      objectReference: {fileID: 725049}
+    - target: {fileID: 6811106091258265540, guid: b613966f24c23154f9fb162702fe3563, type: 3}
+      propertyPath: EnemyStatusData.hp
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811106091258265540, guid: b613966f24c23154f9fb162702fe3563, type: 3}
+      propertyPath: EnemyStatusData.atk
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8180028500941107036, guid: b613966f24c23154f9fb162702fe3563, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -3592,7 +3624,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5846001342412185712, guid: b613966f24c23154f9fb162702fe3563, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

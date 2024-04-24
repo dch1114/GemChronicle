@@ -113,8 +113,9 @@ public class Boss : MonoBehaviour, IDamageable
         EnemyStatusData.Hp = 0;
         SetState(EnemyState.Dead);
         SpawnGems();
-        Destroy(gameObject);
         QuestManager.Instance.hideNPC = false;
+        Destroy(gameObject);
+       
     }
 
     public void TakeDamage(int damage)
@@ -127,6 +128,7 @@ public class Boss : MonoBehaviour, IDamageable
         }
         else
         {
+            HPBar.fillAmount = 0;
             EnemyStatusData.Hp = 0;
             SetState(EnemyState.Dead);
         }
