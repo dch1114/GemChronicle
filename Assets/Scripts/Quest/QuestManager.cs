@@ -46,6 +46,7 @@ public class QuestManager : Singleton<QuestManager>
 
     private Dictionary<QuestType, List<QuestData>> _subscribeQuests = new();
     public bool EndingBossDie;
+    public bool bossAction =false;
     /// <summary>
     /// SubscribeQuest는 QuestData 보관 QuestStart는 퀘스트 진행도와 상태체크
     /// </summary>
@@ -127,6 +128,10 @@ public class QuestManager : Singleton<QuestManager>
         //foreach돌면서 quest ID와 동일한 퀘스트만 실행횟수 업데이트
         foreach (var quest in targetQuests)
             QuestUpdate(quest.ID, count);
+        if (type == QuestType.learn && target == 4000 && count == 1)
+        {
+            bossAction = true;
+        }
         if (target == 500003)
         {
             EndingBossDie = true;
