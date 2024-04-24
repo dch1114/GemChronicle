@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEditor.Progress;
 
 
 public class Inventory : Singleton<Inventory>
@@ -13,7 +10,8 @@ public class Inventory : Singleton<Inventory>
     PlayerStatusData statusData;
 
     [Header("Sprite Change")]
-    /*[SerializeField]*/ private SPUM_SpriteList characterSpriteOBj;
+    /*[SerializeField]*/
+    private SPUM_SpriteList characterSpriteOBj;
     [SerializeField] private SPUM_SpriteList equipmentSpriteOBj;
 
     [Header("Inventory")]
@@ -31,22 +29,22 @@ public class Inventory : Singleton<Inventory>
     }
 
     private void Start()
-    {  
-        if(inventoryItems == null)
+    {
+        if (inventoryItems == null)
         {
             inventoryItems = new List<InventoryItem>();
         }
-        
-        if(equipmentItems == null)
+
+        if (equipmentItems == null)
         {
             equipmentItems = new List<InventoryItem>();
         }
-        
+
         if (equipmentDictionary == null)
         {
             equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
         }
-            
+
         //characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
 
     }
@@ -202,7 +200,7 @@ public class Inventory : Singleton<Inventory>
         }
         else
         {
-            if(_potion.stackSize > 1)
+            if (_potion.stackSize > 1)
             {
                 player.Data.StatusData.TakeHeal(_potion.datas.Recovery);
                 _potion.stackSize--;

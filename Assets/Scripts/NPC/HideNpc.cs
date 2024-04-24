@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class HideNpc : MonoBehaviour
@@ -23,7 +20,7 @@ public class HideNpc : MonoBehaviour
                 Unit.SetActive(false);
                 collider1.enabled = false;
                 collider2.enabled = false;
-                
+
             }
             if (QuestManager.Instance.hideNPC == false)
             {
