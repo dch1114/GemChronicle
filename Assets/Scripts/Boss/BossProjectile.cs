@@ -9,11 +9,11 @@ public class BossProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
-        {
-            //collision.GetComponent<PlayerHP>().TakeDamage(damage);
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
 
-            Destroy(gameObject);
+        if (damageable != null)
+        {
+            damageable.TakeDamage(damage);
         }
     }
 

@@ -14,13 +14,18 @@ public class BossMeleeAttack : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        SetTarget();
+    }
+    
+    void SetTarget()
+    {
+        target = GameManager.Instance.player.transform;
     }
 
     void Update()
     {
         if (target == null)
-            return;
+            SetTarget();
 
         Vector3 directionToPlayer = target.position - transform.position;
         float directionX = Mathf.Sign(directionToPlayer.x);
@@ -43,12 +48,5 @@ public class BossMeleeAttack : MonoBehaviour
     void Attack()
     {
         ani.SetTrigger("Attack");
-
-        Boss2 boss = GetComponent<Boss2>();
-        if (boss != null)
-        {
-            boss.TakeDamage(damage);
-            Debug.Log("dam");
-        }
     }
 }

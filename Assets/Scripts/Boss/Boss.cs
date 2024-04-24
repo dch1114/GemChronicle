@@ -112,6 +112,7 @@ public class Boss : MonoBehaviour, IDamageable
         }
         else
         {
+            EnemyStatusData.Hp = 0;
             SetState(EnemyState.Dead);
         }
     }
