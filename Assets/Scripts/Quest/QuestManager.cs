@@ -128,6 +128,7 @@ public class QuestManager : Singleton<QuestManager>
         //foreach돌면서 quest ID와 동일한 퀘스트만 실행횟수 업데이트
         foreach (var quest in targetQuests)
             QuestUpdate(quest.ID, count);
+        
         if (type == QuestType.learn && target == 4000 && count == 1)
         {
             bossAction = true;
@@ -215,7 +216,8 @@ public class QuestManager : Singleton<QuestManager>
         }
 
         GameManager.Instance.player.Data.StatusData.GetGems(currentProgressMainQuestData.RwardType, currentProgressMainQuestData.Gem);
-
+        GameManager.Instance.player.Data.StatusData.GetExp(currentProgressMainQuestData.Exp);
+        GameManager.Instance.player.Data.StatusData.GetGold(currentProgressMainQuestData.Gold);
         _ongoingQuests.Remove(questId);
 
         _completeQuests.Add(questId);
