@@ -76,8 +76,21 @@ public class PotalManager : Singleton<PotalManager>
             if (player != null)
             {
                 player.transform.position = potalArray[index].potal.potalPosition;
+                if (index == 0)
+                {
+                    UIManager.Instance.alertPanelUI.ShowAlert("<color=#009900>마을 동쪽</color>");
+                }
+                if (index == 1)
+                {
+                    UIManager.Instance.alertPanelUI.ShowAlert("<color=#990099>보라 마을</color>");
+                }
+                if (index == 2)
+                {
+                    UIManager.Instance.alertPanelUI.ShowAlert("<color=#996600>시간의 마을</color>");
+                }
                 if (index == 3)
                 {
+                    UIManager.Instance.alertPanelUI.ShowAlert("<color=#333333>지하 감옥</color>");
                     QuestManager.Instance.NotifyQuest(Constants.QuestType.learn, 4000, 1);
                 }
             }
