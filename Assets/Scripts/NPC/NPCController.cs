@@ -1,10 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor.PackageManager.Requests;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class NPCController : MonoBehaviour, IInteractive
 {
@@ -62,7 +57,7 @@ public class NPCController : MonoBehaviour, IInteractive
     void SetNPCInfoData(int index)
     {
         Debug.Log($"index : {index} // currentNpcIDForQuest : {currentNpcIDForQuest}");
-        if (index == currentNpcIDForQuest && DataManager.Instance.GetQuestTableData(currentNpcIDForQuest) != null) 
+        if (index == currentNpcIDForQuest && DataManager.Instance.GetQuestTableData(currentNpcIDForQuest) != null)
         {
             currentNpcIDForQuest = index + 1;
 
@@ -143,7 +138,7 @@ public class NPCController : MonoBehaviour, IInteractive
         TryTalk();
     }
 
-    
+
     public void TryTalk()
     {
         //만약이 상점 팝업이 열려 있는 상태라면 탭키를 눌렀을 때 현재 선택되어 있는 메뉴를 실행한다
@@ -192,7 +187,7 @@ public class NPCController : MonoBehaviour, IInteractive
             {
                 QuestManager.Instance.SubscribeQuest((int)npcType);
             }
-           
+
             else
             {
                 if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
@@ -200,7 +195,7 @@ public class NPCController : MonoBehaviour, IInteractive
 
                     QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
                 }
-             
+
                 else
                 {
 
@@ -311,7 +306,7 @@ public class NPCController : MonoBehaviour, IInteractive
         }
 
     }
-    
+
     public void Closer()
     {
         UIManager.Instance.talkBtnText.text = npcData.name;
