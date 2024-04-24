@@ -91,7 +91,7 @@ public class PotalManager : Singleton<PotalManager>
                 }
                 if (index == 3)
                 {
-                    UIManager.Instance.alertPanelUI.ShowAlert("<color=#333333>ÁöÇÏ °¨¿Á</color>");
+                    UIManager.Instance.alertPanelUI.ShowAlert("<color=#2F4F4F>ÁöÇÏ °¨¿Á</color>");
                     
                     if (firstEnter == true)
                     {

@@ -70,7 +70,7 @@ public class NextMap : MonoBehaviour, IInteractive
                     {
                         player.transform.position = DestinationPoint.position;
 
-                        GameManager.Instance.cine2d.m_BoundingShape2D = destCol;
+                        //GameManager.Instance.cine2d.m_BoundingShape2D = destCol;
                     }
                     else
                     {
