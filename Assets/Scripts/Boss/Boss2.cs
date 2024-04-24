@@ -116,6 +116,7 @@ public class Boss2 : MonoBehaviour, IDamageable
         Destroy(gameObject);
         QuestManager.Instance.NotifyQuest(Constants.QuestType.KillBoss, 500003, 1);
         UIManager.Instance.Bosstalk(0);
+        FindObjectOfType<MeteoriteSpawner>().BossDied();
     }
 
     public void TakeDamage(int damage)
