@@ -76,6 +76,10 @@ public class PotalManager : Singleton<PotalManager>
             if (player != null)
             {
                 player.transform.position = potalArray[index].potal.potalPosition;
+                if (index == 3)
+                {
+                    QuestManager.Instance.NotifyQuest(Constants.QuestType.learn, 4000, 1);
+                }
             }
         }
     }
