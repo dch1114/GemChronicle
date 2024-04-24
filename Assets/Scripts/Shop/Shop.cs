@@ -84,11 +84,9 @@ public class Shop : MonoBehaviour
             playerInventory.AddItem(_selectItem);
 
             playerInventory.inventoryGold -= _selectItem.Price;
+            GameManager.Instance.player.Data.StatusData.UseGold(_selectItem.Price);
 
             UpdateSlotUI();
-
-
-            playerInventory.UpdateRetainGold();
         }
         else
         {
@@ -107,27 +105,22 @@ public class Shop : MonoBehaviour
                 {
                     _selectItem.Quantity -= _amount;
                     playerInventory.AddItem(_selectItem, _amount);
-                    playerInventory.inventoryGold -= _selectItem.Price * _amount;
+                    GameManager.Instance.player.Data.StatusData.UseGold(_selectItem.Price * _amount);
                     UpdateSlotUI();
-                    playerInventory.UpdateRetainGold();
                     return;
                 }
             }
 
             shopItems.Remove(_selectItem);
             playerInventory.AddItem(_selectItem, _amount);
-
-            playerInventory.inventoryGold -= _selectItem.Price * _amount;
+            GameManager.Instance.player.Data.StatusData.UseGold(_selectItem.Price * _amount);
 
             UpdateSlotUI();
-
-
-            playerInventory.UpdateRetainGold();
         }
         else
         {
             //TODO 팝업 추가
-            Debug.Log("not enough gold");
+            UIManager.Instance.alertPanelUI.ShowAlert("돈이 부족합니다.");
         }
     }
 
@@ -171,8 +164,8 @@ public class Shop : MonoBehaviour
             shopItems.Add(_inventoryItem.datas); // 상점 아이템 목록에 추가
             // 골드 업데이트 및 UI 갱신
             playerInventory.inventoryGold += _inventoryItem.datas.Price;
+            GameManager.Instance.player.Data.StatusData.GetGold(_inventoryItem.datas.Price);
             UpdateSlotUI();
-            playerInventory.UpdateRetainGold();
         }
     }
 
@@ -207,8 +200,8 @@ public class Shop : MonoBehaviour
 
             // 골드 업데이트 및 UI 갱신
             playerInventory.inventoryGold += _inventoryItem.datas.Price * _amount;
+            GameManager.Instance.player.Data.StatusData.GetGold(_inventoryItem.datas.Price * _amount);
             UpdateSlotUI();
-            playerInventory.UpdateRetainGold();
         }
     }
 }

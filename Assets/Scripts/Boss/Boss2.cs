@@ -17,7 +17,7 @@ public class Boss2 : MonoBehaviour, IDamageable
     //Ω∫≈»
     [SerializeField] public EnemyStatusData EnemyStatusData;
 
-    [SerializeField] private List<GameObject> gems;
+    [SerializeField] private GameObject gem;
 
     public Animator Animator { get; private set; }
 
@@ -119,13 +119,13 @@ public class Boss2 : MonoBehaviour, IDamageable
 
     private int RandomAmount()
     {
-        int amount = Random.Range(10, 20);
+        int amount = Random.Range(20, 40);
 
         return amount;
     }
 
     private void SpawnTypeGem()
     {
-        Instantiate(gems[3]).transform.position = gameObject.transform.position;
+        Instantiate(gem).transform.position = gameObject.transform.position;
     }
 }
