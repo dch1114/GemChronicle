@@ -7,14 +7,18 @@ public class BossMonsterPattern : MonoBehaviour
 {
 
     public Transform player;
-    public int health = 100;
     public float speed = 5.0f;
     public int attackDamage = 20;
     public float detectionRange = 10.0f;  // 플레이어 감지 범위
     public float attackRange = 4.0f;      // 공격 범위
     public GameObject AttackPrefab;
     public SpriteRenderer BossRender;
+  
 
+
+
+
+    
     private Transform target;
     private Collider2D collider;
     private Rigidbody2D rigid;
@@ -25,8 +29,13 @@ public class BossMonsterPattern : MonoBehaviour
         collider = GetComponent<Collider2D>();
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
     }
 
+    private void Start()
+    {
+      
+    }
     public void StartAttack()
     {
         target = GameManager.Instance.player.transform;
@@ -36,6 +45,7 @@ public class BossMonsterPattern : MonoBehaviour
     void Update()
     {
         DetectAndAttackPlayer();
+   
     }
 
     IEnumerator FireContinuously()
