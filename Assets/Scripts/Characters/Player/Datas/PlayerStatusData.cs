@@ -142,6 +142,9 @@ public class PlayerStatusData : Status
         level++;
         PlayerDataManager.Instance.SetPlayerLevel();
 
+        Debug.Log(level);
+        Inventory.Instance.InventoryUIController.UpdateStatus();
+        Debug.Log(atk);
         //레벨 2개 건너뛰는거 체크
         GetExp(0);
     }
