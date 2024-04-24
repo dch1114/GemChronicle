@@ -35,11 +35,11 @@ public class QuestData
     public int Count => _count;
     public int Exp => _exp;
     public int Gold => _gold;
+    public int Gem => _rewardCount_1;
     public bool Continue => _continue;
     public bool Talk => _talk;
     public bool Finish => _finish;
 
-    public int RewardCount_1 => _rewardCount_1;
 
 
     public int UnLockPotalIndex => _unlockpotalindex;

@@ -24,18 +24,26 @@ public class Boss2 : MonoBehaviour, IDamageable
     public Transform player;
 
     private EnemyState state;
-
+    private bool bossAction2 = false;
     private void Awake()
     {
     }
 
     private void Start()
     {
-        StartCoroutine(StartSpiralFire());
+        
     }
 
     void FixedUpdate()
     {
+        if (QuestManager.Instance.bossAction == true && bossAction2 == false)
+        {
+            StartCoroutine(StartSpiralFire());
+        }
+        else
+        {
+
+        }
         switch (state)
         {
             case EnemyState.Idle:
@@ -51,7 +59,7 @@ public class Boss2 : MonoBehaviour, IDamageable
         float circleRadius = 1.0f; // 원의 반지름
         float angle = 0f;
         float angleStep = 360f / numberOfProjectiles;
-
+        bossAction2 = true;
         while (true)
         {
             for (int i = 0; i < numberOfProjectiles; i++)
@@ -93,6 +101,8 @@ public class Boss2 : MonoBehaviour, IDamageable
         SetState(EnemyState.Dead);
         SpawnGems();
         Destroy(gameObject);
+        QuestManager.Instance.NotifyQuest(Constants.QuestType.KillBoss, 500003, 1);
+        UIManager.Instance.Bosstalk(0);
     }
 
     public void TakeDamage(int damage)

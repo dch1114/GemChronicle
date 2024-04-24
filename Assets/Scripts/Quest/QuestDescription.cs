@@ -24,7 +24,7 @@ public class QuestDescription : MonoBehaviour
 
         questRewardGold.text = qData.Gold.ToString();
         questRewardExp.text = qData.Exp.ToString();
-        questRewardGem.text = "0";
+        questRewardGem.text = qData.Gem.ToString();
     }
 
     public int GetQuestId()

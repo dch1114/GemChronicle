@@ -179,6 +179,7 @@ public class PlayerStatusData : Status
             return true;
         } else
         {
+            UIManager.Instance.alertPanelUI.ShowAlert("젬이 부족합니다.");
             return false;
         }
     }

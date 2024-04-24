@@ -40,7 +40,7 @@ public class MiniQuest : MonoBehaviour
         slotMiniQuests.Add(miniQuest);
     }
 
-    void RemoveList(SlotMiniQuest slot)
+    public void RemoveList(SlotMiniQuest slot)
     {
         slotMiniQuests.Remove(slot);
     }

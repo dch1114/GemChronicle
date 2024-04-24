@@ -21,7 +21,6 @@ public class PlayerAction : MonoBehaviour
     IInteractive target = null;
     UIManager uiManagerInstance;
     // Update is called once per frame
-    public BossTalk bosstalk;
     private int talkIndex = 1;
     private void Start()
     {
