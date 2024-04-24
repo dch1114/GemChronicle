@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &568917197168645706
 SpriteRenderer:
@@ -217,14 +217,13 @@ MonoBehaviour:
     exp: 7
     type: 0
     walkSpeed: 0
-    attackRate: 0
+    attackRate: 5
     ID: 0
   EnemyAnimationData:
     idleParameterName: Idle
     walkParameterName: Walk
     attackParameterName: Attack
     dieParameterName: Die
-  bossTalk: {fileID: 0}
   enemyType: 1
   skillType: 0
   gem: {fileID: 1754942600076354860, guid: 37655d6ba324ce14bbe7167561bec117, type: 3}
