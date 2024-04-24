@@ -104,7 +104,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         LevelData data = playerLevelDatabase.GetLevelDataByKey(currentStatus.level);
         currentStatus.hp = data.maxHp;
         currentStatus.gold = 3000; //�⺻ �� ���� ���ؾ�
-        currentStatus.currentPos = new Vector3(0f, 0f, 0f);
+        currentStatus.currentPos = new Vector3(0f, 46.3f, 0f);
         SetNewAttackSkillStates();
 
         InitGems();
