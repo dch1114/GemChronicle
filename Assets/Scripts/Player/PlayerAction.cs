@@ -48,7 +48,7 @@ public class PlayerAction : MonoBehaviour
         {
 
         }
-        if (QuestManager.Instance.EnterBossZone == true)
+        if (PotalManager.Instance.EnterBossZone == true)
         {
             uiManagerInstance.BeforeBosstalk(talkIndex2);
             talkIndex2++;
@@ -78,6 +78,10 @@ public class PlayerAction : MonoBehaviour
                 //playerinput.OnDisable();
                 target.Interact();
             }
+        }
+        else
+        {
+            return;
         }
     }
     void Update()  // 이부분 업데이트 제외하고 버튼클릭시 작동하도록 변경

@@ -579,7 +579,7 @@ public class UIManager : Singleton<UIManager>
             QuestManager.Instance.QuestClear(2006);
             playerinput.OnEnable();
             UIManager.Instance.PotraitPanelOnOff(false);
-            QuestManager.Instance.EnterBossZone = false;
+            PotalManager.Instance.EnterBossZone = false;
         }
 
         return;

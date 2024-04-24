@@ -46,10 +46,10 @@ public class QuestManager : Singleton<QuestManager>
 
     private Dictionary<QuestType, List<QuestData>> _subscribeQuests = new();
     public bool EndingBossDie;
-    public bool EnterBossZone;
+    
     public bool bossAction =false;
     public bool hideNPC = false;
-    public bool firstEnter = true;
+    
     /// <summary>
     /// SubscribeQuest는 QuestData 보관 QuestStart는 퀘스트 진행도와 상태체크
     /// </summary>
@@ -134,16 +134,10 @@ public class QuestManager : Singleton<QuestManager>
         foreach (var quest in targetQuests)
             QuestUpdate(quest.ID, count);
         
-        if (type == QuestType.learn && target == 4000 && count == 1)
-        {
-            if (firstEnter == true)
-            {
-                EnterBossZone = true;
-                firstEnter = false;
-                UIManager.Instance.BeforeBosstalk(0);
-            }
+        
             
-        }
+            
+        
         if (target == 500003)
         {
             EndingBossDie = true;

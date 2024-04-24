@@ -22,7 +22,8 @@ public class Potal
 }
 public class PotalManager : Singleton<PotalManager>
 {
-
+    public bool firstEnter = true;
+    public bool EnterBossZone;
     [SerializeField] NextMap[] potalArray;
 
     private void Start()
@@ -91,7 +92,14 @@ public class PotalManager : Singleton<PotalManager>
                 if (index == 3)
                 {
                     UIManager.Instance.alertPanelUI.ShowAlert("<color=#333333>ÁöÇÏ °¨¿Á</color>");
-                    QuestManager.Instance.NotifyQuest(Constants.QuestType.learn, 4000, 1);
+                    
+                    if (firstEnter == true)
+                    {
+                        QuestManager.Instance.NotifyQuest(QuestType.learn, 4000, 1);
+                        EnterBossZone = true;
+                        firstEnter = false;
+                        UIManager.Instance.BeforeBosstalk(0);
+                    }
                 }
             }
         }
