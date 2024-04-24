@@ -19,6 +19,7 @@ public class ArcherSkillPages : SkillPages
 
     private void OnEnable()
     {
+        UIManager.Instance.skillPages.ActiveGems();
         InitializeSkillInfo();
     }
 
@@ -61,6 +62,7 @@ public class ArcherSkillPages : SkillPages
 
     public void InitializeSkillInfo()
     {
+        player = GameManager.Instance.player;
         int asdIndex = GetASDIndex();
         int index = player.Data.AttackData.AttackSkillStates[asdIndex][0];
 

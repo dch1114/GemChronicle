@@ -242,7 +242,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     {
         for(int i = 0; i < _list.Count; i++)
         {
-            for(int j = 0; j <= _list[i].Count; j++)
+            for(int j = 0; j < _list[i].Count; j++)
             {
                 if (_list[i][j] != currentStatus.attackSkillStates[i * 3 + j]) return false;
             }
