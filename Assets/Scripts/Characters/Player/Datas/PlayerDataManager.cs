@@ -338,6 +338,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             data.JobType = currentStatus.jobType;
             data.Gems = ChangeGemsListToDic();
             player.Data.AttackData.AttackSkillStates = ChangeListToDoubleList(currentStatus.attackSkillStates);
+            player.transform.position = currentStatus.currentPos;
 
             // �÷��̾��� �κ��丮 ������
             inventory.equipmentItems = currentItems.equipmentItems;
