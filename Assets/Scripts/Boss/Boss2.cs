@@ -31,11 +31,19 @@ public class Boss2 : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        StartCoroutine(StartSpiralFire());
+        
     }
 
     void FixedUpdate()
     {
+        if (QuestManager.Instance.bossAction == true)
+        {
+            StartCoroutine(StartSpiralFire());
+        }
+        else
+        {
+
+        }
         switch (state)
         {
             case EnemyState.Idle:
