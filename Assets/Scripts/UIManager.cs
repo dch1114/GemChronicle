@@ -52,17 +52,19 @@ public class UIManager : Singleton<UIManager>
     private int[] PortraitId;
     public TalkManager talkManager;
     public int TalkIndex = 0;
+    public int TalkIndex2 = 0;
     public Sprite BossPotrait;
 
     [Header("Potal")]
     public GameObject potalListUI;
     public PotalListUI potalUIScript;
     public GameObject potaltalk;
+    public GameObject superPotaltalk;
     public Button[] showMenuButton;
     public Button[] potalButton;
     public Button[] showHealButton;
     public GameObject Diary;
-    public Text potalTxt;
+    public TextMeshProUGUI potalTxt;
     public Sprite selectButton;
     public Sprite unSelectButton;
     [SerializeField]
@@ -442,6 +444,10 @@ public class UIManager : Singleton<UIManager>
         potaltalk.SetActive(_OnOff);
     }
 
+    public void SuperPotalTalk(bool _OnOff)
+    {
+        superPotaltalk.SetActive(_OnOff);
+    }
     public void ShowDiary(int _page)
     {
         
@@ -477,25 +483,33 @@ public class UIManager : Singleton<UIManager>
     public void Bosstalk(int TalkIndex)
     {
 
-        TalkData = new string[5];
-        PortraitId = new int[5];
-        TalkData[0] = "와 너 강하구나 내가졌다.";
-        TalkData[1] = "넌 약하구나 니가 졌어";
-        TalkData[2] = "어쩔수없지... 너가 이겼다.";
-        TalkData[3] = "축하한다.";
-        TalkData[4] = "잘가라";
+     
+        TalkData = new string[9];
+        PortraitId = new int[9];
+        TalkData[0] = "크윽...제법이군...\n나도 여기까지인가...";
+        TalkData[1] = "<color=#6C00D9>당신이 내다버린 자식에게 죽는 기분이 어때.</color>";
+        TalkData[2] = "...!!!";
+        TalkData[3] = "<color=#6C00D9>그땐 내 힘을 알아보지 못했겠지.(코웃음)\n아쉬울거야.</color>";
+        TalkData[4] = "<color=#6C00D9>하지만 이 또한 네 업보다. 잘가라-</color>";
+        TalkData[5] = "크윽-";
+        TalkData[6] = "(왕 사라짐)";
+        TalkData[7] = "<color=#6C00D9>...</color>";
+        TalkData[8] = "<color=#6C00D9>피곤하군, 우선 한숨 자러 가야겠어...</color>";
 
         PortraitId[0] = 1;
         PortraitId[1] = 2;
         PortraitId[2] = 1;
-        PortraitId[3] = 1;
+        PortraitId[3] = 2;
         PortraitId[4] = 2;
-
+        PortraitId[5] = 1;
+        PortraitId[6] = 1;
+        PortraitId[7] = 2;
+        PortraitId[8] = 2;
         UIManager.Instance.SetPlayerPortraitImage(talkManager.GetPlayerSprite());
         UIManager.Instance.SetNpcPortraitImage(BossPotrait);
         if (TalkIndex < TalkData.Length)
         {
-
+            
             UIManager.Instance.SetTalkMessage(TalkData[TalkIndex]);
             UIManager.Instance.PotraitPanelOnOff(true);
             if (PortraitId[TalkIndex] == 1)
@@ -514,6 +528,58 @@ public class UIManager : Singleton<UIManager>
         else
         {
             UIManager.Instance.PotraitPanelOnOff(false);
+        }
+
+        return;
+    }
+
+    public void BeforeBosstalk(int TalkIndex)
+    {
+        TalkData = new string[6];
+        PortraitId = new int[6];
+        TalkData[0] = "누구냐. 너는.";
+        TalkData[1] = "<color=#6C00D9>당신의 비밀을 아는 자.\n그리고 당신이 버린 수많은 것들 중 하나.</color>";
+        TalkData[2] = "<color=#6C00D9>당신이 저지르고 있는 악행을 막으러 왔다.</color>";
+        TalkData[3] = "무슨 이야기인지 모르겠군.";
+        TalkData[4] = "하지만 이 곳에 침입한 이상 살아돌아갈 순 없다.\n덤벼라.";
+        TalkData[5] = "<color=#6C00D9>바라던 바다.</color>";
+
+        PortraitId[0] = 1;
+        PortraitId[1] = 2;
+        PortraitId[2] = 2;
+        PortraitId[3] = 1;
+        PortraitId[4] = 1;
+        PortraitId[5] = 2;
+
+
+        SetPlayerInput();
+        UIManager.Instance.SetPlayerPortraitImage(talkManager.GetPlayerSprite());
+        UIManager.Instance.SetNpcPortraitImage(BossPotrait);
+        if (TalkIndex < TalkData.Length)
+        {
+            playerinput.OnDisable();
+            UIManager.Instance.SetTalkMessage(TalkData[TalkIndex]);
+            UIManager.Instance.PotraitPanelOnOff(true);
+            if (PortraitId[TalkIndex] == 1)
+            {
+                UIManager.Instance.ShowNpcPotrait(true);
+                UIManager.Instance.ShowPlayerPotrait(false);
+            }
+            else
+            {
+                UIManager.Instance.ShowNpcPotrait(false);
+                UIManager.Instance.ShowPlayerPotrait(true);
+            }
+
+
+        }
+        else
+        {
+            QuestManager.Instance.bossAction = true;
+            QuestManager.Instance.QuestClear(2006);
+            playerinput.OnEnable();
+            UIManager.Instance.PotraitPanelOnOff(false);
+            PotalManager.Instance.EnterBossZone = false;
         }
 
         return;

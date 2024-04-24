@@ -22,6 +22,7 @@ public class PlayerAction : MonoBehaviour
     UIManager uiManagerInstance;
     // Update is called once per frame
     private int talkIndex = 1;
+    private int talkIndex2 = 1;
     private void Start()
     {
         uiManagerInstance = UIManager.Instance;
@@ -30,10 +31,14 @@ public class PlayerAction : MonoBehaviour
     {
         if (interactiveList.Count > 0)
         {
-            if (target.GetType() == InteractType.Potal)
+            if(target != null)
             {
-                target.Interact();
+                if (target.GetType() == InteractType.Potal)
+                {
+                    target.Interact();
+                }
             }
+           
         }
     }
     void OnInteractive()
@@ -44,29 +49,47 @@ public class PlayerAction : MonoBehaviour
             talkIndex++;
         }
         else
-        { 
+        {
+
+        }
+        if (PotalManager.Instance.EnterBossZone == true)
+        {
+            uiManagerInstance.BeforeBosstalk(talkIndex2);
+            talkIndex2++;
+        }
+        else
+        {
 
         }
 
+
         if (interactiveList.Count > 0)
         {
-            if (target.GetType() == InteractType.NPC)
+            if (target != null)
             {
-                playerinput.OnDisable();
-                target.Interact();//trytalk 대신 interact.가까워졌을때 시점, 상호작용하는 시점 2개를 두고 처리하는 애가 무엇인지 생각
-            }
-            else if (target.GetType() == InteractType.SuperPotal)
-            {
-                //포탈 팝업 메뉴가 활성화 되어 있다면
-                if (UIManager.Instance.IsOpenPotalPopup())
+                if (target.GetType() == InteractType.NPC)
                 {
-                    UIManager.Instance.potalUIScript.ExecuteSelectedPotalMenuAction();
-                    return;
+                    playerinput.OnDisable();
+                    target.Interact();//trytalk 대신 interact.가까워졌을때 시점, 상호작용하는 시점 2개를 두고 처리하는 애가 무엇인지 생각
                 }
+                else if (target.GetType() == InteractType.SuperPotal)
+                {
+                    //포탈 팝업 메뉴가 활성화 되어 있다면
+                    if (UIManager.Instance.IsOpenPotalPopup())
+                    {
+                        UIManager.Instance.potalUIScript.ExecuteSelectedPotalMenuAction();
+                        return;
+                    }
 
-                //playerinput.OnDisable();
-                target.Interact();
+                    //playerinput.OnDisable();
+                    target.Interact();
+                }
             }
+            
+        }
+        else
+        {
+            return;
         }
     }
     void Update()  // 이부분 업데이트 제외하고 버튼클릭시 작동하도록 변경
@@ -80,23 +103,23 @@ public class PlayerAction : MonoBehaviour
   
     }
 
-    IInteractive FindClosestTarget()
-    {
-        IInteractive closestTarget = null;
-        float closestDistance = Mathf.Infinity;
+    //IInteractive FindClosestTarget()
+    //{
+    //    IInteractive closestTarget = null;
+    //    float closestDistance = Mathf.Infinity;
 
-        foreach (IInteractive ir in interactiveList)
-        {
-            float distance = Vector3.Distance(transform.position, ir.GetPosition());
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestTarget = ir;
-            }
-        }
+    //    foreach (IInteractive ir in interactiveList)
+    //    {
+    //        float distance = Vector3.Distance(transform.position, ir.GetPosition());
+    //        if (distance < closestDistance)
+    //        {
+    //            closestDistance = distance;
+    //            closestTarget = ir;
+    //        }
+    //    }
 
-        return closestTarget;
-    }
+    //    return closestTarget;
+    //}
 
     /// Istrigger가 켜져있는 콜라이더가 겹치는 곳의 npc 정보를 가져옴
     private void OnTriggerEnter2D(Collider2D _other)
@@ -109,8 +132,7 @@ public class PlayerAction : MonoBehaviour
             {
                 interactiveList.Add(irv);
 
-                target = FindClosestTarget();
-
+                target = irv;
                 if (target != null)
                 {
                     target.Closer();

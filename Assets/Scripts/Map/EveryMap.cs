@@ -28,13 +28,13 @@ public class EveryMap : MonoBehaviour, IInteractive
         uiManagerInstance.potalTxt.text = "포탈";
         // 충돌이 발생하면 상태를 true로 변경
         collisionOccurred = true;
-        uiManagerInstance.PotalTalk(true);
+        uiManagerInstance.SuperPotalTalk(true);
     }
 
     public void CloseUI()
     {
         collisionOccurred = false;
-        uiManagerInstance.PotalTalk(false);
+        uiManagerInstance.SuperPotalTalk(false);
         //포탈 선택 UI 비활성화
         UIManager.Instance.TogglePortalUI(false);
 

@@ -21,12 +21,15 @@ public class HideNpc : MonoBehaviour
             if (QuestManager.Instance.hideNPC == true)
             {
                 Unit.SetActive(false);
+                collider1.enabled = false;
+                collider2.enabled = false;
                 
             }
             if (QuestManager.Instance.hideNPC == false)
             {
                 Unit.SetActive(true);
-                
+                collider1.enabled = true;
+                collider2.enabled = true;
             }
         }
     }

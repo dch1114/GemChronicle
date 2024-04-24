@@ -119,8 +119,8 @@ public class PlayerStatusData : Status
     {
         //State Change
         PlayerStateMachine stateMachine = GameManager.Instance.player.GetStateMachine();
-
         stateMachine.ChangeState(stateMachine.DieState);
+        UIManager.Instance.diePanelUI.ActiveDiePanel();
     }
 
     public void GetExp(int _amount)
