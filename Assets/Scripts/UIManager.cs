@@ -59,11 +59,12 @@ public class UIManager : Singleton<UIManager>
     public GameObject potalListUI;
     public PotalListUI potalUIScript;
     public GameObject potaltalk;
+    public GameObject superPotaltalk;
     public Button[] showMenuButton;
     public Button[] potalButton;
     public Button[] showHealButton;
     public GameObject Diary;
-    public Text potalTxt;
+    public TextMeshProUGUI potalTxt;
     public Sprite selectButton;
     public Sprite unSelectButton;
     [SerializeField]
@@ -443,6 +444,10 @@ public class UIManager : Singleton<UIManager>
         potaltalk.SetActive(_OnOff);
     }
 
+    public void SuperPotalTalk(bool _OnOff)
+    {
+        superPotaltalk.SetActive(_OnOff);
+    }
     public void ShowDiary(int _page)
     {
         
