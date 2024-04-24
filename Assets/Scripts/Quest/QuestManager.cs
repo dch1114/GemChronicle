@@ -46,6 +46,7 @@ public class QuestManager : Singleton<QuestManager>
 
     private Dictionary<QuestType, List<QuestData>> _subscribeQuests = new();
     public bool EndingBossDie;
+    public bool EnterBossZone;
     public bool bossAction =false;
     public bool hideNPC = false;
     /// <summary>
@@ -134,8 +135,8 @@ public class QuestManager : Singleton<QuestManager>
         
         if (type == QuestType.learn && target == 4000 && count == 1)
         {
-            bossAction = true;
-            QuestClear(2006);
+            EnterBossZone = true;
+            UIManager.Instance.BeforeBosstalk(0);
         }
         if (target == 500003)
         {

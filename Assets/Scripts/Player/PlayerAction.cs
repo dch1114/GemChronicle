@@ -22,6 +22,7 @@ public class PlayerAction : MonoBehaviour
     UIManager uiManagerInstance;
     // Update is called once per frame
     private int talkIndex = 1;
+    private int talkIndex2 = 1;
     private void Start()
     {
         uiManagerInstance = UIManager.Instance;
@@ -44,9 +45,19 @@ public class PlayerAction : MonoBehaviour
             talkIndex++;
         }
         else
-        { 
+        {
 
         }
+        if (QuestManager.Instance.EnterBossZone == true)
+        {
+            uiManagerInstance.BeforeBosstalk(talkIndex2);
+            talkIndex2++;
+        }
+        else
+        {
+
+        }
+
 
         if (interactiveList.Count > 0)
         {
