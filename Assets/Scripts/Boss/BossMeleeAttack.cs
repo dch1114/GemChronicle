@@ -16,7 +16,7 @@ public class BossMeleeAttack : MonoBehaviour
     {
         SetTarget();
     }
-    
+
     void SetTarget()
     {
         target = GameManager.Instance.player.transform;
@@ -24,8 +24,10 @@ public class BossMeleeAttack : MonoBehaviour
 
     void Update()
     {
-        if (target == null)
-            SetTarget();
+        if (QuestManager.Instance.bossAction == true)
+        {
+            if (target == null)
+                SetTarget();
 
             Vector3 directionToPlayer = target.position - transform.position;
             float directionX = Mathf.Sign(directionToPlayer.x);
@@ -44,7 +46,9 @@ public class BossMeleeAttack : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-       
+        
+
+
     }
 
     void Attack()

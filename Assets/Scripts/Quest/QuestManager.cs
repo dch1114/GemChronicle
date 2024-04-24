@@ -28,7 +28,7 @@ public class QuestManager : Singleton<QuestManager>
     //현재 들고 있는 퀘스트데이타
     public QuestData currentProgressMainQuestData = null;
     public QuestData currentProgressSubQuestData = null;
-
+   
     public Quest QuestUnclaimed { get; private set; }
 
     [SerializeField] PanelQuestUI panelQuestUI;
@@ -132,6 +132,7 @@ public class QuestManager : Singleton<QuestManager>
         if (type == QuestType.learn && target == 4000 && count == 1)
         {
             bossAction = true;
+            QuestClear(2006);
         }
         if (target == 500003)
         {
