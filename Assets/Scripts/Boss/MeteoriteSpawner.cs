@@ -18,14 +18,18 @@ public class MeteoriteSpawner : MonoBehaviour
     private float limitMaxX = 10.0f;
     private float spawnHeightY = 10.0f;
 
+    private bool bossAlive = true;
+    private Boss2 boss2;
+
     private void Awake()
     {
+        boss2 = FindObjectOfType<Boss2>();
         StartCoroutine(SpawnMeteorite());
     }
 
     private IEnumerator SpawnMeteorite()
     {
-        while (true)
+        while (bossAlive)
         {
             float positionX = Random.Range(limitMinX, limitMaxX);
 
@@ -42,5 +46,10 @@ public class MeteoriteSpawner : MonoBehaviour
 
             yield return new WaitForSeconds(spawnTime);
         }
+    }
+
+    public void BossDied()
+    {
+        bossAlive = false;
     }
 }
