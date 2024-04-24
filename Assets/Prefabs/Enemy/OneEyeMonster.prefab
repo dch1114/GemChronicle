@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4307163665535306380
 SpriteRenderer:
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyStatusData:
-    atk: 0
+    atk: 10
     def: 0
     hp: 30
     exp: 15
@@ -208,7 +208,6 @@ MonoBehaviour:
     walkParameterName: Walk
     attackParameterName: Attack
     dieParameterName: Die
-  bossTalk: {fileID: 0}
   enemyType: 1
   skillType: 1
   gem: {fileID: 1754942600076354860, guid: c3eb92f08e666b840888208e3369f2f9, type: 3}

@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.Tilemaps;
+using UnityEngine;
+
+public class HideNpc : MonoBehaviour
+{
+    // Start is called before the first frame update
+    public GameObject Unit;
+    [SerializeField] private CircleCollider2D collider1;
+    [SerializeField] private CircleCollider2D collider2;
+
+    public void Start()
+    {
+
+    }
+    void Update()
+    {
+        if (QuestManager.Instance != null)
+        {
+            if (QuestManager.Instance.hideNPC == true)
+            {
+                Unit.SetActive(false);
+                
+            }
+            if (QuestManager.Instance.hideNPC == false)
+            {
+                Unit.SetActive(true);
+                
+            }
+        }
+    }
+}

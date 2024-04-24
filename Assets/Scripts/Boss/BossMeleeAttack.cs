@@ -14,7 +14,7 @@ public class BossMeleeAttack : MonoBehaviour
 
     void Start()
     {
-        SetTarget();
+        
     }
 
     void SetTarget()

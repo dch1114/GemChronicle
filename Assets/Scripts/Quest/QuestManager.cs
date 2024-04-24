@@ -47,6 +47,7 @@ public class QuestManager : Singleton<QuestManager>
     private Dictionary<QuestType, List<QuestData>> _subscribeQuests = new();
     public bool EndingBossDie;
     public bool bossAction =false;
+    public bool hideNPC = false;
     /// <summary>
     /// SubscribeQuest는 QuestData 보관 QuestStart는 퀘스트 진행도와 상태체크
     /// </summary>
@@ -62,40 +63,42 @@ public class QuestManager : Singleton<QuestManager>
     //퀘스트 구독
     public void SubscribeQuest(int questId)
     {
-        
-       
-            if (_completeQuests.Contains(questId))
+
+
+        if (_completeQuests.Contains(questId))
+        {
+            Debug.Log($"이미 ID:{questId} 퀘스트는 완료하였습니다");
+            return;
+        }
+
+        if (_ongoingQuests.ContainsKey(questId))
+        {
+            Debug.Log($"이미 ID:{questId} 퀘스트는 진행중입니다");
+            return;
+        }
+
+        //퀘스트 데이터 불러오기
+        var questData = Database.Quest.Get(questId);
+
+        if (questData != null)
+        {
+            //구독 딕셔너리에 퀘스트타입이 존재하지 않으면 Add 딕셔너리
+            if (_subscribeQuests.ContainsKey(questData.Type) == false)
             {
-                Debug.Log($"이미 ID:{questId} 퀘스트는 완료하였습니다");
-                return;
+                _subscribeQuests[questData.Type] = new List<QuestData>();
             }
 
-            if (_ongoingQuests.ContainsKey(questId))
-            {
-                Debug.Log($"이미 ID:{questId} 퀘스트는 진행중입니다");
-                return;
-            }
+            _subscribeQuests[questData.Type].Add(questData);
 
-            //퀘스트 데이터 불러오기
-            var questData = Database.Quest.Get(questId);
+            QuestStart(questId);
 
-            if (questData != null )
-            {
-                //구독 딕셔너리에 퀘스트타입이 존재하지 않으면 Add 딕셔너리
-                if (_subscribeQuests.ContainsKey(questData.Type) == false)
-                {
-                    _subscribeQuests[questData.Type] = new List<QuestData>();
-                }
+            Debug.Log($"ID:{questId} 퀘스트 구독 완료");
+        }
 
-                _subscribeQuests[questData.Type].Add(questData);
-
-                QuestStart(questId);
-
-                Debug.Log($"ID:{questId} 퀘스트 구독 완료");
-            }
-        
-
-       
+        if (questId == 2003)
+        {
+            hideNPC = true;
+        }
 
     }
 
@@ -138,6 +141,7 @@ public class QuestManager : Singleton<QuestManager>
         {
             EndingBossDie = true;
         }
+        
     }
 
     void QuestStart(int questId)

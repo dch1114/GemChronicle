@@ -391,6 +391,7 @@ public class UIManager : Singleton<UIManager>
         HealChoiceOnOff(false);
         GameManager.Instance.player.Data.StatusData.UseGold(100);
         GameManager.Instance.player.Data.StatusData.Hp = GameManager.Instance.player.Data.StatusData.MaxHp;
+        playerUI.UpdateHp();
     }
 
 

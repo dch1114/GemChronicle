@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour, IDamageable
 {
@@ -13,10 +15,14 @@ public class Boss : MonoBehaviour, IDamageable
     private int numberOfProjectiles = 10; 
     [SerializeField]
     private float projectileSpeed = 5.0f;
-
+    public Image prfHpBar;
+    public GameObject canvas;
+    public float heught = 1.7f;
+    RectTransform hpBar;
+    public Image HPBar;
     //Ω∫≈»
     [SerializeField] public EnemyStatusData EnemyStatusData;
-
+    
     [SerializeField] private GameObject gem;
 
 
@@ -32,11 +38,17 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
+        HPBar = hpBar.GetComponent<Image>();
         StartCoroutine(Phase01());
     }
 
     void Update()
     {
+        Vector3 _hpBarPos =
+   Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + heught, 0));
+        hpBar.position = _hpBarPos;
+       
         Attack();
     }
 
@@ -101,17 +113,22 @@ public class Boss : MonoBehaviour, IDamageable
         EnemyStatusData.Hp = 0;
         SetState(EnemyState.Dead);
         SpawnGems();
+        QuestManager.Instance.hideNPC = false;
         Destroy(gameObject);
+       
     }
 
     public void TakeDamage(int damage)
     {
+        
         if (EnemyStatusData.Hp - damage > 0)
         {
             EnemyStatusData.Hp -= damage;
+            HPBar.fillAmount = (float)EnemyStatusData.Hp / 100;
         }
         else
         {
+            HPBar.fillAmount = 0;
             EnemyStatusData.Hp = 0;
             SetState(EnemyState.Dead);
         }

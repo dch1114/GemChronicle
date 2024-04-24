@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 250994166123138631}
   - component: {fileID: 8992261075858987878}
   - component: {fileID: 2723871308718145109}
+  - component: {fileID: -5063857403424592825}
   m_Layer: 7
   m_Name: NPC2
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 4315282888344404001}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &4993208987679539032
 CircleCollider2D:
@@ -159,6 +160,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &-5063857403424592825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6968360432040738624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa9732d104fdcc4cafcb8ef09c0c282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 7724610475392915381}
+  collider1: {fileID: 4993208987679539032}
+  collider2: {fileID: 250994166123138631}
 --- !u!1001 &243599422344917784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -279,5 +295,10 @@ PrefabInstance:
 --- !u!224 &4315282888344404001 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4072246433544991545, guid: 8feaec4531293534a8122e9e3343c768, type: 3}
+  m_PrefabInstance: {fileID: 243599422344917784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7724610475392915381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7517110511148049581, guid: 8feaec4531293534a8122e9e3343c768, type: 3}
   m_PrefabInstance: {fileID: 243599422344917784}
   m_PrefabAsset: {fileID: 0}
