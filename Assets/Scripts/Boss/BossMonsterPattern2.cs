@@ -18,6 +18,7 @@ public class BossMonsterPattern2 : MonoBehaviour
     private Collider2D collider;
     private Rigidbody2D rigid;
     private Animator animator;
+    private bool bossAction3 = false;
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class BossMonsterPattern2 : MonoBehaviour
     {
         target = GameManager.Instance.player.transform;
         StartCoroutine(FireContinuously());
+        bossAction3 = true;
     }
 
     void Update()
@@ -37,7 +39,11 @@ public class BossMonsterPattern2 : MonoBehaviour
         
         if (QuestManager.Instance.bossAction == true)
         {
-            StartAttack();
+            if (bossAction3 == false)
+            {
+                StartAttack();
+            }
+            
             DetectAndAttackPlayer();
         }
     }

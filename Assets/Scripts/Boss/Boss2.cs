@@ -24,7 +24,7 @@ public class Boss2 : MonoBehaviour, IDamageable
     public Transform player;
 
     private EnemyState state;
-
+    private bool bossAction2 = false;
     private void Awake()
     {
     }
@@ -36,7 +36,7 @@ public class Boss2 : MonoBehaviour, IDamageable
 
     void FixedUpdate()
     {
-        if (QuestManager.Instance.bossAction == true)
+        if (QuestManager.Instance.bossAction == true && bossAction2 == false)
         {
             StartCoroutine(StartSpiralFire());
         }
@@ -59,7 +59,7 @@ public class Boss2 : MonoBehaviour, IDamageable
         float circleRadius = 1.0f; // 원의 반지름
         float angle = 0f;
         float angleStep = 360f / numberOfProjectiles;
-
+        bossAction2 = true;
         while (true)
         {
             for (int i = 0; i < numberOfProjectiles; i++)
