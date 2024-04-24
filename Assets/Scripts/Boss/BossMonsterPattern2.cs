@@ -26,10 +26,9 @@ public class BossMonsterPattern2 : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Start()
+    public void StartAttack()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        Invoke("Think", 2);
+        target = GameManager.Instance.player.transform;
         StartCoroutine(FireContinuously());
     }
 
@@ -73,30 +72,30 @@ public class BossMonsterPattern2 : MonoBehaviour
                 }
                 else
                 {
-                    AttackPlayer();
+                    //AttackPlayer();
                 }
             }
         }
     }
 
-    void AttackPlayer()
-    {
-        Player playerComponent = player.GetComponent<Player>();
-        if (playerComponent != null)
-        {
-            //playerComponent.TakeDamage(attackDamage);
-        }
-    }
+    //void AttackPlayer()
+    //{
+    //    Player playerComponent = player.GetComponent<Player>();
+    //    if (playerComponent != null)
+    //    {
+    //        //playerComponent.TakeDamage(attackDamage);
+    //    }
+    //}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Player player = collision.gameObject.GetComponent<Player>();
-            if (player != null)
-            {
-                //player.TakeDamage(attackDamage);
-            }
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        Player player = collision.gameObject.GetComponent<Player>();
+    //        if (player != null)
+    //        {
+    //            //player.TakeDamage(attackDamage);
+    //        }
+    //    }
+    //}
 }

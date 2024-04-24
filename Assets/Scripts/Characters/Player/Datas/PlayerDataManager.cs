@@ -327,6 +327,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
         player = GameManager.Instance.player;
         GameManager.Instance.inventory = inventory.GetComponent<Inventory>();
+        CameraController.Instance.FollowPlayer();
     }
 
     private void SetGameManagerInventory()

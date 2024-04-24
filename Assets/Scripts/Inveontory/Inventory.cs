@@ -11,7 +11,6 @@ public class Inventory : Singleton<Inventory>
     Player player;
     public int inventoryGold;
     PlayerStatusData statusData;
-    [SerializeField] private TextMeshProUGUI goldText;
 
     [Header("Sprite Change")]
     /*[SerializeField]*/ private SPUM_SpriteList characterSpriteOBj;
@@ -50,8 +49,6 @@ public class Inventory : Singleton<Inventory>
             
         //characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
 
-
-        UpdateRetainGold();
     }
 
     public void AddItem(Item _item)
@@ -196,11 +193,6 @@ public class Inventory : Singleton<Inventory>
         _inventoryUIController.UpdateStatus();
     }
 
-    public void UpdateRetainGold()
-    {
-        statusData.Gold = inventoryGold;
-        goldText.text = inventoryGold.ToString();
-    }
 
     public void UseItem(InventoryItem _potion)
     {
@@ -289,8 +281,6 @@ public class Inventory : Singleton<Inventory>
         {
             _inventoryUIController.UpdateLoadItemSlotUI();
         }
-
-        UpdateRetainGold();
     }
 
     public void SetPlayerData()

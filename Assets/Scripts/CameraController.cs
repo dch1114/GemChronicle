@@ -1,14 +1,25 @@
+using Cinemachine;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : Singleton<CameraController>
 {
     public GameObject[] cameras; // 각 장소의 카메라를 배열로 저장
     private int currentCameraIndex = 0; // 현재 사용 중인 카메라의 인덱스를 추적
 
+    [SerializeField] CinemachineVirtualCamera playerCam;
+
     private void Start()
     {
         // 게임 시작 시 첫 번째 카메라를 활성화
-        ActivateCurrentCamera();
+        //ActivateCurrentCamera();
+    }
+
+    public void FollowPlayer()
+    {
+        if(GameManager.Instance.player != null)
+        {
+            playerCam.Follow = GameManager.Instance.player.transform;
+        }
     }
 
     // 포탈을 통해 다음 맵으로 이동할 때 호출되는 함수

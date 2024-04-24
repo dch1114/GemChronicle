@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
 using UnityEngine;
 
 public enum JobType
@@ -79,6 +80,12 @@ public class PlayerStatusData : Status
         }
         else
             return false;
+    }
+
+    public void GetGold(int _price)
+    {
+        gold += _price;
+        UIManager.Instance.playerUI.UpdateGold();
     }
 
     public void TakeDamage(int damage)
