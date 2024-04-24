@@ -101,6 +101,8 @@ public class Boss2 : MonoBehaviour, IDamageable
         SetState(EnemyState.Dead);
         SpawnGems();
         Destroy(gameObject);
+        QuestManager.Instance.NotifyQuest(Constants.QuestType.KillBoss, 500003, 1);
+        UIManager.Instance.Bosstalk(0);
     }
 
     public void TakeDamage(int damage)
