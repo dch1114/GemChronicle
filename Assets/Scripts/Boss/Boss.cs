@@ -17,7 +17,7 @@ public class Boss : MonoBehaviour, IDamageable
     //Ω∫≈»
     [SerializeField] public EnemyStatusData EnemyStatusData;
 
-    [SerializeField] private List<GameObject> gems;
+    [SerializeField] private GameObject gem;
 
 
     public Transform player;
@@ -135,19 +135,19 @@ public class Boss : MonoBehaviour, IDamageable
 
     private void SpawnTypeGem()
     {
-        Instantiate(gems[3]).transform.position = gameObject.transform.position; ;
+        Instantiate(gem).transform.position = gameObject.transform.position;
     }
 
     void Attack()
     {
         ani.SetTrigger("Attack");
 
-        Boss2 boss = GetComponent<Boss2>();
-        if (boss != null)
-        {
-            boss.TakeDamage(damage);
-            Debug.Log("dam");
-        }
+        //Boss2 boss = GetComponent<Boss2>();
+        //if (boss != null)
+        //{
+        //    boss.TakeDamage(damage);
+        //    Debug.Log("dam");
+        //}
     }
 }
 

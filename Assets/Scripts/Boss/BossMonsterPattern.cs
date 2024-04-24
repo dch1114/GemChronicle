@@ -27,10 +27,9 @@ public class BossMonsterPattern : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Start()
+    public void StartAttack()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        Invoke("Think", 2);
+        target = GameManager.Instance.player.transform;
         StartCoroutine(FireContinuously());
     }
 
@@ -79,43 +78,43 @@ public class BossMonsterPattern : MonoBehaviour
                 else
                 {
                     // 공격 범위 내에 있으면 공격
-                    AttackPlayer();
+                    //AttackPlayer();
                 }
             }
         }
     }
 
-    void AttackPlayer()
-    {
-        // 공격 로직 실행,  체력 감소
-        Player playerComponent = player.GetComponent<Player>();
-        if (playerComponent != null)
-        {
-            //playerComponent.TakeDamage(attackDamage);
-        }
-    }
+    //void AttackPlayer()
+    //{
+    //    // 공격 로직 실행,  체력 감소
+    //    Player playerComponent = player.GetComponent<Player>();
+    //    if (playerComponent != null)
+    //    {
+    //        //playerComponent.TakeDamage(attackDamage);
+    //    }
+    //}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Player player = collision.gameObject.GetComponent<Player>();
-            if (player != null)
-            {
-                //player.TakeDamage(attackDamage);
-            }
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        Player player = collision.gameObject.GetComponent<Player>();
+    //        if (player != null)
+    //        {
+    //            //player.TakeDamage(attackDamage);
+    //        }
+    //    }
+    //}
 
-    public void TakeDamage(int damageAmount) // 대미지 받는 함수
-    {
+    //public void TakeDamage(int damageAmount) // 대미지 받는 함수
+    //{
 
-        health -= damageAmount;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
+    //    health -= damageAmount;
+    //    if (health <= 0)
+    //    {
+    //        Die();
+    //    }
+    //}
 
     public void Die()
     {

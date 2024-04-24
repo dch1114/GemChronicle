@@ -18,7 +18,6 @@ public class GameManager : Singleton<GameManager>
 
     //inventory save test
     public Inventory inventory;
-
     protected override void Awake()
     {
         base.Awake();
