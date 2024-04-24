@@ -102,6 +102,7 @@ public class Boss : MonoBehaviour, IDamageable
         SetState(EnemyState.Dead);
         SpawnGems();
         Destroy(gameObject);
+        QuestManager.Instance.hideNPC = false;
     }
 
     public void TakeDamage(int damage)
