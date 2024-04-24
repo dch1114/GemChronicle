@@ -23,24 +23,36 @@ public class SkillPagesUI : MonoBehaviour
 
     private void Start()
     {
+        
+    }
+
+    private void SetPlayer()
+    {
         player = GameManager.Instance.player;
     }
 
     public void SetJobPage()
     {
-        JobType playerJobType = player.Data.StatusData.JobType;
-
-        switch(playerJobType)
+        if(player != null)
         {
-            case JobType.Warrior:
-                player.SkillPage = Warrior;
-                break;
-            case JobType.Archer:
-                player.SkillPage = Archer;
-                break;
-            case JobType.Magician:
-                player.SkillPage= Magician;
-                break;
+            JobType playerJobType = player.Data.StatusData.JobType;
+
+            switch(playerJobType)
+            {
+                case JobType.Warrior:
+                    player.SkillPage = Warrior;
+                    break;
+                case JobType.Archer:
+                    player.SkillPage = Archer;
+                    break;
+                case JobType.Magician:
+                    player.SkillPage= Magician;
+                    break;
+            }
+        } else
+        {
+            SetPlayer();
+            SetJobPage();
         }
     }
 
@@ -62,6 +74,10 @@ public class SkillPagesUI : MonoBehaviour
             iceGem.text = player.Data.StatusData.Gems[SkillType.Ice].ToString();
             fireGem.text = player.Data.StatusData.Gems[SkillType.Fire].ToString();
             lightGem.text = player.Data.StatusData.Gems[SkillType.Light].ToString();
+        } else
+        {
+            SetPlayer();
+            UpdateGems();
         }
     }
 

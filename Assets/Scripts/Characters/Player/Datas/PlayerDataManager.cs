@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [Serializable]
@@ -15,8 +16,9 @@ public class PlayerCurrentStatus //���� ���� �����
     public int hp;  //���� ü��
     public int gold;
     public JobType jobType;
-    public Dictionary<SkillType, int> gems;
+    public List<int> gems;
     public Vector3 currentPos;
+    public List<int> attackSkillStates;
 }
 
 [Serializable]
@@ -103,18 +105,29 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         currentStatus.hp = data.maxHp;
         currentStatus.gold = 3000; //�⺻ �� ���� ���ؾ�
         currentStatus.currentPos = new Vector3(0f, 0f, 0f);
+        SetNewAttackSkillStates();
 
         InitGems();
 
         SetDatas();
     }
 
+    private void SetNewAttackSkillStates()
+    {
+        switch(currentStatus.jobType)
+        {
+            case JobType.Archer:
+                currentStatus.attackSkillStates = new List<int>() { 0, 0, 0, 1, 0, 0, 2, 0, 0 };
+                break;
+            default:
+                currentStatus.attackSkillStates = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                break;
+        }
+    }
+
     public void InitGems()
     {
-        currentStatus.gems = new Dictionary<SkillType, int>();
-        currentStatus.gems.Add(SkillType.Ice, 10);
-        currentStatus.gems.Add(SkillType.Fire, 10);
-        currentStatus.gems.Add(SkillType.Light, 10);
+        currentStatus.gems = new List<int> { 10, 10, 10 };
     }
 
 
@@ -192,6 +205,80 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         }
     }
 
+    private Dictionary<SkillType, int> ChangeGemsListToDic()
+    {
+        Dictionary<SkillType, int> dic = new Dictionary<SkillType, int>();
+
+        dic.Add(SkillType.Ice, currentStatus.gems[0]);
+        dic.Add(SkillType.Fire, currentStatus.gems[1]);
+        dic.Add(SkillType.Light, currentStatus.gems[2]);
+
+        return dic;
+    }
+
+    private void ChangeGemsDicToList(Dictionary<SkillType, int> gems)
+    {
+        currentStatus.gems.Clear();
+        currentStatus.gems.Add(gems[SkillType.Ice]);
+        currentStatus.gems.Add(gems[SkillType.Fire]);
+        currentStatus.gems.Add(gems[SkillType.Light]);
+    }
+
+    private List<int> ChangeDoubleListToList(List<List<int>> _list)
+    {
+        List<int> temp = new List<int>();
+        for(int i = 0; i <  _list.Count; i++)
+        {
+            for(int j = 0; j < _list[i].Count; j++)
+            {
+                temp.Add(_list[i][j]);
+            }
+        }
+
+        return temp;
+    }
+
+    private bool IsDooubleListAndCurrentSame(List<List<int>> _list)
+    {
+        for(int i = 0; i < _list.Count; i++)
+        {
+            for(int j = 0; j < _list[i].Count; j++)
+            {
+                if (_list[i][j] != currentStatus.attackSkillStates[i * 3 + j]) return false;
+            }
+        }
+
+        return true;
+    }
+
+    private List<List<int>> ChangeListToDoubleList(List<int> _list)
+    {
+        List<List<int>> answer = new List<List<int>>();
+
+        List<int> temp0 = new List<int>();
+        List<int> temp1 = new List<int>();
+        List<int> temp2 = new List<int>();
+        for(int i = 0; i < _list.Count; i++)
+        {
+            if (i / 3 == 0)
+            {
+                temp0.Add(_list[i]);
+            } else if(i/3 == 1)
+            {
+                temp1.Add(_list[i]);
+            } else if(i / 3 == 2)
+            {
+                temp2.Add(_list[i]);
+            }
+        }
+
+        answer.Add(temp0);
+        answer.Add(temp1);
+        answer.Add(temp2);
+
+        return answer;
+    }
+
     public void LoadCurrentDatas()
     {
         player = GameManager.Instance.player;
@@ -205,7 +292,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             currentStatus.hp = data.Hp;
             currentStatus.gold = data.Gold;
             currentStatus.jobType = data.JobType;
-            currentStatus.gems = data.Gems;
+            ChangeGemsDicToList(data.Gems);
+            currentStatus.attackSkillStates = ChangeDoubleListToList(player.Data.AttackData.AttackSkillStates);
 
             // �÷��̾��� �κ��丮 ������
             currentItems.equipmentItems = inventory.equipmentItems;
@@ -227,7 +315,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             if (currentStatus.exp != data.Exp) return false;
             if (currentStatus.hp != data.Hp) return false;
             if (currentStatus.gold != data.Gold) return false;
-            if (currentStatus.gems != data.Gems) return false;
+            if (!IsDooubleListAndCurrentSame(player.Data.AttackData.AttackSkillStates)) return false;
             if (currentStatus.currentPos != player.transform.position) return false;
         }
 
@@ -248,7 +336,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             data.Hp = currentStatus.hp;
             data.Gold = currentStatus.gold;
             data.JobType = currentStatus.jobType;
-            data.Gems = currentStatus.gems;
+            data.Gems = ChangeGemsListToDic();
+            player.Data.AttackData.AttackSkillStates = ChangeListToDoubleList(currentStatus.attackSkillStates);
 
             // �÷��̾��� �κ��丮 ������
             inventory.equipmentItems = currentItems.equipmentItems;
@@ -290,7 +379,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             SetDatas();
         } else
         {
-            Debug.Log("저장되었습니다.");
+            Debug.Log("파일이 없습니다.");
         }
     }
 

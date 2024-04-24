@@ -65,7 +65,8 @@ public class Shop : MonoBehaviour
 
     public void Buy(Item _selectItem)
     {
-        if (!(playerInventory.inventoryGold < _selectItem.Price))
+        //if (!(playerInventory.inventoryGold < _selectItem.Price))
+        if(!(GameManager.Instance.player.Data.StatusData.Gold < _selectItem.Price))
         {
             //if(_selectItem.ItemType == ItemType.Potion)
             //{
@@ -83,7 +84,7 @@ public class Shop : MonoBehaviour
             shopItems.Remove(_selectItem);
             playerInventory.AddItem(_selectItem);
 
-            playerInventory.inventoryGold -= _selectItem.Price;
+            GameManager.Instance.player.Data.StatusData.Gold -= _selectItem.Price;
             GameManager.Instance.player.Data.StatusData.UseGold(_selectItem.Price);
 
             UpdateSlotUI();
@@ -91,13 +92,14 @@ public class Shop : MonoBehaviour
         else
         {
             //TODO 팝업 추가
-            Debug.Log("not enough gold");
+            UIManager.Instance.alertPanelUI.ShowAlert("돈이 부족합니다.");
         }
     }
 
     public void BuyPotion(Item _selectItem, int _amount)
     {
-        if (!(playerInventory.inventoryGold < _selectItem.Price))
+        //if (!(playerInventory.inventoryGold < _selectItem.Price))
+        if (!(GameManager.Instance.player.Data.StatusData.Gold < _selectItem.Price))
         {
             if(_selectItem.ItemType == ItemType.Potion)
             {
@@ -163,7 +165,7 @@ public class Shop : MonoBehaviour
             playerInventory.RemoveItem(_inventoryItem); // 아이템 제거
             shopItems.Add(_inventoryItem.datas); // 상점 아이템 목록에 추가
             // 골드 업데이트 및 UI 갱신
-            playerInventory.inventoryGold += _inventoryItem.datas.Price;
+            GameManager.Instance.player.Data.StatusData.Gold += _inventoryItem.datas.Price;
             GameManager.Instance.player.Data.StatusData.GetGold(_inventoryItem.datas.Price);
             UpdateSlotUI();
         }
@@ -199,7 +201,7 @@ public class Shop : MonoBehaviour
             //}
 
             // 골드 업데이트 및 UI 갱신
-            playerInventory.inventoryGold += _inventoryItem.datas.Price * _amount;
+            GameManager.Instance.player.Data.StatusData.Gold += _inventoryItem.datas.Price * _amount;
             GameManager.Instance.player.Data.StatusData.GetGold(_inventoryItem.datas.Price * _amount);
             UpdateSlotUI();
         }
