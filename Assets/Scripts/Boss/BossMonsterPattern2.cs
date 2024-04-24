@@ -34,7 +34,12 @@ public class BossMonsterPattern2 : MonoBehaviour
 
     void Update()
     {
-        DetectAndAttackPlayer();
+        
+        if (QuestManager.Instance.bossAction == true)
+        {
+            StartAttack();
+            DetectAndAttackPlayer();
+        }
     }
 
     IEnumerator FireContinuously()
