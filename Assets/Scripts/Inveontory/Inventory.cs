@@ -9,7 +9,7 @@ public class Inventory : Singleton<Inventory>
 {
     //public Player player;
     Player player;
-    public int inventoryGold;
+    //public int inventoryGold;
     PlayerStatusData statusData;
 
     [Header("Sprite Change")]
@@ -287,7 +287,7 @@ public class Inventory : Singleton<Inventory>
     {
         player = GameManager.Instance.player;
         statusData = player.Data.StatusData;
-        inventoryGold = statusData.Gold;
+        //inventoryGold = statusData.Gold;
         characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
     }
 
