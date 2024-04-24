@@ -36,7 +36,7 @@ public class CharacterChoose : MonoBehaviour
 
     public void StartGame()
     {
-        LoadingSceneController.LoadScene("KYW_TestMain");
+        LoadingSceneController.LoadScene("UserTestScene");
     }
 
     public void StartNewGameBtn()

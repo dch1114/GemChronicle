@@ -7,7 +7,6 @@ public class BossTalk : MonoBehaviour
 {
     private string[] TalkData;
     private int[] PortraitId;
-    //public Sprite[] PortraitImg;
     public TalkManager talkManager;
     public int TalkIndex = 0;
     public Sprite BossPotrait;

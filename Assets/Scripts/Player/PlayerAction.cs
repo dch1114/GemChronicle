@@ -22,7 +22,7 @@ public class PlayerAction : MonoBehaviour
     UIManager uiManagerInstance;
     // Update is called once per frame
     public BossTalk bosstalk;
-    private int talkIndex = 0;
+    private int talkIndex = 1;
     private void Start()
     {
         uiManagerInstance = UIManager.Instance;
@@ -41,7 +41,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (QuestManager.Instance.EndingBossDie == true)
         {
-            bosstalk.Bosstalk(talkIndex);
+            uiManagerInstance.Bosstalk(talkIndex);
             talkIndex++;
         }
         else

@@ -18,7 +18,7 @@ public class QuestManager : Singleton<QuestManager>
     private QuestData questData;
     [Header("Progress Quests")]
     [SerializeField] private ProgressQuestDescription progressQuestPrefab;
-    [SerializeField] private Transform progressQuestParent;
+    //[SerializeField] private Transform progressQuestParent;
 
     [Header("Panel Quest Completed")]
     [SerializeField] private Transform completeQuestParent;
