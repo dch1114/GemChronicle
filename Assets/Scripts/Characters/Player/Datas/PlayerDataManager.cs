@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [Serializable]
@@ -338,6 +337,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             data.JobType = currentStatus.jobType;
             data.Gems = ChangeGemsListToDic();
             player.Data.AttackData.AttackSkillStates = ChangeListToDoubleList(currentStatus.attackSkillStates);
+            player.transform.position = currentStatus.currentPos;
 
             // �÷��̾��� �κ��丮 ������
             inventory.equipmentItems = currentItems.equipmentItems;

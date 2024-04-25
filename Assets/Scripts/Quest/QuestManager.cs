@@ -216,7 +216,7 @@ public class QuestManager : Singleton<QuestManager>
             return;
         }
 
-        GameManager.Instance.player.Data.StatusData.GetGems(currentProgressMainQuestData.RwardType, currentProgressMainQuestData.Gem);
+        GameManager.Instance.player.Data.StatusData.GetGems(currentProgressMainQuestData.rewardgem, currentProgressMainQuestData.Gem);
         GameManager.Instance.player.Data.StatusData.GetExp(currentProgressMainQuestData.Exp);
         GameManager.Instance.player.Data.StatusData.GetGold(currentProgressMainQuestData.Gold);
         _ongoingQuests.Remove(questId);
