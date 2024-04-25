@@ -60,8 +60,6 @@ public class QuestManager : Singleton<QuestManager>
     //퀘스트 구독
     public void SubscribeQuest(int questId)
     {
-
-
         if (_completeQuests.Contains(questId))
         {
             Debug.Log($"이미 ID:{questId} 퀘스트는 완료하였습니다");
@@ -86,7 +84,6 @@ public class QuestManager : Singleton<QuestManager>
             }
 
             _subscribeQuests[questData.Type].Add(questData);
-
             QuestStart(questId);
 
             Debug.Log($"ID:{questId} 퀘스트 구독 완료");
@@ -96,13 +93,11 @@ public class QuestManager : Singleton<QuestManager>
         {
             hideNPC = true;
         }
-
     }
 
     //퀘스트 구독 해제
     public void UnsubscribeQuest(int questId)
     {
-
         var questData = Database.Quest.Get(questId);
 
         if (questData != null)
@@ -113,7 +108,6 @@ public class QuestManager : Singleton<QuestManager>
             _subscribeQuests[questData.Type].Remove(questData);
             Debug.Log($"ID:{questId} 퀘스트 구독 해제 완료");
         }
-
     }
 
     //퀘스트 진행도 업데이트 (QuestType:대분류, target:소분류, count:실행횟수)
@@ -129,20 +123,14 @@ public class QuestManager : Singleton<QuestManager>
         foreach (var quest in targetQuests)
             QuestUpdate(quest.ID, count);
 
-
-
-
-
         if (target == 500003)
         {
             EndingBossDie = true;
         }
-
     }
 
     void QuestStart(int questId)
     {
-
         if (_ongoingQuests.ContainsKey(questId))
         {
             Debug.Log($"해당 ID:{questId} 로 이미 퀘스트가 진행중입니다");
@@ -153,7 +141,6 @@ public class QuestManager : Singleton<QuestManager>
 
         if (questData != null)
         {
-
             //퀘스트를 생성하고 상태를 Wait에서 Progress로 변경
             var quest = new Quest(questId, questData.Count);
             //퀘스트를 진행중 딕셔너리에 추가
@@ -166,10 +153,7 @@ public class QuestManager : Singleton<QuestManager>
                 //퀘스트를 수락 콜백 액션
                 OnQuestStartCallback?.Invoke(questId);
             }
-
         }
-
-
     }
 
     public void QuestUpdate(int questId, int amount)
@@ -197,14 +181,10 @@ public class QuestManager : Singleton<QuestManager>
             //UI업데이트 용도로 사용할 예정
             OnQuestUpdateCallback?.Invoke(questId, amount);
         }
-
     }
-
-
 
     public void QuestClear(int questId)
     {
-
         if (_ongoingQuests.ContainsKey(questId) == false)
             return;
 
@@ -228,10 +208,7 @@ public class QuestManager : Singleton<QuestManager>
 
         if (questId > 10)
         {
-
             OnQuestCompleteCallback?.Invoke(questId);
-
-
             QuestCompleteCallBack(questId);
 
             if (IsContinueQuest())
@@ -239,10 +216,6 @@ public class QuestManager : Singleton<QuestManager>
                 SubscribeQuest(currentProgressMainQuestData.ID);
             }
         }
-
-
-
-
     }
 
     void QuestCompleteCallBack(int id)
@@ -259,7 +232,6 @@ public class QuestManager : Singleton<QuestManager>
     public bool IsProgressQuest(int id)
     {
         return _ongoingQuests.ContainsKey(id);
-
     }
 
     public bool IsContinueQuest()
@@ -314,9 +286,7 @@ public class QuestManager : Singleton<QuestManager>
 
                 panelQuestUI.AddWaitingQuest(questData.Key, newQuest.gameObject);
             }
-
         }
-
     }
 
     void SetUIRemoveWaitingQuest(int key)
@@ -339,5 +309,4 @@ public class QuestManager : Singleton<QuestManager>
     {
         panelQuestUI.RemoveProgressQuest(key);
     }
-
 }

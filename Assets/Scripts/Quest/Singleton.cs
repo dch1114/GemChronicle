@@ -17,7 +17,6 @@ public class Singleton<T> : MonoBehaviour where T : Component
                     instance = nuevoGO.AddComponent<T>();
                 }
             }
-
             return instance;
         }
     }
