@@ -1,9 +1,6 @@
-using JetBrains.Annotations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -56,17 +53,18 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
         if (GameManager.Instance != null)
         {
-            if(GameManager.Instance.isNew)
+            if (GameManager.Instance.isNew)
             {
                 CreateNewPlayer();
-            } else
+            }
+            else
             {
-                LoadPlayerDataToJson();
+                LoadPlayerDataFromJson();
             }
 
         }
 
-        if(UIManager.Instance != null)
+        if (UIManager.Instance != null)
         {
             UIManager.Instance.playerUI.StartPlayerUI();
         }
@@ -113,7 +111,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     private void SetNewAttackSkillStates()
     {
-        switch(currentStatus.jobType)
+        switch (currentStatus.jobType)
         {
             case JobType.Archer:
                 currentStatus.attackSkillStates = new List<int>() { 0, 0, 0, 1, 0, 0, 2, 0, 0 };
@@ -171,7 +169,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         int end = 0;
 
         player = GameManager.Instance.player;
-        if(player != null)
+        if (player != null)
         {
             switch (player.Data.StatusData.JobType)
             {
@@ -226,9 +224,9 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     private List<int> ChangeDoubleListToList(List<List<int>> _list)
     {
         List<int> temp = new List<int>();
-        for(int i = 0; i <  _list.Count; i++)
+        for (int i = 0; i < _list.Count; i++)
         {
-            for(int j = 0; j < _list[i].Count; j++)
+            for (int j = 0; j < _list[i].Count; j++)
             {
                 temp.Add(_list[i][j]);
             }
@@ -239,9 +237,9 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     private bool IsDooubleListAndCurrentSame(List<List<int>> _list)
     {
-        for(int i = 0; i < _list.Count; i++)
+        for (int i = 0; i < _list.Count; i++)
         {
-            for(int j = 0; j < _list[i].Count; j++)
+            for (int j = 0; j < _list[i].Count; j++)
             {
                 if (_list[i][j] != currentStatus.attackSkillStates[i * 3 + j]) return false;
             }
@@ -257,15 +255,17 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         List<int> temp0 = new List<int>();
         List<int> temp1 = new List<int>();
         List<int> temp2 = new List<int>();
-        for(int i = 0; i < _list.Count; i++)
+        for (int i = 0; i < _list.Count; i++)
         {
             if (i / 3 == 0)
             {
                 temp0.Add(_list[i]);
-            } else if(i/3 == 1)
+            }
+            else if (i / 3 == 1)
             {
                 temp1.Add(_list[i]);
-            } else if(i / 3 == 2)
+            }
+            else if (i / 3 == 2)
             {
                 temp2.Add(_list[i]);
             }
@@ -281,7 +281,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     public void LoadCurrentDatas()
     {
         player = GameManager.Instance.player;
-        if(player != null)
+        if (player != null)
         {
             PlayerStatusData data = player.Data.StatusData;
 
@@ -357,18 +357,18 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         File.WriteAllText(path, jsonData);
         File.WriteAllText(itemPath, itemJsonData);
 
-        if(UIManager.Instance != null)
+        if (UIManager.Instance != null)
         {
             UIManager.Instance.alertPanelUI.ShowAlert("저장되었습니다.");
         }
     }
 
-    public void LoadPlayerDataToJson()
+    public void LoadPlayerDataFromJson()
     {
         string path = Path.Combine(Application.dataPath, saveFileName);
-        string itemPath = Path.Combine (Application.dataPath, saveItemFileName);
+        string itemPath = Path.Combine(Application.dataPath, saveItemFileName);
 
-        if(File.Exists(path))
+        if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
             string itemJsonData = File.ReadAllText(itemPath);
@@ -377,7 +377,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             currentItems = JsonUtility.FromJson<PlayerCurrentItems>(itemJsonData);
 
             SetDatas();
-        } else
+        }
+        else
         {
             Debug.Log("파일이 없습니다.");
         }
@@ -385,10 +386,10 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     private void SetPlayerByJob()
     {
-        if(currentStatus != null)
+        if (currentStatus != null)
         {
             int jobType = 0;
-            switch(currentStatus.jobType)
+            switch (currentStatus.jobType)
             {
                 case JobType.Warrior:
                     jobType = 0; break;
