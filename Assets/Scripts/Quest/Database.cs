@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Database : Singleton<Database>
 {
     private QuestDB _quest;
@@ -9,7 +5,7 @@ public class Database : Singleton<Database>
     {
         get
         {
-            if(Instance._quest == null)
+            if (Instance._quest == null)
                 Instance._quest = new QuestDB();
             return Instance._quest;
         }

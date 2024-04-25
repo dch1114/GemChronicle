@@ -1,5 +1,3 @@
-using UnityEngine;  
-
 namespace Constants
 {
     public enum QuestType

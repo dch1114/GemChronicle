@@ -40,7 +40,6 @@ public class QuestDB
         return _quest;
     }
 
-
     public IEnumerator Obenumerator()
     {
         return _quest.GetEnumerator();

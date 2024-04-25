@@ -1,14 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class CharacterExperience : MonoBehaviour
 {
-    //[Header("Stas")]
-    //[SerializeField] private CharacterStats stats;
-
     [Header("Config")]
     [SerializeField] private int levelMax;
     [SerializeField] private int expBase;
@@ -24,7 +17,6 @@ public class CharacterExperience : MonoBehaviour
     {
         Level = 1;
         ExpRequiredNextLevel = expBase;
-        //stats.ExpRequiredNextLevel = ExpRequiredNextLevel;
         UpdateBarExp();
     }
 
@@ -41,7 +33,7 @@ public class CharacterExperience : MonoBehaviour
         if (expObtained > 0f)
         {
             float NewLevelRepresentative = ExpRequiredNextLevel - expActualTemp;
-            if(expObtained >= NewLevelRepresentative)
+            if (expObtained >= NewLevelRepresentative)
             {
                 expObtained -= NewLevelRepresentative;
                 expActual += expObtained;
@@ -64,7 +56,7 @@ public class CharacterExperience : MonoBehaviour
 
     private void UpdateLevel()
     {
-        if(Level < levelMax)
+        if (Level < levelMax)
         {
             Level++;
             expActualTemp = 0f;

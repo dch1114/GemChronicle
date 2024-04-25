@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GoldManager : Singleton<GoldManager>
 {
     [SerializeField] private int goldTest;
 
-    public int GoldTotales {  get; set; }
+    public int GoldTotales { get; set; }
 
     private string KEY_Gold = "MYGAME_GOLD";
 
@@ -30,7 +28,7 @@ public class GoldManager : Singleton<GoldManager>
 
     public void RemoverGold(int quantity)
     {
-        if(quantity > GoldTotales)
+        if (quantity > GoldTotales)
         {
             return;
         }

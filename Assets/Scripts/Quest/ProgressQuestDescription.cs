@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,7 +36,6 @@ public class ProgressQuestDescription : QuestDescription
     {
         Debug.Log("퀘스트 보상 완료");
         QuestManager.Instance.SetClearProgressQuestUI(questData.ID);
-
     }
 
     void ShowGetButton(int id)

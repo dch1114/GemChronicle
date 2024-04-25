@@ -1,6 +1,5 @@
 using Constants;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -40,12 +39,7 @@ public class QuestData
     public bool Talk => _talk;
     public bool Finish => _finish;
 
-
-
     public int UnLockPotalIndex => _unlockpotalindex;
-
-
-
 }
 
 public class Reward

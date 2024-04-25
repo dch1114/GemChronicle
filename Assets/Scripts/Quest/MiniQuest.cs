@@ -1,11 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class MiniQuest : MonoBehaviour
 {
-
     [SerializeField] GameObject panel;
     [SerializeField] Transform parent;
 
@@ -15,9 +12,8 @@ public class MiniQuest : MonoBehaviour
     public List<SlotMiniQuest> slotMiniQuests;
     public SlotMiniQuest miniQuestPrefab;
     //�̴�����Ʈâ Ȱ��ȭ/��Ȱ��ȭ
-    public void ToggleButton() 
+    public void ToggleButton()
     {
-
         if (bVisible)
         {
             panel.SetActive(false);
@@ -28,8 +24,6 @@ public class MiniQuest : MonoBehaviour
             panel.SetActive(true);
             bVisible = true;
         }
-
-      
     }
 
     public void SetMiniQuest(Quest questcompleted, QuestData qData)
@@ -44,6 +38,4 @@ public class MiniQuest : MonoBehaviour
     {
         slotMiniQuests.Remove(slot);
     }
-
-
 }

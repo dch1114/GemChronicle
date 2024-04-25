@@ -11,9 +11,4 @@ public class SubQuestData : ScriptableObject
     public int gold;
     public SkillType skillType;
     public int skillRewardAmount;
-
-
-
-
-
 }

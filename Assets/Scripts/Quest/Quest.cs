@@ -1,8 +1,4 @@
-using Constants;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class Quest
 {
@@ -14,7 +10,7 @@ public class Quest
 
     public int QuestId
     {
-        get => _questId; 
+        get => _questId;
         private set => _questId = value;
     }
 
@@ -49,7 +45,6 @@ public class Quest
             currentCount = targetCount;
         return currentCount;
     }
-
 }
 
 [Serializable]

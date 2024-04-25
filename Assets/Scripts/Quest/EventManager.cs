@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-
     public static EventManager Instance;
 
     public delegate void CallBackEvent();
@@ -12,8 +11,6 @@ public class EventManager : MonoBehaviour
     public delegate void CallBackEvent<F, S>(F arg_1, S arg_2);
 
     public Hashtable eventHash = new Hashtable();
-
-    // NO ARGUMENT
 
     private void Awake()
     {
@@ -53,7 +50,6 @@ public class EventManager : MonoBehaviour
         else
             PrintRunException(_type);
     }
-
 
     // 1 ARGUMENT
     public void AddCallBackEvent<F>(CallBackEventType.TYPES _type, CallBackEvent<F> _event)
@@ -126,8 +122,6 @@ public class EventManager : MonoBehaviour
     {
         Debug.LogError($"등록되어 있지 않은 타입 이므로 <b><color=red> 실행 할 수 없습니다. </color></b> Null Type : {_type}");
     }
-
-
 }
 public class CallBackEventType
 {
@@ -136,5 +130,4 @@ public class CallBackEventType
         OnTalkNPC,
         OnKillEnemyBoss
     }
-
 }
