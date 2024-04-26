@@ -578,14 +578,15 @@ public class UIManager : Singleton<UIManager>
     public void OnOffDiary(bool _OnOff)
     {
         string playerName = GameManager.Instance.player.Data.StatusData.Name;
-        DiaryTxtArray = new string[7];
-        DiaryTxtArray[0] = $"-1월8일-\n\n공주께서 태어나셨다.\n왕께선 공주님의 마력 수치를 보시곤 왕가의 수치라며 \n죽이라 명하셨다.\n\n하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다.\n\n그에게 <color=#6C00D9>{playerName}</color>이라는 이름을 지어줬다.";
-        DiaryTxtArray[1] = "-2월10일-\n\n모든 지역에서 몬스터가 출몰한다는 상소가 빗발친다.\n\n하지만 왕께선 마땅한 대책을 내놓지 않으신다.\n지치신걸까?";
-        DiaryTxtArray[2] = "-2월25일-\n\n최근 왕께서 새벽에 자주 사라지신다는 보고를 받았다.\n\n사람을 붙여 왕께서 어디가시는지 알아봐야겠다.";
-        DiaryTxtArray[3] = "-2월27일-\n\n왕께서 매일밤 오래전 폐쇄된 지하감옥에 드나드신다는 \n보고를 받았다.\n\n그곳엔 아무 것도 없을텐데… 내일 한번 찾아가봐야겠다.";
-        DiaryTxtArray[4] = "-3월27일-\n\n감옥엔  상소문들  속  모습과 같은 몬스터들이 가득했다. \n\n그들의 몸에는 상처가 가득했지만 눈에는 광기만이 남아있었다.\n\n 기괴했다.\n\n그곳의 보고서에는 '어둠의 젬'을  만드는  방법에  대한 이야기가 가득했다.";
-        DiaryTxtArray[5] = "\n\n왕이 만들어내고 있던 것이다.\n\n그 수많은 고통을.\n\n이 모든 사실을 알게 된 나는 차마 왕의 밑에서 더 이상 일할 수 없었다.";
-        DiaryTxtArray[6] = "\n\n도망쳤다.\n\n언제까지 이런 삶을 살아야할지는 알 수 없지만 어떻게든 왕을 막아야한다.\n\n시간이 얼마 남지 않았다.";
+        DiaryTxtArray = new string[8];
+        DiaryTxtArray[0] = $"일기장";
+        DiaryTxtArray[1] = $"-1월8일-\n\n공주께서 태어나셨다.\n왕께선 공주님의 마력 수치를 보시곤 왕가의 수치라며 \n죽이라 명하셨다.\n\n하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다.\n\n그에게 <color=#6C00D9>{playerName}</color>이라는 이름을 지어줬다.";
+        DiaryTxtArray[2] = "-2월10일-\n\n모든 지역에서 몬스터가 출몰한다는 상소가 빗발친다.\n\n하지만 왕께선 마땅한 대책을 내놓지 않으신다.\n지치신걸까?";
+        DiaryTxtArray[3] = "-2월25일-\n\n최근 왕께서 새벽에 자주 사라지신다는 보고를 받았다.\n\n사람을 붙여 왕께서 어디가시는지 알아봐야겠다.";
+        DiaryTxtArray[4] = "-2월27일-\n\n왕께서 매일밤 오래전 폐쇄된 지하감옥에 드나드신다는 \n보고를 받았다.\n\n그곳엔 아무 것도 없을텐데… 내일 한번 찾아가봐야겠다.";
+        DiaryTxtArray[5] = "-3월27일-\n\n감옥엔  상소문들  속  모습과 같은 몬스터들이 가득했다. \n\n그들의 몸에는 상처가 가득했지만 눈에는 광기만이 남아있었다.\n\n 기괴했다.\n\n그곳의 보고서에는 '어둠의 젬'을  만드는  방법에  대한 이야기가 가득했다.";
+        DiaryTxtArray[6] = "\n\n왕이 만들어내고 있던 것이다.\n\n그 수많은 고통을.\n\n이 모든 사실을 알게 된 나는 차마 왕의 밑에서 더 이상 일할 수 없었다.";
+        DiaryTxtArray[7] = "\n\n도망쳤다.\n\n언제까지 이런 삶을 살아야할지는 알 수 없지만 어떻게든 왕을 막아야한다.\n\n시간이 얼마 남지 않았다.";
         Diary.SetActive(_OnOff);
         _page = 0;
         ShowDiary(_page);
