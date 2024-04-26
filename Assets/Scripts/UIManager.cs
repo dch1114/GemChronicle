@@ -170,6 +170,11 @@ public class UIManager : Singleton<UIManager>
     public void talkBtnOnOff(bool _OnOff)
     {
         talkBtn.SetActive(_OnOff);
+        if (_OnOff == false)
+        {
+            ExitShop();
+        }
+        
     }
 
     public void PotraitPanelOnOff(bool _OnOff)

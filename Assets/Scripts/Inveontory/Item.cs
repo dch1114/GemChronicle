@@ -39,11 +39,11 @@ public class Item
         sb.Length = 0;
         descriptionLength = 0;
 
-        AddItemDescription(Damage, "Damage");
-        AddItemDescription(Armor, "Armor");
-        AddItemDescription(Recovery, "Recovery");
-        AddItemDescription(Description, "Description");
-        AddItemDescription(Price, "Price");
+        AddItemDescription(Damage, "공격력");
+        AddItemDescription(Armor, "방어력");
+        AddItemDescription(Recovery, "회복");
+        AddItemDescription(Description, "설명");
+        AddItemDescription(Price, "가격");
 
 
         if (descriptionLength < 5)

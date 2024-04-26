@@ -30,7 +30,7 @@ public class MagicianSkillPage : SkillPages
     public override void UnlockSkillBtn()
     {
         int price = skillBtns[skillInfoIndex].skillInfoData.Price;
-        SkillType gemType = skillBtns[skillInfoIndex].skillInfoData.SkillType;
+        ElementType gemType = skillBtns[skillInfoIndex].skillInfoData.ElementType;
         //젬으로 교체 필요
         if (skillBtns[skillInfoIndex].CheckCanUnlock() && player.Data.StatusData.UseGems(gemType, price))
         {
@@ -68,29 +68,29 @@ public class MagicianSkillPage : SkillPages
 
     private void ShowSkillType(SkillInfoData _skill)
     {
-        switch (_skill.SkillType)
+        switch (_skill.ElementType)
         {
-            case SkillType.Fire:
+            case ElementType.Fire:
                 typeIcons[0].SetTypeIcon(typeSprites[0], _skill.Price);
                 typeIcons[1].SetTypeIcon(typeSprites[1], 0);
                 typeIcons[2].SetTypeIcon(typeSprites[2], 0);
                 break;
-            case SkillType.Ice:
+            case ElementType.Ice:
                 typeIcons[0].SetTypeIcon(typeSprites[0], 0);
                 typeIcons[1].SetTypeIcon(typeSprites[1], _skill.Price);
                 typeIcons[2].SetTypeIcon(typeSprites[2], 0);
                 break;
-            case SkillType.Light:
+            case ElementType.Light:
                 typeIcons[0].SetTypeIcon(typeSprites[0], 0);
                 typeIcons[1].SetTypeIcon(typeSprites[1], 0);
                 typeIcons[2].SetTypeIcon(typeSprites[2], _skill.Price);
                 break;
-            case SkillType.IceFire:
+            case ElementType.IceFire:
                 typeIcons[0].SetTypeIcon(typeSprites[0], _skill.Price);
                 typeIcons[1].SetTypeIcon(typeSprites[1], _skill.Price);
                 typeIcons[2].SetTypeIcon(typeSprites[2], 0);
                 break;
-            case SkillType.FireLight:
+            case ElementType.FireLight:
                 typeIcons[0].SetTypeIcon(typeSprites[0], 0);
                 typeIcons[1].SetTypeIcon(typeSprites[1], _skill.Price);
                 typeIcons[2].SetTypeIcon(typeSprites[2], _skill.Price);

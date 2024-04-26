@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class SoundManager : Singleton<SoundManager>
 {
-    [SerializeField][Range(0f, 1f)] private float soundEffectVolume;
-    [SerializeField][Range(0f, 1f)] private float soundEffectPitchVariance;
+    [SerializeField]/*[Range(0f, 1f)] */private float soundEffectVolume = 0.1f;
+    [SerializeField]/*[Range(0f, 1f)] */private float soundEffectPitchVariance = 1f;
     [SerializeField][Range(0f, 1f)] private float musicVolume;
     private ObjectPool objectPool;
 
@@ -16,7 +16,6 @@ public class SoundManager : Singleton<SoundManager>
     //test
     public AudioClip attackSound;
     public AudioClip gainGem;
-
     public AudioClip inventoryOpenSound;
     public AudioClip inventoryCloseSound;
     public AudioClip SkillPageOpenSound;
@@ -37,28 +36,20 @@ public class SoundManager : Singleton<SoundManager>
         ChangeBackGroundMusic(musicClip);
 
         //test
-        //for(int i = 0; i< objectPool.poolDictionary.Values.Count; i++)
-        //{
-        //    GameObject obj = instance.objectPool.SpawnFromPool("SoundSource");
-        //    obj.SetActive(false);
-        //    AudioSource audioSource = obj.GetComponent<AudioSource>();
-        //    EffectAudioSource.Add(audioSource);
-        //}
+        foreach (var pool in objectPool.poolDictionary)
+        {
+            string tag = pool.Key;
+            Queue<GameObject> queue = pool.Value;
+            int queueCount = queue.Count;
 
-        //foreach (var pool in objectPool.poolDictionary)
-        //{
-        //    string tag = pool.Key;
-        //    Queue<GameObject> queue = pool.Value;
-        //    int queueCount = queue.Count;
-
-        //    for (int i = 0; i < queueCount; i++)
-        //    {
-        //        GameObject obj = instance.objectPool.SpawnFromPool(tag);
-        //        obj.SetActive(false);
-        //        AudioSource audioSource = obj.GetComponent<AudioSource>();
-        //        EffectAudioSource.Add(audioSource);
-        //    }
-        //}
+            for (int i = 0; i < queueCount; i++)
+            {
+                GameObject obj = Instance.objectPool.SpawnFromPool(tag);
+                obj.SetActive(false);
+                AudioSource audioSource = obj.GetComponent<AudioSource>();
+                EffectAudioSource.Add(audioSource);
+            }
+        }
     }
 
     public void ChangeBackGroundMusic(AudioClip music)
@@ -76,7 +67,9 @@ public class SoundManager : Singleton<SoundManager>
         for (int i = 0; i < EffectAudioSource.Count; i++)
         {
             EffectAudioSource[i].volume = _getslider.value;
+            soundEffectVolume = EffectAudioSource[i].volume;
         }
+
     }
     public void PlayClip(AudioClip clip)
     {

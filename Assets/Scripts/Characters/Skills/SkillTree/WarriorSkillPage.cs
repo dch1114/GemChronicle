@@ -66,7 +66,7 @@ public class WarriorSkillPage : SkillPages
     public override void UnlockSkillBtn()
     {
         int price = skillBtns[skillInfoIndex].skillInfoData.Price;
-        SkillType gemType = skillBtns[skillInfoIndex].skillInfoData.SkillType;
+        ElementType gemType = skillBtns[skillInfoIndex].skillInfoData.ElementType;
 
         if (skillBtns[skillInfoIndex].CheckCanUnlock() && player.Data.StatusData.UseGems(gemType, price))
         {
@@ -103,15 +103,15 @@ public class WarriorSkillPage : SkillPages
 
     private void ShowSkillType(SkillInfoData _skill)
     {
-        switch (_skill.SkillType)
+        switch (_skill.ElementType)
         {
-            case SkillType.Fire:
+            case ElementType.Fire:
                 typeIcon.sprite = typeSprites[0];
                 break;
-            case SkillType.Ice:
+            case ElementType.Ice:
                 typeIcon.sprite = typeSprites[1];
                 break;
-            case SkillType.Light:
+            case ElementType.Light:
                 typeIcon.sprite = typeSprites[2];
                 break;
             default:

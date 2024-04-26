@@ -94,8 +94,16 @@ public class InventoryUIController : MonoBehaviour
     {
         shopitemToolTip.gameObject.SetActive(false);
         itemToopTip.gameObject.SetActive(false);
-        //shopTradePopup.gameObject.SetActive(false);
+        CloseShopTradePopup();
         shopUi.SetActive(false);
+    }
+
+    private void CloseShopTradePopup()
+    {
+        shopTradePopup.checkPurchasePopup.SetActive(false);
+        shopTradePopup.checkSellPopup.SetActive(false);
+        shopTradePopup.checkPotionPurchasePopup.SetActive(false);
+        shopTradePopup.checkPotionSellPopup.SetActive(false);
     }
 
     //test

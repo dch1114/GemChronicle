@@ -19,7 +19,7 @@ public class PlayerStatusData : Status
     [SerializeField] protected int level;
     [SerializeField] protected int gold;
     [SerializeField] protected JobType jobType;
-    [SerializeField] protected Dictionary<SkillType, int> gems = new Dictionary<SkillType, int>();
+    [SerializeField] protected Dictionary<ElementType, int> gems = new Dictionary<ElementType, int>();
 
     public string Name { get { return name; } set { name = value; } }
     public int MaxHp { get { return maxHp; } set { maxHp = value; } }
@@ -27,7 +27,7 @@ public class PlayerStatusData : Status
     public int Level {  get { return level; } set { level = value; } }
     public int Gold { get { return gold; } set {  gold = value; } }
     public JobType JobType { get {  return jobType; } set {  jobType = value; } }
-    public Dictionary<SkillType, int> Gems { get { return gems; } set { gems = value; } }
+    public Dictionary<ElementType, int> Gems { get { return gems; } set { gems = value; } }
 
     public void LoadLevelData(LevelData data)
     {
@@ -55,10 +55,10 @@ public class PlayerStatusData : Status
 
     private void InitializeGem()
     {
-        gems.Add(SkillType.Ice, 0);
-        gems.Add(SkillType.Fire, 0);
-        gems.Add(SkillType.Light, 0);
-        gems.Add(SkillType.Dark, 0);
+        gems.Add(ElementType.Ice, 0);
+        gems.Add(ElementType.Fire, 0);
+        gems.Add(ElementType.Light, 0);
+        gems.Add(ElementType.Dark, 0);
     }
 
     private bool IsGoldEnough(int _price)
@@ -148,7 +148,7 @@ public class PlayerStatusData : Status
         GetExp(0);
     }
 
-    private bool IsGemEnough(SkillType gemType, int _amount)
+    private bool IsGemEnough(ElementType gemType, int _amount)
     {
         if (gems.ContainsKey(gemType))
         {
@@ -163,13 +163,13 @@ public class PlayerStatusData : Status
         }
     }
 
-    public void GetGems(SkillType gemType, int amount)
+    public void GetGems(ElementType gemType, int amount)
     {
         if (gems.ContainsKey(gemType)) gems[gemType] += amount;
         UIManager.Instance.skillPages.UpdateGems();
     }
 
-    public bool UseGems(SkillType gemType, int _amount)
+    public bool UseGems(ElementType gemType, int _amount)
     {
         if(IsGemEnough(gemType, _amount))
         {

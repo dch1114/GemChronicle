@@ -202,23 +202,23 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         }
     }
 
-    private Dictionary<SkillType, int> ChangeGemsListToDic()
+    private Dictionary<ElementType, int> ChangeGemsListToDic()
     {
-        Dictionary<SkillType, int> dic = new Dictionary<SkillType, int>();
+        Dictionary<ElementType, int> dic = new Dictionary<ElementType, int>();
 
-        dic.Add(SkillType.Ice, currentStatus.gems[0]);
-        dic.Add(SkillType.Fire, currentStatus.gems[1]);
-        dic.Add(SkillType.Light, currentStatus.gems[2]);
+        dic.Add(ElementType.Ice, currentStatus.gems[0]);
+        dic.Add(ElementType.Fire, currentStatus.gems[1]);
+        dic.Add(ElementType.Light, currentStatus.gems[2]);
 
         return dic;
     }
 
-    private void ChangeGemsDicToList(Dictionary<SkillType, int> gems)
+    private void ChangeGemsDicToList(Dictionary<ElementType, int> gems)
     {
         currentStatus.gems.Clear();
-        currentStatus.gems.Add(gems[SkillType.Ice]);
-        currentStatus.gems.Add(gems[SkillType.Fire]);
-        currentStatus.gems.Add(gems[SkillType.Light]);
+        currentStatus.gems.Add(gems[ElementType.Ice]);
+        currentStatus.gems.Add(gems[ElementType.Fire]);
+        currentStatus.gems.Add(gems[ElementType.Light]);
     }
 
     private List<int> ChangeDoubleListToList(List<List<int>> _list)
