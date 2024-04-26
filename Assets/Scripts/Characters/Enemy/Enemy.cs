@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private Animator animator;
     private EnemyState state;
     [SerializeField] private EnemyType enemyType;
-    [SerializeField] private SkillType skillType;
+    [SerializeField] private ElementType elementType;
 
     [SerializeField] private GameObject gem;
 
@@ -51,8 +51,8 @@ public class Enemy : MonoBehaviour, IDamageable
         leftDirection = transform.localScale;
         rightDirection = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
 
-        Invoke("Think", 5);
-      
+        StartCoroutine(Think());
+
     }
 
     void FixedUpdate()
@@ -208,8 +208,8 @@ public class Enemy : MonoBehaviour, IDamageable
         if (rayHit.collider == null)
         {
             nextMove = nextMove * -1;
-            CancelInvoke();
-            Invoke("Think", 2);
+            StopAllCoroutines();
+            StartCoroutine(Think());
         }
     }
 
@@ -226,13 +226,14 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    void Think()
+    IEnumerator Think()
     {
         nextMove.x = Random.Range(-1, 2);
         SetState(EnemyState.Idle);
 
         float nextThinkTime = Random.Range(2f, 5f);
-        Invoke("Think", nextThinkTime);
+        yield return new WaitForSeconds(nextThinkTime);
+        StartCoroutine(Think());
     }
 
     private void Look()

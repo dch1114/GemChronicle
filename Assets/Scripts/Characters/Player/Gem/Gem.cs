@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Gem : MonoBehaviour
 {
-    [SerializeField] private SkillType gemType;
+    [SerializeField] private ElementType gemType;
     [SerializeField] private int xForce = 5;
     [SerializeField] private int yForce = 15;
     [SerializeField] private int gravity = 25;

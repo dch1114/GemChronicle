@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SkillType
+public enum ElementType
 {
     Ice,
     Fire,
@@ -20,7 +20,7 @@ public class SkillInfoData
     [field: SerializeField] public string SkillName;
     [field: SerializeField] public int Damage;
     [field: SerializeField] public int Range;
-    [field: SerializeField] public SkillType SkillType;
+    [field: SerializeField] public ElementType ElementType;
     [field: SerializeField] public int Price;
     [field: SerializeField] public bool IsUnlocked;
 }

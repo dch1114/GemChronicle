@@ -17,7 +17,7 @@ public class QuestData
     [SerializeField] private bool _continue;
     [SerializeField] private bool _talk;
     [SerializeField] private bool _finish;
-    [SerializeField] private SkillType _reward_1;
+    [SerializeField] private ElementType _reward_1;
     [SerializeField] private int _rewardCount_1;
     [SerializeField] private int _reward_2;
     [SerializeField] private int _rewardCount_2;
@@ -33,7 +33,7 @@ public class QuestData
     public int Target => _target;
     public int Count => _count;
     public int Exp => _exp;
-    public SkillType rewardgem => _reward_1;
+    public ElementType rewardgem => _reward_1;
     public int Gold => _gold;
     public int Gem => _rewardCount_1;
     public bool Continue => _continue;

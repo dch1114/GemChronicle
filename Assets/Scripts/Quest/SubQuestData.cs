@@ -9,7 +9,7 @@ public class SubQuestData : ScriptableObject
     public int targetKillCount;
     public int exp;
     public int gold;
-    public SkillType skillType;
+    public ElementType elementType;
     public int skillRewardAmount;
 
 

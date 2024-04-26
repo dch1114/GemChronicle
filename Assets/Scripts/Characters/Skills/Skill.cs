@@ -13,9 +13,6 @@ public class Skill : MonoBehaviour
 
     protected IDamageable damageable;
 
-    //test
-    //public AudioClip attackSound;
-
     protected void CheckType()
     {
         if(data.Range > 0)
