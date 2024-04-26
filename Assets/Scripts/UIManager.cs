@@ -36,6 +36,7 @@ public class UIManager : Singleton<UIManager>
         Shop,
         Heal
     }
+
     public GameObject talkBtn;
     public GameObject potraitPanel;
     public GameObject shopPanel;
@@ -95,19 +96,12 @@ public class UIManager : Singleton<UIManager>
 
     public InventoryUIController inventoryUIController;
 
-    protected override void Awake()
-    {
-
-   
-
-    }
     private void Start()
     {
         InitializeShopMenuButtons();
         InitializeHealMenuButtons();
-
-
     }
+
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.UpArrow) && currentOpenMenuType.Equals(OpenMenuType.Shop)) PopupShopMenuSelect(--currentShowMenuType);
@@ -138,6 +132,7 @@ public class UIManager : Singleton<UIManager>
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Buy], BuyShop, unSelectButton);
         InitializeShopMenuButton(showMenuButton[(int)ShowMenuType.Exit], ExitShop, unSelectButton);
     }
+
     void InitializeHealMenuButtons()
     {
         // 버튼에 클릭 리스너를 할당하고 이미지 스프라이트를 설정합니다.
@@ -150,6 +145,7 @@ public class UIManager : Singleton<UIManager>
         button.onClick.AddListener(action); // 클릭 이벤트에 액션을 추가합니다.
         button.image.sprite = sprite; // 이미지 스프라이트를 설정합니다.
     }
+
     void InitializeHealMenuButton(Button _button, UnityAction _action, Sprite _sprite)
     {
         _button.onClick.AddListener(_action); // 클릭 이벤트에 액션을 추가합니다.
@@ -193,9 +189,6 @@ public class UIManager : Singleton<UIManager>
         shopPanel.SetActive(_OnOff);
     }
 
-
-    ///////////////////////////////
-
     public void TogglePortalUI(bool isVisible)
     {
         //Cursor.lockState = isVisible ? CursorLockMode.None : CursorLockMode.Locked;
@@ -225,15 +218,12 @@ public class UIManager : Singleton<UIManager>
             {
                 potalUIScript.ShowButton(i);
             }
-
         }
 
         potalUIScript.ButtonSet();
 
         isOpenPotalPopUp = isVisible;
-
     }
-
 
     public void shopChoiceOnOff(bool _OnOff)
     {
@@ -248,7 +238,6 @@ public class UIManager : Singleton<UIManager>
             //팝업창이 뜨면 처음에 구매탭 버튼이 선택이 되게 버튼 세팅
             PopupShopMenuSelect(ShowMenuType.Buy);
             isOpenShowPopUp = true;
-
         }
         else
         {
@@ -262,6 +251,7 @@ public class UIManager : Singleton<UIManager>
             isOpenShowPopUp = false;
         }
     }
+
     public void HealChoiceOnOff(bool _OnOff)
     {
         talkBtn.SetActive(false);
@@ -275,7 +265,6 @@ public class UIManager : Singleton<UIManager>
             //팝업창이 뜨면 처음에 구매탭 버튼이 선택이 되게 버튼 세팅
             PopupHealMenuSelect(ShowHealType.Heal);
             isOpenShowPopUp = true;
-
         }
         else
         {
@@ -288,6 +277,7 @@ public class UIManager : Singleton<UIManager>
             isOpenShowPopUp = false;
         }
     }
+
     public void PopupShopMenuSelect(ShowMenuType type)
     {
         if (currentShowMenuType > ShowMenuType.Exit)
@@ -348,9 +338,7 @@ public class UIManager : Singleton<UIManager>
         {
             case ShowMenuType.Buy:
                 showMenuButton[(int)ShowMenuType.Buy].image.sprite = selectButton;
-
                 return BuyShop;
-
 
             case ShowMenuType.Exit:
                 showMenuButton[(int)ShowMenuType.Exit].image.sprite = selectButton;
@@ -360,6 +348,7 @@ public class UIManager : Singleton<UIManager>
                 return null;
         }
     }
+
     UnityAction GetSelectedHealMenu(ShowHealType type)
     {
         showHealButton[(int)ShowHealType.Heal].image.sprite = unSelectButton;
@@ -381,6 +370,7 @@ public class UIManager : Singleton<UIManager>
                 return null;
         }
     }
+
     public void BuyShop()
     {
         inventoryUIController.UseShop();
@@ -396,19 +386,18 @@ public class UIManager : Singleton<UIManager>
         playerUI.UpdateHp();
     }
 
-
     public void ExitShop()
     {
         inventoryUIController.CloseShop();
         shopChoiceOnOff(false);
         Debug.Log("Select Exi");
-
     }
 
     public void NotHeal()
     {
         HealChoiceOnOff(false);
     }
+
     bool bOpenQuestPanel = false;
     public void TogglePanelQuest()
     {
@@ -423,7 +412,6 @@ public class UIManager : Singleton<UIManager>
         {
             bOpenQuestPanel = false;
             panelQuest.SetActive(false);
-
         }
     }
 
@@ -586,7 +574,7 @@ public class UIManager : Singleton<UIManager>
     {
         string playerName = GameManager.Instance.player.Data.StatusData.Name;
         DiaryTxtArray = new string[7];
-        DiaryTxtArray[0] = $"-1월8일-\n\n왕자께서 태어나셨다.\n왕께선 왕자님의 마력 수치를 보시곤 왕가의 수치라며 \n죽이라 명하셨다.\n\n하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다.\n\n그에게 <color=#6C00D9>{playerName}</color>이라는 이름을 지어줬다.";
+        DiaryTxtArray[0] = $"-1월8일-\n\n공주께서 태어나셨다.\n왕께선 공주님의 마력 수치를 보시곤 왕가의 수치라며 \n죽이라 명하셨다.\n\n하지만 나는 그 명을 따를수 없어 내 가장 친한 친구에게 맡겼다.\n\n그에게 <color=#6C00D9>{playerName}</color>이라는 이름을 지어줬다.";
         DiaryTxtArray[1] = "-2월10일-\n\n모든 지역에서 몬스터가 출몰한다는 상소가 빗발친다.\n\n하지만 왕께선 마땅한 대책을 내놓지 않으신다.\n지치신걸까?";
         DiaryTxtArray[2] = "-2월25일-\n\n최근 왕께서 새벽에 자주 사라지신다는 보고를 받았다.\n\n사람을 붙여 왕께서 어디가시는지 알아봐야겠다.";
         DiaryTxtArray[3] = "-2월27일-\n\n왕께서 매일밤 오래전 폐쇄된 지하감옥에 드나드신다는 \n보고를 받았다.\n\n그곳엔 아무 것도 없을텐데… 내일 한번 찾아가봐야겠다.";
