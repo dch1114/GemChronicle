@@ -137,7 +137,6 @@ public class Enemy : MonoBehaviour, IDamageable
         SpawnGems();
         gameObject.SetActive(false);
         GameManager.Instance.player.Data.StatusData.GetExp(EnemyStatusData.Exp);
-       
     }
 
     private void SpawnGems()
