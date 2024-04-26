@@ -121,14 +121,11 @@ public class Enemy : MonoBehaviour, IDamageable
     private void SpawnSkill()
     {
         GameObject go = skillPool.SpawnFromPool("0");
-        GameObject go2 = skillPool.SpawnFromPool("1");
-        go.transform.position = gameObject.transform.position;
-        if (go2 != null)
+        if(go != null)
         {
-            go2.transform.position = gameObject.transform.position;
-            go2.SetActive(true);
+            go.transform.position = gameObject.transform.position;
+            go.SetActive(true);
         }
-        go.SetActive(true);
 
     }
 

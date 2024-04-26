@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4307163665535306380
 SpriteRenderer:
@@ -209,7 +209,7 @@ MonoBehaviour:
     attackParameterName: Attack
     dieParameterName: Die
   enemyType: 1
-  skillType: 1
+  elementType: 0
   gem: {fileID: 1754942600076354860, guid: c3eb92f08e666b840888208e3369f2f9, type: 3}
   skillPool: {fileID: 3651365302446012086}
 --- !u!114 &3651365302446012086
@@ -227,7 +227,4 @@ MonoBehaviour:
   pools:
   - tag: 0
     prefab: {fileID: 4259303883895745152, guid: 37fb7290393124f4f8d087c78393bff2, type: 3}
-    size: 1
-  - tag: 1
-    prefab: {fileID: 4259303883895745152, guid: 31ae47f9c527bb445b720299e17cff2b, type: 3}
     size: 1

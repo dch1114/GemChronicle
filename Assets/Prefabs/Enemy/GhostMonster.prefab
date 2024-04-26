@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 1934568097767230870}
   - component: {fileID: 8162182532371765950}
   - component: {fileID: 3826628722037684291}
+  - component: {fileID: 7076330447851092933}
   - component: {fileID: 3735438827799170835}
   - component: {fileID: 5349441106173740622}
+  - component: {fileID: 8587134727881557859}
   m_Layer: 17
   m_Name: GhostMonster
   m_TagString: Untagged
@@ -31,9 +33,11 @@ Transform:
   m_LocalPosition: {x: 0.01, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1035369013144053002}
+  - {fileID: 4999646351814798627}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8162182532371765950
 SpriteRenderer:
@@ -108,6 +112,51 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &7076330447851092933
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333983945672477696}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.008237958}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5625, y: 1.5625}
+    newSize: {x: 0.5, y: 0.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5625, y: 1.5789759}
+  m_EdgeRadius: 0
 --- !u!114 &3735438827799170835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,10 +173,10 @@ MonoBehaviour:
     atk: 0
     def: 0
     hp: 0
-    exp: 0
+    exp: 10
     type: 0
     walkSpeed: 0
-    attackRate: 0
+    attackRate: 0.5
     ID: 0
   EnemyAnimationData:
     idleParameterName: Idle
@@ -135,7 +184,7 @@ MonoBehaviour:
     attackParameterName: Attack
     dieParameterName: Die
   enemyType: 1
-  skillType: 0
+  elementType: 0
   gem: {fileID: 1754942600076354860, guid: 37655d6ba324ce14bbe7167561bec117, type: 3}
   skillPool: {fileID: 5349441106173740622}
 --- !u!114 &5349441106173740622
@@ -152,5 +201,168 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pools:
   - tag: 0
-    prefab: {fileID: 0}
-    size: 1
+    prefab: {fileID: 4259303883895745152, guid: d9ffbd6fbfab3154fa0e28f452907556, type: 3}
+    size: 3
+--- !u!50 &8587134727881557859
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 333983945672477696}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!1001 &2112191612991281997
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1934568097767230870}
+    m_Modifications:
+    - target: {fileID: 5185032194433330733, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: targetLeft
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 9064826886766413774, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_Name
+      value: GhostIceBall (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+--- !u!4 &4999646351814798627 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+  m_PrefabInstance: {fileID: 2112191612991281997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6227372637001995108
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1934568097767230870}
+    m_Modifications:
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 9064826886766413774, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+      propertyPath: m_Name
+      value: GhostIceBall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+--- !u!4 &1035369013144053002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6355226458525808238, guid: 45766d639b6bcb146a192e4d8352ae0d, type: 3}
+  m_PrefabInstance: {fileID: 6227372637001995108}
+  m_PrefabAsset: {fileID: 0}

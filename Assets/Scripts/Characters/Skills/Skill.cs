@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -15,15 +16,21 @@ public class Skill : MonoBehaviour
 
     protected void CheckType()
     {
-        if(data.Range > 0)
+        switch (data.SkillType)
         {
-            StartCoroutine(ShootSkill());
-        } else
-        {
-            StartCoroutine(WaitForAnimationEnd());
+            case SkillType.Casting:
+                StartCoroutine(WaitForAnimationEnd());
+                break;
+            case SkillType.Shoot:
+                StartCoroutine(ShootSkill());
+                break;
+            case SkillType.Whirl:
+                StartCoroutine(WhirlingSkill());
+                break;
         }
     }
 
+    //제자리 시전 스킬
     IEnumerator WaitForAnimationEnd()
     {
         do
@@ -34,9 +41,10 @@ public class Skill : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    //발사형 스킬
     IEnumerator ShootSkill()
     {
-        if(data != null)
+        if (data != null)
         {
             Vector3 originalPosition = transform.position;
             Vector3 targetPosition = originalPosition + GetTargetPosition();
@@ -50,6 +58,33 @@ public class Skill : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    //주위 회전형 스킬
+    IEnumerator WhirlingSkill()
+    {
+        Vector3 centerPoint = new Vector3(0, 0, 0);
+        float radius = 1f;
+        float angularSpeed = 180f;
+        float angle = SetStartAngle();
+
+        while (true)
+        {
+            angle += angularSpeed * Time.deltaTime;
+
+            if (angle >= 360f)
+            {
+                angle -= 360f;
+            }
+
+            float x = centerPoint.x + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+            float y = centerPoint.y + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+
+            transform.localPosition = new Vector3(x, y, transform.position.z);
+            yield return null;
+        }
+    }
+
+    protected virtual float SetStartAngle() { return 0f; }
 
     protected virtual void SetTransform() { }
 
