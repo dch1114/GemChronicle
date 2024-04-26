@@ -25,7 +25,7 @@ public class NPCController : MonoBehaviour, IInteractive
     bool isLoadScriptData = false;
     bool isEndSaying = false;
 
-    int currentNpcIDForQuest;
+    int currentNpcID;
 
     //대화 관련 테이블 데이타
     private QuestTableData questData;
@@ -46,7 +46,7 @@ public class NPCController : MonoBehaviour, IInteractive
         npcManager = manager; // NPCManager의 역참조를 받음
         uiManager = UIManager.Instance;
         talkManager = npcManager.talkManager;
-        currentNpcIDForQuest = npcData.ID;
+        currentNpcID = QuestManager.Instance.currentProgressMainQuestData.ID;
 
         questData = DataManager.Instance.GetQuestTableData(npcData.ID);
         doQuest = DataManager.Instance.GetTalkTableData(questData.talk_1);
@@ -56,14 +56,13 @@ public class NPCController : MonoBehaviour, IInteractive
 
     void SetNPCInfoData(int index)
     {
-        Debug.Log($"index : {index} // currentNpcIDForQuest : {currentNpcIDForQuest}");
-        if (index == currentNpcIDForQuest && DataManager.Instance.GetQuestTableData(currentNpcIDForQuest) != null)
+        if (index == currentNpcID && DataManager.Instance.GetQuestTableData(currentNpcID) != null)
         {
-            currentNpcIDForQuest = index + 1;
+            currentNpcID = index + 1;
 
             if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
             {
-                questData = DataManager.Instance.GetQuestTableData(currentNpcIDForQuest);
+                questData = DataManager.Instance.GetQuestTableData(currentNpcID);
 
                 if (questData != null)
                 {
@@ -154,13 +153,13 @@ public class NPCController : MonoBehaviour, IInteractive
 
             int[] scriptIds;
 
-            if (QuestManager.Instance.IsClear(currentNpcIDForQuest))
+            if (QuestManager.Instance.IsClear(currentNpcID))
             {
                 scriptIds = doneQuest.scriptId;
                 Debug.Log("doneQuest");
 
             }
-            else if (QuestManager.Instance.IsProgressQuest(currentNpcIDForQuest))
+            else if (QuestManager.Instance.IsProgressQuest(currentNpcID))
             {
                 scriptIds = doingQuest.scriptId;
                 Debug.Log("doingQuest");
@@ -193,7 +192,7 @@ public class NPCController : MonoBehaviour, IInteractive
                 if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
                 {
 
-                    QuestManager.Instance.SubscribeQuest(currentNpcIDForQuest);
+                    QuestManager.Instance.SubscribeQuest(currentNpcID);
                 }
 
                 else
@@ -201,7 +200,7 @@ public class NPCController : MonoBehaviour, IInteractive
 
                 }
 
-                if (QuestManager.Instance.IsProgressQuest(currentNpcIDForQuest) && QuestManager.Instance.CheckCompareTargetID(npcData.ID))
+                if (QuestManager.Instance.IsProgressQuest(currentNpcID) && QuestManager.Instance.CheckCompareTargetID(npcData.ID))
                 {
                     QuestManager.Instance.NotifyQuest(Constants.QuestType.TalkNpc, npcData.ID, 1);
                     if (npcData.ID == 3000)

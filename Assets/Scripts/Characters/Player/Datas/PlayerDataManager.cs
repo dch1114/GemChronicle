@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using UnityEngine;
+
 
 [Serializable]
 public class PlayerCurrentStatus //���� ���� �����
@@ -25,15 +27,28 @@ public class PlayerCurrentItems
 }
 
 [Serializable]
+public class PlayerQuestData
+{
+    public int questId;
+    public int questCount;
+    public int subQuestId;
+    public int subQuestCount;
+}
+
+
+
+[Serializable]
 public class PlayerDataManager : Singleton<PlayerDataManager>
 {
     public PlayerLevelDatabase playerLevelDatabase;
     public PlayerSkillDatabase playerSkillDatabase;
     public PlayerCurrentStatus currentStatus;
     public PlayerCurrentItems currentItems;
-
+    public PlayerQuestData playerQuestData;
     public string saveFileName = "playerData.json";
     public string saveItemFileName = "playerItemData.json";
+    public string saveQuestFileName = "playerQuestData.json";
+
 
     private Player player;
 
@@ -59,7 +74,9 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             }
             else
             {
+
                 LoadPlayerDataFromJson();
+
             }
 
         }
@@ -89,6 +106,14 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         SetPlayerDataToInventory();
     }
 
+    void SetNewQuestData()
+    {
+        QuestManager.Instance.SetAllQuestUI(2000);
+        playerQuestData.subQuestId = 0;
+    }
+
+
+
     public void CreateNewPlayer()
     {
         //currentStatus = new PlayerCurrentStatus();
@@ -107,6 +132,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         InitGems();
 
         SetDatas();
+
+        SetNewQuestData();
     }
 
     private void SetNewAttackSkillStates()
@@ -141,7 +168,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         }
         else
         {
-            Debug.Log("Level JSON NULL");
+            UnityEngine.Debug.Log("Level JSON NULL");
         }
     }
 
@@ -159,7 +186,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         }
         else
         {
-            Debug.Log("Skill JSON NULL");
+            UnityEngine.Debug.Log("Skill JSON NULL");
         }
     }
 
@@ -298,6 +325,8 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             currentItems.equipmentItems = inventory.equipmentItems;
             currentItems.inventoryItems = inventory.inventoryItems;
             currentStatus.currentPos = player.transform.position;
+
+
         }
     }
 
@@ -346,41 +375,116 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         }
     }
 
+    void LoadCurrentQuestData()
+    {
+        var qMainData = QuestManager.Instance.currentProgressMainQuestData;
+        var qSubData = QuestManager.Instance.currentProgressSubQuestData;
+        var qOnGoingDic = QuestManager.Instance.GetOnGoingQuest();
+        var subQuest = qOnGoingDic.ContainsKey(qSubData.ID) ? qOnGoingDic[qSubData.ID] : null;
+        var mainQuest = qOnGoingDic.ContainsKey(qMainData.ID) ? qOnGoingDic[qMainData.ID] : null;
+
+
+
+
+
+
+        playerQuestData.questId = qMainData.ID;
+        playerQuestData.subQuestId = qSubData.ID;
+
+
+        if (mainQuest != null)
+        {
+            playerQuestData.questCount = qOnGoingDic[qMainData.ID].CurrentCount;
+        }
+        else
+        {
+            playerQuestData.questCount = 0;
+        }
+
+        if (subQuest != null)
+        {
+            playerQuestData.subQuestCount = qOnGoingDic[qSubData.ID].CurrentCount;
+        }
+        else
+        {
+            playerQuestData.subQuestCount = 0;
+        }
+        
+
+
+    }
+
+    void SetQuestData()
+    {
+        //메인 퀘스트 세팅
+        QuestManager.Instance.SetAllQuestUI(playerQuestData.questId);
+
+        QuestManager.Instance.QuestUpdate(playerQuestData.questId, playerQuestData.questCount);
+
+        for (int i = 2000; i < playerQuestData.questId + 1; i++)
+        {
+            PotalManager.Instance.UpdatePotalActiveState(i);
+        }
+
+        //서브 퀘스트 세팅
+        if (playerQuestData.subQuestId != 0)
+        {
+            QuestManager.Instance.SubscribeQuest(playerQuestData.subQuestId);
+            QuestManager.Instance.QuestUpdate(playerQuestData.subQuestId, playerQuestData.subQuestCount);
+        }
+
+    }
+
     public void SavePlayerDataToJson()
     {
         LoadCurrentDatas(); //������ ����ֱ�
+        LoadCurrentQuestData();
+
         string jsonData = JsonUtility.ToJson(currentStatus);
         string path = Path.Combine(Application.dataPath, saveFileName);
+
+
         string itemJsonData = JsonUtility.ToJson(currentItems);
         string itemPath = Path.Combine(Application.dataPath, saveItemFileName);
 
+
+
+        string questJsonData = JsonUtility.ToJson(playerQuestData);
+        string questPath = Path.Combine(Application.dataPath, saveQuestFileName);
+
         File.WriteAllText(path, jsonData);
         File.WriteAllText(itemPath, itemJsonData);
+        File.WriteAllText(questPath, questJsonData);
 
         if (UIManager.Instance != null)
         {
             UIManager.Instance.alertPanelUI.ShowAlert("저장되었습니다.");
         }
+
+
     }
 
     public void LoadPlayerDataFromJson()
     {
         string path = Path.Combine(Application.dataPath, saveFileName);
         string itemPath = Path.Combine(Application.dataPath, saveItemFileName);
-
+        string questPath = Path.Combine(Application.dataPath, saveQuestFileName);
         if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
             string itemJsonData = File.ReadAllText(itemPath);
+            string questJsonData = File.ReadAllText(questPath);
 
             currentStatus = JsonUtility.FromJson<PlayerCurrentStatus>(jsonData);
             currentItems = JsonUtility.FromJson<PlayerCurrentItems>(itemJsonData);
+            playerQuestData = JsonUtility.FromJson<PlayerQuestData>(questJsonData);
 
             SetDatas();
+            SetQuestData();
         }
         else
         {
-            Debug.Log("파일이 없습니다.");
+            UnityEngine.Debug.Log("파일이 없습니다.");
         }
     }
 
