@@ -15,7 +15,7 @@ public class SoundSource : MonoBehaviour
         _audioSource.clip = clip;
         _audioSource.volume = soundEffectVolume;
         _audioSource.Play();
-        _audioSource.pitch = 1f + Random.Range(-soundEffectPitchVariance, soundEffectPitchVariance);
+        _audioSource.pitch = 1f;/*1f + Random.Range(-soundEffectPitchVariance, soundEffectPitchVariance);*/
 
         Invoke("Disable", clip.length + 2);
     }
