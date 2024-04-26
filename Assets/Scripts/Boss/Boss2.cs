@@ -30,6 +30,7 @@ public class Boss2 : MonoBehaviour, IDamageable
     public Image HPBar;
     private EnemyState state;
     private bool bossAction2 = false;
+    private int maxhp;
     private void Awake()
     {
     }
@@ -38,6 +39,7 @@ public class Boss2 : MonoBehaviour, IDamageable
     {
         hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
         HPBar = hpBar.GetComponent<Image>();
+        maxhp = EnemyStatusData.Hp;
     }
 
     void Update()
@@ -124,7 +126,7 @@ public class Boss2 : MonoBehaviour, IDamageable
         if (EnemyStatusData.Hp - damage > 0)
         {
             EnemyStatusData.Hp -= damage;
-            HPBar.fillAmount = (float)EnemyStatusData.Hp / 200;
+            HPBar.fillAmount = (float)EnemyStatusData.Hp / maxhp;
         }
         else
         {

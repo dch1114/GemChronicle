@@ -20,6 +20,7 @@ public class Boss : MonoBehaviour, IDamageable
     public float heught = 1.7f;
     RectTransform hpBar;
     public Image HPBar;
+    private int maxhp;
     //Ω∫≈»
     [SerializeField] public EnemyStatusData EnemyStatusData;
     
@@ -41,6 +42,7 @@ public class Boss : MonoBehaviour, IDamageable
         hpBar = Instantiate(prfHpBar, canvas.transform).GetComponent<RectTransform>();
         HPBar = hpBar.GetComponent<Image>();
         StartCoroutine(Phase01());
+        maxhp = EnemyStatusData.Hp;
     }
 
     void Update()
@@ -124,7 +126,7 @@ public class Boss : MonoBehaviour, IDamageable
         if (EnemyStatusData.Hp - damage > 0)
         {
             EnemyStatusData.Hp -= damage;
-            HPBar.fillAmount = (float)EnemyStatusData.Hp / 100;
+            HPBar.fillAmount = (float)EnemyStatusData.Hp / maxhp;
         }
         else
         {

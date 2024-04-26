@@ -13,6 +13,7 @@ public class SlotMiniQuest : MonoBehaviour
     [SerializeField] Button rewardBtn;
     public Action<SlotMiniQuest> rewardCallBackAction;
     Quest quest;
+    public GameObject ClearFrame;
     bool isClear = false;
 
     private void Awake()
@@ -46,12 +47,18 @@ public class SlotMiniQuest : MonoBehaviour
         }
         
     }
-
+    private void Update()
+    {
+        if (quest.IsClearQuest)
+        {
+            ClearFrame.SetActive(true);
+        }
+    }
     void ClickRewardButton()
     {
         if (quest.IsClearQuest)
         {
-
+            
             if (rewardCallBackAction != null)
             {
                 rewardCallBackAction.Invoke(this);
