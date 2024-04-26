@@ -86,6 +86,7 @@ public class CheckPurchasePopup : MonoBehaviour
     {
         if (selectItem != null && selectItem.ItemType == ItemType.Potion)
         {
+            amountSwitch = ui._amountSwitch;
             shop.BuyPotion(selectItem, amountSwitch.amount);
             ui.shopitemToolTip.HideToolTip();
             checkPotionPurchasePopup.gameObject.SetActive(false);

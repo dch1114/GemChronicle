@@ -125,7 +125,7 @@ public class PlayerUI : MonoBehaviour
     public void UpdateSFXVolume()
     {
         if (SoundManager.Instance != null)
-            SoundManager.Instance.SetMusicVolume(SFXSlider);
+            SoundManager.Instance.SetEffectVolume(SFXSlider);
     }
 
     public void SaveBtn()
