@@ -20,7 +20,7 @@ public class NPCController : MonoBehaviour, IInteractive
     public bool isNPC;
     public bool isShop = false;
     public bool isEndTalk = false;
-
+    public GameObject friend;
     int currentStep;
     bool isLoadScriptData = false;
     bool isEndSaying = false;
@@ -204,6 +204,10 @@ public class NPCController : MonoBehaviour, IInteractive
                 if (QuestManager.Instance.IsProgressQuest(currentNpcIDForQuest) && QuestManager.Instance.CheckCompareTargetID(npcData.ID))
                 {
                     QuestManager.Instance.NotifyQuest(Constants.QuestType.TalkNpc, npcData.ID, 1);
+                    if (npcData.ID == 3000)
+                    {
+                        Destroy(friend);
+                    }
                 }
             }
 
