@@ -418,7 +418,10 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     {
         //메인 퀘스트 세팅
         QuestManager.Instance.SetAllQuestUI(playerQuestData.questId);
-
+        if (PlayerPrefs.GetInt("2002doing") == 1)
+        {
+            QuestManager.Instance.SubscribeQuest(2002);
+        }
         QuestManager.Instance.QuestUpdate(playerQuestData.questId, playerQuestData.questCount);
 
         for (int i = 2000; i < playerQuestData.questId + 1; i++)

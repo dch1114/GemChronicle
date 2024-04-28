@@ -85,7 +85,10 @@ public class QuestManager : Singleton<QuestManager>
 
             Debug.Log($"ID:{questId} 퀘스트 구독 완료");
         }
-
+        if (questId == 2002)
+        {
+            PlayerPrefs.SetInt("2002doing", 1);
+        }
         if (questId == 2003)
         {
             hideNPC = true;
@@ -194,7 +197,10 @@ public class QuestManager : Singleton<QuestManager>
 
         if (_ongoingQuests.ContainsKey(questId) == false)
             return;
-
+        if (questId == 2002)
+        {
+            PlayerPrefs.SetInt("2002doing", 2);
+        }
         if (QuestManager.Instance.GetCurrentQuestData().Finish)
         {
             //특정 문구 표시후
