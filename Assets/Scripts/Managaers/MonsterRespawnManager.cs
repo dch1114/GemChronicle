@@ -7,6 +7,11 @@ public class MonsterRespawnManager : Singleton<MonsterRespawnManager>
 {
     [SerializeField] List<GameObject> monsters = new List<GameObject>();
 
-    public event EventHandler respawnEvent;
-    //respawnEvent?.Invoke(); ·Î ½ÇÇà
+    public event Action RespawnMonsters;
+    
+
+    public void OnRespawn()
+    {
+        RespawnMonsters?.Invoke();
+    }
 }

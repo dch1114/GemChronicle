@@ -106,6 +106,11 @@ public class PotalManager : Singleton<PotalManager>
                     }
                 }
             }
+
+            if(MonsterRespawnManager.Instance != null)
+            {
+                MonsterRespawnManager.Instance.OnRespawn();
+            }
         }
     }
 
