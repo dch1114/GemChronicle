@@ -1,5 +1,6 @@
 using System.Collections;
 using System.IO;
+using TMPro;
 using UnityEngine;
 
 public class StartManager : MonoBehaviour
@@ -9,6 +10,10 @@ public class StartManager : MonoBehaviour
     [SerializeField] private RectTransform gameTitle;
     [SerializeField] private GameObject gameStart;
     [SerializeField] private GameObject characterChooseGO;
+    [Header("Text")]
+    [SerializeField] TextMeshProUGUI alertTxt;
+    [Header("Panel")]
+    [SerializeField] GameObject alertPanel;
 
     private bool gameStarted = false;
     private Vector3 titleTargetPosition;
@@ -77,5 +82,23 @@ public class StartManager : MonoBehaviour
         {
             Debug.Log("저장 파일 없음");
         }
+    }
+    public void ExitBtn()
+    {
+
+
+        alertTxt.text = "게임을 종료하시겠습니까?";
+        alertPanel.SetActive(true);
+        
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
+    }
+
+    public void AlerPanelOff()
+    {
+        alertPanel.SetActive(false);
     }
 }

@@ -72,7 +72,8 @@ public class PlayerUI : MonoBehaviour
             if(playerData.RequiredExp > 0)
             {
                 expBar.fillAmount = (float) playerData.Exp / (float) playerData.RequiredExp;
-                expTxt.text = playerData.Exp + " / " + playerData.RequiredExp;
+                expTxt.text = ((float)playerData.Exp / (float)playerData.RequiredExp) * (float)100 + "%";
+
             }
         }
         else

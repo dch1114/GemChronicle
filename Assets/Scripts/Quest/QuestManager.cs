@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class QuestManager : Singleton<QuestManager>
@@ -10,7 +11,6 @@ public class QuestManager : Singleton<QuestManager>
     [Header("Waiting Quests")]
     [SerializeField] private WaitingQuestDescription waitingQuestPrefab;
     [SerializeField] private Transform waitingQuestParent;
-    private QuestData questData;
     [Header("Progress Quests")]
     [SerializeField] private ProgressQuestDescription progressQuestPrefab;
     //[SerializeField] private Transform progressQuestParent;
@@ -23,8 +23,6 @@ public class QuestManager : Singleton<QuestManager>
     //현재 들고 있는 퀘스트데이타
     public QuestData currentProgressMainQuestData = null;
     public QuestData currentProgressSubQuestData = null;
-
-    public Quest QuestUnclaimed { get; private set; }
 
     [SerializeField] PanelQuestUI panelQuestUI;
     [SerializeField] MiniQuest miniQuest;
@@ -40,8 +38,8 @@ public class QuestManager : Singleton<QuestManager>
     public event Action<int> OnQuestCompleteCallback;
 
     private Dictionary<QuestType, List<QuestData>> _subscribeQuests = new();
-    public bool EndingBossDie;
 
+    public bool EndingBossDie;
     public bool bossAction = false;
     public bool hideNPC = false;
 
@@ -52,16 +50,12 @@ public class QuestManager : Singleton<QuestManager>
     public IEnumerator InitQuestManager()
     {
         yield return null;
-        SetAllQuestUI();
-        currentProgressMainQuestData = Database.Quest.Get(startQuestID);
-        SubscribeQuest(startQuestID);
+
     }
 
     //퀘스트 구독
     public void SubscribeQuest(int questId)
     {
-
-
         if (_completeQuests.Contains(questId))
         {
             Debug.Log($"이미 ID:{questId} 퀘스트는 완료하였습니다");
@@ -72,6 +66,10 @@ public class QuestManager : Singleton<QuestManager>
         {
             Debug.Log($"이미 ID:{questId} 퀘스트는 진행중입니다");
             return;
+        }
+        if (questId == 2000)
+        {
+            PlayerPrefs.SetInt("2002doing", 2);
         }
 
         //퀘스트 데이터 불러오기
@@ -91,7 +89,10 @@ public class QuestManager : Singleton<QuestManager>
 
             Debug.Log($"ID:{questId} 퀘스트 구독 완료");
         }
-
+        if (questId == 2002)
+        {
+            PlayerPrefs.SetInt("2002doing", 1);
+        }
         if (questId == 2003)
         {
             hideNPC = true;
@@ -129,10 +130,6 @@ public class QuestManager : Singleton<QuestManager>
         foreach (var quest in targetQuests)
             QuestUpdate(quest.ID, count);
 
-
-
-
-
         if (target == 500003)
         {
             EndingBossDie = true;
@@ -160,13 +157,10 @@ public class QuestManager : Singleton<QuestManager>
 
             _ongoingQuests.Add(questId, quest);
             Debug.Log($"ID:{questId} 퀘스트 시작");
-            if (questId < 3000)
-            {
-                SetAddProgressQuestUI(quest, questData);
-                //퀘스트를 수락 콜백 액션
-                OnQuestStartCallback?.Invoke(questId);
-            }
 
+            SetAddProgressQuestUI(quest, questData);
+            //퀘스트를 수락 콜백 액션
+            OnQuestStartCallback?.Invoke(questId);
         }
 
 
@@ -207,7 +201,10 @@ public class QuestManager : Singleton<QuestManager>
 
         if (_ongoingQuests.ContainsKey(questId) == false)
             return;
-
+        if (questId == 2002)
+        {
+            PlayerPrefs.SetInt("2002doing", 2);
+        }
         if (QuestManager.Instance.GetCurrentQuestData().Finish)
         {
             //특정 문구 표시후
@@ -298,13 +295,13 @@ public class QuestManager : Singleton<QuestManager>
     }
 
     //수락 가능한 모든 퀘스트를 UI에 세팅
-    void SetAllQuestUI()
+    public void SetAllQuestUI(int id)
     {
         var totalQuests = Database.Quest.GetTotalQuest();
 
         foreach (var questData in totalQuests)
         {
-            if (questData.Value.ID < 3000)
+            if (id <= questData.Value.ID)
             {
                 WaitingQuestDescription newQuest = Instantiate(waitingQuestPrefab, waitingQuestParent);
                 //questData.Key는 ID를 의미
@@ -314,30 +311,50 @@ public class QuestManager : Singleton<QuestManager>
 
                 panelQuestUI.AddWaitingQuest(questData.Key, newQuest.gameObject);
             }
-
         }
 
+        currentProgressMainQuestData = Database.Quest.Get(id);
+
+        if (currentProgressMainQuestData.Continue || id == 2000)
+        {
+            SubscribeQuest(id);
+        }
     }
 
-    void SetUIRemoveWaitingQuest(int key)
+    public void SetSubQuestUI(int id)
     {
-        panelQuestUI.RemoveWaitingQuest(key);
-
+        currentProgressSubQuestData = Database.Quest.Get(id);
+        SubscribeQuest(id);
     }
 
 
     void SetAddProgressQuestUI(Quest questcompleted, QuestData qData)
     {
-        //ProgressQuestDescription newQuest = Instantiate(progressQuestPrefab, progressQuestParent);
-        //newQuest.ConfigureQuestUI(questcompleted, qData);
-        //panelQuestUI.AddProgressQuest(questcompleted.QuestId, newQuest.gameObject);
-        SetUIRemoveWaitingQuest(questcompleted.QuestId);
-        miniQuest.SetMiniQuest(questcompleted, qData);
+
+        if (questcompleted.QuestId < 3000 && questcompleted.QuestId > 10)
+        {
+            panelQuestUI.RemoveWaitingQuest(questcompleted.QuestId);
+            miniQuest.SetMiniQuest(questcompleted, qData);
+
+        }
+        else if(questcompleted.QuestId < 10)
+        {
+            currentProgressSubQuestData = Database.Quest.Get(questcompleted.QuestId);
+            miniQuest.SetMiniQuest(questcompleted, currentProgressSubQuestData);
+        }
+  
     }
 
     public void SetClearProgressQuestUI(int key)
     {
         panelQuestUI.RemoveProgressQuest(key);
     }
+
+    public Dictionary<int, Quest> GetOnGoingQuest()
+    {
+        return _ongoingQuests;
+    }
+
+
 
 }

@@ -50,9 +50,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
         leftDirection = transform.localScale;
         rightDirection = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+    }
 
+    private void OnEnable()
+    {
+        MonsterRespawnManager.Instance.RespawnMonsters -= OnRespawn;
         StartCoroutine(Think());
-
     }
 
     void FixedUpdate()
@@ -137,6 +140,12 @@ public class Enemy : MonoBehaviour, IDamageable
         SpawnGems();
         gameObject.SetActive(false);
         GameManager.Instance.player.Data.StatusData.GetExp(EnemyStatusData.Exp);
+        MonsterRespawnManager.Instance.RespawnMonsters += OnRespawn;
+    }
+
+    private void OnRespawn()
+    {
+        gameObject.SetActive(true);
     }
 
     private void SpawnGems()
