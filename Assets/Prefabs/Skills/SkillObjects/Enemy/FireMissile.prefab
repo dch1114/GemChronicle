@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.22, y: 0.41}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 2046988123994148346}
   - component: {fileID: 9015633870655279474}
   m_Layer: 24
-  m_Name: Fireball 6
+  m_Name: FireMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ Animator:
   m_GameObject: {fileID: 4259303883895745152}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e70e881898ba66a418f30bf1ff48dc7d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7f43fdef5f0d30e4ebfcdf621dd2f1c5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -155,11 +155,11 @@ MonoBehaviour:
   anim: {fileID: 4641808104146388294}
   data:
     ID: 0
-    SkillName: "\uB77C\uCFE4 \uAE30\uBCF8"
+    SkillName: FireMissile
     Damage: 3
     Range: 2
     SkillType: 1
-    ElementType: 0
+    ElementType: 1
     Price: 0
     IsUnlocked: 0
   startAnglePoint: 0
@@ -195,6 +195,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012641013, y: 0.29999995}
+  m_Offset: {x: 0.0023681223, y: 0.28122258}
   serializedVersion: 2
-  m_Radius: 0.43341047
+  m_Radius: 0.28452504
