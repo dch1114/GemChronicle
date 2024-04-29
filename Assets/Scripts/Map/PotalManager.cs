@@ -26,10 +26,14 @@ public class PotalManager : Singleton<PotalManager>
     public bool EnterBossZone;
     [SerializeField] NextMap[] potalArray;
 
+    private void Awake()
+    {
+        InitPotal();
+    }
     private void Start()
     {
         AddEvent();
-        InitPotal();
+       
     }
 
     void AddEvent()

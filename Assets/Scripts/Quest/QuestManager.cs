@@ -67,6 +67,10 @@ public class QuestManager : Singleton<QuestManager>
             Debug.Log($"이미 ID:{questId} 퀘스트는 진행중입니다");
             return;
         }
+        if (questId == 2000)
+        {
+            PlayerPrefs.SetInt("2002doing", 2);
+        }
 
         //퀘스트 데이터 불러오기
         var questData = Database.Quest.Get(questId);
