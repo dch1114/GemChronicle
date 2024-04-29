@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class EnemySkill : Skill
@@ -24,13 +21,14 @@ public class EnemySkill : Skill
 
     protected override Vector3 GetTargetPosition()
     {
-        if(GameManager.Instance.player != null)
+        if (GameManager.Instance.player != null)
         {
-            if(GameManager.Instance.player.transform.position.x < transform.position.x)
+            if (GameManager.Instance.player.transform.position.x < transform.position.x)
             {
                 Flip(true);
                 return new Vector3(data.Range * -1, 0, 0);
-            } else
+            }
+            else
             {
                 Flip(false);
                 return new Vector3(data.Range, 0, 0);
