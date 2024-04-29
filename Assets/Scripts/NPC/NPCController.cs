@@ -149,25 +149,25 @@ public class NPCController : MonoBehaviour, IInteractive
         //대화 스크립트 데이터가 아직 로드된 것이 없다면
         if (!isLoadScriptData)
         {
-            //Debug.Log("대화 스크립트 데이터 로드된 것이 없음");
+   
 
             int[] scriptIds;
 
             if (QuestManager.Instance.IsClear(currentNpcID))
             {
                 scriptIds = doneQuest.scriptId;
-                Debug.Log("doneQuest");
+           
 
             }
             else if (QuestManager.Instance.IsProgressQuest(currentNpcID))
             {
                 scriptIds = doingQuest.scriptId;
-                Debug.Log("doingQuest");
+   
             }
             else
             {
                 scriptIds = doQuest.scriptId;
-                Debug.Log("doQuest");
+              
             }
 
             AddScriptsToQueue(scriptIds);
@@ -212,10 +212,9 @@ public class NPCController : MonoBehaviour, IInteractive
 
             SetPlayerInput();
 
-            //Debug.Log("NPC와 PLAYER 둘다 더이상 할 대화가 남아있지 않음");
-            //Debug.Log("이동초기화전");
+         
             playerinput.OnEnable();
-            //Debug.Log("이동초기화후");
+ 
             currentStep = 0;
             isLoadScriptData = false;
             //초상화 OFF
@@ -246,7 +245,7 @@ public class NPCController : MonoBehaviour, IInteractive
 
         if (isEndSaying)
         {
-            //Debug.Log("말하고 있는것이 끝났음");
+    
 
             var say = scriptTableDatas.Dequeue();
             currentScript = say;
@@ -296,8 +295,7 @@ public class NPCController : MonoBehaviour, IInteractive
             uiManager.ShowPlayerPotrait(false);
         }
 
-        //Debug.Log("sayingNPC:" + sayingNPC);
-        //Debug.Log("currentStep:" + currentStep);
+
         uiManager.SetTalkMessage(currentScript.dialog[currentStep]);
 
         currentStep++;

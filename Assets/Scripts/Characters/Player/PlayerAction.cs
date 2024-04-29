@@ -135,7 +135,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (_other != null)
         {
-            Debug.Log("OtherNullCheck");
+           
             IInteractive irv = _other.GetComponent<IInteractive>();
 
             if (irv != null)
