@@ -41,6 +41,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [SerializeField] private ObjectPool skillPool;
 
+    [SerializeField] private GameObject bullet;
+
     private void Awake()
     {
         EnemyAnimationData.Initialize();
@@ -56,6 +58,11 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         MonsterRespawnManager.Instance.RespawnMonsters -= OnRespawn;
         StartCoroutine(Think());
+    }
+
+    private void OnDisable()
+    {
+        canAttack = true;
     }
 
     void FixedUpdate()
@@ -112,7 +119,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         if(foundEnemy && canAttack)
         {
-            SpawnSkill();
+            ShootSkill();
             canAttack = false;
             StartCoroutine(WaitAttackCoolTime(EnemyStatusData.AttackRate));
         } else
@@ -123,13 +130,27 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void SpawnSkill()
     {
-        GameObject go = skillPool.SpawnFromPool("0");
-        if(go != null)
+        if(bullet == null)
         {
-            go.transform.position = gameObject.transform.position;
-            go.SetActive(true);
+            GameObject go = skillPool.SpawnFromPool("0");
+            if(go != null)
+            {
+                bullet = go;
+                ShootSkill();
+            }
         }
+    }
 
+    private void ShootSkill()
+    {
+        if (bullet != null)
+        {
+            bullet.transform.position = gameObject.transform.position;
+            bullet.SetActive(true);
+        } else
+        {
+            SpawnSkill();
+        }
     }
 
     private void OnDie()
