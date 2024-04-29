@@ -24,15 +24,20 @@ public class EnemySkill : Skill
 
     protected override Vector3 GetTargetPosition()
     {
-        if(GameManager.Instance.player.transform.position.x < transform.position.x)
+        if(GameManager.Instance.player != null)
         {
-            Flip(true);
-            return new Vector3(data.Range * -1, 0, 0);
-        } else
-        {
-            Flip(false);
-            return new Vector3(data.Range, 0, 0);
+            if(GameManager.Instance.player.transform.position.x < transform.position.x)
+            {
+                Flip(true);
+                return new Vector3(data.Range * -1, 0, 0);
+            } else
+            {
+                Flip(false);
+                return new Vector3(data.Range, 0, 0);
+            }
         }
+
+        return new Vector3(data.Range, 0, 0);
     }
 
     private void Flip(bool isLeft)
