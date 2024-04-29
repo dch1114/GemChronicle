@@ -80,7 +80,7 @@ public class StartManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("저장 파일 없음");
+            
         }
     }
     public void ExitBtn()

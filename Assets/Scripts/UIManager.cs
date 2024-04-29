@@ -209,7 +209,7 @@ public class UIManager : Singleton<UIManager>
 
         for (int i = 0; i < pArray.Length; i++)
         {
-            Debug.Log(i+"번째 포탈 잠김 : "+ pArray[i].potal.isLock);
+            
             //해금이 아직 안되었다면
             //if (pArray[i].potal.isLock)
             //{
@@ -380,7 +380,7 @@ public class UIManager : Singleton<UIManager>
     {
         inventoryUIController.UseShop();
         shopChoiceOnOff(false);
-        Debug.Log("Select Buy");
+     
     }
 
     public void Heal()
@@ -395,7 +395,7 @@ public class UIManager : Singleton<UIManager>
     {
         inventoryUIController.CloseShop();
         shopChoiceOnOff(false);
-        Debug.Log("Select Exi");
+       
     }
 
     public void NotHeal()

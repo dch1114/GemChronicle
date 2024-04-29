@@ -58,13 +58,13 @@ public class QuestManager : Singleton<QuestManager>
     {
         if (_completeQuests.Contains(questId))
         {
-            Debug.Log($"이미 ID:{questId} 퀘스트는 완료하였습니다");
+     
             return;
         }
 
         if (_ongoingQuests.ContainsKey(questId))
         {
-            Debug.Log($"이미 ID:{questId} 퀘스트는 진행중입니다");
+       
             return;
         }
         if (questId == 2000)
@@ -87,7 +87,7 @@ public class QuestManager : Singleton<QuestManager>
 
             QuestStart(questId);
 
-            Debug.Log($"ID:{questId} 퀘스트 구독 완료");
+           
         }
         if (questId == 2002)
         {
@@ -112,7 +112,7 @@ public class QuestManager : Singleton<QuestManager>
                 return;
             //구독 딕셔너리에 퀘스트 타입이 존재할 때만 Remove 딕셔너리
             _subscribeQuests[questData.Type].Remove(questData);
-            Debug.Log($"ID:{questId} 퀘스트 구독 해제 완료");
+          
         }
 
     }
@@ -142,7 +142,7 @@ public class QuestManager : Singleton<QuestManager>
 
         if (_ongoingQuests.ContainsKey(questId))
         {
-            Debug.Log($"해당 ID:{questId} 로 이미 퀘스트가 진행중입니다");
+       
             return;
         }
 
@@ -156,7 +156,7 @@ public class QuestManager : Singleton<QuestManager>
             //퀘스트를 진행중 딕셔너리에 추가
 
             _ongoingQuests.Add(questId, quest);
-            Debug.Log($"ID:{questId} 퀘스트 시작");
+       
 
             SetAddProgressQuestUI(quest, questData);
             //퀘스트를 수락 콜백 액션
@@ -168,7 +168,7 @@ public class QuestManager : Singleton<QuestManager>
 
     public void QuestUpdate(int questId, int amount)
     {
-        Debug.Log($"ID:{questId} 카운트 업데이트");
+    
 
         if (_ongoingQuests.ContainsKey(questId) == false)
             return;
@@ -184,7 +184,7 @@ public class QuestManager : Singleton<QuestManager>
             //현재 실행횟수가 퀘스트데이타의 목표횟수에 도달하면 퀘스트 클리어
             if (currentCount >= targetCount)
             {
-                Debug.Log($"<color=red>퀘스트를 완료 받으세요</color>");
+             
                 _ongoingQuests[questId].IsClearQuest = true;
             }
 
@@ -220,7 +220,7 @@ public class QuestManager : Singleton<QuestManager>
 
         _completeQuests.Add(questId);
 
-        Debug.Log($"ID:{questId} 퀘스트 클리어!");
+  
         //SetClearProgressQuestUI(questId);
 
         if (questId > 10)

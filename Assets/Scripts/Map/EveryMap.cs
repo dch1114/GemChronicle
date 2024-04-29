@@ -56,7 +56,7 @@ public class EveryMap : MonoBehaviour, IInteractive
     }
     public Vector3 GetPosition()
     {
-        Debug.Log(transform.position);
+
 
         return transform.position;
     }

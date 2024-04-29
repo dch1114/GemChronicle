@@ -72,7 +72,7 @@ public class SlotMiniQuest : MonoBehaviour
         }
         else
         {
-            Debug.Log($"아직 퀘스트를 완료하지 못하였습니다");
+           
         }
     }
 

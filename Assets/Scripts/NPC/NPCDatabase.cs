@@ -81,12 +81,12 @@ public class NPCDatabase
         }
         foreach (TalkTableData talk in talkTable)
         {
-            //Debug.Log(talk.id);
+   
             talkTableDic.Add(talk.id, talk);
         }
         foreach (ScriptTableData script in dialogTable)
         {
-            //Debug.Log(script.id);
+     
             dialogTableDic.Add(script.id, script);
         }
 

@@ -36,7 +36,9 @@ public class ProgressQuestDescription : QuestDescription
 
     void ClickGetButton()
     {
-        Debug.Log("퀘스트 보상 완료");
+        
+        
+        
         QuestManager.Instance.SetClearProgressQuestUI(questData.ID);
 
     }
