@@ -118,7 +118,7 @@ public class PotalManager : Singleton<PotalManager>
 
     public void CompleteFirstQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc,2000,1); }
     public void CompleteSecondQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500000, 1); }
-    public void CompleteThirdQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500001, 1); }
+    public void CompleteThirdQuest() { QuestManager.Instance.NotifyQuest(QuestType.KillBoss, 500004, 1); }
     public void CompleteFourthQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 3000, 1); }
     public void CompleteFiveQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 7000, 1); }
     public void CompleteSixQuest() { QuestManager.Instance.NotifyQuest(QuestType.TalkNpc, 2000, 1); }

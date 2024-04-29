@@ -152,23 +152,45 @@ public class NPCController : MonoBehaviour, IInteractive
    
 
             int[] scriptIds;
-
-            if (QuestManager.Instance.IsClear(currentNpcID))
+            if (npcType == NPCType.SubNpc)
             {
-                scriptIds = doneQuest.scriptId;
-           
+                if (QuestManager.Instance.IsClear(2))
+                {
+                    scriptIds = doneQuest.scriptId;
 
-            }
-            else if (QuestManager.Instance.IsProgressQuest(currentNpcID))
-            {
-                scriptIds = doingQuest.scriptId;
-   
+
+                }
+                else if (QuestManager.Instance.IsProgressQuest(2))
+                {
+                    scriptIds = doingQuest.scriptId;
+
+                }
+                else
+                {
+                    scriptIds = doQuest.scriptId;
+
+                }
             }
             else
             {
-                scriptIds = doQuest.scriptId;
-              
+                if (QuestManager.Instance.IsClear(currentNpcID))
+                {
+                    scriptIds = doneQuest.scriptId;
+
+
+                }
+                else if (QuestManager.Instance.IsProgressQuest(currentNpcID))
+                {
+                    scriptIds = doingQuest.scriptId;
+
+                }
+                else
+                {
+                    scriptIds = doQuest.scriptId;
+
+                }
             }
+            
 
             AddScriptsToQueue(scriptIds);
 
