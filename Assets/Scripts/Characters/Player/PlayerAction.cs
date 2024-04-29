@@ -31,8 +31,17 @@ public class PlayerAction : MonoBehaviour
     {
         if (interactiveList.Count > 0)
         {
-            if(target != null)
+            if (target == null)
             {
+                target = interactiveList[0];
+                if (target.GetType() == InteractType.Potal)
+                {
+                    target.Interact();
+                }
+            }
+            else
+            {
+                
                 if (target.GetType() == InteractType.Potal)
                 {
                     target.Interact();
@@ -126,6 +135,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (_other != null)
         {
+            Debug.Log("OtherNullCheck");
             IInteractive irv = _other.GetComponent<IInteractive>();
 
             if (irv != null)
@@ -135,7 +145,9 @@ public class PlayerAction : MonoBehaviour
                 target = irv;
                 if (target != null)
                 {
+                    
                     target.Closer();
+                    
                 }
             }
         }
