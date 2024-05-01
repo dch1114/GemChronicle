@@ -1,7 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.IO;
-using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -16,17 +13,17 @@ public class GameManager : Singleton<GameManager>
     public bool isLastBossDead = false;
     public int saveDataID;
 
-    //inventory save test
     public Inventory inventory;
     protected override void Awake()
     {
         base.Awake();
 
         UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(Instance);
-        } else
+        }
+        else
         {
             DontDestroyOnLoad(Instance);
         }

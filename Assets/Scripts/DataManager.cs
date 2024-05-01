@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
@@ -24,8 +21,6 @@ public class DataManager : Singleton<DataManager>
 
             npcDatabase = JsonUtility.FromJson<NPCDatabase>(NPCjson);
             npcDatabase.Initialize();
-
-
         }
         else
         {
@@ -37,8 +32,6 @@ public class DataManager : Singleton<DataManager>
             string json = jsonFile.text;
             itemDatabase = JsonUtility.FromJson<ItemDatabase>(json);
             itemDatabase.Initialize();
-
-
         }
         else
         {
@@ -59,7 +52,7 @@ public class DataManager : Singleton<DataManager>
     IEnumerator InitManagersCoroutine()
     {
         yield return null;
-        if (shop != null /*&& shop.shopItems.Count < 16*/) shop.SetShopItem();
+        if (shop != null) shop.SetShopItem();
         NPCManager.Instance.InitNPCManager();
         if (talkManager != null) talkManager.InitTalkManager();
     }

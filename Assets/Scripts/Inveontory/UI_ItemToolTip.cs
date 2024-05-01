@@ -19,7 +19,7 @@ public class UI_ItemToolTip : MonoBehaviour
         SlotType slotType = item.SlotType;
 
         itemNameText.text = item.Name;
-        //itemTypeText.text = item.SlotType.ToString();
+
         ChangeSlotTypeToKorean(slotType);
         itemDescription.text = item.GetDescription();
 

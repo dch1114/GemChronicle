@@ -1,7 +1,7 @@
 using System.Text;
 using UnityEngine;
 
-public enum SlotType // 수정한 곳
+public enum SlotType
 {
     Weapon,
     Armor,
@@ -28,8 +28,6 @@ public class Item
     public int Price;
     public int Quantity;
 
-    //test
-    //public bool isSellable = false;
     private int descriptionLength;
     private StringBuilder sb = new StringBuilder();
     public Sprite sprite;

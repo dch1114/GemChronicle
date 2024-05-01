@@ -4,12 +4,12 @@ using System.IO;
 using UnityEngine;
 
 [Serializable]
-public class PlayerCurrentStatus //���� ���� �����
+public class PlayerCurrentStatus
 {
     public string name;
     public int level;
-    public int exp; //���� ����ġ
-    public int hp;  //���� ü��
+    public int exp; 
+    public int hp; 
     public int gold;
     public JobType jobType;
     public List<int> gems;
@@ -49,7 +49,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     private void Start()
     {
         LoadDatas();
-        //SetGameManagerInventory();
 
         if (GameManager.Instance != null)
         {
@@ -68,8 +67,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         {
             UIManager.Instance.playerUI.StartPlayerUI();
         }
-
-        // 먼저 inventoryUIController의 요소를 불러와야 한다.
         UpdateInventoryUI();
     }
 
@@ -91,8 +88,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     public void CreateNewPlayer()
     {
-        //currentStatus = new PlayerCurrentStatus();
-
         currentStatus.name = GameManager.Instance.playerName;
         currentStatus.jobType = GameManager.Instance.playerJob;
         currentStatus.level = 1;
@@ -100,7 +95,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
         LevelData data = playerLevelDatabase.GetLevelDataByKey(currentStatus.level);
         currentStatus.hp = data.maxHp;
-        currentStatus.gold = 3000; //�⺻ �� ���� ���ؾ�
+        currentStatus.gold = 3000;
         currentStatus.currentPos = new Vector3(0f, 46.3f, 0f);
         SetNewAttackSkillStates();
 
@@ -294,7 +289,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             ChangeGemsDicToList(data.Gems);
             currentStatus.attackSkillStates = ChangeDoubleListToList(player.Data.AttackData.AttackSkillStates);
 
-            // �÷��̾��� �κ��丮 ������
             currentItems.equipmentItems = inventory.equipmentItems;
             currentItems.inventoryItems = inventory.inventoryItems;
             currentStatus.currentPos = player.transform.position;
@@ -339,7 +333,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
             player.Data.AttackData.AttackSkillStates = ChangeListToDoubleList(currentStatus.attackSkillStates);
             player.transform.position = currentStatus.currentPos;
 
-            // �÷��̾��� �κ��丮 ������
             inventory.equipmentItems = currentItems.equipmentItems;
             inventory.inventoryItems = currentItems.inventoryItems;
             player.transform.position = currentStatus.currentPos;
@@ -348,7 +341,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
 
     public void SavePlayerDataToJson()
     {
-        LoadCurrentDatas(); //������ ����ֱ�
+        LoadCurrentDatas();
         string jsonData = JsonUtility.ToJson(currentStatus);
         string path = Path.Combine(Application.dataPath, saveFileName);
         string itemJsonData = JsonUtility.ToJson(currentItems);

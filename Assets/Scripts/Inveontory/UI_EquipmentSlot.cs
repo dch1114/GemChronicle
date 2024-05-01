@@ -12,7 +12,7 @@ public class UI_EquipmentSlot : UI_ItemSlot
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        if (inventoryItem == null || inventoryItem.stackSize == 0)//item == null || item.datas == null)
+        if (inventoryItem == null || inventoryItem.stackSize == 0)
         {
             return;
         }
@@ -24,7 +24,7 @@ public class UI_EquipmentSlot : UI_ItemSlot
         {
             if (inventoryItem.datas.ItemType == ItemType.Equipment)
             {
-                Inventory.Instance.UnEquipItem(inventoryItem); //수정한 곳
+                Inventory.Instance.UnEquipItem(inventoryItem); 
                 Inventory.Instance.AddItem(inventoryItem.datas);
                 CleanUpSlot();
                 ui.itemToopTip.HideToolTip();

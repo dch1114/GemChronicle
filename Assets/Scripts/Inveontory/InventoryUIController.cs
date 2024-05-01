@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryUIController : MonoBehaviour
 {
-
-    //[SerializeField] public GameObject inventoryPanel;
     [SerializeField] public GameObject inventoryUIPanel;
     [SerializeField] public GameObject shopUi;
     [SerializeField] public CheckPurchasePopup shopTradePopup;
@@ -20,7 +17,7 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private Transform equipmentSlotParent;
     [SerializeField] private Transform statusParent;
     [HideInInspector] public Switch _amountSwitch;
-    //test
+
     [Header("Shop UI")]
     [SerializeField] private Transform inventoryListSlotParent;
 
@@ -28,32 +25,19 @@ public class InventoryUIController : MonoBehaviour
     [SerializeField] private UI_ItemSlot[] inventoryItemSlot;
     [SerializeField] private UI_EquipmentSlot[] equipmentSlot;
     [SerializeField] private UI_Status[] uI_Statuses;
-    //test
-    [SerializeField] private UI_ItemSlot[] inventoryListItemSlot;
 
-    //test
-    //[Header("Sound")]
-    //public AudioClip inventoryOpenSound;
-    //public AudioClip inventoryCloseSound;
+    [SerializeField] private UI_ItemSlot[] inventoryListItemSlot;
 
     void Start()
     {
-        //inventoryPrefab = Inventory.Instance;
-        //inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<UI_ItemSlot>();
-        //equipmentSlot = equipmentSlotParent.GetComponentsInChildren<UI_EquipmentSlot>();
         _amountSwitch = GetComponentInChildren<Switch>();
-        ////test
-        //inventoryListItemSlot = inventoryListSlotParent.GetComponentsInChildren<UI_ItemSlot>();
-
         itemToopTip.gameObject.SetActive(false);
     }
 
-    //test
     public void UpdateSlotUI()
     {
         for (int i = 0; i < equipmentSlot.Length; i++)
         {
-            //test
             foreach (KeyValuePair<SlotType, InventoryItem> item in inventoryPrefab.equipmentDictionary)
             {
                 if (item.Key == equipmentSlot[i].slotType)
@@ -78,7 +62,7 @@ public class InventoryUIController : MonoBehaviour
 
     public void UpdateStatus()
     {
-        for (int i = 0; i< uI_Statuses.Length; i++)
+        for (int i = 0; i < uI_Statuses.Length; i++)
         {
             uI_Statuses[i].UpdateStatValueUI();
         }
@@ -121,21 +105,8 @@ public class InventoryUIController : MonoBehaviour
 
     public void UpdateLoadItemSlotUI()
     {
-        //if(inventoryPrefab.equipmentDictionary == null)
-        //{
-        //    inventoryPrefab.equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
-        //}
-
-        //foreach(var item in inventoryPrefab.equipmentItems)
-        //{
-        //    SlotType slotType = item.datas.SlotType;
-
-        //    inventoryPrefab.equipmentDictionary[slotType] = item;
-        //}
-
         for (int i = 0; i < equipmentSlot.Length; i++)
         {
-            //test
             foreach (var item in inventoryPrefab.equipmentDictionary)
             {
                 if (item.Key == equipmentSlot[i].slotType)
@@ -157,14 +128,4 @@ public class InventoryUIController : MonoBehaviour
             inventoryListItemSlot[i].UpdateSlot(inventoryPrefab.inventoryItems[i]);
         }
     }
-
-    //private void PlayInventoryOpenSound()
-    //{
-    //    SoundManager.PlayClip(inventoryOpenSound);
-    //}
-
-    //private void PlayInventoryCloseSound()
-    //{
-    //    SoundManager.PlayClip(inventoryCloseSound);
-    //}
 }

@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
 {
-    //public Player player;
     Player player;
-    //public int inventoryGold;
     PlayerStatusData statusData;
 
     [Header("Sprite Change")]
-    /*[SerializeField]*/
     private SPUM_SpriteList characterSpriteOBj;
     [SerializeField] private SPUM_SpriteList equipmentSpriteOBj;
 
@@ -44,20 +41,12 @@ public class Inventory : Singleton<Inventory>
         {
             equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
         }
-
-        //characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
-
     }
 
     public void AddItem(Item _item)
     {
-        //if (CanAddItem())
-        //{
-        //    AddToInventory(_item);
-        //}
         AddToInventory(_item);
         _inventoryUIController.UpdateSlotUI();
-
     }
 
     public void AddItem(Item _item, int _amount)
@@ -68,18 +57,6 @@ public class Inventory : Singleton<Inventory>
 
     private void AddToInventory(Item _item)
     {
-        //if(_item.ItemType == ItemType.Potion)
-        //{
-        //    foreach(InventoryItem item in inventory)
-        //    {
-        //        if(item.datas == _item)
-        //        {
-        //            item.AddStack();
-        //            return;
-        //        }
-        //    }
-        //}
-
         InventoryItem newItem = new InventoryItem(_item);
         inventoryItems.Add(newItem);
     }
@@ -225,13 +202,6 @@ public class Inventory : Singleton<Inventory>
         {
             this.equipmentDictionary = new Dictionary<SlotType, InventoryItem>();
 
-            //foreach (var item in this.equipmentItems)
-            //{
-            //    slotType = item.datas.SlotType;
-
-            //    this.equipmentDictionary[slotType] = item;
-
-            //}
         }
 
         slotType = _inventoryItem.datas.SlotType;
@@ -251,20 +221,6 @@ public class Inventory : Singleton<Inventory>
                 equipmentSpriteOBj._armorList[0].sprite = _inventoryItem.datas.sprite;
                 break;
         }
-
-        //if (equipmentDictionary.ContainsKey(slotType))
-        //{
-        //    InventoryItem itemToRemove = equipmentDictionary[slotType];
-        //    equipmentDictionary.Remove(slotType);
-        //    equipmentItems.Remove(itemToRemove);
-        //    RemoveItemStat(itemToRemove.datas);
-        //    AddItem(itemToRemove.datas);
-        //}
-
-        //equipmentDictionary[slotType] = _inventoryItem;
-
-        //RemoveItem(_inventoryItem);
-
     }
 
     public void UpdateLoadInventoryItems()
@@ -285,17 +241,6 @@ public class Inventory : Singleton<Inventory>
     {
         player = GameManager.Instance.player;
         statusData = player.Data.StatusData;
-        //inventoryGold = statusData.Gold;
         characterSpriteOBj = player.gameObject.GetComponentInChildren<SPUM_SpriteList>();
     }
-
-    //public bool CanAddItem()
-    //{
-    //    if (inventory.Count >= inventoryItemSlot.Length)
-    //    {
-    //        return false;
-    //    }
-
-    //    return true;
-    //}
 }
