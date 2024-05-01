@@ -34,8 +34,10 @@ public class SoundManager : Singleton<SoundManager>
     private void Start()
     {
         ChangeBackGroundMusic(musicClip);
+    }
 
-        //test
+    private void AddSFXSources()
+    {
         foreach (var pool in objectPool.poolDictionary)
         {
             string tag = pool.Key;
@@ -64,12 +66,16 @@ public class SoundManager : Singleton<SoundManager>
     }
     public void SetEffectVolume(Slider _getslider)
     {
+        if(EffectAudioSource.Count < 1)
+        {
+            AddSFXSources();
+        }
+
         for (int i = 0; i < EffectAudioSource.Count; i++)
         {
             EffectAudioSource[i].volume = _getslider.value;
             soundEffectVolume = EffectAudioSource[i].volume;
         }
-
     }
     public void PlayClip(AudioClip clip)
     {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,9 +50,9 @@ public class PlayerUI : MonoBehaviour
 
         if (playerData != null)
         {
-            if(playerData.MaxHp > 0)
+            if (playerData.MaxHp > 0)
             {
-                hpBar.fillAmount = (float) playerData.Hp / (float) playerData.MaxHp;
+                hpBar.fillAmount = (float)playerData.Hp / (float)playerData.MaxHp;
                 hpTxt.text = playerData.Hp + " / " + playerData.MaxHp;
             }
         }
@@ -69,9 +67,9 @@ public class PlayerUI : MonoBehaviour
     {
         if (playerData != null)
         {
-            if(playerData.RequiredExp > 0)
+            if (playerData.RequiredExp > 0)
             {
-                expBar.fillAmount = (float) playerData.Exp / (float) playerData.RequiredExp;
+                expBar.fillAmount = (float)playerData.Exp / (float)playerData.RequiredExp;
                 expTxt.text = ((float)playerData.Exp / (float)playerData.RequiredExp) * (float)100 + "%";
 
             }
@@ -101,7 +99,7 @@ public class PlayerUI : MonoBehaviour
         if (playerData != null)
         {
             goldTxt.text = playerData.Gold.ToString();
-            
+
         }
         else
         {
@@ -119,7 +117,7 @@ public class PlayerUI : MonoBehaviour
 
     public void UpdateBGMVolume()
     {
-        if(SoundManager.Instance != null)
+        if (SoundManager.Instance != null)
             SoundManager.Instance.SetMusicVolume(BGMSlider);
     }
 
@@ -131,19 +129,20 @@ public class PlayerUI : MonoBehaviour
 
     public void SaveBtn()
     {
-        if(PlayerDataManager.Instance != null)
+        if (PlayerDataManager.Instance != null)
             PlayerDataManager.Instance.SavePlayerDataToJson();
     }
 
     public void ExitBtn()
     {
-        if(PlayerDataManager.Instance != null)
+        if (PlayerDataManager.Instance != null)
         {
-            if(PlayerDataManager.Instance.IsCurrentDataSaved())
+            if (PlayerDataManager.Instance.IsCurrentDataSaved())
             {
                 //저장되어있으면 경고없음
                 alertTxt.text = "게임을 종료하시겠습니까?";
-            } else
+            }
+            else
             {
                 alertTxt.text = "게임을 종료하시겠습니까?\n(※ 저장하지 않았습니다.)";
             }
