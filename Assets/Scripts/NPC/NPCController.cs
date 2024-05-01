@@ -60,7 +60,7 @@ public class NPCController : MonoBehaviour, IInteractive
         {
             currentNpcID = index + 1;
 
-            if (npcType == NPCType.Teacher || npcType == NPCType.Friend || npcType == NPCType.Diary)
+            if (npcType == NPCType.Teacher)
             {
                 questData = DataManager.Instance.GetQuestTableData(currentNpcID);
 
