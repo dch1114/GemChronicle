@@ -141,7 +141,7 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         switch (currentStatus.jobType)
         {
             case JobType.Archer:
-                currentStatus.attackSkillStates = new List<int>() { 0, 0, 0, 1, 0, 0, 2, 0, 0 };
+                currentStatus.attackSkillStates = new List<int>() { 0, 0, 0, 9, 0, 0, 18, 0, 0 };
                 break;
             default:
                 currentStatus.attackSkillStates = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -383,11 +383,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         var subQuest = qOnGoingDic.ContainsKey(qSubData.ID) ? qOnGoingDic[qSubData.ID] : null;
         var mainQuest = qOnGoingDic.ContainsKey(qMainData.ID) ? qOnGoingDic[qMainData.ID] : null;
 
-
-
-
-
-
         playerQuestData.questId = qMainData.ID;
         playerQuestData.subQuestId = qSubData.ID;
 
@@ -409,9 +404,6 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
         {
             playerQuestData.subQuestCount = 0;
         }
-        
-
-
     }
 
     void SetQuestData()

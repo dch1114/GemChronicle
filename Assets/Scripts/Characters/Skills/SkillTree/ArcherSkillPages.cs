@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -86,18 +87,18 @@ public class ArcherSkillPages : SkillPages
 
         if(!_skill.isUnlocked)
         {
-            switch (_skill.GetSkillType())
-            {
-                case SkillTreeButton.SkillTreeType.increaseAtk:
-                    damageTxt.text += "<color=green> ( + " + _skill.amount + " )</color>";
-                    break;
-                case SkillTreeButton.SkillTreeType.increaseRange:
-                    rangeTxt.text += "<color=green> ( + " + _skill.amount + " )</color>";
-                    break;
-                case SkillTreeButton.SkillTreeType.increaseAtkSphere:
-                    descriptionTxt.SetActive(true);
-                    break;
-            }
+            //switch (_skill.GetSkillType())
+            //{
+            //    case SkillTreeButton.SkillTreeType.increaseAtk:
+            //        damageTxt.text += "<color=green> ( + " + _skill.amount + " )</color>";
+            //        break;
+            //    case SkillTreeButton.SkillTreeType.increaseRange:
+            //        rangeTxt.text += "<color=green> ( + " + _skill.amount + " )</color>";
+            //        break;
+            //    case SkillTreeButton.SkillTreeType.increaseAtkSphere:
+            //        descriptionTxt.SetActive(true);
+            //        break;
+            //}
         }
 
         buyBtn.SetActive(!_skill.isUnlocked);
@@ -121,5 +122,47 @@ public class ArcherSkillPages : SkillPages
                 typeIcon.sprite = typeSprites[0];
                 break;
         }
+    }
+
+    private int CalculateIndexNum()
+    {
+        int index = 0;
+        if (skillTreeBtns[1].isUnlocked)
+        {
+            if (skillTreeBtns[3].isUnlocked)
+            {
+                if (skillTreeBtns[2].isUnlocked && skillTreeBtns[4].isUnlocked)
+                {
+                    index = 8;
+                } else
+                {
+                    if (skillTreeBtns[2].isUnlocked) index = 3;
+                    else if (skillTreeBtns[4].isUnlocked) index = 7;
+                    else index = 6;
+                }
+            } else
+            {
+                if (skillTreeBtns[2].isUnlocked) index = 2;
+                else index = 1;
+            }
+        } else
+        {
+            if (skillTreeBtns[3].isUnlocked)
+            {
+                if (skillTreeBtns[4].isUnlocked)
+                {
+                    if (skillTreeBtns[5].isUnlocked)
+                    {
+                        //TODO : 스킬 3개로 나가기
+                    }
+                    index = 5;
+                } else
+                {
+                    index = 4;
+                }
+            }
+        }
+
+        return index;
     }
 }
